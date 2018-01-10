@@ -37,5 +37,8 @@ and look like this:
 }
 ```
 
+### DB Migrations
 
+To start the app, run `python manage.py migrate` to migrate your local database to
+the latest schema.
 
