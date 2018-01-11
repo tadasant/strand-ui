@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app.users'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+# Override auth user model
+AUTH_USER_MODEL = 'users.User'
 
 
 # Password validation
