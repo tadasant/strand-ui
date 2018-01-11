@@ -28,35 +28,29 @@ class Query(object):
     all_tags = graphene.List(TagType)
     all_sessions = graphene.List(SessionType)
 
-    def resolve_question(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_question(self, info, id=None):
         if id is not None:
             return Question.objects.get(pk=id)
 
         return None
 
-    def resolve_tag(self, info, **kwargs):
-        name = kwargs.get('name')
-
-        if id is not None:
+    def resolve_tag(self, info, name=None):
+        if name is not None:
             return Tag.objects.get(name=name)
 
         return None
 
-    def resolve_session(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_session(self, info, id=None):
         if id is not None:
             return Session.objects.get(pk=id)
 
         return None
 
-    def resolve_all_questions(self, info, **kwargs):
+    def resolve_all_questions(self, info):
         return Question.objects.all()
 
-    def resolve_all_tags(self, info, **kwargs):
+    def resolve_all_tags(self, info):
         return Tag.objects.all()
 
-    def resolve_all_sessions(self, info, **kwargs):
+    def resolve_all_sessions(self, info):
         return Session.objects.all()

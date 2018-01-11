@@ -35,46 +35,38 @@ class Query(object):
     all_slack_teams = graphene.List(SlackTeamType)
     all_slack_settings = graphene.List(SlackSettingsType)
 
-    def resolve_slack_user(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_slack_user(self, info, id=None):
         if id is not None:
             return SlackUser.objects.get(pk=id)
 
         return None
 
-    def resolve_slack_channel(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_slack_channel(self, info, id=None):
         if id is not None:
             return SlackChannel.objects.get(pk=id)
 
         return None
 
-    def resolve_slack_team(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_slack_team(self, info, id=None):
         if id is not None:
             return SlackTeam.objects.get(pk=id)
 
         return None
 
-    def resolve_slack_settings(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_slack_settings(self, info, id=None):
         if id is not None:
             return SlackSettings.objects.get(pk=id)
 
         return None
 
-    def resolve_all_slack_users(self, info, **kwargs):
+    def resolve_all_slack_users(self, info):
         return SlackUser.objects.all()
 
-    def resolve_all_slack_channels(self, info, **kwargs):
+    def resolve_all_slack_channels(self, info):
         return SlackChannel.objects.all()
 
-    def resolve_all_slack_teams(self, info, **kwargs):
+    def resolve_all_slack_teams(self, info):
         return SlackTeam.objects.all()
 
-    def resolve_all_slack_settings(self, info, **kwargs):
+    def resolve_all_slack_settings(self, info):
         return SlackSettings.objects.all()

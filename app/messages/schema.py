@@ -21,24 +21,20 @@ class Query(object):
     all_messages = graphene.List(MessageType)
     all_replies = graphene.List(ReplyType)
 
-    def resolve_message(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_message(self, info, id=None):
         if id is not None:
             return Message.objects.get(pk=id)
 
         return None
 
-    def resolve_reply(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_reply(self, info, id=None):
         if id is not None:
             return Reply.objects.get(pk=id)
 
         return None
 
-    def resolve_all_messages(self, info, **kwargs):
+    def resolve_all_messages(self, info):
         return Message.objects.all()
 
-    def resolve_all_replies(self, info, **kwargs):
+    def resolve_all_replies(self, info):
         return Reply.objects.all()
