@@ -24,7 +24,7 @@ class SlackChannel(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
-    session = models.OneToOneField(to=Session, on_delete=models.CASCADE)
+    session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
 
 
 class SlackUser(TimeStampedModel):
