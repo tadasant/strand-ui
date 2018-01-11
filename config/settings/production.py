@@ -17,3 +17,5 @@ DATABASES = {
         'PORT': os.environ['DB_PORT']
     }
 }
+
+ENABLE_GRAPHIQL = False

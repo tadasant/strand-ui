@@ -19,3 +19,5 @@ DATABASES = {
         'PORT': DB_CREDENTIALS['PORT']
     }
 }
+
+ENABLE_GRAPHIQL = True
