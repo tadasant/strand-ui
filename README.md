@@ -37,12 +37,12 @@ and look like this:
 }
 ```
 
-### DB Migrations
+### Database Migrations
 
 To start the app, run `python manage.py migrate` to migrate your local database to
 the latest schema.
 
-### Create superuser
+### Creating a Superuser
 
 To access Django admin, you need to create a local admin user. Create a superuser by running
 `python manage.py createsuperuser --username USERNAME`
