@@ -21,10 +21,7 @@ class Query(object):
     all_groups = graphene.List(GroupType)
     all_group_settings = graphene.List(GroupSettingsType)
 
-    def resolve_group(self, info, **kwargs):
-        id = kwargs.get('id')
-        name = kwargs.get('name')
-
+    def resolve_group(self, info, id=None, name=None):
         if id is not None:
             return Group.objects.get(pk=id)
 
@@ -33,16 +30,14 @@ class Query(object):
 
         return None
 
-    def resolve_group_settings(self, info, **kwargs):
-        id = kwargs.get('id')
-
+    def resolve_group_settings(self, info, id=None):
         if id is not None:
             return GroupSettings.objects.get(pk=id)
 
         return None
 
-    def resolve_all_groups(self, info, **kwargs):
+    def resolve_all_groups(self, info):
         return Group.objects.all()
 
-    def resolve_all_group_settings(self, info, **kwargs):
+    def resolve_all_group_settings(self, info):
         return GroupSettings.objects.all()
