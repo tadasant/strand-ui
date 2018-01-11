@@ -1,6 +1,5 @@
-from datetime import datetime
-
 from django.db import models
+from django.utils import timezone
 from model_utils.models import TimeStampedModel
 
 from app.users.models import User
@@ -25,6 +24,7 @@ class Question(TimeStampedModel):
 
 
 class Session(TimeStampedModel):
-    time_start = models.DateTimeField(default=datetime.now())
+    time_start = models.DateTimeField(default=timezone.now())
     time_end = models.DateTimeField(null=True)
     question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
+    participants = models.ManyToManyField(to=User)
