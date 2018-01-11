@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app.users',
     'app.groups',
-    'app.questions'
+    'app.questions',
+    'app.slack'
 ]
 
 MIDDLEWARE = [
