@@ -74,6 +74,9 @@ class QuestionFactory(factory.Factory):
 
 
 class SessionFactory(factory.Factory):
+    class Meta:
+        model = Session
+
     time_start = fake.past_datetime()
     time_end = fake.future_datetime()
     question = factory.SubFactory(QuestionFactory)
