@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'rest_framework',
+    'rest_framework.authtoken',
     'app.users',
     'app.groups',
     'app.questions',
@@ -122,5 +124,16 @@ STATIC_URL = '/static/'
 # Graphene
 # https://github.com/graphql-python/graphene-django/blob/master/docs/tutorial-plain.rst
 GRAPHENE = {
-    'SCHEMA': 'app.schema.schema'
+    'SCHEMA': 'app.api.schema.schema'
+}
+
+# Django REST framework
+# http://www.django-rest-framework.org/
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }

@@ -17,7 +17,7 @@ class SlackSettings(TimeStampedModel):
     slack_team = models.OneToOneField(to=SlackTeam, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name_plural = 'Slack Settings'
+        verbose_name_plural = 'Slack settings'
 
 
 class SlackChannel(TimeStampedModel):

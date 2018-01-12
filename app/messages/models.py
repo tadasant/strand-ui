@@ -17,3 +17,6 @@ class Reply(TimeStampedModel):
     message = models.ForeignKey(to=Message, on_delete=models.CASCADE)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE)
     time = models.DateTimeField()
+
+    class Meta:
+        verbose_name_plural = 'Replies'

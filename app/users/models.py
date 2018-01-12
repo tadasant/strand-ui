@@ -1,7 +1,11 @@
-from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.authtoken.models import Token
 
 
 class User(AbstractUser):
@@ -40,3 +44,14 @@ class User(AbstractUser):
         user = super(User, self).save(*args, **kwargs)
         return user
 
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    """Create auth token for new users.
+
+    Fires on post_save signal from users. Only creates
+    token if post_save is result of new user being created.
+    Note: Signal receivers must accept keyword arguments.
+    """
+    if created:
+        Token.objects.create(user=instance)
