@@ -1,6 +1,7 @@
 import pytz
 
 import factory
+from django.contrib.auth.hashers import make_password
 
 from app.groups.models import Group, GroupSettings
 from app.messages.models import Message, Reply
@@ -14,6 +15,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = User
 
     email = factory.Faker('safe_email')
+    password = make_password('mypass123!')
     username = factory.Faker('user_name')
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
