@@ -1,31 +1,27 @@
 import pytest
 from django.db.utils import IntegrityError
 
-from app.users.models import User
-from tests.factories import UserFactory
-
 
 class TestUserModel():
     """Test potential exceptions for User model."""
 
     @pytest.mark.django_db
-    def test_email_is_null(self):
+    def test_email_is_null(self, user_factory):
         """
         Given: The database has been created.
         When: A user is created without an email.
         Then: No constraint is violated.
         """
-        user_factory = UserFactory(email=None)
-        user_factory.save()
-        assert user_factory.email is None
+        user = user_factory(email=None)
+        assert user.email is None
 
     @pytest.mark.django_db
-    def test_email_is_unique(self):
+    def test_email_is_unique(self, user_factory):
         """
         Given: The database contains a user with email address X.
         When: A new user is created also with email address X.
         Then: A unique constraint is violated.
         """
-        User.objects.create(email='hello@gmail.com')
+        user = user_factory(email='hello@gmail.com')
         with pytest.raises(IntegrityError):
-            User.objects.create(email='hello@gmail.com')
+            another_user = user_factory(email='hello@gmail.com')

@@ -14,12 +14,12 @@ class ReplyType(DjangoObjectType):
         model = Reply
 
 
-class Query(object):
+class Query(graphene.ObjectType):
     message = graphene.Field(MessageType, id=graphene.Int())
     reply = graphene.Field(ReplyType, id=graphene.Int())
 
-    all_messages = graphene.List(MessageType)
-    all_replies = graphene.List(ReplyType)
+    messages = graphene.List(MessageType)
+    replies = graphene.List(ReplyType)
 
     def resolve_message(self, info, id=None):
         if id is not None:
@@ -33,8 +33,8 @@ class Query(object):
 
         return None
 
-    def resolve_all_messages(self, info):
+    def resolve_messages(self, info):
         return Message.objects.all()
 
-    def resolve_all_replies(self, info):
+    def resolve_replies(self, info):
         return Reply.objects.all()

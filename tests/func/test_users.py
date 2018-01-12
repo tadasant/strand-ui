@@ -1,9 +1,7 @@
-from collections import OrderedDict
-
 import graphene
 import pytest
 
-from app.users.schema import Query as UserQuery
+from app.users.schema import Query
 
 
 class TestUserQuery():
@@ -12,9 +10,8 @@ class TestUserQuery():
     @pytest.mark.django_db
     def test_get_user(self, user_factory):
         user = user_factory()
-        user.save()
 
-        schema = graphene.Schema(query=UserQuery)
+        schema = graphene.Schema(query=Query)
         query = '''
             query {
               user(id: %s) {
@@ -24,19 +21,14 @@ class TestUserQuery():
         ''' % user.id
         result = schema.execute(query)
         assert not result.errors
-        assert result.data == {
-            'user': OrderedDict([('firstName', user.first_name)])
-        }
+        assert result.data['user']['firstName'] == user.first_name
 
     @pytest.mark.django_db
     def test_get_users(self, user_factory):
         user = user_factory()
-        user.save()
-
         second_user = user_factory()
-        second_user.save()
 
-        schema = graphene.Schema(query=UserQuery)
+        schema = graphene.Schema(query=Query)
         query = '''
             query {
                users {

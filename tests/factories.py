@@ -1,11 +1,15 @@
+import pytz
+
 import factory
+
 from app.groups.models import Group, GroupSettings
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
+from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam
 
 
-class UserFactory(factory.Factory):
+class UserFactory(factory.DjangoModelFactory):
     class Meta:
         model = User
 
@@ -15,7 +19,7 @@ class UserFactory(factory.Factory):
     last_name = factory.Faker('last_name')
 
 
-class GroupFactory(factory.Factory):
+class GroupFactory(factory.DjangoModelFactory):
     class Meta:
         model = Group
 
@@ -31,7 +35,7 @@ class GroupFactory(factory.Factory):
                 self.members.add(member)
 
 
-class GroupSettingsFactory(factory.Factory):
+class GroupSettingsFactory(factory.DjangoModelFactory):
     class Meta:
         model = GroupSettings
 
@@ -39,14 +43,14 @@ class GroupSettingsFactory(factory.Factory):
     group = factory.SubFactory(GroupFactory)
 
 
-class TagFactory(factory.Factory):
+class TagFactory(factory.DjangoModelFactory):
     class Meta:
         model = Tag
 
     name = factory.Faker('word')
 
 
-class QuestionFactory(factory.Factory):
+class QuestionFactory(factory.DjangoModelFactory):
     class Meta:
         model = Question
 
@@ -69,12 +73,12 @@ class QuestionFactory(factory.Factory):
                 self.tags.add(tag)
 
 
-class SessionFactory(factory.Factory):
+class SessionFactory(factory.DjangoModelFactory):
     class Meta:
         model = Session
 
-    time_start = factory.Faker('past_datetime')
-    time_end = factory.Faker('future_datetime')
+    time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
+    time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
     question = factory.SubFactory(QuestionFactory)
 
     @factory.post_generation
@@ -87,21 +91,66 @@ class SessionFactory(factory.Factory):
                 self.participants.add(participant)
 
 
-class MessageFactory(factory.Factory):
+class MessageFactory(factory.DjangoModelFactory):
     text = factory.Faker('text')
     session = factory.SubFactory(SessionFactory)
     author = factory.SubFactory(UserFactory)
-    time = factory.Faker('date_time_this_decade')
+    time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
     class Meta:
         model = Message
 
 
-class ReplyFactory(factory.Factory):
+class ReplyFactory(factory.DjangoModelFactory):
     text = factory.Faker('text')
     message = factory.SubFactory(MessageFactory)
     author = factory.SubFactory(UserFactory)
-    time = factory.Faker('date_time_this_decade')
+    time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
     class Meta:
         model = Reply
+
+
+class SlackTeamFactory(factory.DjangoModelFactory):
+    id = factory.Faker('md5')
+    name = factory.Faker('name')
+    group = factory.SubFactory(GroupFactory)
+
+    class Meta:
+        model = SlackTeam
+
+
+class SlackSettingsFactory(factory.DjangoModelFactory):
+    bot_token = factory.Faker('md5')
+    slack_team = factory.SubFactory(SlackTeamFactory)
+
+    class Meta:
+        model = SlackSettings
+
+
+class SlackChannelFactory(factory.DjangoModelFactory):
+    id = factory.Faker('md5')
+    name = factory.Faker('name')
+    slack_team = factory.SubFactory(SlackTeamFactory)
+    session = factory.SubFactory(SessionFactory)
+
+    class Meta:
+        model = SlackChannel
+
+
+class SlackUserFactory(factory.DjangoModelFactory):
+    id = factory.Faker('md5')
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    real_name = factory.LazyAttribute(lambda x: f'{x.first_name} {x.last_name}')
+    display_name = factory.Faker('user_name')
+    email = factory.Faker('safe_email')
+    avatar_72 = factory.Faker('image_url')
+    is_bot = factory.Faker('pybool')
+    is_admin = factory.Faker('pybool')
+
+    slack_team = factory.SubFactory(SlackTeamFactory)
+    user = factory.SubFactory(UserFactory)
+
+    class Meta:
+        model = SlackUser

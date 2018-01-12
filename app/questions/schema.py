@@ -19,14 +19,14 @@ class SessionType(DjangoObjectType):
         model = Session
 
 
-class Query(object):
+class Query(graphene.ObjectType):
     question = graphene.Field(QuestionType, id=graphene.Int())
     tag = graphene.Field(TagType, name=graphene.String())
     session = graphene.Field(SessionType, id=graphene.Int())
 
-    all_questions = graphene.List(QuestionType)
-    all_tags = graphene.List(TagType)
-    all_sessions = graphene.List(SessionType)
+    questions = graphene.List(QuestionType)
+    tags = graphene.List(TagType)
+    sessions = graphene.List(SessionType)
 
     def resolve_question(self, info, id=None):
         if id is not None:
@@ -46,11 +46,11 @@ class Query(object):
 
         return None
 
-    def resolve_all_questions(self, info):
+    def resolve_questions(self, info):
         return Question.objects.all()
 
-    def resolve_all_tags(self, info):
+    def resolve_tags(self, info):
         return Tag.objects.all()
 
-    def resolve_all_sessions(self, info):
+    def resolve_sessions(self, info):
         return Session.objects.all()

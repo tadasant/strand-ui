@@ -14,12 +14,12 @@ class GroupSettingsType(DjangoObjectType):
         model = GroupSettings
 
 
-class Query(object):
+class Query(graphene.ObjectType):
     group = graphene.Field(GroupType, id=graphene.Int(), name=graphene.String())
     group_settings = graphene.Field(GroupSettingsType, id=graphene.Int())
 
-    all_groups = graphene.List(GroupType)
-    all_group_settings = graphene.List(GroupSettingsType)
+    groups = graphene.List(GroupType)
+    groups_settings = graphene.List(GroupSettingsType)
 
     def resolve_group(self, info, id=None, name=None):
         if id is not None:
@@ -36,8 +36,8 @@ class Query(object):
 
         return None
 
-    def resolve_all_groups(self, info):
+    def resolve_groups(self, info):
         return Group.objects.all()
 
-    def resolve_all_group_settings(self, info):
+    def resolve_groups_settings(self, info):
         return GroupSettings.objects.all()
