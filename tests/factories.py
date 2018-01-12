@@ -1,29 +1,25 @@
 import factory
-from faker import Faker
-
 from app.groups.models import Group, GroupSettings
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-
-fake = Faker()
 
 
 class UserFactory(factory.Factory):
     class Meta:
         model = User
 
-    email = fake.safe_email()
-    username = fake.user_name()
-    first_name = fake.first_name()
-    last_name = fake.last_name()
+    email = factory.Faker('safe_email')
+    username = factory.Faker('user_name')
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
 
 
 class GroupFactory(factory.Factory):
     class Meta:
         model = Group
 
-    name = fake.company()
+    name = factory.Faker('company')
 
     @factory.post_generation
     def members(self, create, extracted, **kwargs):
@@ -39,7 +35,7 @@ class GroupSettingsFactory(factory.Factory):
     class Meta:
         model = GroupSettings
 
-    is_public = fake.pybool()
+    is_public = factory.Faker('pybool')
     group = factory.SubFactory(GroupFactory)
 
 
@@ -47,17 +43,17 @@ class TagFactory(factory.Factory):
     class Meta:
         model = Tag
 
-    name = fake.word()
+    name = factory.Faker('word')
 
 
 class QuestionFactory(factory.Factory):
     class Meta:
         model = Question
 
-    title = fake.sentence()
-    description = fake.text()
-    is_solved = fake.pybool()
-    is_anonymous = fake.pybool()
+    title = factory.Faker('sentence')
+    description = factory.Faker('text')
+    is_solved = factory.Faker('pybool')
+    is_anonymous = factory.Faker('pybool')
 
     original_poster = factory.SubFactory(UserFactory)
     solver = factory.SubFactory(UserFactory)
@@ -77,8 +73,8 @@ class SessionFactory(factory.Factory):
     class Meta:
         model = Session
 
-    time_start = fake.past_datetime()
-    time_end = fake.future_datetime()
+    time_start = factory.Faker('past_datetime')
+    time_end = factory.Faker('future_datetime')
     question = factory.SubFactory(QuestionFactory)
 
     @factory.post_generation
@@ -92,20 +88,20 @@ class SessionFactory(factory.Factory):
 
 
 class MessageFactory(factory.Factory):
-    text = fake.text()
+    text = factory.Faker('text')
     session = factory.SubFactory(SessionFactory)
     author = factory.SubFactory(UserFactory)
-    time = fake.date_time_this_decade()
+    time = factory.Faker('date_time_this_decade')
 
     class Meta:
         model = Message
 
 
 class ReplyFactory(factory.Factory):
-    text = fake.text()
+    text = factory.Faker('text')
     message = factory.SubFactory(MessageFactory)
     author = factory.SubFactory(UserFactory)
-    time = fake.date_time_this_decade()
+    time = factory.Faker('date_time_this_decade')
 
     class Meta:
         model = Reply

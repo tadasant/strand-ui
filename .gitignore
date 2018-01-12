@@ -2,3 +2,4 @@ venv/
 *.pyc
 .idea
 db.config.json
+.cache/
