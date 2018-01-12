@@ -1,27 +1,7 @@
 import graphene
-from graphene_django.types import DjangoObjectType
 
 from app.slack.models import SlackUser, SlackChannel, SlackTeam, SlackSettings
-
-
-class SlackUserType(DjangoObjectType):
-    class Meta:
-        model = SlackUser
-
-
-class SlackChannelType(DjangoObjectType):
-    class Meta:
-        model = SlackChannel
-
-
-class SlackTeamType(DjangoObjectType):
-    class Meta:
-        model = SlackTeam
-
-
-class SlackSettingsType(DjangoObjectType):
-    class Meta:
-        model = SlackSettings
+from app.slack.types import SlackUserType, SlackChannelType, SlackTeamType, SlackSettingsType
 
 
 class Query(graphene.ObjectType):
