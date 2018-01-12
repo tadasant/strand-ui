@@ -24,16 +24,16 @@ class SlackSettingsType(DjangoObjectType):
         model = SlackSettings
 
 
-class Query(object):
+class Query(graphene.ObjectType):
     slack_user = graphene.Field(SlackUserType, id=graphene.String())
     slack_channel = graphene.Field(SlackChannelType, id=graphene.String())
     slack_team = graphene.Field(SlackTeamType, id=graphene.String())
     slack_settings = graphene.Field(SlackSettingsType, id=graphene.Int())
 
-    all_slack_users = graphene.List(SlackUserType)
-    all_slack_channels = graphene.List(SlackChannelType)
-    all_slack_teams = graphene.List(SlackTeamType)
-    all_slack_settings = graphene.List(SlackSettingsType)
+    slack_users = graphene.List(SlackUserType)
+    slack_channels = graphene.List(SlackChannelType)
+    slack_teams = graphene.List(SlackTeamType)
+    slacks_settings = graphene.List(SlackSettingsType)
 
     def resolve_slack_user(self, info, id=None):
         if id is not None:
@@ -59,14 +59,14 @@ class Query(object):
 
         return None
 
-    def resolve_all_slack_users(self, info):
+    def resolve_slack_users(self, info):
         return SlackUser.objects.all()
 
-    def resolve_all_slack_channels(self, info):
+    def resolve_slack_channels(self, info):
         return SlackChannel.objects.all()
 
-    def resolve_all_slack_teams(self, info):
+    def resolve_slack_teams(self, info):
         return SlackTeam.objects.all()
 
-    def resolve_all_slack_settings(self, info):
+    def resolve_slacks_settings(self, info):
         return SlackSettings.objects.all()
