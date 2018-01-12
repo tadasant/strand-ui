@@ -12,6 +12,7 @@ from app.slack.types import (
 from app.slack.models import SlackTeam, SlackUser, SlackChannel, SlackSettings
 from app.users.models import User
 from app.groups.models import Group
+from app.questions.models import Session
 
 
 class CreateSlackUserMutation(graphene.Mutation):
@@ -24,7 +25,8 @@ class CreateSlackUserMutation(graphene.Mutation):
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
-            return CreateSlackUserMutation(status=403)
+            return CreateSlackUserMutation(status=403,
+                                           form_errors={'message': ['Unauthorized']})
 
         if not SlackTeam.objects.filter(pk=input.slack_team_id).exists():
             return CreateSlackUserMutation(status=400,
@@ -47,7 +49,8 @@ class CreateSlackTeamMutation(graphene.Mutation):
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
-            return CreateSlackTeamMutation(status=403)
+            return CreateSlackTeamMutation(status=403,
+                                           form_errors={'message': ['Unauthorized']})
 
         if not Group.objects.filter(pk=input.group_id).exists():
             return CreateSlackTeamMutation(status=400,
@@ -67,11 +70,16 @@ class CreateSlackChannelMutation(graphene.Mutation):
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
-            return CreateSlackChannelMutation(status=403)
+            return CreateSlackChannelMutation(status=403,
+                                              form_errors={'message': ['Unauthorized']})
 
         if not SlackTeam.objects.filter(pk=input.slack_team_id).exists():
             return CreateSlackChannelMutation(status=400,
                                               form_errors={'message': ['Invalid Slack Team Id']})
+
+        if not Session.objects.filter(pk=input.session_id).exists():
+            return CreateSlackChannelMutation(status=400,
+                                              form_errors={'message': ['Invalid Session Id']})
 
         slack_channel = SlackChannel.objects.create(**input)
         return CreateSlackChannelMutation(slack_channel=slack_channel, status=201)
@@ -87,7 +95,8 @@ class CreateSlackSettingsMutation(graphene.Mutation):
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
-            return CreateSlackSettingsMutation(status=403)
+            return CreateSlackSettingsMutation(status=403,
+                                               form_errors={'message': ['Unauthorized']})
 
         if not SlackTeam.objects.filter(pk=input.slack_team_id).exists():
             return CreateSlackSettingsMutation(status=400,

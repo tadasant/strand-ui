@@ -53,4 +53,4 @@ class SlackChannelInputType(graphene.InputObjectType):
 
 class SlackSettingsInputType(graphene.InputObjectType):
     bot_token = graphene.String()
-    slack_team_id = graphene.Int(required=True)
+    slack_team_id = graphene.String(required=True)
