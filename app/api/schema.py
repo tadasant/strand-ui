@@ -7,6 +7,7 @@ import app.questions.schema
 import app.messages.schema
 
 
+# TODO: Migrate each app's Query objects to queries.py as Mutations are added
 class Query(app.users.schema.Query, app.groups.schema.Query,
             app.slack.queries.Query, app.questions.schema.Query,
             app.messages.schema.Query, graphene.ObjectType):
