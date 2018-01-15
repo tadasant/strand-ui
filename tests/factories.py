@@ -7,7 +7,7 @@ from app.groups.models import Group, GroupSettings
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam
+from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam, SlackEvent
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -111,6 +111,13 @@ class ReplyFactory(factory.DjangoModelFactory):
 
     class Meta:
         model = Reply
+
+
+class SlackEventFactory(factory.DjangoModelFactory):
+    timestamp = str(factory.Faker('unix_time'))
+
+    class Meta:
+        model = SlackEvent
 
 
 class SlackTeamFactory(factory.DjangoModelFactory):

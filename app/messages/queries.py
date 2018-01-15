@@ -1,17 +1,7 @@
 import graphene
-from graphene_django.types import DjangoObjectType
 
+from app.messages.types import MessageType, ReplyType
 from app.messages.models import Message, Reply
-
-
-class MessageType(DjangoObjectType):
-    class Meta:
-        model = Message
-
-
-class ReplyType(DjangoObjectType):
-    class Meta:
-        model = Reply
 
 
 class Query(graphene.ObjectType):
