@@ -1,12 +1,13 @@
 import graphene
+
 import app.groups.mutations
 import app.groups.queries
+import app.messages.schema
+import app.questions.schema
 import app.slack.mutations
 import app.slack.queries
 import app.users.mutations
 import app.users.queries
-import app.questions.schema
-import app.messages.schema
 
 
 # TODO: Migrate each app's Query objects to queries.py as Mutations are added
