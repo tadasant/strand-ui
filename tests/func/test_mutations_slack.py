@@ -85,7 +85,6 @@ class TestSlackUserMutations():
           }}
         '''
         response = client.post('/graphql', {'query': mutation})
-        print(response.content)
 
         assert response.status_code == 200
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
@@ -154,7 +153,7 @@ class TestSlackUserMutations():
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
-        print(response.content)
+
         assert response.status_code == 200
         assert response.json()['data']['createSlackUser']['slackUser']['realName'] == slack_user.real_name
 
@@ -222,7 +221,6 @@ class TestSlackChannelMutations():
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
-        print(response.content)
 
         assert response.status_code == 200
         assert response.json()['data']['createSlackChannel'] is None

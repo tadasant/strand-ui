@@ -65,7 +65,7 @@ class TestMessageMutations():
           mutation {{
             createMessageAndSlackEvent(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
                                                 time: "{message.time}",
-                                                slackEventTimestamp: "{slack_event.timestamp}"}}) {{
+                                                slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
               }}
@@ -89,7 +89,7 @@ class TestMessageMutations():
         mutation = f'''
           mutation {{
             createMessageAndSlackEvent(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
-                                                time: "{message.time}", slackEventTimestamp: "{slack_event.timestamp}"}}) {{
+                                                time: "{message.time}", slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 id
                 text
@@ -164,7 +164,7 @@ class TestReplyMutations():
         mutation = f'''
           mutation {{
             createReplyAndSlackEvent(input: {{text: "{reply.text}", messageId: {message.id}, authorId: {user.id},
-                                              time: "{reply.time}", slackEventTimestamp: "{slack_event.timestamp}"}}) {{
+                                              time: "{reply.time}", slackEventTs: "{slack_event.ts}"}}) {{
               reply {{
                 text
               }}
@@ -188,7 +188,7 @@ class TestReplyMutations():
         mutation = f'''
           mutation {{
             createReplyAndSlackEvent(input: {{text: "{reply.text}", messageId: {message.id}, authorId: {user.id},
-                                              time: "{reply.time}", slackEventTimestamp: "{slack_event.timestamp}"}}) {{
+                                              time: "{reply.time}", slackEventTs: "{slack_event.ts}"}}) {{
               reply {{
                 id
                 text

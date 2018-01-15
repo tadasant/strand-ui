@@ -114,7 +114,7 @@ class ReplyFactory(factory.DjangoModelFactory):
 
 
 class SlackEventFactory(factory.DjangoModelFactory):
-    timestamp = str(factory.Faker('unix_time'))
+    ts = str(factory.Faker('unix_time'))
 
     class Meta:
         model = SlackEvent

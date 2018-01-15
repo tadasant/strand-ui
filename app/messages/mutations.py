@@ -49,8 +49,8 @@ class CreateMessageAndSlackEventMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        timestamp = input.pop('slack_event_timestamp')
-        slack_event = SlackEvent.objects.create(timestamp=timestamp)
+        ts = input.pop('slack_event_ts')
+        slack_event = SlackEvent.objects.create(ts=ts)
 
         message = Message.objects.create(**input)
         message.slack_event = slack_event
@@ -69,8 +69,8 @@ class CreateReplyAndSlackEventMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        timestamp = input.pop('slack_event_timestamp')
-        slack_event = SlackEvent.objects.create(timestamp=timestamp)
+        ts = input.pop('slack_event_ts')
+        slack_event = SlackEvent.objects.create(ts=ts)
 
         reply = Reply.objects.create(**input)
         reply.slack_event = slack_event

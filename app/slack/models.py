@@ -43,4 +43,4 @@ class SlackUser(TimeStampedModel):
 
 
 class SlackEvent(TimeStampedModel):
-    timestamp = models.CharField(max_length=255)
+    ts = models.CharField(max_length=255)
