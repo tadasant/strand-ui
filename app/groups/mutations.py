@@ -6,7 +6,7 @@ from app.groups.types import GroupType, GroupSettingsType, GroupInputType, Group
 
 class CreateGroupMutation(graphene.Mutation):
     class Arguments:
-        input = GroupInputType
+        input = GroupInputType(required=True)
 
     group = graphene.Field(GroupType)
 
@@ -20,7 +20,7 @@ class CreateGroupMutation(graphene.Mutation):
 
 class CreateGroupSettingsMutation(graphene.Mutation):
     class Arguments:
-        input = GroupSettingsInputType
+        input = GroupSettingsInputType(required=True)
 
     group_settings = graphene.Field(GroupSettingsType)
 
