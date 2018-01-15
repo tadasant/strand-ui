@@ -1,17 +1,7 @@
 import graphene
-from graphene_django.types import DjangoObjectType
 
 from app.groups.models import Group, GroupSettings
-
-
-class GroupType(DjangoObjectType):
-    class Meta:
-        model = Group
-
-
-class GroupSettingsType(DjangoObjectType):
-    class Meta:
-        model = GroupSettings
+from app.groups.types import GroupType, GroupSettingsType
 
 
 class Query(graphene.ObjectType):

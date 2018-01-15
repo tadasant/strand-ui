@@ -1,12 +1,7 @@
 import graphene
-from graphene_django.types import DjangoObjectType
 
 from app.users.models import User
-
-
-class UserType(DjangoObjectType):
-    class Meta:
-        model = User
+from app.users.types import UserType
 
 
 class Query(graphene.ObjectType):
