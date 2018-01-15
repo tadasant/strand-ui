@@ -5,10 +5,12 @@ class TestGroupMutations():
     """Test group mutations"""
 
     @pytest.mark.django_db
-    def test_create_group_unauthenticated(self, client):
+    def test_create_group_unauthenticated(self, client, group_factory):
+        group = group_factory.build()
+
         mutation = f'''
           mutation {{
-            createGroup(input: {{name: "mygroup"}}) {{
+            createGroup(input: {{name: "{group.name}"}}) {{
               group {{
                 name
               }}
@@ -22,10 +24,12 @@ class TestGroupMutations():
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_group(self, auth_client):
+    def test_create_group(self, auth_client, group_factory):
+        group = group_factory.build()
+
         mutation = f'''
           mutation {{
-            createGroup(input: {{name: "mygroup"}}) {{
+            createGroup(input: {{name: "{group.name}"}}) {{
               group {{
                 name
               }}
@@ -35,19 +39,20 @@ class TestGroupMutations():
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroup']['group']['name'] == 'mygroup'
+        assert response.json()['data']['createGroup']['group']['name'] == group.name
 
 
 class TestGroupSettingsMutations():
     """Test group settings mutations"""
 
     @pytest.mark.django_db
-    def test_create_group_settings_unauthenticated(self, client, group_factory):
+    def test_create_group_settings_unauthenticated(self, client, group_factory, group_settings_factory):
         group = group_factory()
+        group_settings = group_settings_factory.build()
 
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: {group.id}, isPublic: true}}) {{
+            createGroupSettings(input: {{groupId: {group.id}, isPublic: {str(group_settings.is_public).lower()}}}) {{
               groupSettings {{
                 isPublic
               }}
@@ -61,10 +66,12 @@ class TestGroupSettingsMutations():
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_group_settings_invalid_group(self, auth_client):
+    def test_create_group_settings_invalid_group(self, auth_client, group_settings_factory):
+        group_settings = group_settings_factory.build()
+
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: 1, isPublic: true}}) {{
+            createGroupSettings(input: {{groupId: 1, isPublic: {str(group_settings.is_public).lower()}}}) {{
               groupSettings {{
                 isPublic
               }}
@@ -78,12 +85,13 @@ class TestGroupSettingsMutations():
         assert response.json()['errors'][0]['message'] == 'Invalid Group Id'
 
     @pytest.mark.django_db
-    def test_create_group_settings(self, auth_client, group_factory):
+    def test_create_group_settings(self, auth_client, group_factory, group_settings_factory):
         group = group_factory()
+        group_settings = group_settings_factory.build()
 
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: {group.id}, isPublic: true}}) {{
+            createGroupSettings(input: {{groupId: {group.id}, isPublic: {str(group_settings.is_public).lower()}}}) {{
               groupSettings {{
                 isPublic
               }}

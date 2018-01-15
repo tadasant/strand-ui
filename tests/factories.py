@@ -7,7 +7,7 @@ from app.groups.models import Group, GroupSettings
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam
+from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam, SlackEvent
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -94,7 +94,7 @@ class SessionFactory(factory.DjangoModelFactory):
 
 
 class MessageFactory(factory.DjangoModelFactory):
-    text = factory.Faker('text')
+    text = factory.Faker('sentence')
     session = factory.SubFactory(SessionFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
@@ -104,13 +104,20 @@ class MessageFactory(factory.DjangoModelFactory):
 
 
 class ReplyFactory(factory.DjangoModelFactory):
-    text = factory.Faker('text')
+    text = factory.Faker('sentence')
     message = factory.SubFactory(MessageFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
     class Meta:
         model = Reply
+
+
+class SlackEventFactory(factory.DjangoModelFactory):
+    ts = str(factory.Faker('unix_time'))
+
+    class Meta:
+        model = SlackEvent
 
 
 class SlackTeamFactory(factory.DjangoModelFactory):
