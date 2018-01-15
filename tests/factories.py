@@ -94,7 +94,7 @@ class SessionFactory(factory.DjangoModelFactory):
 
 
 class MessageFactory(factory.DjangoModelFactory):
-    text = factory.Faker('text')
+    text = factory.Faker('sentence')
     session = factory.SubFactory(SessionFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
@@ -104,7 +104,7 @@ class MessageFactory(factory.DjangoModelFactory):
 
 
 class ReplyFactory(factory.DjangoModelFactory):
-    text = factory.Faker('text')
+    text = factory.Faker('sentence')
     message = factory.SubFactory(MessageFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)

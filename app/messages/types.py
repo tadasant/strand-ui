@@ -28,3 +28,19 @@ class ReplyInputType(graphene.InputObjectType):
     author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
     slack_event_id = graphene.Int()
+
+
+class MessageAndSlackEventInputType(graphene.InputObjectType):
+    text = graphene.String(required=True)
+    session_id = graphene.Int(required=True)
+    author_id = graphene.Int(required=True)
+    time = graphene.String(required=True)
+    slack_event_timestamp = graphene.String(required=True)
+
+
+class ReplyAndSlackEventInputType(graphene.InputObjectType):
+    text = graphene.String(required=True)
+    message_id = graphene.Int(required=True)
+    author_id = graphene.Int(required=True)
+    time = graphene.String(required=True)
+    slack_event_timestamp = graphene.String(required=True)
