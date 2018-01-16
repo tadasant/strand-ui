@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestUserQuery():
-    """Test user API queries"""
+class TestQueryUsers:
 
     @pytest.mark.django_db
     def test_get_user(self, user_factory, client):

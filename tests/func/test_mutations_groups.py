@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestGroupMutations():
-    """Test group mutations"""
+class TestCreateGroup:
 
     @pytest.mark.django_db
     def test_create_group_unauthenticated(self, client, group_factory):
@@ -42,8 +41,7 @@ class TestGroupMutations():
         assert response.json()['data']['createGroup']['group']['name'] == group.name
 
 
-class TestGroupSettingsMutations():
-    """Test group settings mutations"""
+class TestCreateGroupSettings:
 
     @pytest.mark.django_db
     def test_create_group_settings_unauthenticated(self, client, group_factory, group_settings_factory):
@@ -101,4 +99,4 @@ class TestGroupSettingsMutations():
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroupSettings']['groupSettings']['isPublic']
+        assert response.json()['data']['createGroupSettings']['groupSettings']['isPublic'] == group_settings.is_public

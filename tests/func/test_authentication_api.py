@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestAPIAuthentication():
-    """Test group API queries"""
+class TestAPIAuthentication:
 
     @pytest.mark.django_db
     def test_email_auth(self, user_factory, client):

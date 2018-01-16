@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestMessageQuery():
-    """Test message API queries"""
+class TestQueryMessages:
 
     @pytest.mark.django_db
     def test_get_message(self, message_factory, client):
@@ -26,8 +25,7 @@ class TestMessageQuery():
         assert len(response.json()['data']['messages']) == 2
 
 
-class TestReplyQuery():
-    """Test reply API queries"""
+class TestQueryReplies:
 
     @pytest.mark.django_db
     def test_get_reply(self, reply_factory, client):

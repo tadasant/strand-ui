@@ -1,12 +1,8 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from app.slack.models import SlackUser, SlackChannel, SlackTeam, SlackSettings
-
-
-class SlackUserType(DjangoObjectType):
-    class Meta:
-        model = SlackUser
+from app.questions.types import SessionInputType
+from app.slack.models import SlackUser, SlackChannel, SlackTeam, SlackSettings, SlackEvent
 
 
 class SlackChannelType(DjangoObjectType):
@@ -14,14 +10,24 @@ class SlackChannelType(DjangoObjectType):
         model = SlackChannel
 
 
-class SlackTeamType(DjangoObjectType):
+class SlackEventType(DjangoObjectType):
     class Meta:
-        model = SlackTeam
+        model = SlackEvent
 
 
 class SlackSettingsType(DjangoObjectType):
     class Meta:
         model = SlackSettings
+
+
+class SlackTeamType(DjangoObjectType):
+    class Meta:
+        model = SlackTeam
+
+
+class SlackUserType(DjangoObjectType):
+    class Meta:
+        model = SlackUser
 
 
 class SlackUserInputType(graphene.InputObjectType):
@@ -53,4 +59,28 @@ class SlackChannelInputType(graphene.InputObjectType):
 
 class SlackSettingsInputType(graphene.InputObjectType):
     bot_token = graphene.String()
+    slack_team_id = graphene.String(required=True)
+
+
+class SlackEventAndMessageInputType(graphene.InputObjectType):
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    slack_user_id = graphene.String(required=True)
+    slack_event_ts = graphene.String(required=True)
+
+
+class SlackEventAndReplyInputType(graphene.InputObjectType):
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
+    message_slack_event_ts = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    slack_user_id = graphene.String(required=True)
+    slack_event_ts = graphene.String(required=True)
+
+
+class SessionAndSlackChannelInputType(graphene.InputObjectType):
+    session = graphene.Field(SessionInputType, required=True)
+    id = graphene.String(required=True)
+    name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
