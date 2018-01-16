@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestSlackTeamMutations():
-    """Test slack team mutations"""
+class TestSlackTeamMutations:
 
     @pytest.mark.django_db
     def test_create_slack_team_unauthenticated(self, client, group_factory, slack_team_factory):
@@ -63,8 +62,7 @@ class TestSlackTeamMutations():
         assert response.json()['data']['createSlackTeam']['slackTeam']['name'] == slack_team.name
 
 
-class TestSlackUserMutations():
-    """Test slack user mutations"""
+class TestSlackUserMutations:
 
     @pytest.mark.django_db
     def test_create_slack_user_unauthenticated(self, client, user_factory, slack_team_factory, slack_user_factory):
@@ -158,8 +156,7 @@ class TestSlackUserMutations():
         assert response.json()['data']['createSlackUser']['slackUser']['realName'] == slack_user.real_name
 
 
-class TestSlackChannelMutations():
-    """Test slack channel mutations"""
+class TestSlackChannelMutations:
 
     @pytest.mark.django_db
     def test_create_slack_channel_unauthenticated(self, client, slack_channel_factory, slack_team_factory, session_factory):
@@ -248,8 +245,7 @@ class TestSlackChannelMutations():
         assert response.json()['data']['createSlackChannel']['slackChannel']['name'] == slack_channel.name
 
 
-class TestSlackSettingsMutations():
-    """Test slack team mutations"""
+class TestSlackSettingsMutations:
 
     @pytest.mark.django_db
     def test_create_slack_settings_unauthenticated(self, client, slack_team_factory):

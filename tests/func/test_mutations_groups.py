@@ -101,4 +101,4 @@ class TestGroupSettingsMutations():
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroupSettings']['groupSettings']['isPublic']
+        assert response.json()['data']['createGroupSettings']['groupSettings']['isPublic'] == group_settings.is_public

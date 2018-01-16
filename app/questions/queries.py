@@ -1,22 +1,7 @@
 import graphene
-from graphene_django.types import DjangoObjectType
 
-from app.questions.models import Question, Tag, Session
-
-
-class QuestionType(DjangoObjectType):
-    class Meta:
-        model = Question
-
-
-class TagType(DjangoObjectType):
-    class Meta:
-        model = Tag
-
-
-class SessionType(DjangoObjectType):
-    class Meta:
-        model = Session
+from app.questions.models import Question, Session, Tag
+from app.questions.types import QuestionType, SessionType, TagType
 
 
 class Query(graphene.ObjectType):
