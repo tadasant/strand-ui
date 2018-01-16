@@ -16,8 +16,8 @@ class TestGroupQuery():
 
     @pytest.mark.django_db
     def test_get_groups(self, group_factory, client):
-        group = group_factory()
-        another_group = group_factory()
+        group_factory()
+        group_factory()
 
         query = {'query': '{ groups { name } }'}
         response = client.post('/graphql', query)
@@ -41,8 +41,8 @@ class TestGroupSettingsQuery():
 
     @pytest.mark.django_db
     def test_get_groups(self, group_settings_factory, client):
-        group_settings = group_settings_factory()
-        another_group_settings = group_settings_factory()
+        group_settings_factory()
+        group_settings_factory()
 
         query = {'query': '{ groupsSettings { group { name } } }'}
         response = client.post('/graphql', query)

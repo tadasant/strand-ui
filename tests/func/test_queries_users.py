@@ -16,8 +16,8 @@ class TestUserQuery():
 
     @pytest.mark.django_db
     def test_get_users(self, user_factory, client):
-        user = user_factory()
-        second_user = user_factory()
+        user_factory()
+        user_factory()
 
         query = {'query': '{ users { username } }'}
         response = client.post('/graphql', query)

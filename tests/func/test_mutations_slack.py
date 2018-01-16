@@ -34,7 +34,7 @@ class TestSlackTeamMutations():
               slackTeam {{
                 name
               }}
-            }} 
+            }}
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
@@ -162,7 +162,8 @@ class TestSlackChannelMutations():
     """Test slack channel mutations"""
 
     @pytest.mark.django_db
-    def test_create_slack_channel_unauthenticated(self, client, slack_channel_factory, slack_team_factory, session_factory):
+    def test_create_slack_channel_unauthenticated(self, client, slack_channel_factory, slack_team_factory,
+                                                  session_factory):
         session = session_factory()
         slack_team = slack_team_factory()
         slack_channel = slack_channel_factory.build()
@@ -184,7 +185,8 @@ class TestSlackChannelMutations():
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_channel_invalid_team(self, auth_client, slack_channel_factory, slack_team_factory, session_factory):
+    def test_create_slack_channel_invalid_team(self, auth_client, slack_channel_factory, slack_team_factory,
+                                               session_factory):
         session = session_factory()
         slack_team = slack_team_factory.build()
         slack_channel = slack_channel_factory.build()

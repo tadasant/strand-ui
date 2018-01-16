@@ -1,8 +1,6 @@
 import pytest
 from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
-from rest_framework.authtoken.models import Token
-
 
 from tests.factories import (
     GroupFactory,

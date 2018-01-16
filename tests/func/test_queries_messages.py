@@ -16,8 +16,8 @@ class TestMessageQuery():
 
     @pytest.mark.django_db
     def test_get_messages(self, message_factory, client):
-        message = message_factory()
-        another_message = message_factory()
+        message_factory()
+        message_factory()
 
         query = {'query': '{ messages { text } }'}
         response = client.post('/graphql', query)
@@ -41,8 +41,8 @@ class TestReplyQuery():
 
     @pytest.mark.django_db
     def test_get_replies(self, reply_factory, client):
-        reply = reply_factory()
-        another_reply = reply_factory(message=reply.message)
+        reply_factory()
+        reply_factory()
 
         query = {'query': '{ replies { text } }'}
         response = client.post('/graphql', query)

@@ -8,7 +8,6 @@ class TestSlackUserQuery():
     def test_get_slack_user(self, slack_user_factory, client):
         slack_user = slack_user_factory()
 
-
         query = {'query': f'{{ slackUser(id: "{slack_user.id}") {{ firstName }} }}'}
         response = client.post('/graphql', query)
 
@@ -17,8 +16,8 @@ class TestSlackUserQuery():
 
     @pytest.mark.django_db
     def test_get_slack_users(self, slack_user_factory, client):
-        slack_user = slack_user_factory()
-        another_slack_user = slack_user_factory()
+        slack_user_factory()
+        slack_user_factory()
 
         query = {'query': '{ slackUsers { displayName } }'}
         response = client.post('/graphql', query)
@@ -42,8 +41,8 @@ class TestSlackTeamQuery():
 
     @pytest.mark.django_db
     def test_get_slack_teams(self, slack_team_factory, client):
-        slack_team = slack_team_factory()
-        another_slack_team = slack_team_factory()
+        slack_team_factory()
+        slack_team_factory()
 
         query = {'query': '{ slackTeams { group { name } } }'}
         response = client.post('/graphql', query)
@@ -66,8 +65,8 @@ class TestSlackChannelQuery():
 
     @pytest.mark.django_db
     def test_get_slack_channels(self, slack_channel_factory, client):
-        slack_channel = slack_channel_factory()
-        another_slack_channel = slack_channel_factory()
+        slack_channel_factory()
+        slack_channel_factory()
 
         query = {'query': '{ slackChannels { name } }'}
         response = client.post('/graphql', query)
@@ -90,8 +89,8 @@ class TestSlackSettingsQuery():
 
     @pytest.mark.django_db
     def test_get_slacks_settings(self, slack_settings_factory, client):
-        slack_settings = slack_settings_factory()
-        another_slack_settings = slack_settings_factory()
+        slack_settings_factory()
+        slack_settings_factory()
 
         query = {'query': '{ slacksSettings { botToken } }'}
         response = client.post('/graphql', query)
