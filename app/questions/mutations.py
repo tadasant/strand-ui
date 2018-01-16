@@ -21,7 +21,13 @@ class CreateQuestionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
+        question_tags = input.pop('tags', [])
         question = Question.objects.create(**input)
+
+        for question_tag in question_tags:
+            tag, created = Tag.objects.get_or_create(name=question_tag['name'])
+            question.tags.add(tag)
+
         return CreateQuestionMutation(question=question)
 
 

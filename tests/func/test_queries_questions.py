@@ -1,7 +1,7 @@
 import pytest
 
 
-class TestQuestionQuery():
+class TestQueryQuestions:
     """Test question API queries"""
 
     @pytest.mark.django_db
@@ -26,8 +26,7 @@ class TestQuestionQuery():
         assert len(response.json()['data']['questions']) == 2
 
 
-class TestTagQuery():
-    """Test tag API queries"""
+class TestQueryTags:
 
     @pytest.mark.django_db
     def test_get_tag(self, tag_factory, client):
@@ -51,7 +50,7 @@ class TestTagQuery():
         assert len(response.json()['data']['tags']) == 2
 
 
-class TestSessionQuery():
+class TestQuerySessions:
     """Test session API queries"""
 
     @pytest.mark.django_db
@@ -63,7 +62,6 @@ class TestSessionQuery():
 
         assert response.status_code == 200
         assert response.json()['data']['session']['question']['title'] == session.question.title
-
 
     @pytest.mark.django_db
     def test_get_sessions(self, session_factory, client):

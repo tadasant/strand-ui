@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestUserMutations():
-    """Test user mutations"""
+class TestCreateUser:
 
     @pytest.mark.django_db
     def test_create_user_unauthenticated(self, client, user_factory):

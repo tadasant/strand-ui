@@ -1,13 +1,11 @@
 import pytest
 
 
-class TestSlackUserQuery():
-    """Test slack user API queries"""
+class TestQuerySlackUsers:
 
     @pytest.mark.django_db
     def test_get_slack_user(self, slack_user_factory, client):
         slack_user = slack_user_factory()
-
 
         query = {'query': f'{{ slackUser(id: "{slack_user.id}") {{ firstName }} }}'}
         response = client.post('/graphql', query)
@@ -27,8 +25,7 @@ class TestSlackUserQuery():
         assert len(response.json()['data']['slackUsers']) == 2
 
 
-class TestSlackTeamQuery():
-    """Test slack team queries"""
+class TestQuerySlackTeams:
 
     @pytest.mark.django_db
     def test_get_slack_team(self, slack_team_factory, client):
@@ -52,8 +49,8 @@ class TestSlackTeamQuery():
         assert len(response.json()['data']['slackTeams']) == 2
 
 
-class TestSlackChannelQuery():
-    """Test Slack Channel API queries"""
+class TestQuerySlackChannels:
+
     @pytest.mark.django_db
     def test_get_slack_channel(self, slack_channel_factory, client):
         slack_channel = slack_channel_factory()
@@ -76,8 +73,8 @@ class TestSlackChannelQuery():
         assert len(response.json()['data']['slackChannels']) == 2
 
 
-class TestSlackSettingsQuery():
-    """Test Slack Settings API queries"""
+class TestQuerySlackSettings:
+
     @pytest.mark.django_db
     def test_get_slack_settings(self, slack_settings_factory, client):
         slack_settings = slack_settings_factory()

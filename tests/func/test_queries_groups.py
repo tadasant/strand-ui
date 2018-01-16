@@ -1,8 +1,7 @@
 import pytest
 
 
-class TestGroupQuery():
-    """Test group API queries"""
+class TestQueryGroups:
 
     @pytest.mark.django_db
     def test_get_group(self, group_factory, client):
@@ -26,8 +25,7 @@ class TestGroupQuery():
         assert len(response.json()['data']['groups']) == 2
 
 
-class TestGroupSettingsQuery():
-    """Test group settings API queries"""
+class TestQueryGroupSettings:
 
     @pytest.mark.django_db
     def test_get_group_settings(self, group_settings_factory, client):

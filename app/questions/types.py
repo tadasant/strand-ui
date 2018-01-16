@@ -19,6 +19,10 @@ class TagType(DjangoObjectType):
         model = Tag
 
 
+class TagInputType(graphene.InputObjectType):
+    name = graphene.String(required=True)
+
+
 class QuestionInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
@@ -27,13 +31,19 @@ class QuestionInputType(graphene.InputObjectType):
     original_poster_id = graphene.Int(required=True)
     solver_id = graphene.Int()
     group_id = graphene.Int()
+    tags = graphene.List(TagInputType)
 
 
 class SessionInputType(graphene.InputObjectType):
-    time_start = graphene.String(required=True)
+    time_start = graphene.String()
     time_end = graphene.String()
-    question_id = graphene.Int()
+    question_id = graphene.Int(required=True)
 
 
-class TagInputType(graphene.InputObjectType):
-    name = graphene.String(required=True)
+class QuestionAndTagsInputType(graphene.InputObjectType):
+    title = graphene.String(required=True)
+    description = graphene.String(required=True)
+    is_solved = graphene.Boolean()
+    is_anonymous = graphene.Boolean()
+    original_poster_id = graphene.Int(required=True)
+    solver_id = graphene.Int()
