@@ -64,17 +64,18 @@ class SlackSettingsInputType(graphene.InputObjectType):
 
 class SlackEventAndMessageInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
-    session_id = graphene.Int(required=True)
-    author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    slack_user_id = graphene.String(required=True)
     slack_event_ts = graphene.String(required=True)
 
 
 class SlackEventAndReplyInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
-    message_id = graphene.Int(required=True)
-    author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
+    message_slack_event_ts = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    slack_user_id = graphene.String(required=True)
     slack_event_ts = graphene.String(required=True)
 
 

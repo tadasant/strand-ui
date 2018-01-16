@@ -108,12 +108,20 @@ class CreateSlackEventAndMessageMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
+        if not SlackUser.objects.filter(pk=input['slack_user_id']).exists():
+            raise Exception('Invalid Slack User Id')
+
+        if not SlackChannel.objects.filter(pk=input['slack_channel_id']).exists():
+            raise Exception('Invalid Slack Channel Id')
+
         ts = input.pop('slack_event_ts')
         slack_event = SlackEvent.objects.create(ts=ts)
 
-        message = Message.objects.create(**input)
-        message.slack_event = slack_event
-        message.save()
+        session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
+        author = User.objects.get(slackuser__id=input['slack_user_id'])
+
+        message = Message.objects.create(text=input['text'], session=session, author=author,
+                                         time=input['time'], slack_event=slack_event)
 
         return CreateSlackEventAndMessageMutation(slack_event=slack_event, message=message)
 
@@ -129,12 +137,25 @@ class CreateSlackEventAndReplyMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
+        if not SlackUser.objects.filter(pk=input['slack_user_id']).exists():
+            raise Exception('Invalid Slack User Id')
+
+        if not SlackChannel.objects.filter(pk=input['slack_channel_id']).exists():
+            raise Exception('Invalid Slack Channel Id')
+
+        if not Message.objects.filter(slack_event__ts=input['message_slack_event_ts'],
+                                      session__slackchannel__id=input['slack_channel_id']).exists():
+            raise Exception('Invalid Message Slack Event Ts')
+
         ts = input.pop('slack_event_ts')
         slack_event = SlackEvent.objects.create(ts=ts)
 
-        reply = Reply.objects.create(**input)
-        reply.slack_event = slack_event
-        reply.save()
+        message = Message.objects.get(slack_event__ts=input['message_slack_event_ts'],
+                                      session__slackchannel__id=input['slack_channel_id'])
+        author = User.objects.get(slackuser__id=input['slack_user_id'])
+
+        reply = Reply.objects.create(text=input['text'], message=message, author=author,
+                                     time=input['time'], slack_event=slack_event)
 
         return CreateSlackEventAndReplyMutation(slack_event=slack_event, reply=reply)
 
