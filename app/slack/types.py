@@ -84,3 +84,22 @@ class SessionAndSlackChannelInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
+
+
+class UserAndSlackUserInputType(graphene.InputObjectType):
+    id = graphene.String(required=True)
+    first_name = graphene.String()
+    last_name = graphene.String()
+    real_name = graphene.String(required=True)
+    display_name = graphene.String(required=True)
+    email = graphene.String()
+    avatar_72 = graphene.String()
+    is_bot = graphene.Boolean(required=True)
+    is_admin = graphene.Boolean(required=True)
+    slack_team_id = graphene.String(required=True)
+
+
+class GroupAndSlackTeamInputType(graphene.InputObjectType):
+    slack_team_id = graphene.String(required=True)
+    slack_team_name = graphene.String(required=True)
+    group_name = graphene.String(required=True)

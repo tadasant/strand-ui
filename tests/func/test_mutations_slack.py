@@ -677,3 +677,77 @@ class TestCreateSlackEventAndReply:
         assert response.status_code == 200
         assert response.json()['data']['createSlackEventAndReply']['reply']['message']['author']['id'] == \
             str(message.author.id)
+
+
+class TestCreateGroupAndSlackTeam:
+
+    @pytest.mark.django_db
+    def test_create_group_and_slack_team_unauthenticated(self, client, group_factory, slack_team_factory):
+        group = group_factory.build()
+        slack_team = slack_team_factory.build()
+
+        mutation = f'''
+          mutation {{
+            createGroupAndSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                             slackTeamName: "{slack_team.name}",
+                                             groupName: "{group.name}"}}) {{
+              slackTeam {{
+                group {{
+                  name
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createGroupAndSlackTeam'] is None
+        assert response.json()['errors'][0]['message'] == 'Unauthorized'
+
+    @pytest.mark.django_db
+    def test_create_group_and_slack_team_invalid_id(self, auth_client, group_factory, slack_team_factory):
+        group = group_factory()
+        slack_team = slack_team_factory(group=group)
+
+        mutation = f'''
+          mutation {{
+            createGroupAndSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                             slackTeamName: "{slack_team.name}",
+                                             groupName: "{group.name}"}}) {{
+              slackTeam {{
+                group {{
+                  name
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createGroupAndSlackTeam'] is None
+        assert response.json()['errors'][0]['message'] == f'Slack Team with id {slack_team.id} already exists'
+
+    @pytest.mark.django_db
+    def test_create_group_and_slack_team(self, auth_client, group_factory, slack_team_factory):
+        group = group_factory()
+        slack_team = slack_team_factory.build(group=group)
+
+        mutation = f'''
+          mutation {{
+            createGroupAndSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                             slackTeamName: "{slack_team.name}",
+                                             groupName: "{group.name}"}}) {{
+               slackTeam {{
+                 group {{
+                   id
+                 }}
+               }}
+             }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createGroupAndSlackTeam']['slackTeam']['group']['id'] == str(group.id)
