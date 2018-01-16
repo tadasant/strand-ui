@@ -14,6 +14,8 @@ import os
 
 if os.environ.get('ENVIRONMENT') == 'PROD':
     from config.settings.production import *
+elif os.environ.get('ENVIRONMENT') == 'TEST':
+    from config.settings.test import *
 else:
     from config.settings.local import *
 
