@@ -761,9 +761,8 @@ class TestGetOrCreateUserAndCreateSlackUser:
 
     @pytest.mark.django_db
     def test_get_or_create_user_and_create_slack_user_unauthenticated(self, client, slack_team_factory,
-                                                                      user_factory, slack_user_factory):
+                                                                      slack_user_factory):
         slack_team = slack_team_factory()
-        user = user_factory()
         slack_user = slack_user_factory.build(slack_team=slack_team)
 
         mutation = f'''
@@ -794,9 +793,8 @@ class TestGetOrCreateUserAndCreateSlackUser:
 
     @pytest.mark.django_db
     def test_get_or_create_user_and_create_slack_user_existing_slack_user(self, auth_client, slack_team_factory,
-                                                                          user_factory, slack_user_factory):
+                                                                          slack_user_factory):
         slack_team = slack_team_factory()
-        user = user_factory()
         slack_user = slack_user_factory(slack_team=slack_team)
 
         mutation = f'''

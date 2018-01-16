@@ -44,6 +44,7 @@ class CreateSlackUserMutation(graphene.Mutation):
             raise Exception('Invalid User Id')
 
         slack_user = SlackUser.objects.create(**input)
+
         return CreateSlackUserMutation(slack_user=slack_user)
 
 
@@ -61,6 +62,7 @@ class CreateSlackTeamMutation(graphene.Mutation):
             raise Exception('Invalid Group Id')
 
         slack_team = SlackTeam.objects.create(**input)
+
         return CreateSlackTeamMutation(slack_team=slack_team)
 
 
@@ -81,6 +83,7 @@ class CreateSlackChannelMutation(graphene.Mutation):
             raise Exception('Invalid Session Id')
 
         slack_channel = SlackChannel.objects.create(**input)
+
         return CreateSlackChannelMutation(slack_channel=slack_channel)
 
 
@@ -98,6 +101,7 @@ class CreateSlackSettingsMutation(graphene.Mutation):
             raise Exception('Invalid Slack Team Id')
 
         slack_settings = SlackSettings.objects.create(**input)
+
         return CreateSlackSettingsMutation(slack_settings=slack_settings)
 
 
@@ -123,7 +127,6 @@ class CreateSlackEventAndMessageMutation(graphene.Mutation):
 
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         message = Message.objects.create(text=input['text'], session=session, author=author,
                                          time=input['time'], slack_event=slack_event)
 
@@ -153,11 +156,9 @@ class CreateSlackEventAndReplyMutation(graphene.Mutation):
 
         ts = input.pop('slack_event_ts')
         slack_event = SlackEvent.objects.create(ts=ts)
-
         message = Message.objects.get(slack_event__ts=input['message_slack_event_ts'],
                                       session__slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         reply = Reply.objects.create(text=input['text'], message=message, author=author,
                                      time=input['time'], slack_event=slack_event)
 
@@ -178,6 +179,7 @@ class CreateSessionAndSlackChannelMutation(graphene.Mutation):
         session_args = input.pop('session', {})
         session = Session.objects.create(**session_args)
         channel = SlackChannel.objects.create(**input, session_id=session.id)
+
         return CreateSessionAndSlackChannelMutation(session=session, slack_channel=channel)
 
 
@@ -206,6 +208,7 @@ class GetOrCreateUserAndCreateSlackUserMutation(graphene.Mutation):
                                                                  avatar_url=input.get('avatar_72')))
         slack_team.group.members.add(user)
         slack_user = SlackUser.objects.create(**input, user=user)
+
         return GetOrCreateUserAndCreateSlackUserMutation(user=user, slack_user=slack_user)
 
 
@@ -225,8 +228,7 @@ class GetOrCreateGroupAndCreateSlackTeamMutation(graphene.Mutation):
 
         group_name = input.pop('group_name')
         group, created = Group.objects.get_or_create(name=group_name)
-        slack_team = SlackTeam.objects.create(id=input['slack_team_id'], name=input['slack_team_name'],
-                                              group=group)
+        slack_team = SlackTeam.objects.create(id=input['slack_team_id'], name=input['slack_team_name'], group=group)
 
         return GetOrCreateGroupAndCreateSlackTeamMutation(group=group, slack_team=slack_team)
 
