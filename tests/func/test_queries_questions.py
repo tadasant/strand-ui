@@ -16,8 +16,8 @@ class TestQuestionQuery():
 
     @pytest.mark.django_db
     def test_get_questions(self, question_factory, client):
-        question = question_factory()
-        another_question = question_factory()
+        question_factory()
+        question_factory()
 
         query = {'query': '{ questions { title } }'}
         response = client.post('/graphql', query)
@@ -41,8 +41,8 @@ class TestTagQuery():
 
     @pytest.mark.django_db
     def test_get_tags(self, tag_factory, client):
-        tag = tag_factory()
-        another_tag = tag_factory()
+        tag_factory()
+        tag_factory()
 
         query = {'query': '{ tags { name } }'}
         response = client.post('/graphql', query)
@@ -64,11 +64,10 @@ class TestSessionQuery():
         assert response.status_code == 200
         assert response.json()['data']['session']['question']['title'] == session.question.title
 
-
     @pytest.mark.django_db
     def test_get_sessions(self, session_factory, client):
-        session = session_factory()
-        another_session = session_factory()
+        session_factory()
+        session_factory()
 
         query = {'query': '{ sessions { id } }'}
         response = client.post('/graphql', query)

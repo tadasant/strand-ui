@@ -46,7 +46,7 @@ class TestMessageMutations():
                 text
               }}
             }}
-          }}        
+          }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
 
@@ -70,7 +70,7 @@ class TestMessageMutations():
                 text
               }}
             }}
-          }}        
+          }}
         '''
         response = client.post('/graphql', {'query': mutation})
 
@@ -95,7 +95,7 @@ class TestMessageMutations():
                 text
               }}
             }}
-          }}        
+          }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
 
@@ -169,7 +169,7 @@ class TestReplyMutations():
                 text
               }}
             }}
-          }}        
+          }}
         '''
         response = client.post('/graphql', {'query': mutation})
 
@@ -194,7 +194,7 @@ class TestReplyMutations():
                 text
               }}
             }}
-          }}        
+          }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
 

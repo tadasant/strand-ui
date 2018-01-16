@@ -22,6 +22,6 @@ class TestUserModel():
         When: A new user is created also with email address X.
         Then: A unique constraint is violated.
         """
-        user = user_factory(email='hello@gmail.com')
+        user_factory(email='hello@gmail.com')
         with pytest.raises(IntegrityError):
-            another_user = user_factory(email='hello@gmail.com')
+            user_factory(email='hello@gmail.com')
