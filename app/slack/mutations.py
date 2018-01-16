@@ -1,12 +1,14 @@
 import graphene
 
 from app.groups.models import Group
+from app.groups.types import GroupType
 from app.messages.models import Message, Reply
 from app.messages.types import MessageType, ReplyType
 from app.questions.models import Session
 from app.questions.types import SessionType
 from app.slack.models import SlackChannel, SlackEvent, SlackSettings, SlackTeam, SlackUser
 from app.slack.types import (
+    GroupAndSlackTeamInputType,
     SessionAndSlackChannelInputType,
     SlackChannelType,
     SlackChannelInputType,
@@ -18,9 +20,11 @@ from app.slack.types import (
     SlackTeamType,
     SlackTeamInputType,
     SlackUserType,
-    SlackUserInputType
+    SlackUserInputType,
+    UserAndSlackUserInputType
 )
 from app.users.models import User
+from app.users.types import UserType
 
 
 class CreateSlackUserMutation(graphene.Mutation):
@@ -40,6 +44,7 @@ class CreateSlackUserMutation(graphene.Mutation):
             raise Exception('Invalid User Id')
 
         slack_user = SlackUser.objects.create(**input)
+
         return CreateSlackUserMutation(slack_user=slack_user)
 
 
@@ -57,6 +62,7 @@ class CreateSlackTeamMutation(graphene.Mutation):
             raise Exception('Invalid Group Id')
 
         slack_team = SlackTeam.objects.create(**input)
+
         return CreateSlackTeamMutation(slack_team=slack_team)
 
 
@@ -77,6 +83,7 @@ class CreateSlackChannelMutation(graphene.Mutation):
             raise Exception('Invalid Session Id')
 
         slack_channel = SlackChannel.objects.create(**input)
+
         return CreateSlackChannelMutation(slack_channel=slack_channel)
 
 
@@ -94,6 +101,7 @@ class CreateSlackSettingsMutation(graphene.Mutation):
             raise Exception('Invalid Slack Team Id')
 
         slack_settings = SlackSettings.objects.create(**input)
+
         return CreateSlackSettingsMutation(slack_settings=slack_settings)
 
 
@@ -119,7 +127,6 @@ class CreateSlackEventAndMessageMutation(graphene.Mutation):
 
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         message = Message.objects.create(text=input['text'], session=session, author=author,
                                          time=input['time'], slack_event=slack_event)
 
@@ -149,11 +156,9 @@ class CreateSlackEventAndReplyMutation(graphene.Mutation):
 
         ts = input.pop('slack_event_ts')
         slack_event = SlackEvent.objects.create(ts=ts)
-
         message = Message.objects.get(slack_event__ts=input['message_slack_event_ts'],
                                       session__slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         reply = Reply.objects.create(text=input['text'], message=message, author=author,
                                      time=input['time'], slack_event=slack_event)
 
@@ -174,7 +179,58 @@ class CreateSessionAndSlackChannelMutation(graphene.Mutation):
         session_args = input.pop('session', {})
         session = Session.objects.create(**session_args)
         channel = SlackChannel.objects.create(**input, session_id=session.id)
+
         return CreateSessionAndSlackChannelMutation(session=session, slack_channel=channel)
+
+
+class GetOrCreateUserAndCreateSlackUserMutation(graphene.Mutation):
+    class Arguments:
+        input = UserAndSlackUserInputType(required=True)
+
+    user = graphene.Field(UserType)
+    slack_user = graphene.Field(SlackUserType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if not SlackTeam.objects.filter(pk=input['slack_team_id']).exists():
+            raise Exception('Invalid Slack Team Id')
+
+        if SlackUser.objects.filter(id=input['id'], slack_team__id=input['slack_team_id']).exists():
+            raise Exception(f'''Slack User with id {input['id']} already exists''')
+
+        slack_team = SlackTeam.objects.get(pk=input['slack_team_id'])
+        user, created = User.objects.get_or_create(email=input['email'],
+                                                   defaults=dict(username=input['display_name'],
+                                                                 first_name=input.get('first_name'),
+                                                                 last_name=input.get('last_name'),
+                                                                 avatar_url=input.get('avatar_72')))
+        slack_team.group.members.add(user)
+        slack_user = SlackUser.objects.create(**input, user=user)
+
+        return GetOrCreateUserAndCreateSlackUserMutation(user=user, slack_user=slack_user)
+
+
+class GetOrCreateGroupAndCreateSlackTeamMutation(graphene.Mutation):
+    class Arguments:
+        input = GroupAndSlackTeamInputType(required=True)
+
+    group = graphene.Field(GroupType)
+    slack_team = graphene.Field(SlackTeamType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if SlackTeam.objects.filter(pk=input['slack_team_id']).exists():
+            raise Exception(f'''Slack Team with id {input['slack_team_id']} already exists''')
+
+        group_name = input.pop('group_name')
+        group, created = Group.objects.get_or_create(name=group_name)
+        slack_team = SlackTeam.objects.create(id=input['slack_team_id'], name=input['slack_team_name'], group=group)
+
+        return GetOrCreateGroupAndCreateSlackTeamMutation(group=group, slack_team=slack_team)
 
 
 class Mutation(graphene.ObjectType):
@@ -187,3 +243,6 @@ class Mutation(graphene.ObjectType):
     create_slack_event_and_reply = CreateSlackEventAndReplyMutation.Field()
 
     create_session_and_slack_channel = CreateSessionAndSlackChannelMutation.Field()
+
+    get_or_create_user_and_create_slack_user = GetOrCreateUserAndCreateSlackUserMutation.Field()
+    get_or_create_group_and_create_slack_team = GetOrCreateGroupAndCreateSlackTeamMutation.Field()

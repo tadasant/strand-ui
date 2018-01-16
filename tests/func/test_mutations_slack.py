@@ -677,3 +677,214 @@ class TestCreateSlackEventAndReply:
         assert response.status_code == 200
         assert response.json()['data']['createSlackEventAndReply']['reply']['message']['author']['id'] == \
             str(message.author.id)
+
+
+class TestGetOrCreateGroupAndCreateSlackTeam:
+
+    @pytest.mark.django_db
+    def test_get_or_create_group_and_create_slack_team_unauthenticated(self, client, group_factory,
+                                                                       slack_team_factory):
+        group = group_factory.build()
+        slack_team = slack_team_factory.build()
+
+        mutation = f'''
+          mutation {{
+            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                                        slackTeamName: "{slack_team.name}",
+                                                        groupName: "{group.name}"}}) {{
+              slackTeam {{
+                group {{
+                  name
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam'] is None
+        assert response.json()['errors'][0]['message'] == 'Unauthorized'
+
+    @pytest.mark.django_db
+    def test_get_or_create_group_and_create_slack_team_invalid_id(self, auth_client, group_factory,
+                                                                  slack_team_factory):
+        group = group_factory()
+        slack_team = slack_team_factory(group=group)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                                        slackTeamName: "{slack_team.name}",
+                                                        groupName: "{group.name}"}}) {{
+              slackTeam {{
+                group {{
+                  name
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam'] is None
+        assert response.json()['errors'][0]['message'] == f'Slack Team with id {slack_team.id} already exists'
+
+    @pytest.mark.django_db
+    def test_get_or_create_group_and_create_slack_team(self, auth_client, group_factory,
+                                                       slack_team_factory):
+        group = group_factory()
+        slack_team = slack_team_factory.build(group=group)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
+                                                        slackTeamName: "{slack_team.name}",
+                                                        groupName: "{group.name}"}}) {{
+               slackTeam {{
+                 group {{
+                   id
+                 }}
+               }}
+             }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam']['slackTeam']['group']['id'] == \
+            str(group.id)
+
+
+class TestGetOrCreateUserAndCreateSlackUser:
+
+    @pytest.mark.django_db
+    def test_get_or_create_user_and_create_slack_user_unauthenticated(self, client, slack_team_factory,
+                                                                      slack_user_factory):
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
+                                                       firstName: "{slack_user.first_name}",
+                                                       lastName: "{slack_user.last_name}",
+                                                       realName: "{slack_user.real_name}",
+                                                       displayName: "{slack_user.display_name}",
+                                                       email: "{slack_user.email}",
+                                                       avatar72: "{slack_user.avatar_72}",
+                                                       isBot: {str(slack_user.is_bot).lower()},
+                                                       isAdmin: {str(slack_user.is_admin).lower()},
+                                                       slackTeamId: "{slack_team.id}"}}) {{
+              slackUser {{
+                user {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateUserAndCreateSlackUser'] is None
+        assert response.json()['errors'][0]['message'] == 'Unauthorized'
+
+    @pytest.mark.django_db
+    def test_get_or_create_user_and_create_slack_user_existing_slack_user(self, auth_client, slack_team_factory,
+                                                                          slack_user_factory):
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory(slack_team=slack_team)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
+                                                       firstName: "{slack_user.first_name}",
+                                                       lastName: "{slack_user.last_name}",
+                                                       realName: "{slack_user.real_name}",
+                                                       displayName: "{slack_user.display_name}",
+                                                       email: "{slack_user.email}",
+                                                       avatar72: "{slack_user.avatar_72}",
+                                                       isBot: {str(slack_user.is_bot).lower()},
+                                                       isAdmin: {str(slack_user.is_admin).lower()},
+                                                       slackTeamId: "{slack_team.id}"}}) {{
+              slackUser {{
+                user {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateUserAndCreateSlackUser'] is None
+        assert response.json()['errors'][0]['message'] == f'Slack User with id {slack_user.id} already exists'
+
+    @pytest.mark.django_db
+    def test_get_or_create_user_and_create_slack_user_get_user(self, auth_client, slack_team_factory,
+                                                               user_factory, slack_user_factory):
+        slack_team = slack_team_factory()
+        user = user_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team, email=user.email)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
+                                                       firstName: "{slack_user.first_name}",
+                                                       lastName: "{slack_user.last_name}",
+                                                       realName: "{slack_user.real_name}",
+                                                       displayName: "{slack_user.display_name}",
+                                                       email: "{slack_user.email}",
+                                                       avatar72: "{slack_user.avatar_72}",
+                                                       isBot: {str(slack_user.is_bot).lower()},
+                                                       isAdmin: {str(slack_user.is_admin).lower()},
+                                                       slackTeamId: "{slack_team.id}"}}) {{
+              slackUser {{
+                user {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateUserAndCreateSlackUser']['slackUser']['user']['id'] ==\
+            str(user.id)
+
+    @pytest.mark.django_db
+    def test_get_or_create_user_and_create_slack_user_create_user(self, auth_client, slack_team_factory,
+                                                                  user_factory, slack_user_factory):
+        slack_team = slack_team_factory()
+        user = user_factory.build()
+        slack_user = slack_user_factory.build(slack_team=slack_team, email=user.email)
+
+        mutation = f'''
+          mutation {{
+            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
+                                                       firstName: "{slack_user.first_name}",
+                                                       lastName: "{slack_user.last_name}",
+                                                       realName: "{slack_user.real_name}",
+                                                       displayName: "{slack_user.display_name}",
+                                                       email: "{slack_user.email}",
+                                                       avatar72: "{slack_user.avatar_72}",
+                                                       isBot: {str(slack_user.is_bot).lower()},
+                                                       isAdmin: {str(slack_user.is_admin).lower()},
+                                                       slackTeamId: "{slack_team.id}"}}) {{
+              slackUser {{
+                user {{
+                  email
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['getOrCreateUserAndCreateSlackUser']['slackUser']['user']['email'] ==\
+            slack_user.email
