@@ -1,13 +1,14 @@
 import pytz
 
 import factory
+import factory.fuzzy
 from django.contrib.auth.hashers import make_password
 
-from app.groups.models import Group, GroupSettings
+from app.groups.models import Group, GroupSetting
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack.models import SlackSettings, SlackChannel, SlackUser, SlackTeam, SlackEvent
+from app.slack.models import SlackTeamSetting, SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -37,12 +38,14 @@ class GroupFactory(factory.DjangoModelFactory):
                 self.members.add(member)
 
 
-class GroupSettingsFactory(factory.DjangoModelFactory):
+class GroupSettingFactory(factory.DjangoModelFactory):
     class Meta:
-        model = GroupSettings
+        model = GroupSetting
 
-    is_public = factory.Faker('pybool')
     group = factory.SubFactory(GroupFactory)
+    name = factory.Faker('word')
+    value = factory.Faker('word')
+    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class TagFactory(factory.DjangoModelFactory):
@@ -94,60 +97,65 @@ class SessionFactory(factory.DjangoModelFactory):
 
 
 class MessageFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Message
+
     text = factory.Faker('sentence')
     session = factory.SubFactory(SessionFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
-    class Meta:
-        model = Message
-
 
 class ReplyFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Reply
+
     text = factory.Faker('sentence')
     message = factory.SubFactory(MessageFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
-    class Meta:
-        model = Reply
-
 
 class SlackEventFactory(factory.DjangoModelFactory):
-    ts = factory.LazyAttribute(lambda x: f'''{factory.Faker('unix_time')}''')
-
     class Meta:
         model = SlackEvent
 
+    ts = factory.LazyAttribute(lambda x: f'''{factory.Faker('unix_time')}''')
+
 
 class SlackTeamFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SlackTeam
+
     id = factory.Faker('md5')
     name = factory.Faker('name')
     group = factory.SubFactory(GroupFactory)
 
+
+class SlackTeamSettingFactory(factory.DjangoModelFactory):
     class Meta:
-        model = SlackTeam
+        model = SlackTeamSetting
 
-
-class SlackSettingsFactory(factory.DjangoModelFactory):
-    bot_token = factory.Faker('md5')
     slack_team = factory.SubFactory(SlackTeamFactory)
-
-    class Meta:
-        model = SlackSettings
+    name = factory.Faker('word')
+    value = factory.Faker('word')
+    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class SlackChannelFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SlackChannel
+
     id = factory.Faker('md5')
     name = factory.Faker('name')
     slack_team = factory.SubFactory(SlackTeamFactory)
     session = factory.SubFactory(SessionFactory)
 
-    class Meta:
-        model = SlackChannel
-
 
 class SlackUserFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SlackUser
+
     id = factory.Faker('md5')
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
@@ -161,5 +169,14 @@ class SlackUserFactory(factory.DjangoModelFactory):
     slack_team = factory.SubFactory(SlackTeamFactory)
     user = factory.SubFactory(UserFactory)
 
+
+class SlackTeamInstallationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = SlackUser
+        model = SlackTeamInstallation
+
+    slack_team = factory.SubFactory(SlackTeamFactory)
+    access_token = factory.Faker('md5')
+    scope = factory.Faker('sentence')
+    installer = factory.SubFactory(SlackUserFactory)
+    bot_user_id = factory.Faker('md5')
+    bot_access_token = factory.Faker('md5')

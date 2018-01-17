@@ -1,7 +1,7 @@
 import graphene
 
-from app.groups.models import Group, GroupSettings
-from app.groups.types import GroupType, GroupSettingsType, GroupInputType, GroupSettingsInputType
+from app.groups.models import Group, GroupSetting
+from app.groups.types import GroupType, GroupSettingType, GroupInputType, GroupSettingInputType
 
 
 class CreateGroupMutation(graphene.Mutation):
@@ -18,11 +18,11 @@ class CreateGroupMutation(graphene.Mutation):
         return CreateGroupMutation(group=group)
 
 
-class CreateGroupSettingsMutation(graphene.Mutation):
+class CreateGroupSettingMutation(graphene.Mutation):
     class Arguments:
-        input = GroupSettingsInputType(required=True)
+        input = GroupSettingInputType(required=True)
 
-    group_settings = graphene.Field(GroupSettingsType)
+    group_setting = graphene.Field(GroupSettingType)
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
@@ -31,10 +31,10 @@ class CreateGroupSettingsMutation(graphene.Mutation):
         if not Group.objects.filter(pk=input.group_id).exists():
             raise Exception('Invalid Group Id')
 
-        group_settings = GroupSettings.objects.create(**input)
-        return CreateGroupSettingsMutation(group_settings=group_settings)
+        group_setting = GroupSetting.objects.create(**input)
+        return CreateGroupSettingMutation(group_setting=group_setting)
 
 
 class Mutation(graphene.ObjectType):
     create_group = CreateGroupMutation.Field()
-    create_group_settings = CreateGroupSettingsMutation.Field()
+    create_group_setting = CreateGroupSettingMutation.Field()

@@ -1,15 +1,15 @@
 import graphene
 
-from app.groups.models import Group, GroupSettings
-from app.groups.types import GroupType, GroupSettingsType
+from app.groups.models import Group, GroupSetting
+from app.groups.types import GroupType, GroupSettingType
 
 
 class Query(graphene.ObjectType):
     group = graphene.Field(GroupType, id=graphene.Int(), name=graphene.String())
-    group_settings = graphene.Field(GroupSettingsType, id=graphene.Int())
+    group_setting = graphene.Field(GroupSettingType, id=graphene.Int())
 
     groups = graphene.List(GroupType)
-    groups_settings = graphene.List(GroupSettingsType)
+    group_settings = graphene.List(GroupSettingType)
 
     def resolve_group(self, info, id=None, name=None):
         if id is not None:
@@ -20,14 +20,14 @@ class Query(graphene.ObjectType):
 
         return None
 
-    def resolve_group_settings(self, info, id=None):
+    def resolve_group_setting(self, info, id=None):
         if id is not None:
-            return GroupSettings.objects.get(pk=id)
+            return GroupSetting.objects.get(pk=id)
 
         return None
 
     def resolve_groups(self, info):
         return Group.objects.all()
 
-    def resolve_groups_settings(self, info):
-        return GroupSettings.objects.all()
+    def resolve_group_settings(self, info):
+        return GroupSetting.objects.all()

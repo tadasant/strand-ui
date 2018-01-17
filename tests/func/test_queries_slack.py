@@ -73,25 +73,50 @@ class TestQuerySlackChannels:
         assert len(response.json()['data']['slackChannels']) == 2
 
 
-class TestQuerySlackSettings:
+class TestQuerySlackTeamSettings:
 
     @pytest.mark.django_db
-    def test_get_slack_settings(self, slack_settings_factory, client):
-        slack_settings = slack_settings_factory()
+    def test_get_slack_team_setting(self, slack_team_setting_factory, client):
+        slack_team_setting = slack_team_setting_factory()
 
-        query = {'query': f'{{ slackSettings(id: {slack_settings.id}) {{ botToken }} }}'}
+        query = {'query': f'{{ slackTeamSetting(id: {slack_team_setting.id}) {{ name }} }}'}
         response = client.post('/graphql', query)
 
         assert response.status_code == 200
-        assert response.json()['data']['slackSettings']['botToken'] == slack_settings.bot_token
+        assert response.json()['data']['slackTeamSetting']['name'] == slack_team_setting.name
 
     @pytest.mark.django_db
-    def test_get_slacks_settings(self, slack_settings_factory, client):
-        slack_settings_factory()
-        slack_settings_factory()
+    def test_get_slack_team_settings(self, slack_team_setting_factory, client):
+        slack_team_setting_factory()
+        slack_team_setting_factory()
 
-        query = {'query': '{ slacksSettings { botToken } }'}
+        query = {'query': '{ slackTeamSettings { name } }'}
         response = client.post('/graphql', query)
 
         assert response.status_code == 200
-        assert len(response.json()['data']['slacksSettings']) == 2
+        assert len(response.json()['data']['slackTeamSettings']) == 2
+
+
+class TestQuerySlackTeamInstallations:
+
+    @pytest.mark.django_db
+    def test_get_slack_team_installation(self, slack_team_installation_factory, client):
+        slack_team_installation = slack_team_installation_factory()
+
+        query = {'query': f'{{ slackTeamInstallation(id: {slack_team_installation.id}) {{ botAccessToken }} }}'}
+        response = client.post('/graphql', query)
+
+        assert response.status_code == 200
+        assert response.json()['data']['slackTeamInstallation']['botAccessToken'] == \
+            slack_team_installation.bot_access_token
+
+    @pytest.mark.django_db
+    def test_get_slack_team_installations(self, slack_team_installation_factory, client):
+        slack_team_installation_factory()
+        slack_team_installation_factory()
+
+        query = {'query': '{ slackTeamInstallations { botAccessToken } }'}
+        response = client.post('/graphql', query)
+
+        assert response.status_code == 200
+        assert len(response.json()['data']['slackTeamInstallations']) == 2

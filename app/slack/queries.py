@@ -1,19 +1,33 @@
 import graphene
 
-from app.slack.models import SlackUser, SlackChannel, SlackTeam, SlackSettings
-from app.slack.types import SlackUserType, SlackChannelType, SlackTeamType, SlackSettingsType
+from app.slack.models import (
+    SlackUser,
+    SlackChannel,
+    SlackTeam,
+    SlackTeamInstallation,
+    SlackTeamSetting
+)
+from app.slack.types import (
+    SlackUserType,
+    SlackChannelType,
+    SlackTeamType,
+    SlackTeamInstallationType,
+    SlackTeamSettingType
+)
 
 
 class Query(graphene.ObjectType):
     slack_user = graphene.Field(SlackUserType, id=graphene.String())
     slack_channel = graphene.Field(SlackChannelType, id=graphene.String())
     slack_team = graphene.Field(SlackTeamType, id=graphene.String())
-    slack_settings = graphene.Field(SlackSettingsType, id=graphene.Int())
+    slack_team_setting = graphene.Field(SlackTeamSettingType, id=graphene.Int())
+    slack_team_installation = graphene.Field(SlackTeamInstallationType, id=graphene.Int())
 
     slack_users = graphene.List(SlackUserType)
     slack_channels = graphene.List(SlackChannelType)
     slack_teams = graphene.List(SlackTeamType)
-    slacks_settings = graphene.List(SlackSettingsType)
+    slack_team_settings = graphene.List(SlackTeamSettingType)
+    slack_team_installations = graphene.List(SlackTeamInstallationType)
 
     def resolve_slack_user(self, info, id=None):
         if id is not None:
@@ -33,9 +47,15 @@ class Query(graphene.ObjectType):
 
         return None
 
-    def resolve_slack_settings(self, info, id=None):
+    def resolve_slack_team_setting(self, info, id=None):
         if id is not None:
-            return SlackSettings.objects.get(pk=id)
+            return SlackTeamSetting.objects.get(pk=id)
+
+        return None
+
+    def resolve_slack_team_installation(self, info, id=None):
+        if id is not None:
+            return SlackTeamInstallation.objects.get(pk=id)
 
         return None
 
@@ -48,5 +68,8 @@ class Query(graphene.ObjectType):
     def resolve_slack_teams(self, info):
         return SlackTeam.objects.all()
 
-    def resolve_slacks_settings(self, info):
-        return SlackSettings.objects.all()
+    def resolve_slack_team_settings(self, info):
+        return SlackTeamSetting.objects.all()
+
+    def resolve_slack_team_installations(self, info):
+        return SlackTeamInstallation.objects.all()

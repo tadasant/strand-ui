@@ -12,19 +12,19 @@ class SlackTeam(TimeStampedModel):
     group = models.OneToOneField(to=Group, on_delete=models.CASCADE)
 
 
-class SlackSettings(TimeStampedModel):
-    bot_token = models.CharField(max_length=255, null=True)
-    slack_team = models.OneToOneField(to=SlackTeam, on_delete=models.CASCADE)
+class SlackTeamSetting(TimeStampedModel):
+    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
+    DATA_TYPE_CHOICES = (
+        ('String', 'String'),
+        ('Boolean', 'Boolean'),
+        ('Number', 'Number'),
+    )
+    data_type = models.CharField(max_length=7, choices=DATA_TYPE_CHOICES, default='String')
 
     class Meta:
-        verbose_name_plural = 'Slack settings'
-
-
-class SlackChannel(TimeStampedModel):
-    id = models.CharField(max_length=255, primary_key=True)
-    name = models.CharField(max_length=255)
-    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
-    session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
+        unique_together = ('slack_team', 'name')
 
 
 class SlackUser(TimeStampedModel):
@@ -40,6 +40,22 @@ class SlackUser(TimeStampedModel):
 
     slack_team = models.ForeignKey(SlackTeam, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class SlackTeamInstallation(TimeStampedModel):
+    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
+    access_token = models.CharField(max_length=255)
+    scope = models.CharField(max_length=255)
+    installer = models.ForeignKey(to=SlackUser, on_delete=models.CASCADE)
+    bot_user_id = models.CharField(max_length=255)
+    bot_access_token = models.CharField(max_length=255)
+
+
+class SlackChannel(TimeStampedModel):
+    id = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255)
+    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
+    session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
 
 
 class SlackEvent(TimeStampedModel):
