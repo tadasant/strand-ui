@@ -1,4 +1,7 @@
+from django.conf import settings
 import graphene
+import requests
+from slackclient import SlackClient
 
 from app.groups.models import Group
 from app.groups.types import GroupType
@@ -19,6 +22,7 @@ from app.slack.types import (
     MessageFromSlackInputType,
     ReplyFromSlackInputType,
     SessionFromSlackInputType,
+    SlackOAuthInputType,
     SlackChannelType,
     SlackChannelInputType,
     SlackEventType,
@@ -294,6 +298,59 @@ class SolveQuestionFromSlackMutation(graphene.Mutation):
         return SolveQuestionFromSlackMutation(question=question, session=session)
 
 
+class AddToSlackMutation(graphene.Mutation):
+    class Arguments:
+        input = SlackOAuthInputType(required=True)
+
+    slack_team = graphene.Field(SlackTeamType)
+
+    def mutate(self, info, input):
+        response = requests.get('https://slack.com/api/oauth.access',
+                                params={'code': input.code, 'client_id': settings.SLACK_CLIENT_ID,
+                                        'client_secret': settings.SLACK_CLIENT_SECRET})
+        if not response.json()['ok']:
+            raise Exception(f'''Error accessing OAuth: f{response.json()['error']}''')
+        oauth_info = response.json()
+
+        slack_client = SlackClient(oauth_info['access_token'])
+
+        response = slack_client.api_call('team.info')
+        if not response.get('ok'):
+            raise Exception(f'''Error accessing team.info: f{response.get('error')}''')
+        team_info = response.get('team')
+
+        response = slack_client.api_call('users.info', user=oauth_info['user_id'])
+        if not response.get('ok'):
+            raise Exception(f'''Error accessing users.info: f{response.get('error')}''')
+        user_info = response.get('user')
+
+        group = Group.objects.get_or_create(name=team_info['name'])
+        slack_team = SlackTeam.objects.create(id=team_info['id'], name=team_info['name'], group=group)
+        user = User.objects.get_or_create(email=user_info['profile'].get('email'),
+                                          defaults=dict(username=user_info.get('display_name'),
+                                                        first_name=user_info.get('first_name'),
+                                                        last_name=user_info.get('last_name'),
+                                                        avatar_url=user_info['profile'].get('image_72')))
+        slack_user = SlackUser.objects.create(id=user_info['id'],
+                                              first_name=user_info.get('first_name'),
+                                              last_name=user_info.get('last_name'),
+                                              real_name=user_info.get('real_name'),
+                                              display_name=user_info['profile'].get('display_name'),
+                                              email=user_info['profile'].get('email'),
+                                              avatar_72=user_info['profile'].get('image_72'),
+                                              is_bot=user_info.get('is_bot'),
+                                              is_admin=user_info.get('is_admin'),
+                                              slack_team=slack_team,
+                                              user=user)
+        SlackTeamInstallation.objects.create(slack_team=slack_team,
+                                             access_token=oauth_info['access_token'],
+                                             scope=oauth_info['scope'],
+                                             installer=slack_user,
+                                             bot_user_id=oauth_info['bot']['bot_user_id'],
+                                             bot_access_token=oauth_info['bot']['bot_access_token'])
+        return AddToSlackMutation(slack_team=slack_team)
+
+
 class Mutation(graphene.ObjectType):
     create_slack_user = CreateSlackUserMutation.Field()
     create_slack_team = CreateSlackTeamMutation.Field()
@@ -310,3 +367,5 @@ class Mutation(graphene.ObjectType):
     get_or_create_group_from_slack = GetOrCreateGroupFromSlackMutation.Field()
 
     solve_question_from_slack = SolveQuestionFromSlackMutation.Field()
+
+    add_to_slack = AddToSlackMutation.Field()
