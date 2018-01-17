@@ -495,8 +495,8 @@ class TestCreateSlackEventAndMessage:
         assert response.json()['data']['createSlackEventAndMessage']['message']['author']['id'] == \
             str(slack_user.user.id)
         assert response.json()['data']['createSlackEventAndMessage']['message']['session']['id'] == str(session.id)
-        assert {'id': str(user.id)} in response.json()['data']['createSlackEventAndMessage']['message']['session']\
-            ['participants']
+        assert {'id': str(user.id)} in response.json()['data']['createSlackEventAndMessage']['message']['session'][
+            'participants']
 
 
 class TestCreateSlackEventAndReply:
@@ -687,5 +687,5 @@ class TestCreateSlackEventAndReply:
         assert response.status_code == 200
         assert response.json()['data']['createSlackEventAndReply']['reply']['message']['author']['id'] == \
             str(message.author.id)
-        assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createSlackEventAndReply']\
-            ['reply']['message']['session']['participants']
+        assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createSlackEventAndReply']['reply'][
+            'message']['session']['participants']
