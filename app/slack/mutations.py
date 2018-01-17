@@ -119,9 +119,9 @@ class CreateSlackEventAndMessageMutation(graphene.Mutation):
 
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         message = Message.objects.create(text=input['text'], session=session, author=author,
                                          time=input['time'], slack_event=slack_event)
+        session.participants.add(author)
 
         return CreateSlackEventAndMessageMutation(slack_event=slack_event, message=message)
 
@@ -153,9 +153,9 @@ class CreateSlackEventAndReplyMutation(graphene.Mutation):
         message = Message.objects.get(slack_event__ts=input['message_slack_event_ts'],
                                       session__slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slackuser__id=input['slack_user_id'])
-
         reply = Reply.objects.create(text=input['text'], message=message, author=author,
                                      time=input['time'], slack_event=slack_event)
+        message.session.participants.add(author)
 
         return CreateSlackEventAndReplyMutation(slack_event=slack_event, reply=reply)
 
