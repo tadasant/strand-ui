@@ -4,14 +4,15 @@ from rest_framework.test import APIClient
 
 from tests.factories import (
     GroupFactory,
-    GroupSettingsFactory,
+    GroupSettingFactory,
     MessageFactory,
     QuestionFactory,
     ReplyFactory,
     SessionFactory,
     SlackChannelFactory,
     SlackEventFactory,
-    SlackSettingsFactory,
+    SlackTeamInstallationFactory,
+    SlackTeamSettingFactory,
     SlackTeamFactory,
     SlackUserFactory,
     TagFactory,
@@ -19,14 +20,15 @@ from tests.factories import (
 )
 
 register(GroupFactory)
-register(GroupSettingsFactory)
+register(GroupSettingFactory)
 register(MessageFactory)
 register(QuestionFactory)
 register(ReplyFactory)
 register(SessionFactory)
 register(SlackChannelFactory)
 register(SlackEventFactory)
-register(SlackSettingsFactory)
+register(SlackTeamInstallationFactory)
+register(SlackTeamSettingFactory)
 register(SlackTeamFactory)
 register(SlackUserFactory)
 register(TagFactory)

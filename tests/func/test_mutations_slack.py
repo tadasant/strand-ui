@@ -312,17 +312,19 @@ class TestCreateSessionAndSlackChannel:
         assert response.json()['data']['createSessionAndSlackChannel']['slackChannel']['name'] == slack_channel.name
 
 
-class TestCreateSlackSettings:
+class TestCreateSlackTeamSettings:
 
     @pytest.mark.django_db
-    def test_create_slack_settings_unauthenticated(self, client, slack_team_factory):
+    def test_create_slack_team_setting_unauthenticated(self, client, slack_team_factory, slack_team_setting_factory):
         slack_team = slack_team_factory()
+        slack_team_setting = slack_team_setting_factory.build(slack_team=slack_team)
 
         mutation = f'''
           mutation {{
-            createSlackSettings(input: {{botToken: "123AAA", slackTeamId: "{slack_team.id}"}}) {{
-              slackSettings {{
-                botToken
+            createSlackTeamSetting(input: {{slackTeamId: "{slack_team.id}", name: "{slack_team_setting.name}",
+                                            value: "{slack_team_setting.value}"}}) {{
+              slackTeamSetting {{
+                name
               }}
             }}
           }}
@@ -330,16 +332,19 @@ class TestCreateSlackSettings:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackSettings'] is None
+        assert response.json()['data']['createSlackTeamSetting'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_settings_invalid_team(self, auth_client):
+    def test_create_slack_settings_invalid_team(self, auth_client, slack_team_setting_factory):
+        slack_team_setting = slack_team_setting_factory.build()
+
         mutation = f'''
           mutation {{
-            createSlackSettings(input: {{botToken: "123AAA", slackTeamId: "123AAA"}}) {{
-              slackSettings {{
-                botToken
+            createSlackTeamSetting(input: {{slackTeamId: "123AAA", name: "{slack_team_setting.name}",
+                                            value: "{slack_team_setting.value}"}}) {{
+              slackTeamSetting {{
+                name
               }}
             }}
           }}
@@ -347,18 +352,20 @@ class TestCreateSlackSettings:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackSettings'] is None
+        assert response.json()['data']['createSlackTeamSetting'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
-    def test_create_slack_settings(self, auth_client, slack_team_factory):
+    def test_create_slack_settings(self, auth_client, slack_team_factory, slack_team_setting_factory):
         slack_team = slack_team_factory()
+        slack_team_setting = slack_team_setting_factory.build(slack_team=slack_team)
 
         mutation = f'''
           mutation {{
-            createSlackSettings(input: {{botToken: "123AAA", slackTeamId: "{slack_team.id}"}}) {{
-              slackSettings {{
-                botToken
+            createSlackTeamSetting(input: {{slackTeamId: "{slack_team.id}", name: "{slack_team_setting.name}",
+                                            value: "{slack_team_setting.value}"}}) {{
+              slackTeamSetting {{
+                name
               }}
             }}
           }}
@@ -366,7 +373,7 @@ class TestCreateSlackSettings:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackSettings']['slackSettings']['botToken'] == '123AAA'
+        assert response.json()['data']['createSlackTeamSetting']['slackTeamSetting']['name'] == slack_team_setting.name
 
 
 class TestCreateSlackEventAndMessage:

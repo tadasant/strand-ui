@@ -44,15 +44,16 @@ class TestCreateGroup:
 class TestCreateGroupSettings:
 
     @pytest.mark.django_db
-    def test_create_group_settings_unauthenticated(self, client, group_factory, group_settings_factory):
+    def test_create_group_setting_unauthenticated(self, client, group_factory, group_setting_factory):
         group = group_factory()
-        group_settings = group_settings_factory.build()
+        group_setting = group_setting_factory.build(group=group)
 
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: {group.id}, isPublic: {str(group_settings.is_public).lower()}}}) {{
-              groupSettings {{
-                isPublic
+            createGroupSetting(input: {{groupId: {group.id}, name: "{group_setting.name}",
+                                        value: "{group_setting.value}"}}) {{
+              groupSetting {{
+                name
               }}
             }}
           }}
@@ -60,18 +61,19 @@ class TestCreateGroupSettings:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroupSettings'] is None
+        assert response.json()['data']['createGroupSetting'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_group_settings_invalid_group(self, auth_client, group_settings_factory):
-        group_settings = group_settings_factory.build()
+    def test_create_group_setting_invalid_group(self, auth_client, group_setting_factory):
+        group_setting = group_setting_factory.build()
 
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: 1, isPublic: {str(group_settings.is_public).lower()}}}) {{
-              groupSettings {{
-                isPublic
+            createGroupSetting(input: {{groupId: 1, name: "{group_setting.name}",
+                                        value: "{group_setting.value}"}}) {{
+              groupSetting {{
+                name
               }}
             }}
           }}
@@ -79,19 +81,20 @@ class TestCreateGroupSettings:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroupSettings'] is None
+        assert response.json()['data']['createGroupSetting'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Group Id'
 
     @pytest.mark.django_db
-    def test_create_group_settings(self, auth_client, group_factory, group_settings_factory):
+    def test_create_group_setting(self, auth_client, group_factory, group_setting_factory):
         group = group_factory()
-        group_settings = group_settings_factory.build()
+        group_setting = group_setting_factory.build()
 
         mutation = f'''
           mutation {{
-            createGroupSettings(input: {{groupId: {group.id}, isPublic: {str(group_settings.is_public).lower()}}}) {{
-              groupSettings {{
-                isPublic
+            createGroupSetting(input: {{groupId: {group.id}, name: "{group_setting.name}",
+                                        value: "{group_setting.value}"}}) {{
+              groupSetting {{
+                name
               }}
             }}
           }}
@@ -99,4 +102,4 @@ class TestCreateGroupSettings:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createGroupSettings']['groupSettings']['isPublic'] == group_settings.is_public
+        assert response.json()['data']['createGroupSetting']['groupSetting']['name'] == group_setting.name

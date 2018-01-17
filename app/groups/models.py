@@ -9,9 +9,10 @@ class Group(TimeStampedModel):
     members = models.ManyToManyField(to=User)
 
 
-class GroupSettings(TimeStampedModel):
-    is_public = models.BooleanField(default=True)
-    group = models.OneToOneField(to=Group, on_delete=models.CASCADE)
+class GroupSetting(TimeStampedModel):
+    group = models.ForeignKey(to=Group, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
 
     class Meta:
-        verbose_name_plural = 'Group Settings'
+        unique_together = ('group', 'name')
