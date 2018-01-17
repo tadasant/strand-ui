@@ -6,7 +6,7 @@ from app.questions.types import (
     QuestionInputType,
     SessionType,
     SessionInputType,
-    SolveQuestionAndCloseSessionInputType,
+    SolveQuestionInputType,
     TagType,
     TagInputType
 )
@@ -67,9 +67,9 @@ class CreateTagMutation(graphene.Mutation):
         return CreateTagMutation(tag=tag)
 
 
-class SolveQuestionAndCloseSessionMutation(graphene.Mutation):
+class SolveQuestionMutation(graphene.Mutation):
     class Arguments:
-        input = SolveQuestionAndCloseSessionInputType(required=True)
+        input = SolveQuestionInputType(required=True)
 
     question = graphene.Field(QuestionType)
     session = graphene.Field(SessionType)
@@ -93,7 +93,7 @@ class SolveQuestionAndCloseSessionMutation(graphene.Mutation):
         session.time_end = input['time_end']
         session.save()
 
-        return SolveQuestionAndCloseSessionMutation(question=question, session=session)
+        return SolveQuestionMutation(question=question, session=session)
 
 
 class Mutation(graphene.ObjectType):
@@ -101,4 +101,4 @@ class Mutation(graphene.ObjectType):
     create_session = CreateSessionMutation.Field()
     create_tag = CreateTagMutation.Field()
 
-    solve_question_and_close_session = SolveQuestionAndCloseSessionMutation.Field()
+    solve_question = SolveQuestionMutation.Field()

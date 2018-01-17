@@ -4,7 +4,7 @@ import pytest
 class TestCreateSlackTeam:
 
     @pytest.mark.django_db
-    def test_create_slack_team_unauthenticated(self, client, group_factory, slack_team_factory):
+    def test_unauthenticated(self, client, group_factory, slack_team_factory):
         group = group_factory()
         slack_team = slack_team_factory.build()
 
@@ -24,7 +24,7 @@ class TestCreateSlackTeam:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_team_invalid_group(self, auth_client, slack_team_factory):
+    def test_invalid_group(self, auth_client, slack_team_factory):
         slack_team = slack_team_factory.build()
 
         mutation = f'''
@@ -43,7 +43,7 @@ class TestCreateSlackTeam:
         assert response.json()['errors'][0]['message'] == 'Invalid Group Id'
 
     @pytest.mark.django_db
-    def test_create_slack_team(self, auth_client, group_factory, slack_team_factory):
+    def test_valid(self, auth_client, group_factory, slack_team_factory):
         group = group_factory()
         slack_team = slack_team_factory.build()
 
@@ -65,7 +65,7 @@ class TestCreateSlackTeam:
 class TestCreateSlackUser:
 
     @pytest.mark.django_db
-    def test_create_slack_user_unauthenticated(self, client, user_factory, slack_team_factory, slack_user_factory):
+    def test_unauthenticated(self, client, user_factory, slack_team_factory, slack_user_factory):
         user = user_factory()
         slack_team = slack_team_factory()
         slack_user = slack_user_factory.build()
@@ -88,7 +88,7 @@ class TestCreateSlackUser:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_user_invalid_team(self, auth_client, user_factory, slack_team_factory, slack_user_factory):
+    def test_invalid_team(self, auth_client, user_factory, slack_team_factory, slack_user_factory):
         user = user_factory()
         slack_team = slack_team_factory.build()
         slack_user = slack_user_factory.build()
@@ -111,7 +111,7 @@ class TestCreateSlackUser:
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
-    def test_create_slack_user_invalid_user(self, auth_client, slack_team_factory, slack_user_factory):
+    def test_invalid_user(self, auth_client, slack_team_factory, slack_user_factory):
         slack_team = slack_team_factory()
         slack_user = slack_user_factory()
 
@@ -133,7 +133,7 @@ class TestCreateSlackUser:
         assert response.json()['errors'][0]['message'] == 'Invalid User Id'
 
     @pytest.mark.django_db
-    def test_create_slack_user(self, auth_client, user_factory, slack_team_factory, slack_user_factory):
+    def test_valid(self, auth_client, user_factory, slack_team_factory, slack_user_factory):
         user = user_factory()
         slack_team = slack_team_factory()
         slack_user = slack_user_factory.build()
@@ -159,8 +159,7 @@ class TestCreateSlackUser:
 class TestCreateSlackChannel:
 
     @pytest.mark.django_db
-    def test_create_slack_channel_unauthenticated(self, client, slack_channel_factory, slack_team_factory,
-                                                  session_factory):
+    def test_unauthenticated(self, client, slack_channel_factory, slack_team_factory, session_factory):
         session = session_factory()
         slack_team = slack_team_factory()
         slack_channel = slack_channel_factory.build()
@@ -182,8 +181,7 @@ class TestCreateSlackChannel:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_channel_invalid_team(self, auth_client, slack_channel_factory, slack_team_factory,
-                                               session_factory):
+    def test_invalid_team(self, auth_client, slack_channel_factory, slack_team_factory, session_factory):
         session = session_factory()
         slack_team = slack_team_factory.build()
         slack_channel = slack_channel_factory.build()
@@ -205,7 +203,7 @@ class TestCreateSlackChannel:
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
-    def test_create_slack_channel_invalid_session(self, auth_client, slack_channel_factory, slack_team_factory):
+    def test_invalid_session(self, auth_client, slack_channel_factory, slack_team_factory):
         slack_team = slack_team_factory()
         slack_channel = slack_channel_factory.build()
 
@@ -226,7 +224,7 @@ class TestCreateSlackChannel:
         assert response.json()['errors'][0]['message'] == 'Invalid Session Id'
 
     @pytest.mark.django_db
-    def test_create_slack_channel(self, auth_client, slack_channel_factory, slack_team_factory, session_factory):
+    def test_valid(self, auth_client, slack_channel_factory, slack_team_factory, session_factory):
         session = session_factory()
         slack_team = slack_team_factory()
         slack_channel = slack_channel_factory.build()
@@ -247,11 +245,11 @@ class TestCreateSlackChannel:
         assert response.json()['data']['createSlackChannel']['slackChannel']['name'] == slack_channel.name
 
 
-class TestCreateSessionAndSlackChannel:
+class TestCreateSessionFromSlack:
 
     @pytest.mark.django_db
-    def test_create_session_and_slack_channel_unauthenticated(self, client, slack_channel_factory, slack_team_factory,
-                                                              session_factory, question_factory):
+    def test_unauthenticated(self, client, slack_channel_factory, slack_team_factory, session_factory,
+                             question_factory):
         question = question_factory()
         slack_team = slack_team_factory()
         session = session_factory.build()
@@ -259,11 +257,11 @@ class TestCreateSessionAndSlackChannel:
 
         mutation = f'''
           mutation {{
-            createSessionAndSlackChannel(input: {{session: {{timeStart: "{session.time_start}",
-                                                             questionId: {question.id}}},
-                                                  id: "{slack_channel.id}",
-                                                  name: "{slack_channel.name}",
-                                                  slackTeamId: "{slack_team.id}"}}) {{
+            createSessionFromSlack(input: {{session: {{timeStart: "{session.time_start}",
+                                                       questionId: {question.id}}},
+                                                       id: "{slack_channel.id}",
+                                                       name: "{slack_channel.name}",
+                                                       slackTeamId: "{slack_team.id}"}}) {{
               session {{
                 id
               }}
@@ -276,12 +274,11 @@ class TestCreateSessionAndSlackChannel:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSessionAndSlackChannel'] is None
+        assert response.json()['data']['createSessionFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_session_and_slack_channel(self, auth_client, slack_channel_factory, slack_team_factory,
-                                              session_factory, question_factory):
+    def test_valid(self, auth_client, slack_channel_factory, slack_team_factory, session_factory, question_factory):
         question = question_factory()
         slack_team = slack_team_factory()
         session = session_factory.build()
@@ -289,11 +286,11 @@ class TestCreateSessionAndSlackChannel:
 
         mutation = f'''
           mutation {{
-            createSessionAndSlackChannel(input: {{session: {{timeStart: "{session.time_start}",
-                                                             questionId: {question.id}}},
-                                                  id: "{slack_channel.id}",
-                                                  name: "{slack_channel.name}",
-                                                  slackTeamId: "{slack_team.id}"}}) {{
+            createSessionFromSlack(input: {{session: {{timeStart: "{session.time_start}",
+                                                       questionId: {question.id}}},
+                                                       id: "{slack_channel.id}",
+                                                       name: "{slack_channel.name}",
+                                                       slackTeamId: "{slack_team.id}"}}) {{
               session {{
                 question {{
                   id
@@ -308,14 +305,14 @@ class TestCreateSessionAndSlackChannel:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSessionAndSlackChannel']['session']['question']['id'] == str(question.id)
-        assert response.json()['data']['createSessionAndSlackChannel']['slackChannel']['name'] == slack_channel.name
+        assert response.json()['data']['createSessionFromSlack']['session']['question']['id'] == str(question.id)
+        assert response.json()['data']['createSessionFromSlack']['slackChannel']['name'] == slack_channel.name
 
 
-class TestCreateSlackTeamSettings:
+class TestCreateSlackTeamSetting:
 
     @pytest.mark.django_db
-    def test_create_slack_team_setting_unauthenticated(self, client, slack_team_factory, slack_team_setting_factory):
+    def test_unauthenticated(self, client, slack_team_factory, slack_team_setting_factory):
         slack_team = slack_team_factory()
         slack_team_setting = slack_team_setting_factory.build(slack_team=slack_team)
 
@@ -337,7 +334,7 @@ class TestCreateSlackTeamSettings:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_settings_invalid_team(self, auth_client, slack_team_setting_factory):
+    def test_invalid_team(self, auth_client, slack_team_setting_factory):
         slack_team_setting = slack_team_setting_factory.build()
 
         mutation = f'''
@@ -358,7 +355,7 @@ class TestCreateSlackTeamSettings:
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
-    def test_create_slack_settings(self, auth_client, slack_team_factory, slack_team_setting_factory):
+    def test_valid(self, auth_client, slack_team_factory, slack_team_setting_factory):
         slack_team = slack_team_factory()
         slack_team_setting = slack_team_setting_factory.build(slack_team=slack_team)
 
@@ -379,12 +376,11 @@ class TestCreateSlackTeamSettings:
         assert response.json()['data']['createSlackTeamSetting']['slackTeamSetting']['name'] == slack_team_setting.name
 
 
-class TestCreateSlackTeamInstallations:
+class TestCreateSlackTeamInstallation:
 
     @pytest.mark.django_db
-    def test_create_slack_team_installation_unauthenticated(self, client, slack_team_factory,
-                                                            slack_user_factory,
-                                                            slack_team_installation_factory):
+    def test_unauthenticated(self, client, slack_team_factory, slack_user_factory,
+                             slack_team_installation_factory):
         slack_team = slack_team_factory()
         slack_user = slack_user_factory()
         slack_team_installation = slack_team_installation_factory.build(slack_team=slack_team, installer=slack_user)
@@ -410,9 +406,7 @@ class TestCreateSlackTeamInstallations:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_team_installation_invalid_team(self, auth_client, slack_team_factory,
-                                                         slack_user_factory,
-                                                         slack_team_installation_factory):
+    def test_invalid_team(self, auth_client, slack_team_factory, slack_user_factory, slack_team_installation_factory):
         slack_team = slack_team_factory.build()
         slack_user = slack_user_factory()
         slack_team_installation = slack_team_installation_factory.build(slack_team=slack_team, installer=slack_user)
@@ -438,9 +432,7 @@ class TestCreateSlackTeamInstallations:
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
-    def test_create_slack_team_installation(self, auth_client, slack_team_factory,
-                                            slack_user_factory,
-                                            slack_team_installation_factory):
+    def test_valid(self, auth_client, slack_team_factory, slack_user_factory, slack_team_installation_factory):
         slack_team = slack_team_factory()
         slack_user = slack_user_factory()
         slack_team_installation = slack_team_installation_factory.build(slack_team=slack_team, installer=slack_user)
@@ -466,11 +458,10 @@ class TestCreateSlackTeamInstallations:
             slack_team_installation.access_token
 
 
-class TestCreateSlackEventAndMessage:
+class TestCreateMessageFromSlack:
     @pytest.mark.django_db
-    def test_create_slack_event_and_message_unauthenticated(self, client, session_factory, slack_channel_factory,
-                                                            user_factory, slack_user_factory, slack_event_factory,
-                                                            message_factory):
+    def test_unauthenticated(self, client, session_factory, slack_channel_factory, user_factory, slack_user_factory,
+                             slack_event_factory, message_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         user = user_factory()
@@ -481,9 +472,9 @@ class TestCreateSlackEventAndMessage:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndMessage(input: {{text: "{message.text}", time: "{message.time}",
-                                                slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                                slackEventTs: "{slack_event.ts}"}}) {{
+            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+                                            slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
+                                            slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
               }}
@@ -493,13 +484,12 @@ class TestCreateSlackEventAndMessage:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndMessage'] is None
+        assert response.json()['data']['createMessageFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_message_invalid_slack_user(self, auth_client, session_factory,
-                                                               slack_channel_factory, user_factory, slack_user_factory,
-                                                               slack_event_factory, message_factory):
+    def test_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory, user_factory,
+                                slack_user_factory, slack_event_factory, message_factory):
         session = session_factory()
         slack_channel = slack_channel_factory.build(session=session)
         user = user_factory()
@@ -510,9 +500,9 @@ class TestCreateSlackEventAndMessage:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndMessage(input: {{text: "{message.text}", time: "{message.time}",
-                                                slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                                slackEventTs: "{slack_event.ts}"}}) {{
+            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+                                            slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
+                                            slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
               }}
@@ -522,14 +512,12 @@ class TestCreateSlackEventAndMessage:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndMessage'] is None
+        assert response.json()['data']['createMessageFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_message_invalid_slack_channel(self, auth_client, session_factory,
-                                                                  slack_channel_factory, user_factory,
-                                                                  slack_user_factory, slack_event_factory,
-                                                                  message_factory):
+    def test_invalid_slack_channel(self, auth_client, session_factory, slack_channel_factory, user_factory,
+                                   slack_user_factory, slack_event_factory, message_factory):
         session = session_factory()
         slack_channel = slack_channel_factory.build(session=session)
         user = user_factory()
@@ -540,9 +528,9 @@ class TestCreateSlackEventAndMessage:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndMessage(input: {{text: "{message.text}", time: "{message.time}",
-                                                slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                                slackEventTs: "{slack_event.ts}"}}) {{
+            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+                                            slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
+                                            slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
               }}
@@ -552,13 +540,12 @@ class TestCreateSlackEventAndMessage:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndMessage'] is None
+        assert response.json()['data']['createMessageFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_message(self, auth_client, session_factory, slack_channel_factory,
-                                            user_factory, slack_user_factory, slack_event_factory,
-                                            message_factory):
+    def test_valid(self, auth_client, session_factory, slack_channel_factory, user_factory,
+                   slack_user_factory, slack_event_factory, message_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         user = user_factory()
@@ -569,9 +556,9 @@ class TestCreateSlackEventAndMessage:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndMessage(input: {{text: "{message.text}", time: "{message.time}",
-                                                slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                                slackEventTs: "{slack_event.ts}"}}) {{
+            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+                                            slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
+                                            slackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 author {{
                   id
@@ -589,19 +576,18 @@ class TestCreateSlackEventAndMessage:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndMessage']['message']['author']['id'] == \
+        assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
             str(slack_user.user.id)
-        assert response.json()['data']['createSlackEventAndMessage']['message']['session']['id'] == str(session.id)
-        assert {'id': str(user.id)} in response.json()['data']['createSlackEventAndMessage']['message']['session'][
+        assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
+        assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
             'participants']
 
 
-class TestCreateSlackEventAndReply:
+class TestCreateReplyFromSlack:
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_reply_unauthenticated(self, client, session_factory, slack_channel_factory,
-                                                          slack_event_factory, slack_user_factory,
-                                                          message_factory, reply_factory):
+    def test_unauthenticated(self, client, session_factory, slack_channel_factory, slack_event_factory,
+                             slack_user_factory, message_factory, reply_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         message_slack_event = slack_event_factory()
@@ -613,11 +599,11 @@ class TestCreateSlackEventAndReply:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndReply(input: {{text: "{reply.text}", time: "{reply.time}",
-                                              messageSlackEventTs: "{message_slack_event.ts}",
-                                              slackChannelId: "{slack_channel.id}",
-                                              slackUserId: "{reply_slack_user.id}",
-                                              slackEventTs: "{reply_slack_event.ts}"}}) {{
+            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          slackChannelId: "{slack_channel.id}",
+                                          slackUserId: "{reply_slack_user.id}",
+                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -631,13 +617,12 @@ class TestCreateSlackEventAndReply:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndReply'] is None
+        assert response.json()['data']['createReplyFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_reply_invalid_slack_channel(self, auth_client, session_factory,
-                                                                slack_channel_factory, slack_event_factory,
-                                                                slack_user_factory, message_factory, reply_factory):
+    def test_invalid_slack_channel(self, auth_client, session_factory, slack_channel_factory, slack_event_factory,
+                                   slack_user_factory, message_factory, reply_factory):
         session = session_factory()
         slack_channel = slack_channel_factory.build(session=session)
         message_slack_event = slack_event_factory()
@@ -649,11 +634,11 @@ class TestCreateSlackEventAndReply:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndReply(input: {{text: "{reply.text}", time: "{reply.time}",
-                                              messageSlackEventTs: "{message_slack_event.ts}",
-                                              slackChannelId: "{slack_channel.id}",
-                                              slackUserId: "{reply_slack_user.id}",
-                                              slackEventTs: "{reply_slack_event.ts}"}}) {{
+            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          slackChannelId: "{slack_channel.id}",
+                                          slackUserId: "{reply_slack_user.id}",
+                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -667,13 +652,12 @@ class TestCreateSlackEventAndReply:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndReply'] is None
+        assert response.json()['data']['createReplyFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_reply_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory,
-                                                             slack_event_factory, slack_user_factory,
-                                                             message_factory, reply_factory):
+    def test_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory, slack_event_factory,
+                                slack_user_factory, message_factory, reply_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         message_slack_event = slack_event_factory()
@@ -685,11 +669,11 @@ class TestCreateSlackEventAndReply:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndReply(input: {{text: "{reply.text}", time: "{reply.time}",
-                                              messageSlackEventTs: "{message_slack_event.ts}",
-                                              slackChannelId: "{slack_channel.id}",
-                                              slackUserId: "{reply_slack_user.id}",
-                                              slackEventTs: "{reply_slack_event.ts}"}}) {{
+            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          slackChannelId: "{slack_channel.id}",
+                                          slackUserId: "{reply_slack_user.id}",
+                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -703,14 +687,13 @@ class TestCreateSlackEventAndReply:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndReply'] is None
+        assert response.json()['data']['createReplyFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_reply_invalid_message_slack_event(self, auth_client, session_factory,
-                                                                      slack_channel_factory, slack_event_factory,
-                                                                      slack_user_factory, message_factory,
-                                                                      reply_factory):
+    def test_create_invalid_message_slack_event(self, auth_client, session_factory, slack_channel_factory,
+                                                slack_event_factory, slack_user_factory, message_factory,
+                                                reply_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         message_slack_event = slack_event_factory()
@@ -723,11 +706,11 @@ class TestCreateSlackEventAndReply:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndReply(input: {{text: "{reply.text}", time: "{reply.time}",
-                                              messageSlackEventTs: "{wrong_message_slack_event.ts}",
-                                              slackChannelId: "{slack_channel.id}",
-                                              slackUserId: "{reply_slack_user.id}",
-                                              slackEventTs: "{reply_slack_event.ts}"}}) {{
+            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+                                          messageSlackEventTs: "{wrong_message_slack_event.ts}",
+                                          slackChannelId: "{slack_channel.id}",
+                                          slackUserId: "{reply_slack_user.id}",
+                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -741,13 +724,13 @@ class TestCreateSlackEventAndReply:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndReply'] is None
+        assert response.json()['data']['createReplyFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Message Slack Event Ts'
 
     @pytest.mark.django_db
-    def test_create_slack_event_and_reply(self, auth_client, session_factory, slack_channel_factory,
-                                          slack_event_factory, slack_user_factory, message_factory,
-                                          reply_factory):
+    def test_valid(self, auth_client, session_factory, slack_channel_factory,
+                   slack_event_factory, slack_user_factory, message_factory,
+                   reply_factory):
         session = session_factory()
         slack_channel = slack_channel_factory(session=session)
         message_slack_event = slack_event_factory()
@@ -759,11 +742,11 @@ class TestCreateSlackEventAndReply:
 
         mutation = f'''
           mutation {{
-            createSlackEventAndReply(input: {{text: "{reply.text}", time: "{reply.time}",
-                                              messageSlackEventTs: "{message_slack_event.ts}",
-                                              slackChannelId: "{slack_channel.id}",
-                                              slackUserId: "{reply_slack_user.id}",
-                                              slackEventTs: "{reply_slack_event.ts}"}}) {{
+            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          slackChannelId: "{slack_channel.id}",
+                                          slackUserId: "{reply_slack_user.id}",
+                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -782,25 +765,24 @@ class TestCreateSlackEventAndReply:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackEventAndReply']['reply']['message']['author']['id'] == \
+        assert response.json()['data']['createReplyFromSlack']['reply']['message']['author']['id'] == \
             str(message.author.id)
-        assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createSlackEventAndReply']['reply'][
+        assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createReplyFromSlack']['reply'][
             'message']['session']['participants']
 
 
-class TestGetOrCreateGroupAndCreateSlackTeam:
+class TestGetOrCreateGroupFromSlack:
 
     @pytest.mark.django_db
-    def test_get_or_create_group_and_create_slack_team_unauthenticated(self, client, group_factory,
-                                                                       slack_team_factory):
+    def test_unauthenticated(self, client, group_factory, slack_team_factory):
         group = group_factory.build()
         slack_team = slack_team_factory.build()
 
         mutation = f'''
           mutation {{
-            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
-                                                        slackTeamName: "{slack_team.name}",
-                                                        groupName: "{group.name}"}}) {{
+            getOrCreateGroupFromSlack(input: {{slackTeamId: "{slack_team.id}",
+                                               slackTeamName: "{slack_team.name}",
+                                               groupName: "{group.name}"}}) {{
               slackTeam {{
                 group {{
                   name
@@ -812,20 +794,19 @@ class TestGetOrCreateGroupAndCreateSlackTeam:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam'] is None
+        assert response.json()['data']['getOrCreateGroupFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_get_or_create_group_and_create_slack_team_invalid_id(self, auth_client, group_factory,
-                                                                  slack_team_factory):
+    def test_invalid_id(self, auth_client, group_factory, slack_team_factory):
         group = group_factory()
         slack_team = slack_team_factory(group=group)
 
         mutation = f'''
           mutation {{
-            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
-                                                        slackTeamName: "{slack_team.name}",
-                                                        groupName: "{group.name}"}}) {{
+            getOrCreateGroupFromSlack(input: {{slackTeamId: "{slack_team.id}",
+                                               slackTeamName: "{slack_team.name}",
+                                               groupName: "{group.name}"}}) {{
               slackTeam {{
                 group {{
                   name
@@ -837,20 +818,19 @@ class TestGetOrCreateGroupAndCreateSlackTeam:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam'] is None
+        assert response.json()['data']['getOrCreateGroupFromSlack'] is None
         assert response.json()['errors'][0]['message'] == f'Slack Team with id {slack_team.id} already exists'
 
     @pytest.mark.django_db
-    def test_get_or_create_group_and_create_slack_team(self, auth_client, group_factory,
-                                                       slack_team_factory):
+    def test_valid(self, auth_client, group_factory, slack_team_factory):
         group = group_factory()
         slack_team = slack_team_factory.build(group=group)
 
         mutation = f'''
           mutation {{
-            getOrCreateGroupAndCreateSlackTeam(input: {{slackTeamId: "{slack_team.id}",
-                                                        slackTeamName: "{slack_team.name}",
-                                                        groupName: "{group.name}"}}) {{
+            getOrCreateGroupFromSlack(input: {{slackTeamId: "{slack_team.id}",
+                                               slackTeamName: "{slack_team.name}",
+                                               groupName: "{group.name}"}}) {{
                slackTeam {{
                  group {{
                    id
@@ -862,30 +842,28 @@ class TestGetOrCreateGroupAndCreateSlackTeam:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateGroupAndCreateSlackTeam']['slackTeam']['group']['id'] == \
-            str(group.id)
+        assert response.json()['data']['getOrCreateGroupFromSlack']['slackTeam']['group']['id'] == str(group.id)
 
 
-class TestGetOrCreateUserAndCreateSlackUser:
+class TestGetOrCreateUserFromSlack:
 
     @pytest.mark.django_db
-    def test_get_or_create_user_and_create_slack_user_unauthenticated(self, client, slack_team_factory,
-                                                                      slack_user_factory):
+    def test_unauthenticated(self, client, slack_team_factory, slack_user_factory):
         slack_team = slack_team_factory()
         slack_user = slack_user_factory.build(slack_team=slack_team)
 
         mutation = f'''
           mutation {{
-            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
-                                                       firstName: "{slack_user.first_name}",
-                                                       lastName: "{slack_user.last_name}",
-                                                       realName: "{slack_user.real_name}",
-                                                       displayName: "{slack_user.display_name}",
-                                                       email: "{slack_user.email}",
-                                                       avatar72: "{slack_user.avatar_72}",
-                                                       isBot: {str(slack_user.is_bot).lower()},
-                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                       slackTeamId: "{slack_team.id}"}}) {{
+            getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              firstName: "{slack_user.first_name}",
+                                              lastName: "{slack_user.last_name}",
+                                              realName: "{slack_user.real_name}",
+                                              displayName: "{slack_user.display_name}",
+                                              email: "{slack_user.email}",
+                                              avatar72: "{slack_user.avatar_72}",
+                                              isBot: {str(slack_user.is_bot).lower()},
+                                              isAdmin: {str(slack_user.is_admin).lower()},
+                                              slackTeamId: "{slack_team.id}"}}) {{
               slackUser {{
                 user {{
                   id
@@ -897,27 +875,26 @@ class TestGetOrCreateUserAndCreateSlackUser:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateUserAndCreateSlackUser'] is None
+        assert response.json()['data']['getOrCreateUserFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_get_or_create_user_and_create_slack_user_existing_slack_user(self, auth_client, slack_team_factory,
-                                                                          slack_user_factory):
+    def test_invalid_existing_slack_user(self, auth_client, slack_team_factory, slack_user_factory):
         slack_team = slack_team_factory()
         slack_user = slack_user_factory(slack_team=slack_team)
 
         mutation = f'''
           mutation {{
-            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
-                                                       firstName: "{slack_user.first_name}",
-                                                       lastName: "{slack_user.last_name}",
-                                                       realName: "{slack_user.real_name}",
-                                                       displayName: "{slack_user.display_name}",
-                                                       email: "{slack_user.email}",
-                                                       avatar72: "{slack_user.avatar_72}",
-                                                       isBot: {str(slack_user.is_bot).lower()},
-                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                       slackTeamId: "{slack_team.id}"}}) {{
+            getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              firstName: "{slack_user.first_name}",
+                                              lastName: "{slack_user.last_name}",
+                                              realName: "{slack_user.real_name}",
+                                              displayName: "{slack_user.display_name}",
+                                              email: "{slack_user.email}",
+                                              avatar72: "{slack_user.avatar_72}",
+                                              isBot: {str(slack_user.is_bot).lower()},
+                                              isAdmin: {str(slack_user.is_admin).lower()},
+                                              slackTeamId: "{slack_team.id}"}}) {{
               slackUser {{
                 user {{
                   id
@@ -929,28 +906,27 @@ class TestGetOrCreateUserAndCreateSlackUser:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateUserAndCreateSlackUser'] is None
+        assert response.json()['data']['getOrCreateUserFromSlack'] is None
         assert response.json()['errors'][0]['message'] == f'Slack User with id {slack_user.id} already exists'
 
     @pytest.mark.django_db
-    def test_get_or_create_user_and_create_slack_user_get_user(self, auth_client, slack_team_factory,
-                                                               user_factory, slack_user_factory):
+    def test_valid_and_gets_user(self, auth_client, slack_team_factory, user_factory, slack_user_factory):
         slack_team = slack_team_factory()
         user = user_factory()
         slack_user = slack_user_factory.build(slack_team=slack_team, email=user.email)
 
         mutation = f'''
           mutation {{
-            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
-                                                       firstName: "{slack_user.first_name}",
-                                                       lastName: "{slack_user.last_name}",
-                                                       realName: "{slack_user.real_name}",
-                                                       displayName: "{slack_user.display_name}",
-                                                       email: "{slack_user.email}",
-                                                       avatar72: "{slack_user.avatar_72}",
-                                                       isBot: {str(slack_user.is_bot).lower()},
-                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                       slackTeamId: "{slack_team.id}"}}) {{
+            getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              firstName: "{slack_user.first_name}",
+                                              lastName: "{slack_user.last_name}",
+                                              realName: "{slack_user.real_name}",
+                                              displayName: "{slack_user.display_name}",
+                                              email: "{slack_user.email}",
+                                              avatar72: "{slack_user.avatar_72}",
+                                              isBot: {str(slack_user.is_bot).lower()},
+                                              isAdmin: {str(slack_user.is_admin).lower()},
+                                              slackTeamId: "{slack_team.id}"}}) {{
               slackUser {{
                 user {{
                   id
@@ -962,28 +938,26 @@ class TestGetOrCreateUserAndCreateSlackUser:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateUserAndCreateSlackUser']['slackUser']['user']['id'] ==\
-            str(user.id)
+        assert response.json()['data']['getOrCreateUserFromSlack']['slackUser']['user']['id'] == str(user.id)
 
     @pytest.mark.django_db
-    def test_get_or_create_user_and_create_slack_user_create_user(self, auth_client, slack_team_factory,
-                                                                  user_factory, slack_user_factory):
+    def test_valid_and_creates_user(self, auth_client, slack_team_factory, user_factory, slack_user_factory):
         slack_team = slack_team_factory()
         user = user_factory.build()
         slack_user = slack_user_factory.build(slack_team=slack_team, email=user.email)
 
         mutation = f'''
           mutation {{
-            getOrCreateUserAndCreateSlackUser(input: {{id: "{slack_user.id}",
-                                                       firstName: "{slack_user.first_name}",
-                                                       lastName: "{slack_user.last_name}",
-                                                       realName: "{slack_user.real_name}",
-                                                       displayName: "{slack_user.display_name}",
-                                                       email: "{slack_user.email}",
-                                                       avatar72: "{slack_user.avatar_72}",
-                                                       isBot: {str(slack_user.is_bot).lower()},
-                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                       slackTeamId: "{slack_team.id}"}}) {{
+            getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              firstName: "{slack_user.first_name}",
+                                              lastName: "{slack_user.last_name}",
+                                              realName: "{slack_user.real_name}",
+                                              displayName: "{slack_user.display_name}",
+                                              email: "{slack_user.email}",
+                                              avatar72: "{slack_user.avatar_72}",
+                                              isBot: {str(slack_user.is_bot).lower()},
+                                              isAdmin: {str(slack_user.is_admin).lower()},
+                                              slackTeamId: "{slack_team.id}"}}) {{
               slackUser {{
                 user {{
                   email
@@ -995,11 +969,10 @@ class TestGetOrCreateUserAndCreateSlackUser:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['getOrCreateUserAndCreateSlackUser']['slackUser']['user']['email'] ==\
-            slack_user.email
+        assert response.json()['data']['getOrCreateUserFromSlack']['slackUser']['user']['email'] == slack_user.email
 
 
-class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
+class TestSolveQuestionFromSlack:
 
     @pytest.mark.django_db
     def test_unauthenticated(self, client, user_factory, question_factory, session_factory,
@@ -1013,9 +986,9 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
 
         mutation = f'''
           mutation {{
-            solveSlackChannelSessionQuestionAndCloseSlackChannelSession(input: {{slackChannelId: "{slack_channel.id}",
-                                                                                 slackUserId: "{slack_solver.id}",
-                                                                                 timeEnd: "{time_end}"}}) {{
+            solveQuestionFromSlack(input: {{slackChannelId: "{slack_channel.id}",
+                                            slackUserId: "{slack_solver.id}",
+                                            timeEnd: "{time_end}"}}) {{
               question {{
                 session {{
                   timeEnd
@@ -1030,12 +1003,12 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['solveSlackChannelSessionQuestionAndCloseSlackChannelSession'] is None
+        assert response.json()['data']['solveQuestionFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_invalid_slack_channel(self, auth_client, user_factory, question_factory,
-                                   session_factory, slack_channel_factory, slack_user_factory):
+    def test_invalid_slack_channel(self, auth_client, user_factory, question_factory, session_factory,
+                                   slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         question = question_factory(original_poster=original_poster)
         session = session_factory(question=question)
@@ -1045,9 +1018,9 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
 
         mutation = f'''
           mutation {{
-            solveSlackChannelSessionQuestionAndCloseSlackChannelSession(input: {{slackChannelId: "{slack_channel.id}",
-                                                                                 slackUserId: "{slack_solver.id}",
-                                                                                 timeEnd: "{time_end}"}}) {{
+            solveQuestionFromSlack(input: {{slackChannelId: "{slack_channel.id}",
+                                            slackUserId: "{slack_solver.id}",
+                                            timeEnd: "{time_end}"}}) {{
               question {{
                 session {{
                   timeEnd
@@ -1062,7 +1035,7 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['solveSlackChannelSessionQuestionAndCloseSlackChannelSession'] is None
+        assert response.json()['data']['solveQuestionFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
 
     @pytest.mark.django_db
@@ -1077,9 +1050,9 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
 
         mutation = f'''
           mutation {{
-            solveSlackChannelSessionQuestionAndCloseSlackChannelSession(input: {{slackChannelId: "{slack_channel.id}",
-                                                                                 slackUserId: "{slack_solver.id}",
-                                                                                 timeEnd: "{time_end}"}}) {{
+            solveQuestionFromSlack(input: {{slackChannelId: "{slack_channel.id}",
+                                            slackUserId: "{slack_solver.id}",
+                                            timeEnd: "{time_end}"}}) {{
               question {{
                 session {{
                   timeEnd
@@ -1094,12 +1067,12 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['solveSlackChannelSessionQuestionAndCloseSlackChannelSession'] is None
+        assert response.json()['data']['solveQuestionFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
 
     @pytest.mark.django_db
-    def test_valid_slack_user(self, auth_client, user_factory, question_factory, session_factory,
-                              slack_channel_factory, slack_user_factory):
+    def test_valid(self, auth_client, user_factory, question_factory, session_factory,
+                   slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         question = question_factory(original_poster=original_poster)
         session = session_factory(question=question)
@@ -1109,9 +1082,9 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
 
         mutation = f'''
           mutation {{
-            solveSlackChannelSessionQuestionAndCloseSlackChannelSession(input: {{slackChannelId: "{slack_channel.id}",
-                                                                                 slackUserId: "{slack_solver.id}",
-                                                                                 timeEnd: "{time_end}"}}) {{
+            solveQuestionFromSlack(input: {{slackChannelId: "{slack_channel.id}",
+                                            slackUserId: "{slack_solver.id}",
+                                            timeEnd: "{time_end}"}}) {{
               question {{
                 session {{
                   timeEnd
@@ -1126,5 +1099,5 @@ class TestSolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['solveSlackChannelSessionQuestionAndCloseSlackChannelSession']['question'][
-            'solver']['id'] == str(slack_solver.user.id)
+        assert response.json()['data']['solveQuestionFromSlack']['question'][
+                   'solver']['id'] == str(slack_solver.user.id)

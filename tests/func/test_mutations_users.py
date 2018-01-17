@@ -4,7 +4,7 @@ import pytest
 class TestCreateUser:
 
     @pytest.mark.django_db
-    def test_create_user_unauthenticated(self, client, user_factory):
+    def test_unauthenticated(self, client, user_factory):
         user = user_factory.build()
         mutation = f'''
           mutation {{
@@ -22,7 +22,7 @@ class TestCreateUser:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_user(self, auth_client, user_factory):
+    def test_valid(self, auth_client, user_factory):
         user = user_factory.build()
 
         mutation = f'''

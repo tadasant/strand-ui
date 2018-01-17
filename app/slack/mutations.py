@@ -15,12 +15,12 @@ from app.slack.models import (
     SlackUser
 )
 from app.slack.types import (
-    GroupAndSlackTeamInputType,
-    SessionAndSlackChannelInputType,
+    GroupFromSlackInputType,
+    MessageFromSlackInputType,
+    ReplyFromSlackInputType,
+    SessionFromSlackInputType,
     SlackChannelType,
     SlackChannelInputType,
-    SlackEventAndMessageInputType,
-    SlackEventAndReplyInputType,
     SlackEventType,
     SlackTeamSettingType,
     SlackTeamSettingInputType,
@@ -30,8 +30,8 @@ from app.slack.types import (
     SlackTeamInstallationInputType,
     SlackUserType,
     SlackUserInputType,
-    SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionInputType,
-    UserAndSlackUserInputType
+    SolveQuestionFromSlackInputType,
+    UserFromSlackInputType
 )
 from app.users.models import User
 from app.users.types import UserType
@@ -133,9 +133,9 @@ class CreateSlackTeamInstallationMutation(graphene.Mutation):
         return CreateSlackTeamInstallationMutation(slack_team_installation=slack_team_installation)
 
 
-class CreateSlackEventAndMessageMutation(graphene.Mutation):
+class CreateMessageFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = SlackEventAndMessageInputType(required=True)
+        input = MessageFromSlackInputType(required=True)
 
     slack_event = graphene.Field(SlackEventType)
     message = graphene.Field(MessageType)
@@ -159,12 +159,12 @@ class CreateSlackEventAndMessageMutation(graphene.Mutation):
                                          time=input['time'], slack_event=slack_event)
         session.participants.add(author)
 
-        return CreateSlackEventAndMessageMutation(slack_event=slack_event, message=message)
+        return CreateMessageFromSlackMutation(slack_event=slack_event, message=message)
 
 
-class CreateSlackEventAndReplyMutation(graphene.Mutation):
+class CreateReplyFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = SlackEventAndReplyInputType(required=True)
+        input = ReplyFromSlackInputType(required=True)
 
     slack_event = graphene.Field(SlackEventType)
     reply = graphene.Field(ReplyType)
@@ -192,12 +192,12 @@ class CreateSlackEventAndReplyMutation(graphene.Mutation):
                                      time=input['time'], slack_event=slack_event)
         message.session.participants.add(author)
 
-        return CreateSlackEventAndReplyMutation(slack_event=slack_event, reply=reply)
+        return CreateReplyFromSlackMutation(slack_event=slack_event, reply=reply)
 
 
-class CreateSessionAndSlackChannelMutation(graphene.Mutation):
+class CreateSessionFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = SessionAndSlackChannelInputType(required=True)
+        input = SessionFromSlackInputType(required=True)
 
     session = graphene.Field(SessionType)
     slack_channel = graphene.Field(SlackChannelType)
@@ -210,12 +210,12 @@ class CreateSessionAndSlackChannelMutation(graphene.Mutation):
         session = Session.objects.create(**session_args)
         channel = SlackChannel.objects.create(**input, session_id=session.id)
 
-        return CreateSessionAndSlackChannelMutation(session=session, slack_channel=channel)
+        return CreateSessionFromSlackMutation(session=session, slack_channel=channel)
 
 
-class GetOrCreateUserAndCreateSlackUserMutation(graphene.Mutation):
+class GetOrCreateUserFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = UserAndSlackUserInputType(required=True)
+        input = UserFromSlackInputType(required=True)
 
     user = graphene.Field(UserType)
     slack_user = graphene.Field(SlackUserType)
@@ -239,12 +239,12 @@ class GetOrCreateUserAndCreateSlackUserMutation(graphene.Mutation):
         slack_team.group.members.add(user)
         slack_user = SlackUser.objects.create(**input, user=user)
 
-        return GetOrCreateUserAndCreateSlackUserMutation(user=user, slack_user=slack_user)
+        return GetOrCreateUserFromSlackMutation(user=user, slack_user=slack_user)
 
 
-class GetOrCreateGroupAndCreateSlackTeamMutation(graphene.Mutation):
+class GetOrCreateGroupFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = GroupAndSlackTeamInputType(required=True)
+        input = GroupFromSlackInputType(required=True)
 
     group = graphene.Field(GroupType)
     slack_team = graphene.Field(SlackTeamType)
@@ -260,12 +260,12 @@ class GetOrCreateGroupAndCreateSlackTeamMutation(graphene.Mutation):
         group, created = Group.objects.get_or_create(name=group_name)
         slack_team = SlackTeam.objects.create(id=input['slack_team_id'], name=input['slack_team_name'], group=group)
 
-        return GetOrCreateGroupAndCreateSlackTeamMutation(group=group, slack_team=slack_team)
+        return GetOrCreateGroupFromSlackMutation(group=group, slack_team=slack_team)
 
 
-class SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation(graphene.Mutation):
+class SolveQuestionFromSlackMutation(graphene.Mutation):
     class Arguments:
-        input = SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionInputType(required=True)
+        input = SolveQuestionFromSlackInputType(required=True)
 
     question = graphene.Field(QuestionType)
     session = graphene.Field(SessionType)
@@ -291,7 +291,7 @@ class SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation(graphe
         session.time_end = input['time_end']
         session.save()
 
-        return SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation(question=question, session=session)
+        return SolveQuestionFromSlackMutation(question=question, session=session)
 
 
 class Mutation(graphene.ObjectType):
@@ -301,13 +301,12 @@ class Mutation(graphene.ObjectType):
     create_slack_team_setting = CreateSlackTeamSettingMutation.Field()
     create_slack_team_installation = CreateSlackTeamInstallationMutation.Field()
 
-    create_slack_event_and_message = CreateSlackEventAndMessageMutation.Field()
-    create_slack_event_and_reply = CreateSlackEventAndReplyMutation.Field()
+    create_message_from_slack = CreateMessageFromSlackMutation.Field()
+    create_reply_from_slack = CreateReplyFromSlackMutation.Field()
 
-    create_session_and_slack_channel = CreateSessionAndSlackChannelMutation.Field()
+    create_session_from_slack = CreateSessionFromSlackMutation.Field()
 
-    get_or_create_user_and_create_slack_user = GetOrCreateUserAndCreateSlackUserMutation.Field()
-    get_or_create_group_and_create_slack_team = GetOrCreateGroupAndCreateSlackTeamMutation.Field()
+    get_or_create_user_from_slack = GetOrCreateUserFromSlackMutation.Field()
+    get_or_create_group_from_slack = GetOrCreateGroupFromSlackMutation.Field()
 
-    solve_slack_channel_session_question_and_close_slack_channel_session = \
-        SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionMutation.Field()
+    solve_question_from_slack = SolveQuestionFromSlackMutation.Field()
