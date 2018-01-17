@@ -1,6 +1,7 @@
 import pytz
 
 import factory
+import factory.fuzzy
 from django.contrib.auth.hashers import make_password
 
 from app.groups.models import Group, GroupSetting
@@ -44,6 +45,7 @@ class GroupSettingFactory(factory.DjangoModelFactory):
     group = factory.SubFactory(GroupFactory)
     name = factory.Faker('word')
     value = factory.Faker('word')
+    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class TagFactory(factory.DjangoModelFactory):
@@ -137,6 +139,7 @@ class SlackTeamSettingFactory(factory.DjangoModelFactory):
     slack_team = factory.SubFactory(SlackTeamFactory)
     name = factory.Faker('word')
     value = factory.Faker('word')
+    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class SlackChannelFactory(factory.DjangoModelFactory):

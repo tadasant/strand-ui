@@ -73,6 +73,7 @@ class SlackTeamSettingInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     name = graphene.String(required=True)
     value = graphene.String(required=True)
+    data_type = graphene.String(required=True)
 
 
 class SlackTeamInstallationInputType(graphene.InputObjectType):

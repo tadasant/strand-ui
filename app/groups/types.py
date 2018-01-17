@@ -22,3 +22,4 @@ class GroupSettingInputType(graphene.InputObjectType):
     group_id = graphene.Int(required=True)
     name = graphene.String(required=True)
     value = graphene.String(required=True)
+    data_type = graphene.String(required=True)

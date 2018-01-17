@@ -50,8 +50,10 @@ class TestCreateGroupSettings:
 
         mutation = f'''
           mutation {{
-            createGroupSetting(input: {{groupId: {group.id}, name: "{group_setting.name}",
-                                        value: "{group_setting.value}"}}) {{
+            createGroupSetting(input: {{groupId: {group.id},
+                                        name: "{group_setting.name}",
+                                        value: "{group_setting.value}",
+                                        dataType: "{group_setting.data_type}"}}) {{
               groupSetting {{
                 name
               }}
@@ -70,8 +72,10 @@ class TestCreateGroupSettings:
 
         mutation = f'''
           mutation {{
-            createGroupSetting(input: {{groupId: 1, name: "{group_setting.name}",
-                                        value: "{group_setting.value}"}}) {{
+            createGroupSetting(input: {{groupId: 1,
+                                        name: "{group_setting.name}",
+                                        value: "{group_setting.value}",
+                                        dataType: "{group_setting.data_type}" }}) {{
               groupSetting {{
                 name
               }}
@@ -91,8 +95,10 @@ class TestCreateGroupSettings:
 
         mutation = f'''
           mutation {{
-            createGroupSetting(input: {{groupId: {group.id}, name: "{group_setting.name}",
-                                        value: "{group_setting.value}"}}) {{
+            createGroupSetting(input: {{groupId: {group.id},
+                                        name: "{group_setting.name}",
+                                        value: "{group_setting.value}",
+                                        dataType: "{group_setting.data_type}"}}) {{
               groupSetting {{
                 name
               }}
