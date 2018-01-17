@@ -6,9 +6,11 @@ from app.questions.types import (
     QuestionInputType,
     SessionType,
     SessionInputType,
+    SolveQuestionAndCloseSessionInputType,
     TagType,
     TagInputType
 )
+from app.users.models import User
 
 
 class CreateQuestionMutation(graphene.Mutation):
@@ -20,6 +22,9 @@ class CreateQuestionMutation(graphene.Mutation):
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
+
+        if not User.objects.filter(pk=input['original_poster_id']).exists():
+            raise Exception('Invalid User Id')
 
         question_tags = input.pop('tags', [])
         question = Question.objects.create(**input)
@@ -41,6 +46,9 @@ class CreateSessionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
+        if not Question.objects.filter(pk=input['question_id']).exists():
+            raise Exception('Invalid Question Id')
+
         session = Session.objects.create(**input)
         return CreateSessionMutation(session=session)
 
@@ -59,7 +67,38 @@ class CreateTagMutation(graphene.Mutation):
         return CreateTagMutation(tag=tag)
 
 
+class SolveQuestionAndCloseSessionMutation(graphene.Mutation):
+    class Arguments:
+        input = SolveQuestionAndCloseSessionInputType(required=True)
+
+    question = graphene.Field(QuestionType)
+    session = graphene.Field(SessionType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if not Question.objects.filter(pk=input['question_id']).exists():
+            raise Exception('Invalid Question Id')
+
+        if not User.objects.filter(pk=input['solver_id']).exists():
+            raise Exception('Invalid User Id')
+
+        question = Question.objects.get(pk=input['question_id'])
+        question.is_solved = True
+        question.solver_id = input['solver_id']
+        question.save()
+
+        session = question.session
+        session.time_end = input['time_end']
+        session.save()
+
+        return SolveQuestionAndCloseSessionMutation(question=question, session=session)
+
+
 class Mutation(graphene.ObjectType):
     create_question = CreateQuestionMutation.Field()
     create_session = CreateSessionMutation.Field()
     create_tag = CreateTagMutation.Field()
+
+    solve_question_and_close_session = SolveQuestionAndCloseSessionMutation.Field()

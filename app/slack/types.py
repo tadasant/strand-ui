@@ -126,3 +126,9 @@ class GroupAndSlackTeamInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     slack_team_name = graphene.String(required=True)
     group_name = graphene.String(required=True)
+
+
+class SolveSlackChannelSessionQuestionAndCloseSlackChannelSessionInputType(graphene.InputObjectType):
+    slack_channel_id = graphene.String()
+    slack_user_id = graphene.String()
+    time_end = graphene.String()
