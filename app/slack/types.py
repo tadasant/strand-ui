@@ -132,3 +132,7 @@ class SolveQuestionFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String()
     slack_user_id = graphene.String()
     time_end = graphene.String()
+
+
+class SlackOAuthInputType(graphene.InputObjectType):
+    code = graphene.String()
