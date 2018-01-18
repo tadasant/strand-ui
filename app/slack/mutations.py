@@ -308,32 +308,32 @@ class AddToSlackMutation(graphene.Mutation):
         response = requests.get('https://slack.com/api/oauth.access',
                                 params={'code': input.code, 'client_id': settings.SLACK_CLIENT_ID,
                                         'client_secret': settings.SLACK_CLIENT_SECRET})
-        if not response.json()['ok']:
-            raise Exception(f'''Error accessing OAuth: f{response.json()['error']}''')
+        if not response.json().get('ok'):
+            raise Exception(f'''Error accessing OAuth: {response.json()['error']}''')
         oauth_info = response.json()
 
         slack_client = SlackClient(oauth_info['access_token'])
 
         response = slack_client.api_call('team.info')
         if not response.get('ok'):
-            raise Exception(f'''Error accessing team.info: f{response.get('error')}''')
+            raise Exception(f'''Error accessing team.info: {response.get('error')}''')
         team_info = response.get('team')
 
         response = slack_client.api_call('users.info', user=oauth_info['user_id'])
         if not response.get('ok'):
-            raise Exception(f'''Error accessing users.info: f{response.get('error')}''')
+            raise Exception(f'''Error accessing users.info: {response.get('error')}''')
         user_info = response.get('user')
 
-        group = Group.objects.get_or_create(name=team_info['name'])
+        group, created = Group.objects.get_or_create(name=team_info['name'])
         slack_team = SlackTeam.objects.create(id=team_info['id'], name=team_info['name'], group=group)
-        user = User.objects.get_or_create(email=user_info['profile'].get('email'),
-                                          defaults=dict(username=user_info.get('display_name'),
-                                                        first_name=user_info.get('first_name'),
-                                                        last_name=user_info.get('last_name'),
-                                                        avatar_url=user_info['profile'].get('image_72')))
+        user, created = User.objects.get_or_create(email=user_info['profile'].get('email'),
+                                                   defaults=dict(username=user_info['profile'].get('display_name'),
+                                                                 first_name=user_info.get('first_name', ''),
+                                                                 last_name=user_info.get('last_name', ''),
+                                                                 avatar_url=user_info['profile'].get('image_72')))
         slack_user = SlackUser.objects.create(id=user_info['id'],
-                                              first_name=user_info.get('first_name'),
-                                              last_name=user_info.get('last_name'),
+                                              first_name=user_info.get('first_name', ''),
+                                              last_name=user_info.get('last_name', ''),
                                               real_name=user_info.get('real_name'),
                                               display_name=user_info['profile'].get('display_name'),
                                               email=user_info['profile'].get('email'),
