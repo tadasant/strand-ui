@@ -47,3 +47,9 @@ class QuestionAndTagsInputType(graphene.InputObjectType):
     is_anonymous = graphene.Boolean()
     original_poster_id = graphene.Int(required=True)
     solver_id = graphene.Int()
+
+
+class SolveQuestionInputType(graphene.InputObjectType):
+    question_id = graphene.Int()
+    solver_id = graphene.Int()
+    time_end = graphene.String()

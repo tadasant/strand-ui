@@ -4,7 +4,7 @@ import pytest
 class TestCreateGroup:
 
     @pytest.mark.django_db
-    def test_create_group_unauthenticated(self, client, group_factory):
+    def test_unauthenticated(self, client, group_factory):
         group = group_factory.build()
 
         mutation = f'''
@@ -23,7 +23,7 @@ class TestCreateGroup:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_group(self, auth_client, group_factory):
+    def test_valid(self, auth_client, group_factory):
         group = group_factory.build()
 
         mutation = f'''
@@ -44,7 +44,7 @@ class TestCreateGroup:
 class TestCreateGroupSettings:
 
     @pytest.mark.django_db
-    def test_create_group_setting_unauthenticated(self, client, group_factory, group_setting_factory):
+    def test_unauthenticated(self, client, group_factory, group_setting_factory):
         group = group_factory()
         group_setting = group_setting_factory.build(group=group)
 
@@ -67,7 +67,7 @@ class TestCreateGroupSettings:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_group_setting_invalid_group(self, auth_client, group_setting_factory):
+    def test_invalid_group(self, auth_client, group_setting_factory):
         group_setting = group_setting_factory.build()
 
         mutation = f'''
@@ -89,7 +89,7 @@ class TestCreateGroupSettings:
         assert response.json()['errors'][0]['message'] == 'Invalid Group Id'
 
     @pytest.mark.django_db
-    def test_create_group_setting(self, auth_client, group_factory, group_setting_factory):
+    def test_valid(self, auth_client, group_factory, group_setting_factory):
         group = group_factory()
         group_setting = group_setting_factory.build()
 

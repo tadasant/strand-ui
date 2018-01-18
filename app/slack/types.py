@@ -57,9 +57,7 @@ class SlackUserInputType(graphene.InputObjectType):
 
 
 class SlackTeamInputType(graphene.InputObjectType):
-    id = graphene.String(required=True)
-    name = graphene.String(required=True)
-    group_id = graphene.Int(required=True)
+    code = graphene.String(required=True)
 
 
 class SlackChannelInputType(graphene.InputObjectType):
@@ -85,7 +83,7 @@ class SlackTeamInstallationInputType(graphene.InputObjectType):
     bot_access_token = graphene.String(required=True)
 
 
-class SlackEventAndMessageInputType(graphene.InputObjectType):
+class MessageFromSlackInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
     time = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)
@@ -93,7 +91,7 @@ class SlackEventAndMessageInputType(graphene.InputObjectType):
     slack_event_ts = graphene.String(required=True)
 
 
-class SlackEventAndReplyInputType(graphene.InputObjectType):
+class ReplyFromSlackInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
     time = graphene.String(required=True)
     message_slack_event_ts = graphene.String(required=True)
@@ -102,14 +100,14 @@ class SlackEventAndReplyInputType(graphene.InputObjectType):
     slack_event_ts = graphene.String(required=True)
 
 
-class SessionAndSlackChannelInputType(graphene.InputObjectType):
+class SessionFromSlackInputType(graphene.InputObjectType):
     session = graphene.Field(SessionInputType, required=True)
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
 
 
-class UserAndSlackUserInputType(graphene.InputObjectType):
+class UserFromSlackInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
     first_name = graphene.String()
     last_name = graphene.String()
@@ -122,7 +120,13 @@ class UserAndSlackUserInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
 
 
-class GroupAndSlackTeamInputType(graphene.InputObjectType):
+class GroupFromSlackInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     slack_team_name = graphene.String(required=True)
     group_name = graphene.String(required=True)
+
+
+class SolveQuestionFromSlackInputType(graphene.InputObjectType):
+    slack_channel_id = graphene.String()
+    slack_user_id = graphene.String()
+    time_end = graphene.String()

@@ -4,8 +4,8 @@ import pytest
 class TestCreateMessage:
 
     @pytest.mark.django_db
-    def test_create_message_unauthenticated(self, client, session_factory, user_factory, slack_event_factory,
-                                            message_factory):
+    def test_unauthenticated(self, client, session_factory, user_factory, slack_event_factory,
+                             message_factory):
         session = session_factory()
         user = user_factory()
         slack_event = slack_event_factory()
@@ -28,8 +28,8 @@ class TestCreateMessage:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_message(self, auth_client, session_factory, user_factory, slack_event_factory,
-                            message_factory):
+    def test_valid(self, auth_client, session_factory, user_factory, slack_event_factory,
+                   message_factory):
         session = session_factory()
         user = user_factory()
         slack_event = slack_event_factory()
@@ -54,8 +54,8 @@ class TestCreateMessage:
 class TestCreateReply:
 
     @pytest.mark.django_db
-    def test_create_reply_unauthenticated(self, client, message_factory, user_factory, slack_event_factory,
-                                          reply_factory):
+    def test_unauthenticated(self, client, message_factory, user_factory, slack_event_factory,
+                             reply_factory):
         message = message_factory()
         user = user_factory()
         slack_event = slack_event_factory()
@@ -77,7 +77,7 @@ class TestCreateReply:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_create_reply(self, auth_client, message_factory, user_factory, slack_event_factory, reply_factory):
+    def test_valid(self, auth_client, message_factory, user_factory, slack_event_factory, reply_factory):
         message = message_factory()
         user = user_factory()
         slack_event = slack_event_factory()
