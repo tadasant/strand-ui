@@ -22,7 +22,6 @@ from app.slack.types import (
     MessageFromSlackInputType,
     ReplyFromSlackInputType,
     SessionFromSlackInputType,
-    SlackOAuthInputType,
     SlackChannelType,
     SlackChannelInputType,
     SlackEventType,
@@ -60,24 +59,6 @@ class CreateSlackUserMutation(graphene.Mutation):
         slack_user = SlackUser.objects.create(**input)
 
         return CreateSlackUserMutation(slack_user=slack_user)
-
-
-class CreateSlackTeamMutation(graphene.Mutation):
-    class Arguments:
-        input = SlackTeamInputType(required=True)
-
-    slack_team = graphene.Field(SlackTeamType)
-
-    def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
-        if not Group.objects.filter(pk=input.group_id).exists():
-            raise Exception('Invalid Group Id')
-
-        slack_team = SlackTeam.objects.create(**input)
-
-        return CreateSlackTeamMutation(slack_team=slack_team)
 
 
 class CreateSlackChannelMutation(graphene.Mutation):
@@ -298,9 +279,9 @@ class SolveQuestionFromSlackMutation(graphene.Mutation):
         return SolveQuestionFromSlackMutation(question=question, session=session)
 
 
-class AddToSlackMutation(graphene.Mutation):
+class CreateSlackTeamMutation(graphene.Mutation):
     class Arguments:
-        input = SlackOAuthInputType(required=True)
+        input = SlackTeamInputType(required=True)
 
     slack_team = graphene.Field(SlackTeamType)
 
@@ -348,7 +329,7 @@ class AddToSlackMutation(graphene.Mutation):
                                              installer=slack_user,
                                              bot_user_id=oauth_info['bot']['bot_user_id'],
                                              bot_access_token=oauth_info['bot']['bot_access_token'])
-        return AddToSlackMutation(slack_team=slack_team)
+        return CreateSlackTeamMutation(slack_team=slack_team)
 
 
 class Mutation(graphene.ObjectType):
@@ -367,5 +348,3 @@ class Mutation(graphene.ObjectType):
     get_or_create_group_from_slack = GetOrCreateGroupFromSlackMutation.Field()
 
     solve_question_from_slack = SolveQuestionFromSlackMutation.Field()
-
-    add_to_slack = AddToSlackMutation.Field()

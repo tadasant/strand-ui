@@ -57,9 +57,7 @@ class SlackUserInputType(graphene.InputObjectType):
 
 
 class SlackTeamInputType(graphene.InputObjectType):
-    id = graphene.String(required=True)
-    name = graphene.String(required=True)
-    group_id = graphene.Int(required=True)
+    code = graphene.String(required=True)
 
 
 class SlackChannelInputType(graphene.InputObjectType):
@@ -132,7 +130,3 @@ class SolveQuestionFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String()
     slack_user_id = graphene.String()
     time_end = graphene.String()
-
-
-class SlackOAuthInputType(graphene.InputObjectType):
-    code = graphene.String()

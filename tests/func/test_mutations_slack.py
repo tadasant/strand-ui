@@ -1,67 +1,6 @@
 import pytest
 
 
-class TestCreateSlackTeam:
-
-    @pytest.mark.django_db
-    def test_unauthenticated(self, client, group_factory, slack_team_factory):
-        group = group_factory()
-        slack_team = slack_team_factory.build()
-
-        mutation = f'''
-          mutation {{
-            createSlackTeam(input: {{id: "{slack_team.id}", name: "{slack_team.name}", groupId: {group.id}}}) {{
-              slackTeam {{
-                name
-              }}
-            }}
-          }}
-        '''
-        response = client.post('/graphql', {'query': mutation})
-
-        assert response.status_code == 200
-        assert response.json()['data']['createSlackTeam'] is None
-        assert response.json()['errors'][0]['message'] == 'Unauthorized'
-
-    @pytest.mark.django_db
-    def test_invalid_group(self, auth_client, slack_team_factory):
-        slack_team = slack_team_factory.build()
-
-        mutation = f'''
-          mutation {{
-            createSlackTeam(input: {{id: "{slack_team.id}", name: "{slack_team.name}", groupId: 1}}) {{
-              slackTeam {{
-                name
-              }}
-            }}
-          }}
-        '''
-        response = auth_client.post('/graphql', {'query': mutation})
-
-        assert response.status_code == 200
-        assert response.json()['data']['createSlackTeam'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Group Id'
-
-    @pytest.mark.django_db
-    def test_valid(self, auth_client, group_factory, slack_team_factory):
-        group = group_factory()
-        slack_team = slack_team_factory.build()
-
-        mutation = f'''
-          mutation {{
-            createSlackTeam(input: {{id: "{slack_team.id}", name: "{slack_team.name}", groupId: {group.id} }}) {{
-              slackTeam {{
-                name
-              }}
-            }}
-          }}
-        '''
-        response = auth_client.post('/graphql', {'query': mutation})
-
-        assert response.status_code == 200
-        assert response.json()['data']['createSlackTeam']['slackTeam']['name'] == slack_team.name
-
-
 class TestCreateSlackUser:
 
     @pytest.mark.django_db
@@ -1103,7 +1042,7 @@ class TestSolveQuestionFromSlack:
                    'solver']['id'] == str(slack_solver.user.id)
 
 
-class TestAddToSlack:
+class TestCreateSlackTeam:
 
     @pytest.mark.django_db
     @pytest.mark.parametrize('slack_oauth_request', ['invalid_token'], indirect=True)
@@ -1111,7 +1050,7 @@ class TestAddToSlack:
         code = '123456789012.123456789012.1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR'
         mutation = f'''
           mutation {{
-            addToSlack(input: {{code: "{code}"}}) {{
+            createSlackTeam(input: {{code: "{code}"}}) {{
               slackTeam {{
                 name
               }}
@@ -1128,7 +1067,7 @@ class TestAddToSlack:
         code = '123456789012.123456789012.1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR'
         mutation = f'''
           mutation {{
-            addToSlack(input: {{code: "{code}"}}) {{
+            createSlackTeam(input: {{code: "{code}"}}) {{
               slackTeam {{
                 name
               }}
@@ -1137,4 +1076,4 @@ class TestAddToSlack:
         '''
         response = client.post('/graphql', {'query': mutation})
         assert response.status_code == 200
-        assert response.json()['data']['addToSlack']['slackTeam']['name'] == 'Clippy Sandbox'
+        assert response.json()['data']['createSlackTeam']['slackTeam']['name'] == 'Clippy Sandbox'
