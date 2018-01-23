@@ -7,8 +7,8 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slack', '0002_auto_20180115_1844'),
-        ('session_messages', '0001_initial'),
+        ('slack_integration', '0002_auto_20180115_1844'),
+        ('discussions', '0001_initial'),
     ]
 
     operations = [
@@ -19,11 +19,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='slack_event',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='slack.SlackEvent'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='slack_integration.SlackEvent'),
         ),
         migrations.AddField(
             model_name='reply',
             name='slack_event',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='slack.SlackEvent'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='slack_integration.SlackEvent'),
         ),
     ]

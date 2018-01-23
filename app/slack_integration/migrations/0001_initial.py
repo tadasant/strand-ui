@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
                 ('avatar_72', models.CharField(max_length=255)),
                 ('is_bot', models.BooleanField(default=False)),
                 ('is_admin', models.BooleanField(default=False)),
-                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackTeam')),
+                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack_integration.SlackTeam')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -80,11 +80,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='slacksettings',
             name='slack_team',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackTeam'),
+            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='slack_integration.SlackTeam'),
         ),
         migrations.AddField(
             model_name='slackchannel',
             name='slack_team',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackTeam'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack_integration.SlackTeam'),
         ),
     ]

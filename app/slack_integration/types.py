@@ -2,7 +2,7 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from app.questions.types import SessionInputType
-from app.slack.models import (
+from app.slack_integration.models import (
     SlackChannel,
     SlackEvent,
     SlackTeam,

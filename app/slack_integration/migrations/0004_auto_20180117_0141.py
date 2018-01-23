@@ -9,7 +9,7 @@ import model_utils.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slack', '0003_auto_20180115_2121'),
+        ('slack_integration', '0003_auto_20180115_2121'),
     ]
 
     operations = [
@@ -17,14 +17,18 @@ class Migration(migrations.Migration):
             name='SlackTeamInstallation',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False,
+                                                                verbose_name='created')),
+                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False,
+                                                                      verbose_name='modified')),
                 ('access_token', models.CharField(max_length=255)),
                 ('scope', models.CharField(max_length=255)),
                 ('bot_user_id', models.CharField(max_length=255)),
                 ('bot_access_token', models.CharField(max_length=255)),
-                ('installer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackUser')),
-                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackTeam')),
+                ('installer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                to='slack_integration.SlackUser')),
+                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                 to='slack_integration.SlackTeam')),
             ],
             options={
                 'abstract': False,
@@ -34,11 +38,14 @@ class Migration(migrations.Migration):
             name='SlackTeamSetting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False,
+                                                                verbose_name='created')),
+                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False,
+                                                                      verbose_name='modified')),
                 ('name', models.CharField(max_length=255)),
                 ('value', models.CharField(max_length=255)),
-                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='slack.SlackTeam')),
+                ('slack_team', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                                 to='slack_integration.SlackTeam')),
             ],
         ),
         migrations.RemoveField(

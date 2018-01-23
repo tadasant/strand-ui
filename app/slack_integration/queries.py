@@ -1,12 +1,12 @@
 import graphene
 
-from app.slack.models import (
+from app.slack_integration.models import (
     SlackUser,
     SlackChannel,
     SlackTeam,
     SlackTeamInstallation,
 )
-from app.slack.types import (
+from app.slack_integration.types import (
     SlackUserType,
     SlackChannelType,
     SlackTeamType,

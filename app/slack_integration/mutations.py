@@ -5,18 +5,18 @@ from slackclient import SlackClient
 
 from app.groups.models import Group
 from app.groups.types import GroupType
-from app.messages.models import Message, Reply
-from app.messages.types import MessageType, ReplyType
+from app.discussions.models import Message, Reply
+from app.discussions.types import MessageType, ReplyType
 from app.questions.models import Question, Session
 from app.questions.types import SessionType, QuestionType
-from app.slack.models import (
+from app.slack_integration.models import (
     SlackChannel,
     SlackEvent,
     SlackTeamInstallation,
     SlackTeam,
     SlackUser
 )
-from app.slack.types import (
+from app.slack_integration.types import (
     GroupFromSlackInputType,
     MessageFromSlackInputType,
     ReplyFromSlackInputType,

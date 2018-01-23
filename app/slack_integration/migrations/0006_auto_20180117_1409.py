@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slack', '0005_slackteamsetting_type'),
+        ('slack_integration', '0005_slackteamsetting_type'),
     ]
 
     operations = [

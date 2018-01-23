@@ -8,7 +8,7 @@ import model_utils.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slack', '0001_initial'),
+        ('slack_integration', '0001_initial'),
     ]
 
     operations = [

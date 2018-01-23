@@ -2,7 +2,6 @@ import pytest
 
 
 class TestQueryQuestions:
-    """Test question API queries"""
 
     @pytest.mark.django_db
     def test_get_question(self, question_factory, client):
@@ -51,7 +50,6 @@ class TestQueryTags:
 
 
 class TestQuerySessions:
-    """Test session API queries"""
 
     @pytest.mark.django_db
     def test_get_session(self, session_factory, client):
