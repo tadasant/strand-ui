@@ -19,7 +19,6 @@ class MessageInputType(graphene.InputObjectType):
     session_id = graphene.Int(required=True)
     author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
-    slack_event_id = graphene.Int()
 
 
 class ReplyInputType(graphene.InputObjectType):
@@ -27,4 +26,3 @@ class ReplyInputType(graphene.InputObjectType):
     message_id = graphene.Int(required=True)
     author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
-    slack_event_id = graphene.Int()
