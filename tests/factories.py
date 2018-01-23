@@ -160,3 +160,4 @@ class SlackTeamInstallationFactory(factory.DjangoModelFactory):
     installer = factory.SubFactory(SlackUserFactory)
     bot_user_id = factory.Faker('md5')
     bot_access_token = factory.Faker('md5')
+    help_channel_id = factory.Faker('md5')
