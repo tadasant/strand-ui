@@ -350,9 +350,12 @@ class TestCreateMessageFromSlack:
           mutation {{
             createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                            slackEventTs: "{slack_event.ts}"}}) {{
+                                            originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
+                originSlackEvent {{
+                  ts
+                }}
               }}
             }}
           }}
@@ -378,9 +381,12 @@ class TestCreateMessageFromSlack:
           mutation {{
             createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                            slackEventTs: "{slack_event.ts}"}}) {{
+                                            originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
+                originSlackEvent {{
+                  ts
+                }}
               }}
             }}
           }}
@@ -406,9 +412,12 @@ class TestCreateMessageFromSlack:
           mutation {{
             createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                            slackEventTs: "{slack_event.ts}"}}) {{
+                                            originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 text
+                originSlackEvent {{
+                  ts
+                }}
               }}
             }}
           }}
@@ -434,10 +443,13 @@ class TestCreateMessageFromSlack:
           mutation {{
             createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
-                                            slackEventTs: "{slack_event.ts}"}}) {{
+                                            originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
                 author {{
                   id
+                }}
+                originSlackEvent {{
+                  ts
                 }}
                 session {{
                   id
@@ -455,6 +467,7 @@ class TestCreateMessageFromSlack:
         assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
             str(slack_user.user.id)
         assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
+        assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == slack_event.ts
         assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
             'participants']
 
@@ -470,16 +483,18 @@ class TestCreateReplyFromSlack:
         reply_slack_event = slack_event_factory()
         message_slack_user = slack_user_factory()
         reply_slack_user = slack_user_factory()
-        message = message_factory(session=session, slack_event=message_slack_event, author=message_slack_user.user)
-        reply = reply_factory.build(message=message, slack_event=reply_slack_event, author=reply_slack_user.user)
+        message = message_factory(session=session, origin_slack_event=message_slack_event,
+                                  author=message_slack_user.user)
+        reply = reply_factory.build(message=message, origin_slack_event=reply_slack_event,
+                                    author=reply_slack_user.user)
 
         mutation = f'''
           mutation {{
             createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
-                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
-                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
+                                          originSlackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -505,16 +520,18 @@ class TestCreateReplyFromSlack:
         reply_slack_event = slack_event_factory()
         message_slack_user = slack_user_factory()
         reply_slack_user = slack_user_factory()
-        message = message_factory(session=session, slack_event=message_slack_event, author=message_slack_user.user)
-        reply = reply_factory.build(message=message, slack_event=reply_slack_event, author=reply_slack_user.user)
+        message = message_factory(session=session, origin_slack_event=message_slack_event,
+                                  author=message_slack_user.user)
+        reply = reply_factory.build(message=message, origin_slack_event=reply_slack_event,
+                                    author=reply_slack_user.user)
 
         mutation = f'''
           mutation {{
             createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
-                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
-                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
+                                          originSlackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -540,16 +557,18 @@ class TestCreateReplyFromSlack:
         reply_slack_event = slack_event_factory()
         message_slack_user = slack_user_factory()
         reply_slack_user = slack_user_factory.build()
-        message = message_factory(session=session, slack_event=message_slack_event, author=message_slack_user.user)
-        reply = reply_factory.build(message=message, slack_event=reply_slack_event, author=reply_slack_user.user)
+        message = message_factory(session=session, origin_slack_event=message_slack_event,
+                                  author=message_slack_user.user)
+        reply = reply_factory.build(message=message, origin_slack_event=reply_slack_event,
+                                    author=reply_slack_user.user)
 
         mutation = f'''
           mutation {{
             createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
-                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
-                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
+                                          originSlackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -577,16 +596,18 @@ class TestCreateReplyFromSlack:
         reply_slack_event = slack_event_factory()
         message_slack_user = slack_user_factory()
         reply_slack_user = slack_user_factory()
-        message = message_factory(session=session, slack_event=message_slack_event, author=message_slack_user.user)
-        reply = reply_factory.build(message=message, slack_event=reply_slack_event, author=reply_slack_user.user)
+        message = message_factory(session=session, origin_slack_event=message_slack_event,
+                                  author=message_slack_user.user)
+        reply = reply_factory.build(message=message, origin_slack_event=reply_slack_event,
+                                    author=reply_slack_user.user)
 
         mutation = f'''
           mutation {{
             createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
-                                          messageSlackEventTs: "{wrong_message_slack_event.ts}",
+                                          messageOriginSlackEventTs: "{wrong_message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
-                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
+                                          originSlackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
                 message {{
                   author {{
@@ -601,7 +622,7 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Message Slack Event Ts'
+        assert response.json()['errors'][0]['message'] == 'Invalid Message Origin Slack Event Ts'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, session_factory, slack_channel_factory,
@@ -613,17 +634,22 @@ class TestCreateReplyFromSlack:
         reply_slack_event = slack_event_factory()
         message_slack_user = slack_user_factory()
         reply_slack_user = slack_user_factory()
-        message = message_factory(session=session, slack_event=message_slack_event, author=message_slack_user.user)
-        reply = reply_factory.build(message=message, slack_event=reply_slack_event, author=reply_slack_user.user)
+        message = message_factory(session=session, origin_slack_event=message_slack_event,
+                                  author=message_slack_user.user)
+        reply = reply_factory.build(message=message, origin_slack_event=reply_slack_event,
+                                    author=reply_slack_user.user)
 
         mutation = f'''
           mutation {{
             createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
-                                          messageSlackEventTs: "{message_slack_event.ts}",
+                                          messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
-                                          slackEventTs: "{reply_slack_event.ts}"}}) {{
+                                          originSlackEventTs: "{reply_slack_event.ts}"}}) {{
               reply {{
+                originSlackEvent {{
+                  ts
+                }}
                 message {{
                   author {{
                     id
@@ -641,6 +667,8 @@ class TestCreateReplyFromSlack:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
+        assert response.json()['data']['createReplyFromSlack']['reply']['originSlackEvent']['ts'] == \
+            reply_slack_event.ts
         assert response.json()['data']['createReplyFromSlack']['reply']['message']['author']['id'] == \
             str(message.author.id)
         assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createReplyFromSlack']['reply'][

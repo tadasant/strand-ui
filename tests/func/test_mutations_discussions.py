@@ -4,17 +4,15 @@ import pytest
 class TestCreateMessage:
 
     @pytest.mark.django_db
-    def test_unauthenticated(self, client, session_factory, user_factory, slack_event_factory,
-                             message_factory):
+    def test_unauthenticated(self, client, session_factory, user_factory, message_factory):
         session = session_factory()
         user = user_factory()
-        slack_event = slack_event_factory()
-        message = message_factory.build(session=session, author=user, slack_event=slack_event)
+        message = message_factory.build(session=session, author=user)
 
         mutation = f'''
           mutation {{
             createMessage(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
-                                   time: "{message.time}", slackEventId: {slack_event.id}}}) {{
+                                   time: "{message.time}"}}) {{
               message {{
                 time
               }}
@@ -28,17 +26,15 @@ class TestCreateMessage:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, session_factory, user_factory, slack_event_factory,
-                   message_factory):
+    def test_valid(self, auth_client, session_factory, user_factory, message_factory):
         session = session_factory()
         user = user_factory()
-        slack_event = slack_event_factory()
-        message = message_factory.build(session=session, author=user, slack_event=slack_event)
+        message = message_factory.build(session=session, author=user)
 
         mutation = f'''
           mutation {{
             createMessage(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
-                                   time: "{message.time}", slackEventId: {slack_event.id}}}) {{
+                                   time: "{message.time}"}}) {{
               message {{
                 text
               }}
@@ -54,17 +50,15 @@ class TestCreateMessage:
 class TestCreateReply:
 
     @pytest.mark.django_db
-    def test_unauthenticated(self, client, message_factory, user_factory, slack_event_factory,
-                             reply_factory):
+    def test_unauthenticated(self, client, message_factory, user_factory, reply_factory):
         message = message_factory()
         user = user_factory()
-        slack_event = slack_event_factory()
-        reply = reply_factory.build(message=message, author=user, slack_event=slack_event)
+        reply = reply_factory.build(message=message, author=user)
 
         mutation = f'''
           mutation {{
             createReply(input: {{text: "{reply.text}", messageId: {message.id}, authorId: {user.id},
-                                 time: "{reply.time}", slackEventId: {slack_event.id}}}) {{
+                                 time: "{reply.time}"}}) {{
               reply {{
                 text
               }}
@@ -77,16 +71,15 @@ class TestCreateReply:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, message_factory, user_factory, slack_event_factory, reply_factory):
+    def test_valid(self, auth_client, message_factory, user_factory, reply_factory):
         message = message_factory()
         user = user_factory()
-        slack_event = slack_event_factory()
-        reply = reply_factory.build(message=message, author=user, slack_event=slack_event)
+        reply = reply_factory.build(message=message, author=user)
 
         mutation = f'''
           mutation {{
             createReply(input: {{text: "{reply.text}", messageId: {message.id}, authorId: {user.id},
-                                 time: "{reply.time}", slackEventId: {slack_event.id}}}) {{
+                                 time: "{reply.time}"}}) {{
               reply {{
                 text
               }}

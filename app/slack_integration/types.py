@@ -72,20 +72,20 @@ class SlackTeamInstallationInputType(graphene.InputObjectType):
 
 
 class MessageFromSlackInputType(graphene.InputObjectType):
-    text = graphene.String(required=True)
-    time = graphene.String(required=True)
+    origin_slack_event_ts = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)
     slack_user_id = graphene.String(required=True)
-    slack_event_ts = graphene.String(required=True)
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
 
 
 class ReplyFromSlackInputType(graphene.InputObjectType):
-    text = graphene.String(required=True)
-    time = graphene.String(required=True)
-    message_slack_event_ts = graphene.String(required=True)
+    message_origin_slack_event_ts = graphene.String(required=True)
+    origin_slack_event_ts = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)
     slack_user_id = graphene.String(required=True)
-    slack_event_ts = graphene.String(required=True)
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
 
 
 class SessionFromSlackInputType(graphene.InputObjectType):
