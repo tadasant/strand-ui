@@ -11,8 +11,9 @@ class TestCreateSlackUser:
 
         mutation = f'''
           mutation {{
-            createSlackUser(input: {{id: "{slack_user.id}", realName: "{slack_user.real_name}",
-                                     displayName: "{slack_user.display_name}", isBot: {str(slack_user.is_bot).lower()},
+            createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
+                                     realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
+                                     isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
@@ -34,8 +35,9 @@ class TestCreateSlackUser:
 
         mutation = f'''
           mutation {{
-            createSlackUser(input: {{id: "{slack_user.id}", realName: "{slack_user.real_name}",
-                                     displayName: "{slack_user.display_name}", isBot: {str(slack_user.is_bot).lower()},
+            createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
+                                     realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
+                                     isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
@@ -56,8 +58,9 @@ class TestCreateSlackUser:
 
         mutation = f'''
           mutation {{
-            createSlackUser(input: {{id: "{slack_user.id}", realName: "{slack_user.real_name}",
-                                     displayName: "{slack_user.display_name}", isBot: {str(slack_user.is_bot).lower()},
+            createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
+                                     realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
+                                     isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: 1}}) {{
               slackUser {{
@@ -79,8 +82,9 @@ class TestCreateSlackUser:
 
         mutation = f'''
           mutation {{
-            createSlackUser(input: {{id: "{slack_user.id}", realName: "{slack_user.real_name}",
-                                     displayName: "{slack_user.display_name}", isBot: {str(slack_user.is_bot).lower()},
+            createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
+                                     realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
+                                     isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
@@ -727,6 +731,7 @@ class TestGetOrCreateUserFromSlack:
         mutation = f'''
           mutation {{
             getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              name: "{slack_user.name}",
                                               firstName: "{slack_user.first_name}",
                                               lastName: "{slack_user.last_name}",
                                               realName: "{slack_user.real_name}",
@@ -758,6 +763,7 @@ class TestGetOrCreateUserFromSlack:
         mutation = f'''
           mutation {{
             getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              name: "{slack_user.name}",
                                               firstName: "{slack_user.first_name}",
                                               lastName: "{slack_user.last_name}",
                                               realName: "{slack_user.real_name}",
@@ -790,6 +796,7 @@ class TestGetOrCreateUserFromSlack:
         mutation = f'''
           mutation {{
             getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              name: "{slack_user.name}",
                                               firstName: "{slack_user.first_name}",
                                               lastName: "{slack_user.last_name}",
                                               realName: "{slack_user.real_name}",
@@ -821,6 +828,7 @@ class TestGetOrCreateUserFromSlack:
         mutation = f'''
           mutation {{
             getOrCreateUserFromSlack(input: {{id: "{slack_user.id}",
+                                              name: "{slack_user.name}",
                                               firstName: "{slack_user.first_name}",
                                               lastName: "{slack_user.last_name}",
                                               realName: "{slack_user.real_name}",

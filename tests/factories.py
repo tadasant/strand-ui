@@ -137,6 +137,7 @@ class SlackUserFactory(factory.DjangoModelFactory):
         model = SlackUser
 
     id = factory.Faker('md5')
+    name = factory.Faker('user_name')
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
     real_name = factory.LazyAttribute(lambda x: f'{x.first_name} {x.last_name}')
