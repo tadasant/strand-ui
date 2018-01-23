@@ -5,10 +5,10 @@ import factory.fuzzy
 from django.contrib.auth.hashers import make_password
 
 from app.groups.models import Group
-from app.messages.models import Message, Reply
+from app.discussions.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack.models import SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
+from app.slack_integration.models import SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
 
 
 class UserFactory(factory.DjangoModelFactory):
