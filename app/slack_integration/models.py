@@ -14,6 +14,7 @@ class SlackTeam(TimeStampedModel):
 
 class SlackUser(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
     real_name = models.CharField(max_length=255)

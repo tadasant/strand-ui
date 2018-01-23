@@ -38,6 +38,7 @@ class SlackUserType(DjangoObjectType):
 
 class SlackUserInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
+    name = graphene.String(required=True)
     first_name = graphene.String()
     last_name = graphene.String()
     real_name = graphene.String(required=True)
@@ -96,6 +97,7 @@ class SessionFromSlackInputType(graphene.InputObjectType):
 
 class UserFromSlackInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
+    name = graphene.String(required=True)
     first_name = graphene.String()
     last_name = graphene.String()
     real_name = graphene.String(required=True)

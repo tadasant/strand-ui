@@ -196,7 +196,8 @@ class GetOrCreateUserFromSlackMutation(graphene.Mutation):
 
         slack_team = SlackTeam.objects.get(pk=input['slack_team_id'])
         user, created = User.objects.get_or_create(email=input['email'],
-                                                   defaults=dict(username=input['display_name'],
+                                                   defaults=dict(username=input.get('display_name') or
+                                                                 input.get('name'),
                                                                  first_name=input.get('first_name'),
                                                                  last_name=input.get('last_name'),
                                                                  avatar_url=input.get('avatar_72')))
@@ -287,11 +288,13 @@ class CreateSlackTeamMutation(graphene.Mutation):
         group, created = Group.objects.get_or_create(name=team_info['name'])
         slack_team = SlackTeam.objects.create(id=team_info['id'], name=team_info['name'], group=group)
         user, created = User.objects.get_or_create(email=user_info['profile'].get('email'),
-                                                   defaults=dict(username=user_info['profile'].get('display_name'),
+                                                   defaults=dict(username=user_info['profile'].get('display_name') or
+                                                                 user_info.get('name'),
                                                                  first_name=user_info.get('first_name', ''),
                                                                  last_name=user_info.get('last_name', ''),
                                                                  avatar_url=user_info['profile'].get('image_72')))
         slack_user = SlackUser.objects.create(id=user_info['id'],
+                                              name=user_info.get('name'),
                                               first_name=user_info.get('first_name', ''),
                                               last_name=user_info.get('last_name', ''),
                                               real_name=user_info.get('real_name'),
