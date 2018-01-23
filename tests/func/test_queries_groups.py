@@ -23,27 +23,3 @@ class TestQueryGroups:
 
         assert response.status_code == 200
         assert len(response.json()['data']['groups']) == 2
-
-
-class TestQueryGroupSettings:
-
-    @pytest.mark.django_db
-    def test_get_group_setting(self, group_setting_factory, client):
-        group_setting = group_setting_factory()
-
-        query = {'query': f'{{ groupSetting(id: {group_setting.id}) {{ name }} }}'}
-        response = client.post('/graphql', query)
-
-        assert response.status_code == 200
-        assert response.json()['data']['groupSetting']['name'] == group_setting.name
-
-    @pytest.mark.django_db
-    def test_get_groups(self, group_setting_factory, client):
-        group_setting_factory()
-        group_setting_factory()
-
-        query = {'query': '{ groupSettings { group { id } } }'}
-        response = client.post('/graphql', query)
-
-        assert response.status_code == 200
-        assert len(response.json()['data']['groupSettings']) == 2

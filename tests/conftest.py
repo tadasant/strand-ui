@@ -6,7 +6,6 @@ from slackclient import SlackClient
 
 from tests.factories import (
     GroupFactory,
-    GroupSettingFactory,
     MessageFactory,
     QuestionFactory,
     ReplyFactory,
@@ -14,7 +13,6 @@ from tests.factories import (
     SlackChannelFactory,
     SlackEventFactory,
     SlackTeamInstallationFactory,
-    SlackTeamSettingFactory,
     SlackTeamFactory,
     SlackUserFactory,
     TagFactory,
@@ -23,7 +21,6 @@ from tests.factories import (
 from tests.resources.TestSlackClient import TestSlackClient
 
 register(GroupFactory)
-register(GroupSettingFactory)
 register(MessageFactory)
 register(QuestionFactory)
 register(ReplyFactory)
@@ -31,7 +28,6 @@ register(SessionFactory)
 register(SlackChannelFactory)
 register(SlackEventFactory)
 register(SlackTeamInstallationFactory)
-register(SlackTeamSettingFactory)
 register(SlackTeamFactory)
 register(SlackUserFactory)
 register(TagFactory)
