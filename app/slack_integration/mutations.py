@@ -26,6 +26,7 @@ from app.slack_integration.types import (
     SlackEventType,
     SlackTeamType,
     SlackTeamInputType,
+    SlackTeamInstallationHelpChannelInputType,
     SlackTeamInstallationType,
     SlackTeamInstallationInputType,
     SlackUserType,
@@ -95,6 +96,26 @@ class CreateSlackTeamInstallationMutation(graphene.Mutation):
         slack_team_installation = SlackTeamInstallation.objects.create(**input)
 
         return CreateSlackTeamInstallationMutation(slack_team_installation=slack_team_installation)
+
+
+class UpdateSlackTeamInstallationHelpChannelMutation(graphene.Mutation):
+    class Arguments:
+        input = SlackTeamInstallationHelpChannelInputType(required=True)
+
+    slack_team_installation = graphene.Field(SlackTeamInstallationType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if not SlackTeamInstallation.objects.filter(slack_team__id=input['slack_team_id']).exists():
+            raise Exception('Invalid Slack Team Id')
+
+        slack_team_installation = SlackTeamInstallation.objects.get(slack_team__id=input['slack_team_id'])
+        slack_team_installation.help_channel_id = input['help_channel_id']
+        slack_team_installation.save()
+
+        return UpdateSlackTeamInstallationHelpChannelMutation(slack_team_installation=slack_team_installation)
 
 
 class CreateMessageFromSlackMutation(graphene.Mutation):
@@ -318,7 +339,9 @@ class Mutation(graphene.ObjectType):
     create_slack_user = CreateSlackUserMutation.Field()
     create_slack_team = CreateSlackTeamMutation.Field()
     create_slack_channel = CreateSlackChannelMutation.Field()
+
     create_slack_team_installation = CreateSlackTeamInstallationMutation.Field()
+    update_slack_team_installation_help_channel = UpdateSlackTeamInstallationHelpChannelMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
     create_reply_from_slack = CreateReplyFromSlackMutation.Field()

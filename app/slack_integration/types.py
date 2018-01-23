@@ -71,6 +71,11 @@ class SlackTeamInstallationInputType(graphene.InputObjectType):
     bot_access_token = graphene.String(required=True)
 
 
+class SlackTeamInstallationHelpChannelInputType(graphene.InputObjectType):
+    slack_team_id = graphene.String(required=True)
+    help_channel_id = graphene.String(required=True)
+
+
 class MessageFromSlackInputType(graphene.InputObjectType):
     origin_slack_event_ts = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)

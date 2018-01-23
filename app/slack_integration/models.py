@@ -35,6 +35,7 @@ class SlackTeamInstallation(TimeStampedModel):
     installer = models.ForeignKey(to=SlackUser, on_delete=models.CASCADE)
     bot_user_id = models.CharField(max_length=255)
     bot_access_token = models.CharField(max_length=255)
+    help_channel_id = models.CharField(max_length=255, null=True)
 
 
 class SlackChannel(TimeStampedModel):
