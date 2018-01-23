@@ -7,7 +7,6 @@ from app.slack.models import (
     SlackEvent,
     SlackTeam,
     SlackTeamInstallation,
-    SlackTeamSetting,
     SlackUser
 )
 
@@ -30,11 +29,6 @@ class SlackTeamType(DjangoObjectType):
 class SlackTeamInstallationType(DjangoObjectType):
     class Meta:
         model = SlackTeamInstallation
-
-
-class SlackTeamSettingType(DjangoObjectType):
-    class Meta:
-        model = SlackTeamSetting
 
 
 class SlackUserType(DjangoObjectType):
@@ -65,13 +59,6 @@ class SlackChannelInputType(graphene.InputObjectType):
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
     session_id = graphene.Int(required=True)
-
-
-class SlackTeamSettingInputType(graphene.InputObjectType):
-    slack_team_id = graphene.String(required=True)
-    name = graphene.String(required=True)
-    value = graphene.String(required=True)
-    data_type = graphene.String(required=True)
 
 
 class SlackTeamInstallationInputType(graphene.InputObjectType):

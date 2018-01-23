@@ -4,11 +4,11 @@ import factory
 import factory.fuzzy
 from django.contrib.auth.hashers import make_password
 
-from app.groups.models import Group, GroupSetting
+from app.groups.models import Group
 from app.messages.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack.models import SlackTeamSetting, SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
+from app.slack.models import SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -36,16 +36,6 @@ class GroupFactory(factory.DjangoModelFactory):
         if extracted:
             for member in extracted:
                 self.members.add(member)
-
-
-class GroupSettingFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = GroupSetting
-
-    group = factory.SubFactory(GroupFactory)
-    name = factory.Faker('word')
-    value = factory.Faker('word')
-    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class TagFactory(factory.DjangoModelFactory):
@@ -130,16 +120,6 @@ class SlackTeamFactory(factory.DjangoModelFactory):
     id = factory.Faker('md5')
     name = factory.Faker('name')
     group = factory.SubFactory(GroupFactory)
-
-
-class SlackTeamSettingFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = SlackTeamSetting
-
-    slack_team = factory.SubFactory(SlackTeamFactory)
-    name = factory.Faker('word')
-    value = factory.Faker('word')
-    data_type = factory.fuzzy.FuzzyChoice(choices=('String', 'Boolean', 'Number',))
 
 
 class SlackChannelFactory(factory.DjangoModelFactory):

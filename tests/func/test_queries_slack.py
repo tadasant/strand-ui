@@ -73,30 +73,6 @@ class TestQuerySlackChannels:
         assert len(response.json()['data']['slackChannels']) == 2
 
 
-class TestQuerySlackTeamSettings:
-
-    @pytest.mark.django_db
-    def test_get_slack_team_setting(self, slack_team_setting_factory, client):
-        slack_team_setting = slack_team_setting_factory()
-
-        query = {'query': f'{{ slackTeamSetting(id: {slack_team_setting.id}) {{ name }} }}'}
-        response = client.post('/graphql', query)
-
-        assert response.status_code == 200
-        assert response.json()['data']['slackTeamSetting']['name'] == slack_team_setting.name
-
-    @pytest.mark.django_db
-    def test_get_slack_team_settings(self, slack_team_setting_factory, client):
-        slack_team_setting_factory()
-        slack_team_setting_factory()
-
-        query = {'query': '{ slackTeamSettings { name } }'}
-        response = client.post('/graphql', query)
-
-        assert response.status_code == 200
-        assert len(response.json()['data']['slackTeamSettings']) == 2
-
-
 class TestQuerySlackTeamInstallations:
 
     @pytest.mark.django_db

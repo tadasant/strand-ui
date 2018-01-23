@@ -12,21 +12,6 @@ class SlackTeam(TimeStampedModel):
     group = models.OneToOneField(to=Group, on_delete=models.CASCADE)
 
 
-class SlackTeamSetting(TimeStampedModel):
-    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    value = models.CharField(max_length=255)
-    DATA_TYPE_CHOICES = (
-        ('String', 'String'),
-        ('Boolean', 'Boolean'),
-        ('Number', 'Number'),
-    )
-    data_type = models.CharField(max_length=7, choices=DATA_TYPE_CHOICES, default='String')
-
-    class Meta:
-        unique_together = ('slack_team', 'name')
-
-
 class SlackUser(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     first_name = models.CharField(max_length=255, null=True)
