@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.slack.models import SlackChannel, SlackTeam, SlackTeamInstallation, SlackUser
+from app.slack_integration.models import SlackChannel, SlackTeam, SlackTeamInstallation, SlackUser
 
 admin.site.register(SlackTeam)
 admin.site.register(SlackTeamInstallation)

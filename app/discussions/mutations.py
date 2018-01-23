@@ -1,7 +1,7 @@
 import graphene
 
-from app.messages.models import Message, Reply
-from app.messages.types import (
+from app.discussions.models import Message, Reply
+from app.discussions.types import (
     MessageType,
     ReplyType,
     MessageInputType,

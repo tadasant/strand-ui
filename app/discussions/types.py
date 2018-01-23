@@ -1,7 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from app.messages.models import Message, Reply
+from app.discussions.models import Message, Reply
 
 
 class MessageType(DjangoObjectType):

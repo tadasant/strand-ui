@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'app.users',
     'app.groups',
     'app.questions',
-    'app.slack',
-    'app.messages'
+    'app.slack_integration',
+    'app.discussions'
 ]
 
 MIDDLEWARE = [
