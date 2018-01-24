@@ -33,7 +33,7 @@ class Session(TimeStampedModel):
     time_start = models.DateTimeField(default=timezone.now)
     time_end = models.DateTimeField(null=True)
     question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
-    participants = models.ManyToManyField(to=User)
+    participants = models.ManyToManyField(to=User, related_name='sessions')
 
     def __str__(self):
         return f'Session for "{self.question.title}"'
