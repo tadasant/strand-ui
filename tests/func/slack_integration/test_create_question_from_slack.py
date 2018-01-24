@@ -67,7 +67,7 @@ class TestCreateQuestionFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createQuestionFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
+        assert response.json()['errors'][0]['message'] == 'SlackUser matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, question_factory, slack_user_factory, tag_factory):
@@ -97,6 +97,7 @@ class TestCreateQuestionFromSlack:
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
+        print(response.content)
 
         assert response.status_code == 200
         assert len(response.json()['data']['createQuestionFromSlack']['question']['tags']) == 2

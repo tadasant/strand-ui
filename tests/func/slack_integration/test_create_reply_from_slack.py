@@ -75,7 +75,7 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
+        assert response.json()['errors'][0]['message'] == 'Message matching query does not exist.'
 
     @pytest.mark.django_db
     def test_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory, slack_event_factory,
@@ -112,7 +112,7 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
+        assert response.json()['errors'][0]['message'] == 'User matching query does not exist.'
 
     @pytest.mark.django_db
     def test_create_invalid_message_slack_event(self, auth_client, session_factory, slack_channel_factory,
@@ -151,7 +151,7 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Message Origin Slack Event Ts'
+        assert response.json()['errors'][0]['message'] == 'Message matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, session_factory, slack_channel_factory,

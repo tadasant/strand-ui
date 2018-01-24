@@ -134,5 +134,6 @@ class TestCreateMessageFromSlack:
         assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
             str(slack_user.user.id)
         assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
+        assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == slack_event.ts
         assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
             'participants']

@@ -54,7 +54,8 @@ class TestCreateSlackTeamInstallation:
 
         assert response.status_code == 200
         assert response.json()['data']['createSlackTeamInstallation'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
+        assert response.json()['errors'][0]['message'] == f"{{'slack_team_id': ['Invalid pk \"{slack_team.id}\" - " \
+                                                          "object does not exist.']}"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_team_factory, slack_user_factory, slack_team_installation_factory):
