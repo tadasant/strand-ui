@@ -1,7 +1,7 @@
 import graphene
 
-from app.users.models import User
 from app.users.types import UserInputType, UserType
+from app.users.validators import UserValidator
 
 
 class CreateUserMutation(graphene.Mutation):
@@ -14,7 +14,10 @@ class CreateUserMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        user = User.objects.create(**input)
+        user_validator = UserValidator(data=input)
+        user_validator.is_valid(raise_exception=True)
+        user = user_validator.save()
+
         return CreateUserMutation(user=user)
 
 
