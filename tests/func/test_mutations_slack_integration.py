@@ -1095,7 +1095,7 @@ class TestUpdateSlackTeamInstallationHelpChannelAndActivate:
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_team_installation_factory):
-        slack_team_installation = slack_team_installation_factory(help_channel_id=None)
+        slack_team_installation = slack_team_installation_factory(help_channel_id=None, is_active=False)
         help_channel_id = slack_team_installation_factory.build().help_channel_id
 
         mutation = f'''
