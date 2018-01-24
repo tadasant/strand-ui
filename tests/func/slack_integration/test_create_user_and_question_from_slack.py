@@ -28,7 +28,7 @@ class TestCreateUserAndQuestionFromSlack:
                                                       avatar72: "{slack_user.avatar_72}",
                                                       isBot: {str(slack_user.is_bot).lower()},
                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                      slackTeamId: "{slack_team.id}" 
+                                                      slackTeamId: "{slack_team.id}"
                                                     }},
                                                     tags: [
                                                       {{name: "{tag_one.name}"}},
@@ -78,7 +78,7 @@ class TestCreateUserAndQuestionFromSlack:
                                                       avatar72: "{slack_user.avatar_72}",
                                                       isBot: {str(slack_user.is_bot).lower()},
                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                      slackTeamId: "{slack_team.id}" 
+                                                      slackTeamId: "{slack_team.id}"
                                                     }},
                                                     tags: [
                                                       {{name: "{tag_one.name}"}},
@@ -128,7 +128,7 @@ class TestCreateUserAndQuestionFromSlack:
                                                       avatar72: "{slack_user.avatar_72}",
                                                       isBot: {str(slack_user.is_bot).lower()},
                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                      slackTeamId: "{slack_team.id}" 
+                                                      slackTeamId: "{slack_team.id}"
                                                     }},
                                                     tags: [
                                                       {{name: "{tag_one.name}"}},
@@ -177,7 +177,7 @@ class TestCreateUserAndQuestionFromSlack:
                                                       avatar72: "{slack_user.avatar_72}",
                                                       isBot: {str(slack_user.is_bot).lower()},
                                                       isAdmin: {str(slack_user.is_admin).lower()},
-                                                      slackTeamId: "{slack_team.id}" 
+                                                      slackTeamId: "{slack_team.id}"
                                                     }},
                                                     tags: [
                                                       {{name: "{tag_one.name}"}},
