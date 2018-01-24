@@ -7,7 +7,7 @@ from app.groups.models import Group
 from app.groups.types import GroupType
 from app.discussions.models import Message, Reply
 from app.discussions.types import MessageType, ReplyType
-from app.questions.models import Question, Session
+from app.questions.models import Question, Session, Tag
 from app.questions.types import SessionType, QuestionType
 from app.slack_integration.models import (
     SlackChannel,
@@ -19,6 +19,7 @@ from app.slack_integration.models import (
 from app.slack_integration.types import (
     GroupFromSlackInputType,
     MessageFromSlackInputType,
+    QuestionFromSlackInputType,
     ReplyFromSlackInputType,
     SessionFromSlackInputType,
     SlackChannelType,
@@ -33,7 +34,8 @@ from app.slack_integration.types import (
     SlackUserInputType,
     SolveQuestionFromSlackInputType,
     UserFromSlackInputType,
-    UserAndMessageFromSlackInputType
+    UserAndMessageFromSlackInputType,
+    UserAndQuestionFromSlackInputType
 )
 from app.users.models import User
 from app.users.types import UserType
@@ -349,6 +351,71 @@ class CreateGroupFromSlackMutation(graphene.Mutation):
         return CreateGroupFromSlackMutation(group=group, slack_team=slack_team)
 
 
+class CreateQuestionFromSlackMutation(graphene.Mutation):
+    class Arguments:
+        input = QuestionFromSlackInputType(required=True)
+
+    question = graphene.Field(QuestionType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if not SlackUser.objects.filter(pk=input['original_poster_slack_user_id']).exists():
+            raise Exception('Invalid Slack User Id')
+
+        original_poster_slack_user_id = input.pop('original_poster_slack_user_id')
+        slack_user = SlackUser.objects.get(pk=original_poster_slack_user_id)
+
+        question_tags = input.pop('tags', [])
+        question = Question.objects.create(**input, original_poster=slack_user.user, group=slack_user.slack_team.group)
+
+        for question_tag in question_tags:
+            tag, created = Tag.objects.get_or_create(name=question_tag['name'])
+            question.tags.add(tag)
+
+        return CreateQuestionFromSlackMutation(question=question)
+
+
+class CreateUserAndQuestionFromSlackMutation(graphene.Mutation):
+    class Arguments:
+        input = UserAndQuestionFromSlackInputType(required=True)
+
+    user = graphene.Field(UserType)
+    slack_user = graphene.Field(SlackUserType)
+    question = graphene.Field(QuestionType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if SlackUser.objects.filter(pk=input['original_poster_slack_user']['id']).exists():
+            raise Exception('Slack User already exists')
+
+        if not SlackTeam.objects.filter(pk=input['original_poster_slack_user']['slack_team_id']).exists():
+            raise Exception('Invalid Slack Team Id')
+
+        slack_user_input = input.pop('original_poster_slack_user')
+        slack_team = SlackTeam.objects.get(pk=slack_user_input['slack_team_id'])
+        user, created = User.objects.get_or_create(email=slack_user_input['email'],
+                                                   defaults=dict(username=slack_user_input.get('display_name') or
+                                                                 slack_user_input.get('name'),
+                                                                 first_name=slack_user_input.get('first_name'),
+                                                                 last_name=slack_user_input.get('last_name'),
+                                                                 avatar_url=input.get('avatar_72')))
+        slack_team.group.members.add(user)
+        slack_user = SlackUser.objects.create(**slack_user_input, user=user)
+
+        question_tags = input.pop('tags', [])
+        question = Question.objects.create(**input, original_poster=slack_user.user, group=slack_user.slack_team.group)
+
+        for question_tag in question_tags:
+            tag, created = Tag.objects.get_or_create(name=question_tag['name'])
+            question.tags.add(tag)
+
+        return CreateUserAndQuestionFromSlackMutation(user=user, slack_user=slack_user, question=question)
+
+
 class SolveQuestionFromSlackMutation(graphene.Mutation):
     class Arguments:
         input = SolveQuestionFromSlackInputType(required=True)
@@ -390,9 +457,12 @@ class Mutation(graphene.ObjectType):
         UpdateSlackTeamInstallationHelpChannelAndActivateMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
+    create_user_and_message_from_slack = CreateUserAndMessageFromSlackMutation.Field()
+
     create_reply_from_slack = CreateReplyFromSlackMutation.Field()
 
-    create_user_and_message_from_slack = CreateUserAndMessageFromSlackMutation.Field()
+    create_question_from_slack = CreateQuestionFromSlackMutation.Field()
+    create_user_and_question_from_slack = CreateUserAndQuestionFromSlackMutation.Field()
 
     create_session_from_slack = CreateSessionFromSlackMutation.Field()
 
