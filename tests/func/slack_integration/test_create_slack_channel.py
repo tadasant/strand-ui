@@ -45,7 +45,8 @@ class TestCreateSlackChannel:
 
         assert response.status_code == 200
         assert response.json()['data']['createSlackChannel'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
+        assert response.json()['errors'][0]['message'] == f"{{'slack_team_id': ['Invalid pk \"{slack_team.id}\" - " \
+                                                          "object does not exist.']}"
 
     @pytest.mark.django_db
     def test_invalid_session(self, auth_client, slack_channel_factory, slack_team_factory):
@@ -66,7 +67,8 @@ class TestCreateSlackChannel:
 
         assert response.status_code == 200
         assert response.json()['data']['createSlackChannel'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Session Id'
+        assert response.json()['errors'][0]['message'] == "{'session_id': ['Invalid pk \"0\" - " \
+                                                          "object does not exist.']}"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_channel_factory, slack_team_factory, session_factory):

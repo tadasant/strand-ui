@@ -27,15 +27,15 @@ class SlackUser(TimeStampedModel):
     is_bot = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
-    slack_team = models.ForeignKey(SlackTeam, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    slack_team = models.ForeignKey(SlackTeam, on_delete=models.CASCADE, related_name='slack_users')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='slack_users')
 
     def __str__(self):
         return f'{self.real_name or self.name}'
 
 
 class SlackTeamInstallation(TimeStampedModel):
-    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
+    slack_team = models.OneToOneField(to=SlackTeam, on_delete=models.CASCADE, null=True)
     access_token = models.CharField(max_length=255)
     scope = models.CharField(max_length=255)
     installer = models.ForeignKey(to=SlackUser, on_delete=models.CASCADE)
@@ -51,7 +51,7 @@ class SlackTeamInstallation(TimeStampedModel):
 class SlackChannel(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
-    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE)
+    slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE, related_name='slack_channels')
     session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

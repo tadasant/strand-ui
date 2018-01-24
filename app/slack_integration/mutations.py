@@ -38,7 +38,7 @@ from app.slack_integration.types import (
     UserAndQuestionFromSlackInputType,
     UserAndReplyFromSlackInputType
 )
-from app.slack_integration.validators import SlackUserValidator
+from app.slack_integration.validators import SlackUserValidator, SlackChannelValidator
 from app.users.models import User
 from app.users.types import UserType
 
@@ -70,13 +70,9 @@ class CreateSlackChannelMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not SlackTeam.objects.filter(pk=input.slack_team_id).exists():
-            raise Exception('Invalid Slack Team Id')
-
-        if not Session.objects.filter(pk=input.session_id).exists():
-            raise Exception('Invalid Session Id')
-
-        slack_channel = SlackChannel.objects.create(**input)
+        slack_channel_validator = SlackChannelValidator(data=input)
+        slack_channel_validator.is_valid(raise_exception=True)
+        slack_channel = slack_channel_validator.save()
 
         return CreateSlackChannelMutation(slack_channel=slack_channel)
 
