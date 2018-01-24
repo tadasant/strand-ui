@@ -50,6 +50,6 @@ class QuestionAndTagsInputType(graphene.InputObjectType):
 
 
 class SolveQuestionInputType(graphene.InputObjectType):
-    question_id = graphene.Int()
+    id = graphene.Int()
     solver_id = graphene.Int()
     time_end = graphene.String()

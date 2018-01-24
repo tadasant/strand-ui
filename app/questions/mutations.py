@@ -1,6 +1,7 @@
 import graphene
 
-from app.questions.models import Question, Session, Tag
+from app.questions.models import Question
+from app.questions.validators import QuestionValidator, SessionValidator, TagValidator
 from app.questions.types import (
     QuestionType,
     QuestionInputType,
@@ -10,7 +11,6 @@ from app.questions.types import (
     TagType,
     TagInputType
 )
-from app.users.models import User
 
 
 class CreateQuestionMutation(graphene.Mutation):
@@ -23,15 +23,9 @@ class CreateQuestionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not User.objects.filter(pk=input['original_poster_id']).exists():
-            raise Exception('Invalid User Id')
-
-        question_tags = input.pop('tags', [])
-        question = Question.objects.create(**input)
-
-        for question_tag in question_tags:
-            tag, created = Tag.objects.get_or_create(name=question_tag['name'])
-            question.tags.add(tag)
+        question_validator = QuestionValidator(data=input)
+        question_validator.is_valid(raise_exception=True)
+        question = question_validator.save()
 
         return CreateQuestionMutation(question=question)
 
@@ -46,10 +40,10 @@ class CreateSessionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not Question.objects.filter(pk=input['question_id']).exists():
-            raise Exception('Invalid Question Id')
+        session_validator = SessionValidator(data=input)
+        session_validator.is_valid(raise_exception=True)
+        session = session_validator.save()
 
-        session = Session.objects.create(**input)
         return CreateSessionMutation(session=session)
 
 
@@ -63,7 +57,10 @@ class CreateTagMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        tag = Tag.objects.create(**input)
+        tag_validator = TagValidator(data=input)
+        tag_validator.is_valid(raise_exception=True)
+        tag = tag_validator.save()
+
         return CreateTagMutation(tag=tag)
 
 
@@ -78,20 +75,12 @@ class SolveQuestionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not Question.objects.filter(pk=input['question_id']).exists():
-            raise Exception('Invalid Question Id')
-
-        if not User.objects.filter(pk=input['solver_id']).exists():
-            raise Exception('Invalid User Id')
-
-        question = Question.objects.get(pk=input['question_id'])
-        question.is_solved = True
-        question.solver_id = input['solver_id']
-        question.save()
-
-        session = question.session
-        session.time_end = input['time_end']
-        session.save()
+        time_end = input.pop('time_end')
+        question = Question.objects.get(pk=input['id'])
+        question_validator = QuestionValidator(question, data=input, partial=True)
+        question_validator.is_valid(raise_exception=True)
+        question = question_validator.save()
+        session = question.solve(time_end)
 
         return SolveQuestionMutation(question=question, session=session)
 

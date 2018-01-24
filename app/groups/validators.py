@@ -1,4 +1,4 @@
-# Use of serializers limited to validating and saving models.
+# Use of serializers limited to deserializing, validating and saving model instance data.
 
 from rest_framework import serializers
 
