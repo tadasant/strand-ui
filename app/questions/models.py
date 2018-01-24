@@ -26,7 +26,7 @@ class Question(TimeStampedModel):
     tags = models.ManyToManyField(to=Tag)
 
     def __str__(self):
-        return f'"{self.title}" by {self.original_poster.username}'
+        return f'"{self.title}"'
 
 
 class Session(TimeStampedModel):
@@ -36,4 +36,4 @@ class Session(TimeStampedModel):
     participants = models.ManyToManyField(to=User)
 
     def __str__(self):
-        return f'Session for "{self.question.title}" by {self.question.original_poster.username}'
+        return f'Session for "{self.question.title}"'

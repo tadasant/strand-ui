@@ -31,7 +31,7 @@ class SlackUser(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.real_name or self.name} from {self.slack_team.name}'
+        return f'{self.real_name or self.name}'
 
 
 class SlackTeamInstallation(TimeStampedModel):
@@ -54,7 +54,7 @@ class SlackChannel(TimeStampedModel):
     session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'#{self.name} on {self.slack_team.name}'
+        return f'#{self.name}'
 
 
 class SlackEvent(TimeStampedModel):

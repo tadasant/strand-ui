@@ -2,5 +2,14 @@ from django.contrib import admin
 
 from app.discussions.models import Message, Reply
 
-admin.site.register(Message)
-admin.site.register(Reply)
+
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('time', 'author', 'session')
+
+
+class ReplyAdmin(admin.ModelAdmin):
+    list_display = ('time', 'author', 'message')
+
+
+admin.site.register(Message, admin_class=MessageAdmin)
+admin.site.register(Reply, admin_class=ReplyAdmin)

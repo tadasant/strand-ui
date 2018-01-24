@@ -14,7 +14,7 @@ class Message(TimeStampedModel):
     origin_slack_event = models.ForeignKey(to=SlackEvent, on_delete=models.CASCADE, related_name='message', null=True)
 
     def __str__(self):
-        return f'Message by {self.author.username}'
+        return f'Message on {self.time}'
 
 
 class Reply(TimeStampedModel):
@@ -28,4 +28,4 @@ class Reply(TimeStampedModel):
         verbose_name_plural = 'Replies'
 
     def __str__(self):
-        return f'Reply by {self.author.name}'
+        return f'Reply on {self.time}'
