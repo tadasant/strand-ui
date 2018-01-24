@@ -1,6 +1,6 @@
 import graphene
 
-from app.groups.models import Group
+from app.groups.serializers import GroupSerializer
 from app.groups.types import GroupType, GroupInputType
 
 
@@ -14,7 +14,10 @@ class CreateGroupMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        group = Group.objects.create(**input)
+        group_serializer = GroupSerializer(data=input)
+        group_serializer.is_valid(raise_exception=True)
+        group = group_serializer.save()
+
         return CreateGroupMutation(group=group)
 
 
