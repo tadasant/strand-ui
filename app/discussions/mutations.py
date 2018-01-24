@@ -19,9 +19,9 @@ class CreateMessageMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        message_serializer = MessageValidator(data=input)
-        message_serializer.is_valid(raise_exception=True)
-        message = message_serializer.save()
+        message_validator = MessageValidator(data=input)
+        message_validator.is_valid(raise_exception=True)
+        message = message_validator.save()
         return CreateMessageMutation(message=message)
 
 
@@ -35,9 +35,9 @@ class CreateReplyMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        reply_serializer = ReplyValidator(data=input)
-        reply_serializer.is_valid(raise_exception=True)
-        reply = reply_serializer.save()
+        reply_validator = ReplyValidator(data=input)
+        reply_validator.is_valid(raise_exception=True)
+        reply = reply_validator.save()
         return CreateReplyMutation(reply=reply)
 
 
