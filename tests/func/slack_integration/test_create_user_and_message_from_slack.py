@@ -15,7 +15,7 @@ class TestCreateUserAndMessageFromSlack:
         mutation = f'''
           mutation {{
             createUserAndMessageFromSlack(input: {{slackUser: {{id: "{slack_user.id}",
-                                                                name: "{slack_user.name}"
+                                                                name: "{slack_user.name}",
                                                                 firstName: "{slack_user.first_name}",
                                                                 lastName: "{slack_user.last_name}",
                                                                 realName: "{slack_user.real_name}",
@@ -55,7 +55,7 @@ class TestCreateUserAndMessageFromSlack:
         mutation = f'''
           mutation {{
             createUserAndMessageFromSlack(input: {{slackUser: {{id: "{slack_user.id}",
-                                                                name: "{slack_user.name}"
+                                                                name: "{slack_user.name}",
                                                                 firstName: "{slack_user.first_name}",
                                                                 lastName: "{slack_user.last_name}",
                                                                 realName: "{slack_user.real_name}",
@@ -94,7 +94,7 @@ class TestCreateUserAndMessageFromSlack:
         mutation = f'''
           mutation {{
             createUserAndMessageFromSlack(input: {{slackUser: {{id: "{slack_user.id}",
-                                                                name: "{slack_user.name}"
+                                                                name: "{slack_user.name}",
                                                                 firstName: "{slack_user.first_name}",
                                                                 lastName: "{slack_user.last_name}",
                                                                 realName: "{slack_user.real_name}",
@@ -134,7 +134,7 @@ class TestCreateUserAndMessageFromSlack:
         mutation = f'''
           mutation {{
             createUserAndMessageFromSlack(input: {{slackUser: {{id: "{slack_user.id}",
-                                                                name: "{slack_user.name}"
+                                                                name: "{slack_user.name}",
                                                                 firstName: "{slack_user.first_name}",
                                                                 lastName: "{slack_user.last_name}",
                                                                 realName: "{slack_user.real_name}",
@@ -174,7 +174,7 @@ class TestCreateUserAndMessageFromSlack:
         mutation = f'''
           mutation {{
             createUserAndMessageFromSlack(input: {{slackUser: {{id: "{slack_user.id}",
-                                                                name: "{slack_user.name}"
+                                                                name: "{slack_user.name}",
                                                                 firstName: "{slack_user.first_name}",
                                                                 lastName: "{slack_user.last_name}",
                                                                 realName: "{slack_user.real_name}",
