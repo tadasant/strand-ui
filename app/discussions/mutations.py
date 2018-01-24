@@ -1,6 +1,7 @@
 import graphene
 
 from app.discussions.models import Message, Reply
+from app.discussions.serializers import MessageSerializer, ReplySerializer
 from app.discussions.types import (
     MessageType,
     ReplyType,
@@ -19,7 +20,9 @@ class CreateMessageMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        message = Message.objects.create(**input)
+        message_serializer = MessageSerializer(data=input)
+        message_serializer.is_valid(raise_exception=True)
+        message = message_serializer.save()
         return CreateMessageMutation(message=message)
 
 
@@ -33,7 +36,9 @@ class CreateReplyMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        reply = Reply.objects.create(**input)
+        reply_serializer = ReplySerializer(data=input)
+        reply_serializer.is_valid(raise_exception=True)
+        reply = reply_serializer.save()
         return CreateReplyMutation(reply=reply)
 
 
