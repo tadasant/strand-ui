@@ -13,7 +13,7 @@ class TestSolveQuestion:
 
         mutation = f'''
           mutation {{
-            solveQuestion(input: {{questionId: {question.id},
+            solveQuestion(input: {{id: {question.id},
                                    solverId: {solver.id},
                                    timeEnd: "{time_end}"}}) {{
               question {{
@@ -43,7 +43,7 @@ class TestSolveQuestion:
 
         mutation = f'''
           mutation {{
-            solveQuestion(input: {{questionId: 1,
+            solveQuestion(input: {{id: 1,
                                    solverId: {solver.id},
                                    timeEnd: "{time_end}"}}) {{
               question {{
@@ -61,7 +61,7 @@ class TestSolveQuestion:
 
         assert response.status_code == 200
         assert response.json()['data']['solveQuestion'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Question Id'
+        assert response.json()['errors'][0]['message'] == 'Question matching query does not exist.'
 
     @pytest.mark.django_db
     def test_invalid_user(self, auth_client, user_factory, question_factory, session_factory):
@@ -72,7 +72,7 @@ class TestSolveQuestion:
 
         mutation = f'''
           mutation {{
-            solveQuestion(input: {{questionId: {question.id},
+            solveQuestion(input: {{id: {question.id},
                                    solverId: 1,
                                    timeEnd: "{time_end}"}}) {{
               question {{
@@ -90,7 +90,7 @@ class TestSolveQuestion:
 
         assert response.status_code == 200
         assert response.json()['data']['solveQuestion'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid User Id'
+        assert response.json()['errors'][0]['message'] == "{'solver_id': ['Invalid pk \"1\" - object does not exist.']}"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, user_factory, question_factory, session_factory):
@@ -102,7 +102,7 @@ class TestSolveQuestion:
 
         mutation = f'''
           mutation {{
-            solveQuestion(input: {{questionId: {question.id},
+            solveQuestion(input: {{id: {question.id},
                                    solverId: {solver.id},
                                    timeEnd: "{time_end}"}}) {{
               question {{

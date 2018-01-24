@@ -25,6 +25,14 @@ class Question(TimeStampedModel):
 
     tags = models.ManyToManyField(to=Tag)
 
+    def solve(self, time_end):
+        self.is_solved = True
+        self.save()
+
+        self.session.time_end = time_end
+        self.session.save()
+        return self.session
+
     def __str__(self):
         return f'"{self.title}"'
 
