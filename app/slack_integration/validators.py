@@ -34,11 +34,6 @@ class SlackUserValidator(serializers.ModelSerializer):
                            'slack_team_id', 'user_id')
 
 
-class SlackEventValidator(serializers.ModelSerializer):
-    class Meta:
-        model = SlackEvent
-
-
 class SlackChannelValidator(serializers.ModelSerializer):
     slack_team_id = serializers.PrimaryKeyRelatedField(queryset=SlackTeam.objects.all(), source='slack_team')
     session_id = serializers.PrimaryKeyRelatedField(queryset=Session.objects.all(), source='session')

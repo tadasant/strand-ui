@@ -28,7 +28,7 @@ class QuestionValidator(serializers.ModelSerializer):
         tags_data = validated_data.pop('tags', [])
         question = Question.objects.create(**validated_data)
         for tag_data in tags_data:
-            tag, created = Tag.objects.get_or_create(**tag_data)
+            tag, _ = Tag.objects.get_or_create(**tag_data)
             question.tags.add(tag)
         return question
 
