@@ -1,7 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from app.questions.types import SessionInputType
+from app.questions.types import SessionInputType, TagInputType
 from app.slack_integration.models import (
     SlackChannel,
     SlackEvent,
@@ -132,3 +132,21 @@ class UserAndMessageFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String(required=True)
     text = graphene.String(required=True)
     time = graphene.String(required=True)
+
+
+class QuestionFromSlackInputType(graphene.InputObjectType):
+    title = graphene.String(required=True)
+    description = graphene.String(required=True)
+    is_solved = graphene.Boolean()
+    is_anonymous = graphene.Boolean()
+    original_poster_slack_user_id = graphene.String(required=True)
+    tags = graphene.List(TagInputType)
+
+
+class UserAndQuestionFromSlackInputType(graphene.InputObjectType):
+    title = graphene.String(required=True)
+    description = graphene.String(required=True)
+    is_solved = graphene.Boolean()
+    is_anonymous = graphene.Boolean()
+    original_poster_slack_user = graphene.Field(UserFromSlackInputType)
+    tags = graphene.List(TagInputType)
