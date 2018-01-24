@@ -1,6 +1,5 @@
 import graphene
 
-from app.discussions.models import Message, Reply
 from app.discussions.serializers import MessageSerializer, ReplySerializer
 from app.discussions.types import (
     MessageType,
