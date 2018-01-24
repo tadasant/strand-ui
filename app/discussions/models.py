@@ -13,6 +13,9 @@ class Message(TimeStampedModel):
     time = models.DateTimeField()
     origin_slack_event = models.ForeignKey(to=SlackEvent, on_delete=models.CASCADE, related_name='message', null=True)
 
+    def __str__(self):
+        return f'Message on {self.time}'
+
 
 class Reply(TimeStampedModel):
     text = models.TextField()
@@ -23,3 +26,6 @@ class Reply(TimeStampedModel):
 
     class Meta:
         verbose_name_plural = 'Replies'
+
+    def __str__(self):
+        return f'Reply on {self.time}'

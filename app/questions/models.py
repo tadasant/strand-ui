@@ -9,6 +9,9 @@ from app.groups.models import Group
 class Tag(TimeStampedModel):
     name = models.CharField(max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Question(TimeStampedModel):
     title = models.CharField(max_length=255)
@@ -22,9 +25,15 @@ class Question(TimeStampedModel):
 
     tags = models.ManyToManyField(to=Tag)
 
+    def __str__(self):
+        return f'"{self.title}"'
+
 
 class Session(TimeStampedModel):
     time_start = models.DateTimeField(default=timezone.now)
     time_end = models.DateTimeField(null=True)
     question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
     participants = models.ManyToManyField(to=User)
+
+    def __str__(self):
+        return f'Session for "{self.question.title}"'
