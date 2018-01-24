@@ -40,23 +40,23 @@ def create_users_and_slack_users(client, group, slack_team):
     users_info = response.get('members')
     for user_info in users_info:
         user, created = User.objects.get_or_create(email=user_info['profile'].get('email'),
-                                                   defaults=dict(username=(user_info['profile'].get('display_name')
-                                                                           or user_info.get('name')),
+                                                   defaults=dict(username=(user_info['profile'].get('display_name') or
+                                                                           user_info.get('name')),
                                                                  first_name=user_info['profile'].get('first_name'),
                                                                  last_name=user_info['profile'].get('last_name'),
                                                                  avatar_url=user_info['profile'].get('image_72')))
-        slack_user = SlackUser.objects.create(id=user_info.get('id'),
-                                              name=user_info.get('name'),
-                                              first_name=user_info['profile'].get('first_name'),
-                                              last_name=user_info['profile'].get('last_name'),
-                                              real_name=user_info.get('real_name', ''),
-                                              display_name=user_info['profile'].get('display_name'),
-                                              email=user_info['profile'].get('email'),
-                                              avatar_72=user_info['profile'].get('image_72'),
-                                              is_bot=user_info.get('is_bot'),
-                                              is_admin=user_info.get('is_admin', False),
-                                              slack_team=slack_team,
-                                              user=user)
+        SlackUser.objects.create(id=user_info.get('id'),
+                                 name=user_info.get('name'),
+                                 first_name=user_info['profile'].get('first_name'),
+                                 last_name=user_info['profile'].get('last_name'),
+                                 real_name=user_info.get('real_name', ''),
+                                 display_name=user_info['profile'].get('display_name'),
+                                 email=user_info['profile'].get('email'),
+                                 avatar_72=user_info['profile'].get('image_72'),
+                                 is_bot=user_info.get('is_bot'),
+                                 is_admin=user_info.get('is_admin', False),
+                                 slack_team=slack_team,
+                                 user=user)
         group.members.add(user)
 
 
