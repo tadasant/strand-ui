@@ -114,6 +114,23 @@ class UserFromSlackInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
 
 
+class UserAndMessageFromSlackInputType(graphene.InputObjectType):
+    slack_user = graphene.Field(UserFromSlackInputType)
+    origin_slack_event_ts = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
+
+
+class UserAndReplyFromSlackInputType(graphene.InputObjectType):
+    slack_user = graphene.Field(UserFromSlackInputType)
+    message_origin_slack_event_ts = graphene.String(required=True)
+    origin_slack_event_ts = graphene.String(required=True)
+    slack_channel_id = graphene.String(required=True)
+    text = graphene.String(required=True)
+    time = graphene.String(required=True)
+
+
 class GroupFromSlackInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     slack_team_name = graphene.String(required=True)
@@ -124,14 +141,6 @@ class SolveQuestionFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String()
     slack_user_id = graphene.String()
     time_end = graphene.String()
-
-
-class UserAndMessageFromSlackInputType(graphene.InputObjectType):
-    slack_user = graphene.Field(UserFromSlackInputType)
-    origin_slack_event_ts = graphene.String(required=True)
-    slack_channel_id = graphene.String(required=True)
-    text = graphene.String(required=True)
-    time = graphene.String(required=True)
 
 
 class QuestionFromSlackInputType(graphene.InputObjectType):
