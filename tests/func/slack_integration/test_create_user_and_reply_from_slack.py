@@ -1,0 +1,317 @@
+import pytest
+
+
+class TestCreateUserAndReplyFromSlack:
+
+    @pytest.mark.django_db
+    def test_unauthenticated(self, client, message_factory, reply_factory, slack_event_factory,
+                             session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory(session=session)
+        message_slack_event = slack_event_factory()
+        message = message_factory(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                id
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack'] is None
+        assert response.json()['errors'][0]['message'] == 'Unauthorized'
+
+    @pytest.mark.django_db
+    def test_invalid_slack_user(self, auth_client, message_factory, reply_factory, slack_event_factory,
+                                session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory.build(session=session)
+        message_slack_event = slack_event_factory()
+        message = message_factory(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                email
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack'] is None
+        assert response.json()['errors'][0]['message'] == 'Slack User already exists'
+
+    @pytest.mark.django_db
+    def test_invalid_slack_team(self, auth_client, message_factory, reply_factory, slack_event_factory,
+                                session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory.build(session=session)
+        message_slack_event = slack_event_factory()
+        message = message_factory(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory.build()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                email
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack'] is None
+        assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
+
+    @pytest.mark.django_db
+    def test_invalid_slack_channel(self, auth_client, message_factory, reply_factory, slack_event_factory,
+                                   session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory.build(session=session)
+        message_slack_event = slack_event_factory()
+        message = message_factory(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                email
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack'] is None
+        assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
+
+    @pytest.mark.django_db
+    def test_invalid_message(self, auth_client, message_factory, reply_factory, slack_event_factory,
+                             session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory(session=session)
+        message_slack_event = slack_event_factory.build()
+        message = message_factory.build(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                email
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack'] is None
+        assert response.json()['errors'][0]['message'] == 'Invalid Message Origin Slack Event Ts'
+
+    @pytest.mark.django_db
+    def test_valid(self, auth_client, message_factory, reply_factory, slack_event_factory,
+                   session_factory, slack_channel_factory, slack_user_factory, slack_team_factory):
+        session = session_factory()
+        slack_channel = slack_channel_factory(session=session)
+        message_slack_event = slack_event_factory()
+        message = message_factory(origin_slack_event=message_slack_event, session=session)
+        slack_team = slack_team_factory()
+        slack_user = slack_user_factory.build(slack_team=slack_team)
+        reply_slack_event = slack_event_factory.build()
+        reply = reply_factory.build(origin_slack_event=reply_slack_event, message=message)
+
+        mutation = f'''
+          mutation {{
+            createUserAndReplyFromSlack(input: {{slackUser: {{
+                                                   id: "{slack_user.id}",
+                                                   name: "{slack_user.name}",
+                                                   firstName: "{slack_user.first_name}",
+                                                   lastName: "{slack_user.last_name}",
+                                                   realName: "{slack_user.real_name}",
+                                                   displayName: "{slack_user.display_name}",
+                                                   email: "{slack_user.email}",
+                                                   avatar72: "{slack_user.avatar_72}",
+                                                   isBot: {str(slack_user.is_bot).lower()},
+                                                   isAdmin: {str(slack_user.is_admin).lower()},
+                                                   slackTeamId: "{slack_user.slack_team.id}"
+                                                 }},
+                                                 messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
+                                                 originSlackEventTs: "{reply.origin_slack_event.ts}",
+                                                 slackChannelId: "{slack_channel.id}",
+                                                 text: "{reply.text}",
+                                                 time: "{reply.time}"}}) {{
+              slackUser {{
+                name
+              }}
+              user {{
+                email
+              }}
+              reply {{
+                message {{
+                  id
+                }}
+              }}
+            }}
+          }}
+        '''
+        response = auth_client.post('/graphql', {'query': mutation})
+
+        assert response.status_code == 200
+        assert response.json()['data']['createUserAndReplyFromSlack']['slackUser']['name'] == slack_user.name
+        assert response.json()['data']['createUserAndReplyFromSlack']['user']['email'] == slack_user.email
+        assert response.json()['data']['createUserAndReplyFromSlack']['reply']['message']['id'] == str(message.id)

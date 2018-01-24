@@ -33,7 +33,8 @@ from app.slack_integration.types import (
     SlackUserInputType,
     SolveQuestionFromSlackInputType,
     UserFromSlackInputType,
-    UserAndMessageFromSlackInputType
+    UserAndMessageFromSlackInputType,
+    UserAndReplyFromSlackInputType
 )
 from app.users.models import User
 from app.users.types import UserType
@@ -280,6 +281,54 @@ class CreateReplyFromSlackMutation(graphene.Mutation):
         return CreateReplyFromSlackMutation(slack_event=slack_event, reply=reply)
 
 
+class CreateUserAndReplyFromSlackMutation(graphene.Mutation):
+    class Arguments:
+        input = UserAndReplyFromSlackInputType(required=True)
+
+    user = graphene.Field(UserType)
+    slack_user = graphene.Field(SlackUserType)
+    reply = graphene.Field(ReplyType)
+
+    def mutate(self, info, input):
+        if not info.context.user.is_authenticated:
+            raise Exception('Unauthorized')
+
+        if SlackUser.objects.filter(pk=input['slack_user']['id']).exists():
+            raise Exception('Slack User already exists')
+
+        if not SlackTeam.objects.filter(pk=input['slack_user']['slack_team_id']).exists():
+            raise Exception('Invalid Slack Team Id')
+
+        if not SlackChannel.objects.filter(pk=input['slack_channel_id']).exists():
+            raise Exception('Invalid Slack Channel Id')
+
+        if not Message.objects.filter(origin_slack_event__ts=input['message_origin_slack_event_ts'],
+                                      session__slackchannel__id=input['slack_channel_id']).exists():
+            raise Exception('Invalid Message Origin Slack Event Ts')
+
+        slack_user_input = input.pop('slack_user')
+        slack_team = SlackTeam.objects.get(pk=slack_user_input['slack_team_id'])
+        user, created = User.objects.get_or_create(email=slack_user_input['email'],
+                                                   defaults=dict(username=slack_user_input.get('display_name') or
+                                                                 slack_user_input.get('name'),
+                                                                 first_name=slack_user_input.get('first_name'),
+                                                                 last_name=slack_user_input.get('last_name'),
+                                                                 avatar_url=input.get('avatar_72')))
+        slack_team.group.members.add(user)
+        slack_user = SlackUser.objects.create(**slack_user_input, user=user)
+
+        ts = input.pop('origin_slack_event_ts')
+        slack_event = SlackEvent.objects.create(ts=ts)
+
+        message = Message.objects.get(origin_slack_event__ts=input['message_origin_slack_event_ts'],
+                                      session__slackchannel__id=input['slack_channel_id'])
+        reply = Reply.objects.create(text=input['text'], message=message, author=user,
+                                     time=input['time'], origin_slack_event=slack_event)
+        message.session.participants.add(user)
+
+        return CreateUserAndReplyFromSlackMutation(user=user, slack_user=slack_user, reply=reply)
+
+
 class CreateSessionFromSlackMutation(graphene.Mutation):
     class Arguments:
         input = SessionFromSlackInputType(required=True)
@@ -390,9 +439,10 @@ class Mutation(graphene.ObjectType):
         UpdateSlackTeamInstallationHelpChannelAndActivateMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
-    create_reply_from_slack = CreateReplyFromSlackMutation.Field()
-
     create_user_and_message_from_slack = CreateUserAndMessageFromSlackMutation.Field()
+
+    create_reply_from_slack = CreateReplyFromSlackMutation.Field()
+    create_user_and_reply_from_slack = CreateUserAndReplyFromSlackMutation.Field()
 
     create_session_from_slack = CreateSessionFromSlackMutation.Field()
 
