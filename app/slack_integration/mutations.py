@@ -26,7 +26,7 @@ from app.slack_integration.types import (
     SlackEventType,
     SlackTeamType,
     SlackTeamInputType,
-    SlackTeamInstallationHelpChannelInputType,
+    SlackTeamInstallationHelpChannelAndActivateInputType,
     SlackTeamInstallationType,
     SlackTeamInstallationInputType,
     SlackUserType,
@@ -98,9 +98,9 @@ class CreateSlackTeamInstallationMutation(graphene.Mutation):
         return CreateSlackTeamInstallationMutation(slack_team_installation=slack_team_installation)
 
 
-class UpdateSlackTeamInstallationHelpChannelMutation(graphene.Mutation):
+class UpdateSlackTeamInstallationHelpChannelAndActivateMutation(graphene.Mutation):
     class Arguments:
-        input = SlackTeamInstallationHelpChannelInputType(required=True)
+        input = SlackTeamInstallationHelpChannelAndActivateInputType(required=True)
 
     slack_team_installation = graphene.Field(SlackTeamInstallationType)
 
@@ -113,9 +113,11 @@ class UpdateSlackTeamInstallationHelpChannelMutation(graphene.Mutation):
 
         slack_team_installation = SlackTeamInstallation.objects.get(slack_team__id=input['slack_team_id'])
         slack_team_installation.help_channel_id = input['help_channel_id']
+        slack_team_installation.is_active = True
         slack_team_installation.save()
 
-        return UpdateSlackTeamInstallationHelpChannelMutation(slack_team_installation=slack_team_installation)
+        return UpdateSlackTeamInstallationHelpChannelAndActivateMutation(
+            slack_team_installation=slack_team_installation)
 
 
 class CreateMessageFromSlackMutation(graphene.Mutation):
@@ -341,7 +343,8 @@ class Mutation(graphene.ObjectType):
     create_slack_channel = CreateSlackChannelMutation.Field()
 
     create_slack_team_installation = CreateSlackTeamInstallationMutation.Field()
-    update_slack_team_installation_help_channel = UpdateSlackTeamInstallationHelpChannelMutation.Field()
+    update_slack_team_installation_help_channel_and_activate = \
+        UpdateSlackTeamInstallationHelpChannelAndActivateMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
     create_reply_from_slack = CreateReplyFromSlackMutation.Field()
