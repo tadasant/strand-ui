@@ -5,14 +5,13 @@ from slackclient import SlackClient
 
 from app.groups.models import Group
 from app.groups.types import GroupType
-from app.discussions.models import Message, Reply
+from app.discussions.models import Message
 from app.discussions.types import MessageType, ReplyType
 from app.discussions.validators import MessageValidator, ReplyValidator
-from app.questions.models import Question, Session, Tag
+from app.questions.models import Question, Session
 from app.questions.types import SessionType, QuestionType
 from app.questions.validators import QuestionValidator, SessionValidator
 from app.slack_integration.models import (
-    SlackChannel,
     SlackEvent,
     SlackTeamInstallation,
     SlackTeam,

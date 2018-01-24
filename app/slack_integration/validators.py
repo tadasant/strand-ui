@@ -7,7 +7,6 @@ from app.questions.models import Session
 from app.slack_integration.models import (
     SlackTeam,
     SlackUser,
-    SlackEvent,
     SlackChannel,
     SlackTeamInstallation
 )
