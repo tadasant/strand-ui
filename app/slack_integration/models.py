@@ -44,6 +44,10 @@ class SlackTeamInstallation(TimeStampedModel):
     help_channel_id = models.CharField(max_length=255, null=True)
     is_active = models.BooleanField(default=False)
 
+    def activate(self):
+        self.is_active = True
+        self.save()
+
     def __str__(self):
         return f'Installation for {self.slack_team.name}'
 

@@ -38,7 +38,12 @@ from app.slack_integration.types import (
     UserAndQuestionFromSlackInputType,
     UserAndReplyFromSlackInputType
 )
-from app.slack_integration.validators import SlackUserValidator, SlackChannelValidator
+from app.slack_integration.validators import (
+    SlackChannelValidator,
+    SlackTeamValidator,
+    SlackTeamInstallationValidator,
+    SlackUserValidator
+)
 from app.users.models import User
 from app.users.types import UserType
 
@@ -142,10 +147,9 @@ class CreateSlackTeamInstallationMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not SlackTeam.objects.filter(pk=input.slack_team_id).exists():
-            raise Exception('Invalid Slack Team Id')
-
-        slack_team_installation = SlackTeamInstallation.objects.create(**input)
+        slack_team_installation_validator = SlackTeamInstallationValidator(data=input)
+        slack_team_installation_validator.is_valid(raise_exception=True)
+        slack_team_installation = slack_team_installation_validator.save()
 
         return CreateSlackTeamInstallationMutation(slack_team_installation=slack_team_installation)
 
@@ -160,13 +164,13 @@ class UpdateSlackTeamInstallationHelpChannelAndActivateMutation(graphene.Mutatio
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if not SlackTeamInstallation.objects.filter(slack_team__id=input['slack_team_id']).exists():
-            raise Exception('Invalid Slack Team Id')
-
-        slack_team_installation = SlackTeamInstallation.objects.get(slack_team__id=input['slack_team_id'])
-        slack_team_installation.help_channel_id = input['help_channel_id']
-        slack_team_installation.is_active = True
-        slack_team_installation.save()
+        slack_team_installation = SlackTeamInstallation.objects.get(slack_team__id=input.pop('slack_team_id'))
+        slack_team_installation_validator = SlackTeamInstallationValidator(slack_team_installation,
+                                                                           data=input,
+                                                                           partial=True)
+        slack_team_installation_validator.is_valid(raise_exception=True)
+        slack_team_installation = slack_team_installation_validator.save()
+        slack_team_installation.activate()
 
         return UpdateSlackTeamInstallationHelpChannelAndActivateMutation(
             slack_team_installation=slack_team_installation)
@@ -383,12 +387,11 @@ class CreateGroupFromSlackMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        if SlackTeam.objects.filter(pk=input['slack_team_id']).exists():
-            raise Exception(f'''Slack Team with id {input['slack_team_id']} already exists''')
-
-        group_name = input.pop('group_name')
-        group, created = Group.objects.get_or_create(name=group_name)
-        slack_team = SlackTeam.objects.create(id=input['slack_team_id'], name=input['slack_team_name'], group=group)
+        group, created = Group.objects.get_or_create(name=input.get('group_name'))
+        slack_team_validator = SlackTeamValidator(data=dict(id=input['slack_team_id'], name=input['slack_team_name'],
+                                                            group_id=group.id))
+        slack_team_validator.is_valid(raise_exception=True)
+        slack_team = slack_team_validator.save()
 
         return CreateGroupFromSlackMutation(group=group, slack_team=slack_team)
 

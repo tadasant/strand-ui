@@ -44,7 +44,7 @@ class TestUpdateSlackTeamInstallationHelpChannelAndActivate:
 
         assert response.status_code == 200
         assert response.json()['data']['updateSlackTeamInstallationHelpChannelAndActivate'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
+        assert response.json()['errors'][0]['message'] == 'SlackTeamInstallation matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_team_installation_factory):
