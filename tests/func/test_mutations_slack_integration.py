@@ -330,8 +330,8 @@ class TestCreateSlackTeamInstallation:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackTeamInstallation']['slackTeamInstallation']['accessToken'] ==\
-            slack_team_installation.access_token
+        assert response.json()['data']['createSlackTeamInstallation']['slackTeamInstallation']['accessToken'] == \
+               slack_team_installation.access_token
 
 
 class TestCreateMessageFromSlack:
@@ -465,7 +465,7 @@ class TestCreateMessageFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
-            str(slack_user.user.id)
+               str(slack_user.user.id)
         assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
         assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == slack_event.ts
         assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
@@ -668,9 +668,9 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack']['reply']['originSlackEvent']['ts'] == \
-            reply_slack_event.ts
+               reply_slack_event.ts
         assert response.json()['data']['createReplyFromSlack']['reply']['message']['author']['id'] == \
-            str(message.author.id)
+               str(message.author.id)
         assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createReplyFromSlack']['reply'][
             'message']['session']['participants']
 
@@ -1048,7 +1048,7 @@ class TestCreateSlackTeam:
         assert response.json()['data']['createSlackTeam']['slackTeam']['name'] == 'Clippy Sandbox'
 
 
-class TestUpdateSlackTeamInstallationHelpChannel:
+class TestUpdateSlackTeamInstallationHelpChannelAndActivate:
 
     @pytest.mark.django_db
     def test_unauthenticated(self, client, slack_team_installation_factory):
@@ -1057,8 +1057,8 @@ class TestUpdateSlackTeamInstallationHelpChannel:
 
         mutation = f'''
           mutation {{
-            updateSlackTeamInstallationHelpChannel(input: {{slackTeamId: "{slack_team_installation.slack_team_id}",
-                                                            helpChannelId: "{help_channel_id}"}}) {{
+            updateSlackTeamInstallationHelpChannelAndActivate(
+            input: {{slackTeamId: "{slack_team_installation.slack_team_id}", helpChannelId: "{help_channel_id}"}}) {{
               slackTeamInstallation {{
                 helpChannelId
               }}
@@ -1068,7 +1068,7 @@ class TestUpdateSlackTeamInstallationHelpChannel:
         response = client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['updateSlackTeamInstallationHelpChannel'] is None
+        assert response.json()['data']['updateSlackTeamInstallationHelpChannelAndActivate'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
@@ -1079,7 +1079,7 @@ class TestUpdateSlackTeamInstallationHelpChannel:
 
         mutation = f'''
           mutation {{
-            updateSlackTeamInstallationHelpChannel(input: {{slackTeamId: "{slack_team.id}",
+            updateSlackTeamInstallationHelpChannelAndActivate(input: {{slackTeamId: "{slack_team.id}",
                                                             helpChannelId: "{help_channel_id}"}}) {{
               slackTeamInstallation {{
                 helpChannelId
@@ -1090,20 +1090,21 @@ class TestUpdateSlackTeamInstallationHelpChannel:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['updateSlackTeamInstallationHelpChannel'] is None
+        assert response.json()['data']['updateSlackTeamInstallationHelpChannelAndActivate'] is None
         assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_team_installation_factory):
-        slack_team_installation = slack_team_installation_factory(help_channel_id=None)
+        slack_team_installation = slack_team_installation_factory(help_channel_id=None, is_active=False)
         help_channel_id = slack_team_installation_factory.build().help_channel_id
 
         mutation = f'''
           mutation {{
-            updateSlackTeamInstallationHelpChannel(input: {{slackTeamId: "{slack_team_installation.slack_team_id}",
-                                                            helpChannelId: "{help_channel_id}"}}) {{
+            updateSlackTeamInstallationHelpChannelAndActivate(
+            input: {{slackTeamId: "{slack_team_installation.slack_team_id}", helpChannelId: "{help_channel_id}"}}) {{
               slackTeamInstallation {{
                 helpChannelId
+                isActive
               }}
             }}
           }}
@@ -1111,5 +1112,7 @@ class TestUpdateSlackTeamInstallationHelpChannel:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['updateSlackTeamInstallationHelpChannel']['slackTeamInstallation'][
-            'helpChannelId'] == help_channel_id
+        assert response.json()['data']['updateSlackTeamInstallationHelpChannelAndActivate']['slackTeamInstallation'][
+                   'helpChannelId'] == help_channel_id
+        assert response.json()['data']['updateSlackTeamInstallationHelpChannelAndActivate']['slackTeamInstallation'][
+            'isActive']

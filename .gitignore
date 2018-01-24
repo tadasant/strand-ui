@@ -1,6 +1,7 @@
 venv/
 *.pyc
 workspace.xml
+misc.xml
 *.iml
 db.config.json
 .cache/

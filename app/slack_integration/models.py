@@ -36,6 +36,7 @@ class SlackTeamInstallation(TimeStampedModel):
     bot_user_id = models.CharField(max_length=255)
     bot_access_token = models.CharField(max_length=255)
     help_channel_id = models.CharField(max_length=255, null=True)
+    is_active = models.BooleanField(default=False)
 
 
 class SlackChannel(TimeStampedModel):

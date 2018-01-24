@@ -162,3 +162,4 @@ class SlackTeamInstallationFactory(factory.DjangoModelFactory):
     bot_user_id = factory.Faker('md5')
     bot_access_token = factory.Faker('md5')
     help_channel_id = factory.Faker('md5')
+    is_active = factory.Faker('pybool')
