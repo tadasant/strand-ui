@@ -8,7 +8,7 @@ from app.groups.models import Group
 from app.discussions.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack_integration.models import SlackTeamInstallation, SlackChannel, SlackUser, SlackTeam, SlackEvent
+from app.slack_integration.models import SlackApplicationInstallation, SlackChannel, SlackEvent, SlackUser, SlackTeam
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -151,9 +151,9 @@ class SlackUserFactory(factory.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
 
 
-class SlackTeamInstallationFactory(factory.DjangoModelFactory):
+class SlackApplicationInstallationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = SlackTeamInstallation
+        model = SlackApplicationInstallation
 
     slack_team = factory.SubFactory(SlackTeamFactory)
     access_token = factory.Faker('md5')

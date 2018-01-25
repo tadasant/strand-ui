@@ -3909,8 +3909,8 @@
   "model": "slack_integration.slackevent",
   "pk": 232,
   "fields": {
-    "created": "2018-01-24T00:29:18.000Z",
-    "modified": "2018-01-24T00:29:18.000Z",
+    "created": "2018-01-24T00:29:18Z",
+    "modified": "2018-01-24T00:29:18Z",
     "ts": "1513773112.000354"
   }
 },
@@ -5538,8 +5538,8 @@
   "model": "slack_integration.slackevent",
   "pk": 413,
   "fields": {
-    "created": "2018-01-24T00:29:21.000Z",
-    "modified": "2018-01-24T00:29:21.000Z",
+    "created": "2018-01-24T00:29:21Z",
+    "modified": "2018-01-24T00:29:21Z",
     "ts": "1515510534.000710"
   }
 },

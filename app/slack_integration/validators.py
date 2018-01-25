@@ -5,10 +5,11 @@ from rest_framework import serializers
 from app.groups.models import Group
 from app.questions.models import Session
 from app.slack_integration.models import (
-    SlackTeam,
-    SlackUser,
+    SlackApplicationInstallation,
     SlackChannel,
-    SlackTeamInstallation
+    SlackTeam,
+    SlackUser
+
 )
 from app.users.models import User
 
@@ -42,12 +43,12 @@ class SlackChannelValidator(serializers.ModelSerializer):
         fields = ('id', 'name', 'slack_team_id', 'session_id')
 
 
-class SlackTeamInstallationValidator(serializers.ModelSerializer):
+class SlackApplicationInstallationValidator(serializers.ModelSerializer):
     slack_team_id = serializers.PrimaryKeyRelatedField(queryset=SlackTeam.objects.all(), source='slack_team')
     installer_id = serializers.PrimaryKeyRelatedField(queryset=SlackUser.objects.all(), source='installer')
 
     class Meta:
-        model = SlackTeamInstallation
+        model = SlackApplicationInstallation
         fields = ('slack_team_id', 'access_token', 'scope', 'installer_id', 'bot_user_id', 'bot_access_token',
                   'help_channel_id', 'is_active')
         required_fields = ('slack_team_id', 'access_token', 'scope', 'installer_id', 'bot_user_id', 'bot_access_token')

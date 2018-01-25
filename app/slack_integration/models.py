@@ -34,7 +34,7 @@ class SlackUser(TimeStampedModel):
         return f'{self.real_name or self.name}'
 
 
-class SlackTeamInstallation(TimeStampedModel):
+class SlackApplicationInstallation(TimeStampedModel):
     slack_team = models.OneToOneField(to=SlackTeam, on_delete=models.CASCADE, null=True)
     access_token = models.CharField(max_length=255)
     scope = models.CharField(max_length=255)

@@ -4,13 +4,13 @@ from app.slack_integration.models import (
     SlackUser,
     SlackChannel,
     SlackTeam,
-    SlackTeamInstallation,
+    SlackApplicationInstallation,
 )
 from app.slack_integration.types import (
     SlackUserType,
     SlackChannelType,
     SlackTeamType,
-    SlackTeamInstallationType,
+    SlackApplicationInstallationType,
 )
 
 
@@ -18,12 +18,12 @@ class Query(graphene.ObjectType):
     slack_user = graphene.Field(SlackUserType, id=graphene.String())
     slack_channel = graphene.Field(SlackChannelType, id=graphene.String())
     slack_team = graphene.Field(SlackTeamType, id=graphene.String())
-    slack_team_installation = graphene.Field(SlackTeamInstallationType, id=graphene.Int())
+    slack_application_installation = graphene.Field(SlackApplicationInstallationType, id=graphene.Int())
 
     slack_users = graphene.List(SlackUserType)
     slack_channels = graphene.List(SlackChannelType)
     slack_teams = graphene.List(SlackTeamType)
-    slack_team_installations = graphene.List(SlackTeamInstallationType)
+    slack_application_installations = graphene.List(SlackApplicationInstallationType)
 
     def resolve_slack_user(self, info, id=None):
         if id is not None:
@@ -43,9 +43,9 @@ class Query(graphene.ObjectType):
 
         return None
 
-    def resolve_slack_team_installation(self, info, id=None):
+    def resolve_slack_application_installation(self, info, id=None):
         if id is not None:
-            return SlackTeamInstallation.objects.get(pk=id)
+            return SlackApplicationInstallation.objects.get(pk=id)
 
         return None
 
@@ -58,5 +58,5 @@ class Query(graphene.ObjectType):
     def resolve_slack_teams(self, info):
         return SlackTeam.objects.all()
 
-    def resolve_slack_team_installations(self, info):
-        return SlackTeamInstallation.objects.all()
+    def resolve_slack_application_installations(self, info):
+        return SlackApplicationInstallation.objects.all()
