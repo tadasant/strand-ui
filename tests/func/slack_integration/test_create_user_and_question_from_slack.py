@@ -100,7 +100,7 @@ class TestCreateUserAndQuestionFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createUserAndQuestionFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Slack User already exists'
+        assert response.json()['errors'][0]['message'] == "{'id': ['slack user with this id already exists.']}"
 
     @pytest.mark.django_db
     def test_invalid_slack_team(self, auth_client, question_factory, slack_user_factory, slack_team_factory,
@@ -150,7 +150,8 @@ class TestCreateUserAndQuestionFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createUserAndQuestionFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Team Id'
+        assert response.json()['errors'][0]['message'] == f"{{'slack_team_id': ['Invalid pk \"{slack_team.id}\" - " \
+                                                          "object does not exist.']}"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, question_factory, slack_user_factory, slack_team_factory, tag_factory):

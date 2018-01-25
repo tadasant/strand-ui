@@ -37,7 +37,7 @@ class TestCreateMessageFromSlack:
     def test_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory, user_factory,
                                 slack_user_factory, slack_event_factory, message_factory):
         session = session_factory()
-        slack_channel = slack_channel_factory.build(session=session)
+        slack_channel = slack_channel_factory(session=session)
         user = user_factory()
         slack_user = slack_user_factory.build(user=user)
 
@@ -62,7 +62,7 @@ class TestCreateMessageFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createMessageFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
+        assert response.json()['errors'][0]['message'] == 'User matching query does not exist.'
 
     @pytest.mark.django_db
     def test_invalid_slack_channel(self, auth_client, session_factory, slack_channel_factory, user_factory,
@@ -93,7 +93,7 @@ class TestCreateMessageFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createMessageFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
+        assert response.json()['errors'][0]['message'] == 'Session matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, session_factory, slack_channel_factory, user_factory,

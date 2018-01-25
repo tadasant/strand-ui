@@ -23,9 +23,13 @@ class CreateQuestionMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
+        tags = input.pop('tags', [])
+
         question_validator = QuestionValidator(data=input)
         question_validator.is_valid(raise_exception=True)
         question = question_validator.save()
+
+        question.add_or_create_tags(tags)
 
         return CreateQuestionMutation(question=question)
 
@@ -76,10 +80,12 @@ class SolveQuestionMutation(graphene.Mutation):
             raise Exception('Unauthorized')
 
         time_end = input.pop('time_end')
+
         question = Question.objects.get(pk=input['id'])
         question_validator = QuestionValidator(question, data=input, partial=True)
         question_validator.is_valid(raise_exception=True)
         question = question_validator.save()
+
         session = question.solve(time_end)
 
         return SolveQuestionMutation(question=question, session=session)

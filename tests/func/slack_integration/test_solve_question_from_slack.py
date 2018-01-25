@@ -65,7 +65,7 @@ class TestSolveQuestionFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['solveQuestionFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack Channel Id'
+        assert response.json()['errors'][0]['message'] == 'Question matching query does not exist.'
 
     @pytest.mark.django_db
     def test_invalid_slack_user(self, auth_client, user_factory, question_factory,
@@ -97,7 +97,7 @@ class TestSolveQuestionFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['solveQuestionFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Invalid Slack User Id'
+        assert response.json()['errors'][0]['message'] == 'User matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, user_factory, question_factory, session_factory,

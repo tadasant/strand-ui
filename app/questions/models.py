@@ -33,6 +33,11 @@ class Question(TimeStampedModel):
         self.session.save()
         return self.session
 
+    def add_or_create_tags(self, tags):
+        for tag_data in tags:
+            tag, _ = Tag.objects.get_or_create(**tag_data)
+            self.tags.add(tag)
+
     def __str__(self):
         return f'"{self.title}"'
 

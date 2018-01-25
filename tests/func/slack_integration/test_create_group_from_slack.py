@@ -49,7 +49,7 @@ class TestCreateGroupFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createGroupFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == f'Slack Team with id {slack_team.id} already exists'
+        assert response.json()['errors'][0]['message'] == "{'id': ['slack team with this id already exists.']}"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, group_factory, slack_team_factory):

@@ -65,7 +65,7 @@ class TestCreateUserFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createUserFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == f'Slack User with id {slack_user.id} already exists'
+        assert response.json()['errors'][0]['message'] == "{'id': ['slack user with this id already exists.']}"
 
     @pytest.mark.django_db
     def test_valid_and_gets_user(self, auth_client, slack_team_factory, user_factory, slack_user_factory):

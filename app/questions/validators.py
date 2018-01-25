@@ -17,20 +17,10 @@ class QuestionValidator(serializers.ModelSerializer):
     original_poster_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='original_poster')
     solver_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='solver', required=False)
     group_id = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all(), source='group')
-    tags = TagValidator(many=True, required=False)
 
     class Meta:
         model = Question
-        fields = ('title', 'description', 'is_solved', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id',
-                  'tags')
-
-    def create(self, validated_data):
-        tags_data = validated_data.pop('tags', [])
-        question = Question.objects.create(**validated_data)
-        for tag_data in tags_data:
-            tag, created = Tag.objects.get_or_create(**tag_data)
-            question.tags.add(tag)
-        return question
+        fields = ('title', 'description', 'is_solved', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id')
 
 
 class SessionValidator(serializers.ModelSerializer):
