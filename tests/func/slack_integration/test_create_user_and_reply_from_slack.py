@@ -33,8 +33,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}
@@ -85,8 +84,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}
@@ -137,8 +135,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}
@@ -190,8 +187,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}
@@ -242,8 +238,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}
@@ -294,8 +289,7 @@ class TestCreateUserAndReplyFromSlack:
                                                  messageOriginSlackEventTs: "{reply.message.origin_slack_event.ts}",
                                                  originSlackEventTs: "{reply.origin_slack_event.ts}",
                                                  slackChannelId: "{slack_channel.id}",
-                                                 text: "{reply.text}",
-                                                 time: "{reply.time}"}}) {{
+                                                 text: "{reply.text}"}}) {{
               slackUser {{
                 name
               }}

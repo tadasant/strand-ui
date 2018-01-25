@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.conf import settings
 import graphene
 import requests
@@ -188,7 +190,8 @@ class CreateMessageFromSlackMutation(graphene.Mutation):
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slack_users__id=input['slack_user_id'])
 
-        message_validator = MessageValidator(data=dict(text=input['text'], time=input['time'], session_id=session.id,
+        time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
+        message_validator = MessageValidator(data=dict(text=input['text'], time=time, session_id=session.id,
                                                        author_id=author.id, origin_slack_event_id=slack_event.id))
         message_validator.is_valid(raise_exception=True)
         message = message_validator.save()
@@ -224,7 +227,8 @@ class CreateUserAndMessageFromSlackMutation(graphene.Mutation):
         slack_event = SlackEvent.objects.create(ts=input.pop('origin_slack_event_ts'))
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
 
-        message_validator = MessageValidator(data=dict(text=input['text'], time=input['time'], session_id=session.id,
+        time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
+        message_validator = MessageValidator(data=dict(text=input['text'], time=time, session_id=session.id,
                                                        author_id=user.id, origin_slack_event_id=slack_event.id))
         message_validator.is_valid(raise_exception=True)
         message = message_validator.save()
@@ -250,8 +254,9 @@ class CreateReplyFromSlackMutation(graphene.Mutation):
                                       session__slackchannel__id=input['slack_channel_id'])
         author = User.objects.get(slack_users__id=input['slack_user_id'])
 
+        time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
         reply_validator = ReplyValidator(data=dict(text=input['text'], message_id=message.id, author_id=author.id,
-                                                   origin_slack_event_id=slack_event.id, time=input['time']))
+                                                   origin_slack_event_id=slack_event.id, time=time))
         reply_validator.is_valid(raise_exception=True)
         reply = reply_validator.save()
 
@@ -287,7 +292,8 @@ class CreateUserAndReplyFromSlackMutation(graphene.Mutation):
         message = Message.objects.get(origin_slack_event__ts=input['message_origin_slack_event_ts'],
                                       session__slackchannel__id=input['slack_channel_id'])
 
-        reply_validator = ReplyValidator(data=dict(text=input['text'], time=input['time'], author_id=user.id,
+        time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
+        reply_validator = ReplyValidator(data=dict(text=input['text'], time=time, author_id=user.id,
                                                    message_id=message.id, origin_slack_event_id=slack_event.id))
         reply_validator.is_valid(raise_exception=True)
         reply = reply_validator.save()
