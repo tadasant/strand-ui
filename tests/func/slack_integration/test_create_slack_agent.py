@@ -1,7 +1,7 @@
 import pytest
 
 
-class TestCreateSlackTeam:
+class TestCreateSlackAgent:
 
     @pytest.mark.django_db
     @pytest.mark.parametrize('slack_oauth_request', ['invalid_token'], indirect=True)
@@ -9,9 +9,11 @@ class TestCreateSlackTeam:
         code = '123456789012.123456789012.1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR'
         mutation = f'''
           mutation {{
-            createSlackTeam(input: {{code: "{code}"}}) {{
-              slackTeam {{
-                name
+            createSlackAgent(input: {{code: "{code}"}}) {{
+              slackAgent {{
+                slackTeam {{
+                  name
+                }}
               }}
             }}
           }}
@@ -26,13 +28,15 @@ class TestCreateSlackTeam:
         code = '123456789012.123456789012.1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR'
         mutation = f'''
           mutation {{
-            createSlackTeam(input: {{code: "{code}"}}) {{
-              slackTeam {{
-                name
+            createSlackAgent(input: {{code: "{code}"}}) {{
+              slackAgent {{
+                slackTeam {{
+                  name
+                }}
               }}
             }}
           }}
         '''
         response = client.post('/graphql', {'query': mutation})
         assert response.status_code == 200
-        assert response.json()['data']['createSlackTeam']['slackTeam']['name'] == 'Clippy Sandbox'
+        assert response.json()['data']['createSlackAgent']['slackAgent']['slackTeam']['name'] == 'Clippy Sandbox'

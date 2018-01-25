@@ -3,12 +3,18 @@ from graphene_django.types import DjangoObjectType
 
 from app.questions.types import SessionInputType, TagInputType
 from app.slack_integration.models import (
+    SlackAgent,
     SlackChannel,
     SlackEvent,
     SlackTeam,
     SlackApplicationInstallation,
     SlackUser
 )
+
+
+class SlackAgentType(DjangoObjectType):
+    class Meta:
+        model = SlackAgent
 
 
 class SlackChannelType(DjangoObjectType):
@@ -51,7 +57,7 @@ class SlackUserInputType(graphene.InputObjectType):
     user_id = graphene.Int(required=True)
 
 
-class SlackTeamInputType(graphene.InputObjectType):
+class SlackAgentInputType(graphene.InputObjectType):
     code = graphene.String(required=True)
 
 
@@ -62,16 +68,7 @@ class SlackChannelInputType(graphene.InputObjectType):
     session_id = graphene.Int(required=True)
 
 
-class SlackApplicationInstallationInputType(graphene.InputObjectType):
-    slack_team_id = graphene.String(required=True)
-    access_token = graphene.String(required=True)
-    scope = graphene.String(required=True)
-    installer_id = graphene.String(required=True)
-    bot_user_id = graphene.String(required=True)
-    bot_access_token = graphene.String(required=True)
-
-
-class SlackApplicationInstallationHelpChannelAndActivateInputType(graphene.InputObjectType):
+class SlackAgentHelpChannelAndActivateInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     help_channel_id = graphene.String(required=True)
 

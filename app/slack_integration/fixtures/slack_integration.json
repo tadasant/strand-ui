@@ -1,12 +1,23 @@
 [
 {
+  "model": "slack_integration.slackagent",
+  "pk": 1,
+  "fields": {
+    "created": "2018-01-25T19:36:15.525Z",
+    "modified": "2018-01-25T19:36:15.535Z",
+    "group": 11,
+    "status": "AUTHENTICATED",
+    "help_channel_id": null
+  }
+},
+{
   "model": "slack_integration.slackteam",
   "pk": "T8C26RNPN",
   "fields": {
     "created": "2018-01-24T00:29:57.807Z",
-    "modified": "2018-01-24T00:29:57.808Z",
+    "modified": "2018-01-25T19:36:27.620Z",
     "name": "CodeClippy",
-    "group": 11
+    "slack_agent": 1
   }
 },
 {

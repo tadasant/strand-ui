@@ -14,7 +14,7 @@ class CustomUserManager(UserManager):
         user.set_password(None)
         user.save(using=self._db)
 
-        slack_user.slack_team.group.members.add(user)
+        slack_user.slack_team.slack_agent.group.members.add(user)
 
         slack_user.user = user
         slack_user.save()
