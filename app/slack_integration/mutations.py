@@ -137,7 +137,8 @@ class UpdateSlackAgentHelpChannelAndActivateMutation(graphene.Mutation):
             raise Exception('Unauthorized')
 
         slack_agent = SlackAgent.objects.get(slack_team__id=input['slack_team_id'])
-        slack_agent.activate(input['help_channel_id'])
+        slack_agent.help_channel_id = input['help_channel_id']
+        slack_agent.activate()
 
         return UpdateSlackAgentHelpChannelAndActivateMutation(slack_agent=slack_agent)
 

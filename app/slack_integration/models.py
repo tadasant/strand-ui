@@ -29,11 +29,11 @@ class SlackAgent(TimeStampedModel):
         self.save()
 
     def activate(self, help_channel_id=None):
-        if help_channel_id:
-            self.help_channel_id = help_channel_id
-
-        self.status = 'ACTIVE'
-        self.save()
+        if self.help_channel_id:
+            self.status = 'ACTIVE'
+            self.save()
+        else:
+            raise Exception('Missing help channel id')
 
     def __str__(self):
         return f'Slack Agent for {self.group.name}'
@@ -72,7 +72,7 @@ class SlackApplicationInstallation(TimeStampedModel):
                                        related_name='slack_application_installation')
     access_token = models.CharField(max_length=255)
     scope = models.CharField(max_length=255)
-    installer = models.OneToOneField(to=SlackUser, on_delete=models.SET_NULL, null=True)
+    installer = models.OneToOneField(to=SlackUser, on_delete=models.CASCADE)
     bot_user_id = models.CharField(max_length=255)
     bot_access_token = models.CharField(max_length=255)
 
