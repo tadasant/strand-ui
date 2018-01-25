@@ -334,7 +334,7 @@ class CreateUserFromSlackMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        slack_user_validator = SlackUserValidator(data=input.pop('slack_user'), partial=True)
+        slack_user_validator = SlackUserValidator(data=input, partial=True)
         slack_user_validator.is_valid(raise_exception=True)
         slack_user = SlackUser(**slack_user_validator.validated_data)
 
@@ -404,7 +404,7 @@ class CreateUserAndQuestionFromSlackMutation(graphene.Mutation):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        slack_user_validator = SlackUserValidator(data=input.pop('slack_user'), partial=True)
+        slack_user_validator = SlackUserValidator(data=input.pop('original_poster_slack_user'), partial=True)
         slack_user_validator.is_valid(raise_exception=True)
         slack_user = SlackUser(**slack_user_validator.validated_data)
 

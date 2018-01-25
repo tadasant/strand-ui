@@ -157,7 +157,8 @@ class TestCreateUserAndReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createUserAndReplyFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'SlackTeam matching query does not exist.'
+        assert response.json()['errors'][0]['message'] == f"{{'slack_team_id': ['Invalid pk \"{slack_team.id}\" - " \
+                                                          "object does not exist.']}"
 
     @pytest.mark.django_db
     def test_invalid_slack_channel(self, auth_client, message_factory, reply_factory, slack_event_factory,
