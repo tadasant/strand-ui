@@ -6,7 +6,7 @@ from app.slack_integration.models import (
     SlackChannel,
     SlackEvent,
     SlackTeam,
-    SlackTeamInstallation,
+    SlackApplicationInstallation,
     SlackUser
 )
 
@@ -26,9 +26,9 @@ class SlackTeamType(DjangoObjectType):
         model = SlackTeam
 
 
-class SlackTeamInstallationType(DjangoObjectType):
+class SlackApplicationInstallationType(DjangoObjectType):
     class Meta:
-        model = SlackTeamInstallation
+        model = SlackApplicationInstallation
 
 
 class SlackUserType(DjangoObjectType):
@@ -62,7 +62,7 @@ class SlackChannelInputType(graphene.InputObjectType):
     session_id = graphene.Int(required=True)
 
 
-class SlackTeamInstallationInputType(graphene.InputObjectType):
+class SlackApplicationInstallationInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     access_token = graphene.String(required=True)
     scope = graphene.String(required=True)
@@ -71,7 +71,7 @@ class SlackTeamInstallationInputType(graphene.InputObjectType):
     bot_access_token = graphene.String(required=True)
 
 
-class SlackTeamInstallationHelpChannelAndActivateInputType(graphene.InputObjectType):
+class SlackApplicationInstallationHelpChannelAndActivateInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     help_channel_id = graphene.String(required=True)
 

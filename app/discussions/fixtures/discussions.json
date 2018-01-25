@@ -2837,8 +2837,8 @@
   "model": "discussions.message",
   "pk": 638,
   "fields": {
-    "created": "2018-01-24T00:30:02.000Z",
-    "modified": "2018-01-24T00:30:02.000Z",
+    "created": "2018-01-24T00:30:02Z",
+    "modified": "2018-01-24T00:30:02Z",
     "text": "```\nbody {\n    display: flex;\n    margin: 0;\n    text-align: center;\n    background: #424242;\n    flex-flow: row wrap;\n}\n\nheader {\n    font-family: Monoton, sans-serif;\n    font-size: 70px;\n    border-bottom: 2px solid black;\n    border-left: 2px solid black;\n    border-right: 2px solid black;\n    flex: 0 1 100%;\n}\n``` for anyone reading this in the future",
     "session": 34,
     "author": 112,

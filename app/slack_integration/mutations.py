@@ -12,8 +12,8 @@ from app.questions.models import Question, Session
 from app.questions.types import SessionType, QuestionType
 from app.questions.validators import QuestionValidator, SessionValidator
 from app.slack_integration.models import (
+    SlackApplicationInstallation,
     SlackEvent,
-    SlackTeamInstallation,
     SlackTeam,
     SlackUser
 )
@@ -23,14 +23,14 @@ from app.slack_integration.types import (
     QuestionFromSlackInputType,
     ReplyFromSlackInputType,
     SessionFromSlackInputType,
+    SlackApplicationInstallationHelpChannelAndActivateInputType,
+    SlackApplicationInstallationInputType,
+    SlackApplicationInstallationType,
     SlackChannelType,
     SlackChannelInputType,
     SlackEventType,
     SlackTeamType,
     SlackTeamInputType,
-    SlackTeamInstallationHelpChannelAndActivateInputType,
-    SlackTeamInstallationType,
-    SlackTeamInstallationInputType,
     SlackUserType,
     SlackUserInputType,
     SolveQuestionFromSlackInputType,
@@ -40,9 +40,9 @@ from app.slack_integration.types import (
     UserAndReplyFromSlackInputType
 )
 from app.slack_integration.validators import (
+    SlackApplicationInstallationValidator,
     SlackChannelValidator,
     SlackTeamValidator,
-    SlackTeamInstallationValidator,
     SlackUserValidator
 )
 from app.users.models import User
@@ -117,64 +117,60 @@ class CreateSlackTeamMutation(graphene.Mutation):
                                                            first_name=user_info.get('first_name', ''),
                                                            last_name=user_info.get('last_name', ''),
                                                            avatar_url=user_info['profile'].get('image_72')))
-        slack_user = SlackUser.objects.create(id=user_info['id'],
-                                              name=user_info.get('name'),
+        slack_user = SlackUser.objects.create(id=user_info['id'], name=user_info.get('name'),
                                               first_name=user_info.get('first_name', ''),
                                               last_name=user_info.get('last_name', ''),
                                               real_name=user_info.get('real_name'),
                                               display_name=user_info['profile'].get('display_name'),
                                               email=user_info['profile'].get('email'),
                                               avatar_72=user_info['profile'].get('image_72'),
-                                              is_bot=user_info.get('is_bot'),
-                                              is_admin=user_info.get('is_admin'),
-                                              slack_team=slack_team,
-                                              user=user)
-        SlackTeamInstallation.objects.create(slack_team=slack_team,
-                                             access_token=oauth_info['access_token'],
-                                             scope=oauth_info['scope'],
-                                             installer=slack_user,
-                                             bot_user_id=oauth_info['bot']['bot_user_id'],
-                                             bot_access_token=oauth_info['bot']['bot_access_token'])
+                                              is_bot=user_info.get('is_bot'), is_admin=user_info.get('is_admin'),
+                                              slack_team=slack_team, user=user)
+        SlackApplicationInstallation.objects.create(slack_team=slack_team, access_token=oauth_info['access_token'],
+                                                    scope=oauth_info['scope'], installer=slack_user,
+                                                    bot_user_id=oauth_info['bot']['bot_user_id'],
+                                                    bot_access_token=oauth_info['bot']['bot_access_token'])
         return CreateSlackTeamMutation(slack_team=slack_team)
 
 
-class CreateSlackTeamInstallationMutation(graphene.Mutation):
+class CreateSlackApplicationInstallationMutation(graphene.Mutation):
     class Arguments:
-        input = SlackTeamInstallationInputType(required=True)
+        input = SlackApplicationInstallationInputType(required=True)
 
-    slack_team_installation = graphene.Field(SlackTeamInstallationType)
+    slack_application_installation = graphene.Field(SlackApplicationInstallationType)
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        slack_team_installation_validator = SlackTeamInstallationValidator(data=input)
-        slack_team_installation_validator.is_valid(raise_exception=True)
-        slack_team_installation = slack_team_installation_validator.save()
+        slack_application_installation_validator = SlackApplicationInstallationValidator(data=input)
+        slack_application_installation_validator.is_valid(raise_exception=True)
+        slack_application_installation = slack_application_installation_validator.save()
 
-        return CreateSlackTeamInstallationMutation(slack_team_installation=slack_team_installation)
+        return CreateSlackApplicationInstallationMutation(slack_application_installation=slack_application_installation)
 
 
-class UpdateSlackTeamInstallationHelpChannelAndActivateMutation(graphene.Mutation):
+class UpdateSlackApplicationInstallationHelpChannelAndActivateMutation(graphene.Mutation):
     class Arguments:
-        input = SlackTeamInstallationHelpChannelAndActivateInputType(required=True)
+        input = SlackApplicationInstallationHelpChannelAndActivateInputType(required=True)
 
-    slack_team_installation = graphene.Field(SlackTeamInstallationType)
+    slack_application_installation = graphene.Field(SlackApplicationInstallationType)
 
     def mutate(self, info, input):
         if not info.context.user.is_authenticated:
             raise Exception('Unauthorized')
 
-        slack_team_installation = SlackTeamInstallation.objects.get(slack_team__id=input.pop('slack_team_id'))
-        slack_team_installation_validator = SlackTeamInstallationValidator(slack_team_installation,
-                                                                           data=input,
-                                                                           partial=True)
-        slack_team_installation_validator.is_valid(raise_exception=True)
-        slack_team_installation = slack_team_installation_validator.save()
-        slack_team_installation.activate()
+        slack_application_installation = SlackApplicationInstallation.objects.get(
+            slack_team__id=input.pop('slack_team_id'))
+        slack_application_installation_validator = SlackApplicationInstallationValidator(slack_application_installation,
+                                                                                         data=input,
+                                                                                         partial=True)
+        slack_application_installation_validator.is_valid(raise_exception=True)
+        slack_application_installation = slack_application_installation_validator.save()
+        slack_application_installation.activate()
 
-        return UpdateSlackTeamInstallationHelpChannelAndActivateMutation(
-            slack_team_installation=slack_team_installation)
+        return UpdateSlackApplicationInstallationHelpChannelAndActivateMutation(
+            slack_application_installation=slack_application_installation)
 
 
 class CreateMessageFromSlackMutation(graphene.Mutation):
@@ -456,9 +452,9 @@ class Mutation(graphene.ObjectType):
     create_slack_team = CreateSlackTeamMutation.Field()
     create_slack_channel = CreateSlackChannelMutation.Field()
 
-    create_slack_team_installation = CreateSlackTeamInstallationMutation.Field()
-    update_slack_team_installation_help_channel_and_activate = \
-        UpdateSlackTeamInstallationHelpChannelAndActivateMutation.Field()
+    create_slack_application_installation = CreateSlackApplicationInstallationMutation.Field()
+    update_slack_application_installation_help_channel_and_activate = \
+        UpdateSlackApplicationInstallationHelpChannelAndActivateMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
     create_user_and_message_from_slack = CreateUserAndMessageFromSlackMutation.Field()
