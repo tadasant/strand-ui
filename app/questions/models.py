@@ -21,9 +21,9 @@ class Question(TimeStampedModel):
 
     original_poster = models.ForeignKey(to=User, on_delete=models.DO_NOTHING, related_name='asked_questions')
     solver = models.ForeignKey(to=User, on_delete=models.DO_NOTHING, null=True, related_name='solved_questions')
-    group = models.ForeignKey(to=Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(to=Group, on_delete=models.CASCADE, related_name='questions')
 
-    tags = models.ManyToManyField(to=Tag)
+    tags = models.ManyToManyField(to=Tag, related_name='questions')
 
     def solve(self, time_end):
         self.is_solved = True
