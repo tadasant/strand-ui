@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.slack_integration.models import SlackApplicationInstallation, SlackChannel, SlackTeam, SlackUser
+from app.slack_integration.models import SlackAgent, SlackApplicationInstallation, SlackChannel, SlackTeam, SlackUser
 
 
 class SlackChannelAdmin(admin.ModelAdmin):
@@ -11,6 +11,7 @@ class SlackUserAdmin(admin.ModelAdmin):
     list_display = ('name', 'real_name', 'display_name', 'slack_team')
 
 
+admin.site.register(SlackAgent)
 admin.site.register(SlackChannel, admin_class=SlackChannelAdmin)
 admin.site.register(SlackTeam)
 admin.site.register(SlackApplicationInstallation)

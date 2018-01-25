@@ -8,7 +8,14 @@ from app.groups.models import Group
 from app.discussions.models import Message, Reply
 from app.questions.models import Question, Session, Tag
 from app.users.models import User
-from app.slack_integration.models import SlackApplicationInstallation, SlackChannel, SlackEvent, SlackUser, SlackTeam
+from app.slack_integration.models import (
+    SlackAgent,
+    SlackApplicationInstallation,
+    SlackChannel,
+    SlackEvent,
+    SlackUser,
+    SlackTeam
+)
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -113,13 +120,22 @@ class SlackEventFactory(factory.DjangoModelFactory):
     ts = factory.LazyAttribute(lambda x: f'''{factory.Faker('unix_time')}''')
 
 
+class SlackAgentFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = SlackAgent
+
+    group = factory.SubFactory(GroupFactory)
+    help_channel_id = factory.Faker('md5')
+    status = 'INITIATED'
+
+
 class SlackTeamFactory(factory.DjangoModelFactory):
     class Meta:
         model = SlackTeam
 
     id = factory.Faker('md5')
     name = factory.Faker('name')
-    group = factory.SubFactory(GroupFactory)
+    slack_agent = factory.SubFactory(SlackAgentFactory)
 
 
 class SlackChannelFactory(factory.DjangoModelFactory):
@@ -155,11 +171,9 @@ class SlackApplicationInstallationFactory(factory.DjangoModelFactory):
     class Meta:
         model = SlackApplicationInstallation
 
-    slack_team = factory.SubFactory(SlackTeamFactory)
+    slack_agent = factory.SubFactory(SlackAgentFactory)
     access_token = factory.Faker('md5')
     scope = factory.Faker('sentence')
     installer = factory.SubFactory(SlackUserFactory)
     bot_user_id = factory.Faker('md5')
     bot_access_token = factory.Faker('md5')
-    help_channel_id = factory.Faker('md5')
-    is_active = factory.Faker('pybool')

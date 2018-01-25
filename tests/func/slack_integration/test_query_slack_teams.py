@@ -18,7 +18,7 @@ class TestQuerySlackTeams:
         slack_team_factory()
         slack_team_factory()
 
-        query = {'query': '{ slackTeams { group { name } } }'}
+        query = {'query': '{ slackTeams { slackAgent { group { name } } } }'}
         response = client.post('/graphql', query)
 
         assert response.status_code == 200

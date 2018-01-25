@@ -866,7 +866,7 @@
     "is_solved": true,
     "is_anonymous": false,
     "original_poster": 117,
-    "solver": 117,
+    "solver": null,
     "group": 11,
     "tags": [
       24,
