@@ -126,7 +126,6 @@ STATIC_URL = '/static/'
 # Graphene
 # https://github.com/graphql-python/graphene-django/blob/master/docs/tutorial-plain.rst
 GRAPHENE = {
-    'MIDDLEWARE': ['app.api.schema.AuthorizationMiddleware'],
     'SCHEMA': 'app.api.schema.schema'
 }
 

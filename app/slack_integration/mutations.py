@@ -3,6 +3,7 @@ import graphene
 import requests
 from slackclient import SlackClient
 
+from app.api.authorization import check_authorization
 from app.groups.models import Group
 from app.discussions.models import Message
 from app.discussions.types import MessageType, ReplyType
@@ -49,6 +50,7 @@ class CreateSlackUserMutation(graphene.Mutation):
 
     slack_user = graphene.Field(SlackUserType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user_validator = SlackUserValidator(data=input)
         slack_user_validator.is_valid(raise_exception=True)
@@ -63,6 +65,7 @@ class CreateSlackChannelMutation(graphene.Mutation):
 
     slack_channel = graphene.Field(SlackChannelType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_channel_validator = SlackChannelValidator(data=input)
         slack_channel_validator.is_valid(raise_exception=True)
@@ -125,6 +128,7 @@ class UpdateSlackAgentHelpChannelAndActivateMutation(graphene.Mutation):
 
     slack_agent = graphene.Field(SlackAgentType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_agent = SlackAgent.objects.get(slack_team__id=input['slack_team_id'])
         slack_agent.help_channel_id = input['help_channel_id']
@@ -140,6 +144,7 @@ class CreateMessageFromSlackMutation(graphene.Mutation):
     slack_event = graphene.Field(SlackEventType)
     message = graphene.Field(MessageType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_event = SlackEvent.objects.create(ts=input['origin_slack_event_ts'])
         session = Session.objects.get(slackchannel__id=input['slack_channel_id'])
@@ -163,6 +168,7 @@ class CreateUserAndMessageFromSlackMutation(graphene.Mutation):
     slack_user = graphene.Field(SlackUserType)
     message = graphene.Field(MessageType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user_validator = SlackUserValidator(data=input.pop('slack_user'), partial=True)
         slack_user_validator.is_valid(raise_exception=True)
@@ -195,6 +201,7 @@ class CreateReplyFromSlackMutation(graphene.Mutation):
     slack_event = graphene.Field(SlackEventType)
     reply = graphene.Field(ReplyType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_event = SlackEvent.objects.create(ts=input.pop('origin_slack_event_ts'))
         message = Message.objects.get(origin_slack_event__ts=input['message_origin_slack_event_ts'],
@@ -219,6 +226,7 @@ class CreateUserAndReplyFromSlackMutation(graphene.Mutation):
     slack_user = graphene.Field(SlackUserType)
     reply = graphene.Field(ReplyType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user_validator = SlackUserValidator(data=input.pop('slack_user'), partial=True)
         slack_user_validator.is_valid(raise_exception=True)
@@ -252,6 +260,7 @@ class CreateSessionFromSlackMutation(graphene.Mutation):
     session = graphene.Field(SessionType)
     slack_channel = graphene.Field(SlackChannelType)
 
+    @check_authorization
     def mutate(self, info, input):
         session_validator = SessionValidator(data=input.pop('session', {}))
         session_validator.is_valid(raise_exception=True)
@@ -271,6 +280,7 @@ class CreateUserFromSlackMutation(graphene.Mutation):
     user = graphene.Field(UserType)
     slack_user = graphene.Field(SlackUserType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user_validator = SlackUserValidator(data=input, partial=True)
         slack_user_validator.is_valid(raise_exception=True)
@@ -292,6 +302,7 @@ class CreateQuestionFromSlackMutation(graphene.Mutation):
 
     question = graphene.Field(QuestionType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user = SlackUser.objects.get(pk=input.pop('original_poster_slack_user_id'))
         tags = input.pop('tags', [])
@@ -314,6 +325,7 @@ class CreateUserAndQuestionFromSlackMutation(graphene.Mutation):
     slack_user = graphene.Field(SlackUserType)
     question = graphene.Field(QuestionType)
 
+    @check_authorization
     def mutate(self, info, input):
         slack_user_validator = SlackUserValidator(data=input.pop('original_poster_slack_user'), partial=True)
         slack_user_validator.is_valid(raise_exception=True)
@@ -345,6 +357,7 @@ class SolveQuestionFromSlackMutation(graphene.Mutation):
     question = graphene.Field(QuestionType)
     session = graphene.Field(SessionType)
 
+    @check_authorization
     def mutate(self, info, input):
         user = User.objects.get(slack_users__id=input['slack_user_id'])
         time_end = input.pop('time_end')

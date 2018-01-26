@@ -1,5 +1,6 @@
 import graphene
 
+from app.api.authorization import check_authorization
 from app.questions.models import Question
 from app.questions.validators import QuestionValidator, SessionValidator, TagValidator
 from app.questions.types import (
@@ -19,6 +20,7 @@ class CreateQuestionMutation(graphene.Mutation):
 
     question = graphene.Field(QuestionType)
 
+    @check_authorization
     def mutate(self, info, input):
         tags = input.pop('tags', [])
 
@@ -37,6 +39,7 @@ class CreateSessionMutation(graphene.Mutation):
 
     session = graphene.Field(SessionType)
 
+    @check_authorization
     def mutate(self, info, input):
         session_validator = SessionValidator(data=input)
         session_validator.is_valid(raise_exception=True)
@@ -51,6 +54,7 @@ class CreateTagMutation(graphene.Mutation):
 
     tag = graphene.Field(TagType)
 
+    @check_authorization
     def mutate(self, info, input):
         tag_validator = TagValidator(data=input)
         tag_validator.is_valid(raise_exception=True)
@@ -66,6 +70,7 @@ class SolveQuestionMutation(graphene.Mutation):
     question = graphene.Field(QuestionType)
     session = graphene.Field(SessionType)
 
+    @check_authorization
     def mutate(self, info, input):
         time_end = input.pop('time_end')
 
