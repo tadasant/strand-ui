@@ -1,6 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
+from app.api.authorization import check_authorization
 from app.questions.types import SessionInputType, TagInputType
 from app.slack_integration.models import (
     SlackAgent,
@@ -35,6 +36,30 @@ class SlackTeamType(DjangoObjectType):
 class SlackApplicationInstallationType(DjangoObjectType):
     class Meta:
         model = SlackApplicationInstallation
+
+    @check_authorization
+    def resolve_access_token(self, info):
+        return self.access_token
+
+    @check_authorization
+    def resolve_bot_user_id(self, info):
+        return self.bot_user_id
+
+    @check_authorization
+    def resolve_bot_access_token(self, info):
+        return self.bot_access_token
+
+    @check_authorization
+    def resolve_installer(self, info):
+        return self.installer
+
+    @check_authorization
+    def resolve_scope(self, info):
+        return self.scope
+
+    @check_authorization
+    def resolve_slack_agent(self, info):
+        return self.slack_agent
 
 
 class SlackUserType(DjangoObjectType):

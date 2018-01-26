@@ -1,5 +1,6 @@
 import graphene
 
+from app.api.authorization import check_authorization
 from app.discussions.validators import MessageValidator, ReplyValidator
 from app.discussions.types import (
     MessageType,
@@ -15,10 +16,8 @@ class CreateMessageMutation(graphene.Mutation):
 
     message = graphene.Field(MessageType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         message_validator = MessageValidator(data=input)
         message_validator.is_valid(raise_exception=True)
         message = message_validator.save()
@@ -31,10 +30,8 @@ class CreateReplyMutation(graphene.Mutation):
 
     reply = graphene.Field(ReplyType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         reply_validator = ReplyValidator(data=input)
         reply_validator.is_valid(raise_exception=True)
         reply = reply_validator.save()

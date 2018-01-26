@@ -15,7 +15,7 @@ class SlackAgent(TimeStampedModel):
         ('INACTIVE', 'INACTIVE')
     )
 
-    group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent')
+    group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent', primary_key=True)
     status = models.CharField(max_length=14, choices=STATUS_CHOICES, default='INITIATED')
     help_channel_id = models.CharField(max_length=255, blank=True, null=True)
 

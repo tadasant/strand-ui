@@ -1,5 +1,6 @@
 import graphene
 
+from app.api.authorization import check_authorization
 from app.questions.models import Question
 from app.questions.validators import QuestionValidator, SessionValidator, TagValidator
 from app.questions.types import (
@@ -19,10 +20,8 @@ class CreateQuestionMutation(graphene.Mutation):
 
     question = graphene.Field(QuestionType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         tags = input.pop('tags', [])
 
         question_validator = QuestionValidator(data=input)
@@ -40,10 +39,8 @@ class CreateSessionMutation(graphene.Mutation):
 
     session = graphene.Field(SessionType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         session_validator = SessionValidator(data=input)
         session_validator.is_valid(raise_exception=True)
         session = session_validator.save()
@@ -57,10 +54,8 @@ class CreateTagMutation(graphene.Mutation):
 
     tag = graphene.Field(TagType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         tag_validator = TagValidator(data=input)
         tag_validator.is_valid(raise_exception=True)
         tag = tag_validator.save()
@@ -75,10 +70,8 @@ class SolveQuestionMutation(graphene.Mutation):
     question = graphene.Field(QuestionType)
     session = graphene.Field(SessionType)
 
+    @check_authorization
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         time_end = input.pop('time_end')
 
         question = Question.objects.get(pk=input['id'])
