@@ -37,7 +37,7 @@ class TestCreateUserAndMessageFromSlack:
           }}
         '''
         response = client.post('/graphql', {'query': mutation})
-        print(response.content)
+
         assert response.status_code == 200
         assert response.json()['data']['createUserAndMessageFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
