@@ -29,6 +29,8 @@ class Query(graphene.ObjectType):
     slack_teams = graphene.List(SlackTeamType)
     slack_application_installations = graphene.List(SlackApplicationInstallationType)
 
+    active_slack_application_installations = graphene.List(SlackApplicationInstallationType)
+
     def resolve_slack_agent(self, info, id=None):
         if id is not None:
             return SlackAgent.objects.get(pk=id)
@@ -69,3 +71,6 @@ class Query(graphene.ObjectType):
 
     def resolve_slack_application_installations(self, info):
         return SlackApplicationInstallation.objects.all()
+
+    def resolve_active_slack_application_installations(self, info):
+        return SlackApplicationInstallation.objects.filter(slack_agent__status='ACTIVE').all()
