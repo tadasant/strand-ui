@@ -80,8 +80,7 @@ class TestUpdateSlackAgentHelpChannelAndActivate:
 
         assert response.status_code == 200
         assert response.json()['data']['updateSlackAgentHelpChannelAndActivate'] is None
-        assert response.json()['errors'][0]['message'] ==  "Can't switch from state 'INITIATED' using method 'activate'"
-
+        assert response.json()['errors'][0]['message'] == "Can't switch from state 'INITIATED' using method 'activate'"
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, slack_application_installation_factory, slack_agent_factory, slack_team_factory):
