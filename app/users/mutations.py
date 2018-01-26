@@ -11,9 +11,6 @@ class CreateUserMutation(graphene.Mutation):
     user = graphene.Field(UserType)
 
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         user_validator = UserValidator(data=input)
         user_validator.is_valid(raise_exception=True)
         user = user_validator.save()

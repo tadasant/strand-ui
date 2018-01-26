@@ -53,10 +53,7 @@ class Query(graphene.ObjectType):
         return None
 
     def resolve_slack_application_installation(self, info, id=None):
-        if id is not None:
-            return SlackApplicationInstallation.objects.get(pk=id)
-
-        return None
+        return SlackApplicationInstallation.objects.get(pk=id)
 
     def resolve_slack_agents(self, info):
         return SlackAgent.objects.all()

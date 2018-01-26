@@ -11,9 +11,6 @@ class CreateGroupMutation(graphene.Mutation):
     group = graphene.Field(GroupType)
 
     def mutate(self, info, input):
-        if not info.context.user.is_authenticated:
-            raise Exception('Unauthorized')
-
         group_validator = GroupValidator(data=input)
         group_validator.is_valid(raise_exception=True)
         group = group_validator.save()

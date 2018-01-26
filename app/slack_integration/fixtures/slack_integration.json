@@ -1,11 +1,10 @@
 [
 {
   "model": "slack_integration.slackagent",
-  "pk": 1,
+  "pk": 11,
   "fields": {
     "created": "2018-01-25T19:36:15.525Z",
     "modified": "2018-01-25T19:36:15.535Z",
-    "group": 11,
     "status": "AUTHENTICATED",
     "help_channel_id": null
   }
@@ -1538,6 +1537,20 @@
     "is_admin": false,
     "slack_team": "T8C26RNPN",
     "user": 71
+  }
+},
+{
+  "model": "slack_integration.slackapplicationinstallation",
+  "pk": 1,
+  "fields": {
+    "created": "2018-01-25T21:34:55.613Z",
+    "modified": "2018-01-25T21:34:55.627Z",
+    "slack_agent": 1,
+    "access_token": "123",
+    "scope": "123",
+    "installer": "U8C2LGL7N",
+    "bot_user_id": "123",
+    "bot_access_token": "123"
   }
 },
 {
