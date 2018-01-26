@@ -103,22 +103,28 @@ class CreateSlackAgentMutation(graphene.Mutation):
         group, _ = Group.objects.get_or_create(name=team_info['name'])
         slack_agent = SlackAgent.objects.create(group=group)
         slack_team = SlackTeam.objects.create(id=team_info['id'], name=team_info['name'], slack_agent=slack_agent)
-        user, _ = User.objects.get_or_create(email=user_info['profile'].get('email'),
-                                             defaults=dict(username=user_info['profile'].get('display_name') or
-                                                                    user_info.get('name'),
-                                                           first_name=user_info.get('first_name', ''),
-                                                           last_name=user_info.get('last_name', ''),
-                                                           avatar_url=user_info['profile'].get('image_72')))
-        SlackUser.objects.create(id=user_info['id'], name=user_info.get('name'),
-                                 first_name=user_info.get('first_name', ''),
-                                 last_name=user_info.get('last_name', ''),
-                                 real_name=user_info.get('real_name'),
-                                 display_name=user_info['profile'].get('display_name'),
-                                 email=user_info['profile'].get('email'),
-                                 avatar_72=user_info['profile'].get('image_72'),
-                                 is_bot=user_info.get('is_bot'), is_admin=user_info.get('is_admin'),
-                                 slack_team=slack_team, user=user)
-        slack_agent.authenticate(oauth_info)
+
+        slack_user = SlackUser(id=user_info['id'], name=user_info.get('name'),
+                               first_name=user_info.get('first_name', ''),
+                               last_name=user_info.get('last_name', ''),
+                               real_name=user_info.get('real_name'),
+                               display_name=user_info['profile'].get('display_name'),
+                               email=user_info['profile'].get('email'),
+                               avatar_72=user_info['profile'].get('image_72'),
+                               is_bot=user_info.get('is_bot'), is_admin=user_info.get('is_admin'),
+                               slack_team=slack_team)
+
+        try:
+            user = User.objects.get(email=user_info['profile'].get('email'))
+            slack_user.user = user
+            slack_user.save()
+        except User.DoesNotExist:
+            User.objects.create_user_from_slack_user(slack_user)
+
+        slack_agent.create_slack_application_installation_from_oauth(oauth_info)
+        slack_agent.authenticate()
+        slack_agent.save()
+
         return CreateSlackAgentMutation(slack_agent=slack_agent)
 
 
@@ -133,6 +139,7 @@ class UpdateSlackAgentHelpChannelAndActivateMutation(graphene.Mutation):
         slack_agent = SlackAgent.objects.get(slack_team__id=input['slack_team_id'])
         slack_agent.help_channel_id = input['help_channel_id']
         slack_agent.activate()
+        slack_agent.save()
 
         return UpdateSlackAgentHelpChannelAndActivateMutation(slack_agent=slack_agent)
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
 from app.questions.models import Session
@@ -7,33 +8,52 @@ from app.groups.models import Group
 
 
 class SlackAgent(TimeStampedModel):
-    STATUS_CHOICES = (
-        ('INITIATED', 'INITIATED'),
-        ('AUTHENTICATED', 'AUTHENTICATED'),
-        ('ACTIVE', 'ACTIVE'),
-        ('PAUSED', 'PAUSED'),
-        ('INACTIVE', 'INACTIVE')
-    )
-
     group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent', primary_key=True)
-    status = models.CharField(max_length=14, choices=STATUS_CHOICES, default='INITIATED')
+    # INITIATED, AUTHENTICATED, ACTIVE, PAUSED, INACTIVE
+    status = FSMField(default='INITIATED', protected=True)
     help_channel_id = models.CharField(max_length=255, blank=True, null=True)
 
-    def authenticate(self, oauth_info):
+    def create_slack_application_installation_from_oauth(self, oauth_info):
         slack_user = SlackUser.objects.get(id=oauth_info['user_id'])
-        SlackApplicationInstallation.objects.create(slack_agent=self, access_token=oauth_info['access_token'],
-                                                    scope=oauth_info['scope'], installer=slack_user,
-                                                    bot_user_id=oauth_info['bot']['bot_user_id'],
-                                                    bot_access_token=oauth_info['bot']['bot_access_token'])
-        self.status = 'AUTHENTICATED'
-        self.save()
+        slack_application_installation = SlackApplicationInstallation.objects.create(slack_agent=self,
+                                                                                     access_token=oauth_info[
+                                                                                         'access_token'],
+                                                                                     scope=oauth_info['scope'],
+                                                                                     installer=slack_user,
+                                                                                     bot_user_id=oauth_info['bot'][
+                                                                                         'bot_user_id'],
+                                                                                     bot_access_token=oauth_info[
+                                                                                         'bot']['bot_access_token'])
+        return slack_application_installation
 
-    def activate(self, help_channel_id=None):
-        if self.help_channel_id:
-            self.status = 'ACTIVE'
-            self.save()
+    def can_authenticate(self):
+        if self.slack_application_installation:
+            return True
         else:
-            raise Exception('Missing help channel id')
+            return False
+
+    @transition(status, source=['INITIATED', 'INACTIVE'], target='AUTHENTICATED', conditions=[can_authenticate])
+    def authenticate(self):
+        pass
+
+    def can_activate(self):
+        if self.help_channel_id:
+            return True
+        else:
+            return False
+
+    @transition(field=status, source=['AUTHENTICATED', 'PAUSED', 'INACTIVE'], target='ACTIVE',
+                conditions=[can_activate])
+    def activate(self):
+        pass
+
+    @transition(field=status, source=['ACTIVE'], target='PAUSED')
+    def pause(self):
+        pass
+
+    @transition(field=status, source=['ACTIVE', 'PAUSED'], target='INACTIVE')
+    def inactivate(self):
+        pass
 
     def __str__(self):
         return f'Slack Agent for {self.group.name}'

@@ -4,7 +4,7 @@
   "pk": 11,
   "fields": {
     "created": "2018-01-25T19:36:15.525Z",
-    "modified": "2018-01-25T19:36:15.535Z",
+    "modified": "2018-01-25T22:16:52.063Z",
     "status": "AUTHENTICATED",
     "help_channel_id": null
   }
@@ -14,9 +14,9 @@
   "pk": "T8C26RNPN",
   "fields": {
     "created": "2018-01-24T00:29:57.807Z",
-    "modified": "2018-01-25T19:36:27.620Z",
+    "modified": "2018-01-25T22:18:16.852Z",
     "name": "CodeClippy",
-    "slack_agent": 1
+    "slack_agent": 11
   }
 },
 {
@@ -1545,7 +1545,7 @@
   "fields": {
     "created": "2018-01-25T21:34:55.613Z",
     "modified": "2018-01-25T21:34:55.627Z",
-    "slack_agent": 1,
+    "slack_agent": 11,
     "access_token": "123",
     "scope": "123",
     "installer": "U8C2LGL7N",
