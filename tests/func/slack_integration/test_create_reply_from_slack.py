@@ -19,7 +19,7 @@ class TestCreateReplyFromSlack:
 
         mutation = f'''
           mutation {{
-            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+            createReplyFromSlack(input: {{text: "{reply.text}",
                                           messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
@@ -56,7 +56,7 @@ class TestCreateReplyFromSlack:
 
         mutation = f'''
           mutation {{
-            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+            createReplyFromSlack(input: {{text: "{reply.text}",
                                           messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
@@ -93,7 +93,7 @@ class TestCreateReplyFromSlack:
 
         mutation = f'''
           mutation {{
-            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+            createReplyFromSlack(input: {{text: "{reply.text}",
                                           messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
@@ -132,7 +132,7 @@ class TestCreateReplyFromSlack:
 
         mutation = f'''
           mutation {{
-            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+            createReplyFromSlack(input: {{text: "{reply.text}",
                                           messageOriginSlackEventTs: "{wrong_message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
@@ -170,7 +170,7 @@ class TestCreateReplyFromSlack:
 
         mutation = f'''
           mutation {{
-            createReplyFromSlack(input: {{text: "{reply.text}", time: "{reply.time}",
+            createReplyFromSlack(input: {{text: "{reply.text}",
                                           messageOriginSlackEventTs: "{message_slack_event.ts}",
                                           slackChannelId: "{slack_channel.id}",
                                           slackUserId: "{reply_slack_user.id}",
@@ -197,7 +197,7 @@ class TestCreateReplyFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createReplyFromSlack']['reply']['originSlackEvent']['ts'] == \
-            reply_slack_event.ts
+            str(reply_slack_event.ts)
         assert response.json()['data']['createReplyFromSlack']['reply']['message']['author']['id'] == \
             str(message.author.id)
         assert {'id': str(reply_slack_user.user.id)} in response.json()['data']['createReplyFromSlack']['reply'][

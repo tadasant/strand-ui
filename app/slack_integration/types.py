@@ -103,7 +103,6 @@ class MessageFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String(required=True)
     slack_user_id = graphene.String(required=True)
     text = graphene.String(required=True)
-    time = graphene.String(required=True)
 
 
 class ReplyFromSlackInputType(graphene.InputObjectType):
@@ -112,7 +111,6 @@ class ReplyFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String(required=True)
     slack_user_id = graphene.String(required=True)
     text = graphene.String(required=True)
-    time = graphene.String(required=True)
 
 
 class SessionFromSlackInputType(graphene.InputObjectType):
@@ -141,7 +139,6 @@ class UserAndMessageFromSlackInputType(graphene.InputObjectType):
     origin_slack_event_ts = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)
     text = graphene.String(required=True)
-    time = graphene.String(required=True)
 
 
 class UserAndReplyFromSlackInputType(graphene.InputObjectType):
@@ -150,7 +147,6 @@ class UserAndReplyFromSlackInputType(graphene.InputObjectType):
     origin_slack_event_ts = graphene.String(required=True)
     slack_channel_id = graphene.String(required=True)
     text = graphene.String(required=True)
-    time = graphene.String(required=True)
 
 
 class GroupFromSlackInputType(graphene.InputObjectType):

@@ -15,7 +15,7 @@ class TestCreateMessageFromSlack:
 
         mutation = f'''
           mutation {{
-            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+            createMessageFromSlack(input: {{text: "{message.text}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
                                             originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
@@ -46,7 +46,7 @@ class TestCreateMessageFromSlack:
 
         mutation = f'''
           mutation {{
-            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+            createMessageFromSlack(input: {{text: "{message.text}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
                                             originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
@@ -77,7 +77,7 @@ class TestCreateMessageFromSlack:
 
         mutation = f'''
           mutation {{
-            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+            createMessageFromSlack(input: {{text: "{message.text}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
                                             originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
@@ -108,7 +108,7 @@ class TestCreateMessageFromSlack:
 
         mutation = f'''
           mutation {{
-            createMessageFromSlack(input: {{text: "{message.text}", time: "{message.time}",
+            createMessageFromSlack(input: {{text: "{message.text}",
                                             slackChannelId: "{slack_channel.id}", slackUserId: "{slack_user.id}",
                                             originSlackEventTs: "{slack_event.ts}"}}) {{
               message {{
@@ -134,6 +134,7 @@ class TestCreateMessageFromSlack:
         assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
             str(slack_user.user.id)
         assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
-        assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == slack_event.ts
+        assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == \
+            str(slack_event.ts)
         assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
             'participants']

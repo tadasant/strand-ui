@@ -27,8 +27,7 @@ class TestCreateUserAndMessageFromSlack:
                                                                 slackTeamId: "{slack_user.slack_team_id}"}},
                                                     originSlackEventTs: "{slack_event.ts}",
                                                     slackChannelId: "{slack_channel.id}",
-                                                    text: "{message.text}",
-                                                    time: "{message.time}"}}) {{
+                                                    text: "{message.text}"}}) {{
               slackUser {{
                 user {{
                   firstName
@@ -67,8 +66,7 @@ class TestCreateUserAndMessageFromSlack:
                                                                 slackTeamId: "{slack_user.slack_team_id}"}},
                                                     originSlackEventTs: "{slack_event.ts}",
                                                     slackChannelId: "{slack_channel.id}",
-                                                    text: "{message.text}",
-                                                    time: "{message.time}"}}) {{
+                                                    text: "{message.text}"}}) {{
               slackUser {{
                 user {{
                   firstName
@@ -106,8 +104,7 @@ class TestCreateUserAndMessageFromSlack:
                                                                 slackTeamId: "{slack_user.slack_team_id}"}},
                                                     originSlackEventTs: "{slack_event.ts}",
                                                     slackChannelId: "{slack_channel.id}",
-                                                    text: "{message.text}",
-                                                    time: "{message.time}"}}) {{
+                                                    text: "{message.text}"}}) {{
               slackUser {{
                 user {{
                   firstName
@@ -148,8 +145,7 @@ class TestCreateUserAndMessageFromSlack:
                                                                 slackTeamId: "{slack_user.slack_team_id}"}},
                                                     originSlackEventTs: "{slack_event.ts}",
                                                     slackChannelId: "{slack_channel.id}",
-                                                    text: "{message.text}",
-                                                    time: "{message.time}"}}) {{
+                                                    text: "{message.text}"}}) {{
               slackUser {{
                 user {{
                   firstName
@@ -188,8 +184,7 @@ class TestCreateUserAndMessageFromSlack:
                                                                 slackTeamId: "{slack_user.slack_team_id}"}},
                                                     originSlackEventTs: "{slack_event.ts}",
                                                     slackChannelId: "{slack_channel.id}",
-                                                    text: "{message.text}",
-                                                    time: "{message.time}"}}) {{
+                                                    text: "{message.text}"}}) {{
               slackUser {{
                 user {{
                   firstName

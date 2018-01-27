@@ -117,7 +117,7 @@ class SlackEventFactory(factory.DjangoModelFactory):
     class Meta:
         model = SlackEvent
 
-    ts = factory.LazyAttribute(lambda x: f'''{factory.Faker('unix_time')}''')
+    ts = factory.Faker('unix_time')
 
 
 class SlackAgentFactory(factory.DjangoModelFactory):
