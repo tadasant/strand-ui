@@ -38,4 +38,4 @@ class TestQuerySlackApplicationInstallations:
         response = auth_client.post('/graphql', query)
 
         assert response.status_code == 200
-        assert len(response.json()['data']['activeSlackApplicationInstallations']) == 1
+        assert len(response.json()['data']['slackApplicationInstallations']) == 1
