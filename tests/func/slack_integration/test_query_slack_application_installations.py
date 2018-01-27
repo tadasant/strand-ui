@@ -34,7 +34,7 @@ class TestQuerySlackApplicationInstallations:
         slack_agent_two = slack_agent_factory(status='ACTIVE')
         slack_application_installation_factory(slack_agent=slack_agent_two)
 
-        query = {'query': '{ activeSlackApplicationInstallations { botAccessToken } }'}
+        query = {'query': '{ slackApplicationInstallations (agentStatus: "ACTIVE") { botAccessToken } }'}
         response = auth_client.post('/graphql', query)
 
         assert response.status_code == 200
