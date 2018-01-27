@@ -12,7 +12,6 @@ class TestCreateQuestion:
         mutation = f'''
           mutation {{
             createQuestion(input: {{title: "{question.title}", description: "{question.description}",
-                                    isSolved: {str(question.is_solved).lower()},
                                     isAnonymous: {str(question.is_anonymous).lower()},
                                     originalPosterId: {user.id},
                                     groupId: {str(group.id)}}}) {{
@@ -37,7 +36,6 @@ class TestCreateQuestion:
         mutation = f'''
           mutation {{
             createQuestion(input: {{title: "{question.title}", description: "{question.description}",
-                                    isSolved: {str(question.is_solved).lower()},
                                     isAnonymous: {str(question.is_anonymous).lower()},
                                     originalPosterId: {user.id},
                                     groupId: {str(group.id)}}}) {{
@@ -64,7 +62,6 @@ class TestCreateQuestion:
         mutation = f'''
           mutation {{
             createQuestion(input: {{title: "{question.title}", description: "{question.description}",
-                                    isSolved: {str(question.is_solved).lower()},
                                     isAnonymous: {str(question.is_anonymous).lower()},
                                     originalPosterId: {user.id},
                                     groupId: {str(group.id)},

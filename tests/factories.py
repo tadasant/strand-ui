@@ -58,7 +58,7 @@ class QuestionFactory(factory.DjangoModelFactory):
 
     title = factory.Faker('sentence')
     description = factory.Faker('sentence')
-    is_solved = factory.Faker('pybool')
+    status = 'UNSOLVED'
     is_anonymous = factory.Faker('pybool')
 
     original_poster = factory.SubFactory(UserFactory)

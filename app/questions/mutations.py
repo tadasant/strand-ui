@@ -12,6 +12,7 @@ from app.questions.types import (
     TagType,
     TagInputType
 )
+from app.users.models import User
 
 
 class CreateQuestionMutation(graphene.Mutation):
@@ -72,16 +73,17 @@ class SolveQuestionMutation(graphene.Mutation):
 
     @check_authorization
     def mutate(self, info, input):
-        time_end = input.pop('time_end')
-
         question = Question.objects.get(pk=input['id'])
-        question_validator = QuestionValidator(question, data=input, partial=True)
-        question_validator.is_valid(raise_exception=True)
-        question = question_validator.save()
+        solver = User.objects.get(pk=input['solver_id'])
 
-        session = question.solve(time_end)
+        question.session.mark_as_closed()
+        question.session.save()
 
-        return SolveQuestionMutation(question=question, session=session)
+        question.mark_as_solved()
+        question.solver = solver
+        question.save()
+
+        return SolveQuestionMutation(question=question, session=question.session)
 
 
 class Mutation(graphene.ObjectType):

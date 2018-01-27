@@ -4,11 +4,11 @@ from app.questions.models import Tag, Question, Session
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'original_poster', 'group', 'is_solved')
+    list_display = ('title', 'original_poster', 'group', 'status')
 
 
 class SessionAdmin(admin.ModelAdmin):
-    list_display = ('question', 'get_question_original_poster', 'get_question_group')
+    list_display = ('question', 'get_question_original_poster', 'get_question_group', 'status')
 
     def get_question_original_poster(self, obj):
         return obj.question.original_poster

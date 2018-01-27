@@ -20,7 +20,7 @@ class QuestionValidator(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('title', 'description', 'is_solved', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id')
+        fields = ('title', 'description', 'status', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id')
 
 
 class SessionValidator(serializers.ModelSerializer):
@@ -28,4 +28,4 @@ class SessionValidator(serializers.ModelSerializer):
 
     class Meta:
         model = Session
-        fields = ('id', 'time_start', 'time_end', 'question_id')
+        fields = ('id', 'status', 'time_start', 'time_end', 'question_id')

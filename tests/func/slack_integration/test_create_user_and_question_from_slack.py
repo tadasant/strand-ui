@@ -9,13 +9,12 @@ class TestCreateUserAndQuestionFromSlack:
         slack_team = slack_team_factory()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createUserAndQuestionFromSlack(input: {{title: "{question.title}",
                                                     description: "{question.description}",
-                                                    isSolved: {str(question.is_solved).lower()},
                                                     isAnonymous: {str(question.is_anonymous).lower()},
                                                     originalPosterSlackUser: {{
                                                       id: "{slack_user.id}",
@@ -59,13 +58,12 @@ class TestCreateUserAndQuestionFromSlack:
         slack_team = slack_team_factory()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createUserAndQuestionFromSlack(input: {{title: "{question.title}",
                                                     description: "{question.description}",
-                                                    isSolved: {str(question.is_solved).lower()},
                                                     isAnonymous: {str(question.is_anonymous).lower()},
                                                     originalPosterSlackUser: {{
                                                       id: "{slack_user.id}",
@@ -109,13 +107,12 @@ class TestCreateUserAndQuestionFromSlack:
         slack_team = slack_team_factory.build()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createUserAndQuestionFromSlack(input: {{title: "{question.title}",
                                                     description: "{question.description}",
-                                                    isSolved: {str(question.is_solved).lower()},
                                                     isAnonymous: {str(question.is_anonymous).lower()},
                                                     originalPosterSlackUser: {{
                                                       id: "{slack_user.id}",
@@ -159,13 +156,12 @@ class TestCreateUserAndQuestionFromSlack:
         slack_team = slack_team_factory()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createUserAndQuestionFromSlack(input: {{title: "{question.title}",
                                                     description: "{question.description}",
-                                                    isSolved: {str(question.is_solved).lower()},
                                                     isAnonymous: {str(question.is_anonymous).lower()},
                                                     originalPosterSlackUser: {{
                                                       id: "{slack_user.id}",
