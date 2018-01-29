@@ -8,13 +8,12 @@ class TestCreateQuestionFromSlack:
         slack_user = slack_user_factory()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createQuestionFromSlack(input: {{title: "{question.title}",
                                              description: "{question.description}",
-                                             isSolved: {str(question.is_solved).lower()},
                                              isAnonymous: {str(question.is_anonymous).lower()},
                                              originalPosterSlackUserId: "{slack_user.id}",
                                              tags: [
@@ -41,13 +40,12 @@ class TestCreateQuestionFromSlack:
         slack_user = slack_user_factory.build()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createQuestionFromSlack(input: {{title: "{question.title}",
                                              description: "{question.description}",
-                                             isSolved: {str(question.is_solved).lower()},
                                              isAnonymous: {str(question.is_anonymous).lower()},
                                              originalPosterSlackUserId: "{slack_user.id}",
                                              tags: [
@@ -74,13 +72,12 @@ class TestCreateQuestionFromSlack:
         slack_user = slack_user_factory()
         tag_one = tag_factory()
         tag_two = tag_factory.build()
-        question = question_factory.build(is_solved=False)
+        question = question_factory.build()
 
         mutation = f'''
           mutation {{
             createQuestionFromSlack(input: {{title: "{question.title}",
                                              description: "{question.description}",
-                                             isSolved: {str(question.is_solved).lower()},
                                              isAnonymous: {str(question.is_anonymous).lower()},
                                              originalPosterSlackUserId: "{slack_user.id}",
                                              tags: [

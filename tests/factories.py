@@ -10,6 +10,7 @@ from app.questions.models import Question, Session, Tag
 from app.users.models import User
 from app.slack_integration.models import (
     SlackAgent,
+    SlackAgentStatus,
     SlackApplicationInstallation,
     SlackChannel,
     SlackEvent,
@@ -58,7 +59,7 @@ class QuestionFactory(factory.DjangoModelFactory):
 
     title = factory.Faker('sentence')
     description = factory.Faker('sentence')
-    is_solved = factory.Faker('pybool')
+    status = 'UNSOLVED'
     is_anonymous = factory.Faker('pybool')
 
     original_poster = factory.SubFactory(UserFactory)
@@ -126,7 +127,7 @@ class SlackAgentFactory(factory.DjangoModelFactory):
 
     group = factory.SubFactory(GroupFactory)
     help_channel_id = factory.Faker('md5')
-    status = 'INITIATED'
+    status = SlackAgentStatus.INITIATED.value
 
 
 class SlackTeamFactory(factory.DjangoModelFactory):

@@ -120,6 +120,10 @@ class SessionFromSlackInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
 
 
+class MarkSessionAsPendingClosedFromSlackInputType(graphene.InputObjectType):
+    slack_channel_id = graphene.String(required=True)
+
+
 class UserFromSlackInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
     name = graphene.String(required=True)

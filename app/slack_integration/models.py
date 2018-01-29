@@ -1,3 +1,5 @@
+from enum import Enum
+
 from django.db import models
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
@@ -7,10 +9,17 @@ from app.users.models import User
 from app.groups.models import Group
 
 
+class SlackAgentStatus(Enum):
+    INITIATED = 'INITIATED'
+    AUTHENTICATED = 'AUTHENTICATED'
+    ACTIVE = 'ACTIVE'
+    PAUSED = 'PAUSED'
+    INACTIVE = 'INACTIVE'
+
+
 class SlackAgent(TimeStampedModel):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent', primary_key=True)
-    # INITIATED, AUTHENTICATED, ACTIVE, PAUSED, INACTIVE
-    status = FSMField(default='INITIATED', protected=True)
+    status = FSMField(default=SlackAgentStatus.INITIATED.value, protected=True)
     help_channel_id = models.CharField(max_length=255, blank=True, null=True)
 
     def create_slack_application_installation_from_oauth(self, oauth_info):
@@ -32,7 +41,8 @@ class SlackAgent(TimeStampedModel):
         else:
             return False
 
-    @transition(status, source=['INITIATED', 'INACTIVE'], target='AUTHENTICATED', conditions=[can_authenticate])
+    @transition(status, source=[SlackAgentStatus.INITIATED.value, SlackAgentStatus.INACTIVE.value],
+                target=SlackAgentStatus.AUTHENTICATED.value, conditions=[can_authenticate])
     def authenticate(self):
         pass
 
@@ -42,16 +52,18 @@ class SlackAgent(TimeStampedModel):
         else:
             return False
 
-    @transition(field=status, source=['AUTHENTICATED', 'PAUSED', 'INACTIVE'], target='ACTIVE',
+    @transition(field=status, source=[SlackAgentStatus.AUTHENTICATED.value, SlackAgentStatus.PAUSED.value,
+                                      SlackAgentStatus.INACTIVE.value], target=SlackAgentStatus.ACTIVE.value,
                 conditions=[can_activate])
     def activate(self):
         pass
 
-    @transition(field=status, source=['ACTIVE'], target='PAUSED')
+    @transition(field=status, source=SlackAgentStatus.ACTIVE.value, target=SlackAgentStatus.PAUSED.value)
     def pause(self):
         pass
 
-    @transition(field=status, source=['ACTIVE', 'PAUSED'], target='INACTIVE')
+    @transition(field=status, source=[SlackAgentStatus.ACTIVE.value, SlackAgentStatus.PAUSED.value],
+                target=SlackAgentStatus.INACTIVE)
     def inactivate(self):
         pass
 
