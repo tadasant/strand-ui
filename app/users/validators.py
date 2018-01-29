@@ -8,4 +8,4 @@ from app.users.models import User
 class UserValidator(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'avatar_url')
+        fields = ('email', 'username', 'avatar_url', 'is_bot')

@@ -17,6 +17,7 @@ class User(AbstractUser):
                                 validators=[username_validator])
     email = models.EmailField(_('email address'), blank=True, null=True, unique=True)
     avatar_url = models.CharField(max_length=255, blank=True, null=True)
+    is_bot = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
