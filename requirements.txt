@@ -1,5 +1,8 @@
+amqp==2.2.2
 apipkg==1.4
 attrs==17.4.0
+billiard==3.5.0.3
+celery==4.1.0
 certifi==2017.11.5
 chardet==3.0.4
 cookies==2.2.1
@@ -19,6 +22,7 @@ graphql-relay==0.4.5
 idna==2.6
 inflection==0.3.1
 iso8601==0.1.12
+kombu==4.1.0
 mccabe==0.6.1
 pep8==1.7.1
 pluggy==0.6.0
@@ -37,6 +41,7 @@ pytest-mock==1.6.3
 pytest-pep8==1.0.6
 python-dateutil==2.6.1
 pytz==2017.3
+redis==2.10.6
 requests==2.18.4
 responses==0.8.1
 Rx==1.6.0
@@ -46,4 +51,5 @@ slackclient==1.1.0
 text-unidecode==1.1
 typing==3.6.2
 urllib3==1.22
+vine==1.1.4
 websocket-client==0.46.0

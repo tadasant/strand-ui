@@ -64,11 +64,13 @@ class Session(TimeStampedModel):
     question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
     participants = models.ManyToManyField(to=User, related_name='sessions')
 
+    def get_datetime_of_last_non_bot_message(self):
+        return self.messages.filter(author_).last().time
+
     @property
     def is_closed(self):
         return self.status == SessionStatus.CLOSED.value
 
-    # TODO: Check timestamp of last non-bot message.
     def can_mark_as_stale(self):
         return True
 
