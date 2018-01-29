@@ -13,6 +13,8 @@ jobs:
           POSTGRES_DB: solutionloft
           POSTGRES_PASSWORD: ""
 
+      - image: redis
+
     working_directory: ~/repo
 
     steps:

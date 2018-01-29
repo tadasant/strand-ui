@@ -112,11 +112,15 @@ To test that Redis has been installed, use the Redis CLI to ping the server: `$ 
 ### Starting a Celery worker
 
 To start a Celery worker, open up another Terminal session. Using the Celery command line, you can run
-`celery -A app worker -l info`. The `-A` flag is for specifying an app by its name, which we've done in 
+`$ celery -A app worker -l info`. The `-A` flag is for specifying an app by its name, which we've done in 
 `celery.py` within `app/api/`. If the project is properly configured, you should see the Celery logo along
 with Redis connection information that matches that in your `local.py` file.
 
 ### Starting _the_ Beat
 
 To start the Celery beat, open up a third Terminal session. Using the Celery command line, you can run
-`celery -A app beat -l info`.
+`$ celery -A app beat -l info`.
+
+### Clearing out the Queue
+
+If something goes awry, you can clear the task queue by running `$ celery -A app purge`.

@@ -144,6 +144,7 @@ REST_FRAMEWORK = {
 }
 
 # Celery
+# http://docs.celeryproject.org/en/latest/userguide/configuration.html
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_SERIALIZER = 'json'
