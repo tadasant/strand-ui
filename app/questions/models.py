@@ -5,8 +5,8 @@ from django.utils import timezone
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
-from app.users.models import User
 from app.groups.models import Group
+from app.users.models import User
 
 
 class Tag(TimeStampedModel):
@@ -64,26 +64,41 @@ class Session(TimeStampedModel):
     question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
     participants = models.ManyToManyField(to=User, related_name='sessions')
 
-    def get_datetime_of_last_non_bot_message(self):
-        return self.messages.filter(author_).last().time
+    @property
+    def datetime_of_last_non_bot_message(self):
+        last_non_bot_message = self.messages.filter(author__is_bot=False).order_by('time').first()
+        if last_non_bot_message:
+            return last_non_bot_message.time
+        else:
+            return self.time_start
+
+    @property
+    def minutes_since_last_non_bot_message(self):
+        time_delta = timezone.now() - self.datetime_of_last_non_bot_message
+        minutes = round(time_delta.seconds / 60)
+        return minutes
 
     @property
     def is_closed(self):
         return self.status == SessionStatus.CLOSED.value
 
     def can_mark_as_stale(self):
-        return True
+        if self.minutes_since_last_non_bot_message > 30:
+            return True
+        else:
+            return False
 
     @transition(field=status, source=SessionStatus.OPEN.value, target=SessionStatus.STALE.value,
                 conditions=[can_mark_as_stale])
     def mark_as_stale(self):
+
         pass
 
     @transition(field=status, source=SessionStatus.STALE.value, target=SessionStatus.PENDING_CLOSED.value)
     def mark_as_pending_closed(self):
-        pass
+        from app.questions.tasks import close_pending_closed_session
+        close_pending_closed_session.apply_async(args=[self.id, self.datetime_of_last_non_bot_message], countdown=5)
 
-    # TODO: Check timestamp of last non-bot message and PENDING CLOSED
     @transition(field=status, source='*', target=SessionStatus.CLOSED.value)
     def mark_as_closed(self):
         self.time_end = timezone.now()

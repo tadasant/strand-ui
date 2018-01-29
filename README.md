@@ -119,5 +119,4 @@ with Redis connection information that matches that in your `local.py` file.
 ### Starting _the_ Beat
 
 To start the Celery beat, open up a third Terminal session. Using the Celery command line, you can run
-`celery -A app beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler`. The `--scheduler`
-argument tells Celery to use `django-celery-beat`'s features for scheduling periodic tasks.
+`celery -A app beat -l info`.
