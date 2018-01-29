@@ -124,3 +124,15 @@ To start the Celery beat, open up a third Terminal session. Using the Celery com
 ### Clearing out the Queue
 
 If something goes awry, you can clear the task queue by running `$ celery -A app purge`.
+
+### Setting up Periodic Tasks
+
+We have two types of tasks at the moment. One is a periodic task, which runs every 5 minutes
+and marks sessions as stale if there has been no non-bot activity for over 30 minutes. Another is
+an asynchronous task that runs 5 minutes after a session has been marked as pending closed. If
+there is no new activity since it was marked as pending closed, then the task closes the session and
+the respective session.
+
+The periodic task needs to exist in the `django_celery_beat` table in order for the beat to populate
+it to the task queue every 5 minutes. To do this, we have a management command to create it if you haven't
+already done so. To execute it, run `$ python manage create_periodic_tasks`.
