@@ -97,7 +97,8 @@ class Session(TimeStampedModel):
     @transition(field=status, source=SessionStatus.STALE.value, target=SessionStatus.PENDING_CLOSED.value)
     def mark_as_pending_closed(self):
         from app.questions.tasks import close_pending_closed_session
-        close_pending_closed_session.apply_async(args=[self.id, self.datetime_of_last_non_bot_message], countdown=5)
+        close_pending_closed_session.apply_async(args=[self.id, self.datetime_of_last_non_bot_message],
+                                                 countdown=60 * 5)
 
     @transition(field=status, source='*', target=SessionStatus.CLOSED.value)
     def mark_as_closed(self):
