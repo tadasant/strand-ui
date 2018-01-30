@@ -82,6 +82,10 @@ class Session(TimeStampedModel):
     def is_closed(self):
         return self.status == SessionStatus.CLOSED.value
 
+    @property
+    def is_stale(self):
+        return self.status == SessionStatus.STALE.value
+
     def can_mark_as_stale(self):
         if self.minutes_since_last_non_bot_message > 30:
             return True

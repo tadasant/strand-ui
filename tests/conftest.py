@@ -1,6 +1,12 @@
+import os
+import signal
+import subprocess
+import time
+
 import pytest
-from pytest_factoryboy.fixture import register
 import responses
+from django_celery_beat.models import IntervalSchedule, PeriodicTask
+from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
 from slackclient import SlackClient
 
@@ -95,3 +101,17 @@ def slack_client_factory(mocker):
     the scope of the token.
     """
     mocker.patch.object(SlackClient, 'api_call', new=TestSlackClient.api_call)
+
+
+@pytest.fixture()
+def periodic_tasks():
+    schedule, created = IntervalSchedule.objects.get_or_create(
+        every=10,
+        period=IntervalSchedule.SECONDS,
+    )
+
+    PeriodicTask.objects.create(
+        interval=schedule,
+        name='Mark stale sessions',
+        task='app.questions.tasks.mark_stale_sessions'
+    )

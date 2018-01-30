@@ -24,6 +24,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = User
 
     email = factory.Faker('safe_email')
+    is_bot = factory.Faker('pybool')
     password = make_password('mypass123!')
     username = factory.Faker('user_name')
     first_name = factory.Faker('first_name')

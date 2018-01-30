@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         schedule, created = IntervalSchedule.objects.get_or_create(
-            every=10,
+            every=5 * 60,
             period=IntervalSchedule.SECONDS,
         )
 
