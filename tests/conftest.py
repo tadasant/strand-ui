@@ -1,15 +1,10 @@
-import os
-import signal
-import subprocess
-import time
-
 import pytest
 import responses
-from django_celery_beat.models import IntervalSchedule, PeriodicTask
 from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
 from slackclient import SlackClient
 
+from app.questions.tasks import auto_close_pending_closed_session
 from tests.factories import (
     GroupFactory,
     MessageFactory,
@@ -26,6 +21,7 @@ from tests.factories import (
     UserFactory
 )
 from tests.resources.TestSlackClient import TestSlackClient
+from tests.resources.test_celery_tasks import auto_close_pending_closed_session_task, mark_stale_sessions_task
 
 register(GroupFactory)
 register(MessageFactory)
@@ -43,7 +39,7 @@ register(UserFactory)
 
 
 @pytest.fixture()
-def auth_client(user_factory):
+def auth_client(user_factory, transactional_db):
     """Pytest fixture for authenticated API client
 
     Most of our mutations require authentication. Rather than authenticate
@@ -104,14 +100,22 @@ def slack_client_factory(mocker):
 
 
 @pytest.fixture()
-def periodic_tasks():
-    schedule, created = IntervalSchedule.objects.get_or_create(
-        every=10,
-        period=IntervalSchedule.SECONDS,
-    )
+def auto_close_pending_closed_session_factory(mocker, transactional_db):
+    """Pytest fixture to patch async_delay using test resource
 
-    PeriodicTask.objects.create(
-        interval=schedule,
-        name='Mark stale sessions',
-        task='app.questions.tasks.mark_stale_sessions'
-    )
+    Created a test resource for the auto_close_pending_closed_session
+    task that executes after the intended delay without the need of
+    a Celery worker.
+    """
+    mocker.patch.object(auto_close_pending_closed_session, 'apply_async', new=auto_close_pending_closed_session_task)
+
+
+@pytest.fixture()
+def mark_stale_sessions_factory(transactional_db):
+    """Pytest fixture to monitor for stale sessions.
+
+    This is in lieu of creating mock resources to mimick a
+    Celery Beat and Celery worker. This does a timed loop
+    10 times and executes the mark_stale_session task.
+    """
+    return mark_stale_sessions_task

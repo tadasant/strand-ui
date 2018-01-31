@@ -10,13 +10,13 @@ def mark_stale_sessions():
     """
     sessions = Session.objects.filter(status=SessionStatus.OPEN.value).all()
     for session in sessions:
-        if session.minutes_since_last_non_bot_message > 30:
+        if session.minutes_since_last_non_bot_message >= 30.0:
             session.mark_as_stale()
             session.save()
 
 
 @celery_app.task
-def close_pending_closed_session(session_id, datetime_of_last_non_bot_message):
+def auto_close_pending_closed_session(session_id, datetime_of_last_non_bot_message):
     """
     Task that closes session that's been set to PENDING CLOSED
     if there is no new activity for 5 additional minutes.

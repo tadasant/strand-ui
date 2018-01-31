@@ -1,5 +1,6 @@
 from enum import Enum
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django_fsm import FSMField, transition
@@ -66,7 +67,7 @@ class Session(TimeStampedModel):
 
     @property
     def datetime_of_last_non_bot_message(self):
-        last_non_bot_message = self.messages.filter(author__is_bot=False).order_by('time').first()
+        last_non_bot_message = self.messages.filter(author__is_bot=False).order_by('time').last()
         if last_non_bot_message:
             return last_non_bot_message.time
         else:
@@ -75,7 +76,7 @@ class Session(TimeStampedModel):
     @property
     def minutes_since_last_non_bot_message(self):
         time_delta = timezone.now() - self.datetime_of_last_non_bot_message
-        minutes = round(time_delta.seconds / 60)
+        minutes = round(time_delta.seconds / 60, 2)
         return minutes
 
     @property
@@ -86,8 +87,16 @@ class Session(TimeStampedModel):
     def is_stale(self):
         return self.status == SessionStatus.STALE.value
 
+    def mark_as_pending_closed_and_standby_to_auto_close(self):
+        self.mark_as_pending_closed()
+        self.save()
+
+        from app.questions.tasks import auto_close_pending_closed_session
+        auto_close_pending_closed_session.apply_async(args=[self.id, self.datetime_of_last_non_bot_message],
+                                                      countdown=settings.AUTO_CLOSE_DELAY)
+
     def can_mark_as_stale(self):
-        if self.minutes_since_last_non_bot_message > 30:
+        if self.minutes_since_last_non_bot_message >= 30.0:
             return True
         else:
             return False
@@ -95,14 +104,11 @@ class Session(TimeStampedModel):
     @transition(field=status, source=SessionStatus.OPEN.value, target=SessionStatus.STALE.value,
                 conditions=[can_mark_as_stale])
     def mark_as_stale(self):
-
         pass
 
     @transition(field=status, source=SessionStatus.STALE.value, target=SessionStatus.PENDING_CLOSED.value)
     def mark_as_pending_closed(self):
-        from app.questions.tasks import close_pending_closed_session
-        close_pending_closed_session.apply_async(args=[self.id, self.datetime_of_last_non_bot_message],
-                                                 countdown=60 * 5)
+        pass
 
     @transition(field=status, source='*', target=SessionStatus.CLOSED.value)
     def mark_as_closed(self):

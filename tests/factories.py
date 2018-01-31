@@ -81,6 +81,7 @@ class SessionFactory(factory.DjangoModelFactory):
     class Meta:
         model = Session
 
+    status = 'OPEN'
     time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
     time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
     question = factory.SubFactory(QuestionFactory)
