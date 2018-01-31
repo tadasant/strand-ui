@@ -87,7 +87,7 @@ class Session(TimeStampedModel):
     def is_stale(self):
         return self.status == SessionStatus.STALE.value
 
-    def mark_as_pending_closed_and_standby_to_auto_close(self):
+    def standby_to_auto_close(self):
         self.mark_as_pending_closed()
         self.save()
 

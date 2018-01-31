@@ -12,7 +12,7 @@ class TestMarkingSessionAsStale:
     def test_does_become_stale_with_no_messages(self, mark_stale_sessions_factory, session_factory):
         mark_stale_sessions_factory(num_periods=3, period_length=1.5)
 
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=29, seconds=58)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=58)
         session = session_factory(time_start=original_time)
 
         wait_until(condition=lambda: Session.objects.get(pk=session.id).is_stale, timeout=7)
@@ -25,7 +25,7 @@ class TestMarkingSessionAsStale:
                                                         slack_user_factory, slack_event_factory):
         mark_stale_sessions_factory(num_periods=3, period_length=1.5)
 
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=29, seconds=58)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=58)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
         user = user_factory(is_bot=False)
@@ -56,7 +56,7 @@ class TestMarkingSessionAsStale:
                                                 slack_user_factory, slack_event_factory):
         mark_stale_sessions_factory(num_periods=3, period_length=1.5)
 
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=29, seconds=57)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=57)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
         user = user_factory(is_bot=True)
@@ -87,7 +87,7 @@ class TestClosingPendingClosedSession:
     def test_does_get_closed(self, auto_close_pending_closed_session_factory, auth_client, session_factory,
                              slack_channel_factory, message_factory, user_factory, slack_user_factory,
                              slack_event_factory):
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=31)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
 
@@ -134,7 +134,7 @@ class TestClosingPendingClosedSession:
                                                       auth_client, session_factory, slack_channel_factory,
                                                       message_factory, user_factory, slack_user_factory,
                                                       slack_event_factory):
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=31)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
         non_bot_user = user_factory(is_bot=False)
@@ -174,7 +174,7 @@ class TestClosingPendingClosedSession:
         assert not Session.objects.get(pk=session.id).is_closed
 
         # New message sent
-        slack_event = slack_event_factory(ts=datetime.now(pytz.UTC).timestamp())
+        slack_event = slack_event_factory(ts=datetime.utcnow().timestamp())
         message = message_factory.build(session=session, author=non_bot_user)
 
         mutation = f'''
@@ -198,7 +198,7 @@ class TestClosingPendingClosedSession:
                                               auth_client, session_factory, slack_channel_factory,
                                               message_factory, user_factory, slack_user_factory,
                                               slack_event_factory):
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=31)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
         non_bot_user = user_factory(is_bot=False)
@@ -262,7 +262,7 @@ class TestClosingPendingClosedSession:
     @pytest.mark.django_db
     def test_does_get_closed_with_no_messages_ever(self, auto_close_pending_closed_session_factory,
                                                    auth_client, session_factory, slack_channel_factory):
-        original_time = datetime.now(pytz.UTC) - timedelta(minutes=31)
+        original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         session = session_factory(time_start=original_time)
         slack_channel = slack_channel_factory(session=session)
 
