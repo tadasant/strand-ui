@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 
 from app.groups.models import Group
 from app.discussions.models import Message, Reply
-from app.questions.models import Question, Session, Tag
+from app.questions.models import Question, Session, Tag, SessionStatus
 from app.users.models import User
 from app.slack_integration.models import (
     SlackAgent,
@@ -24,6 +24,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = User
 
     email = factory.Faker('safe_email')
+    is_bot = factory.Faker('pybool')
     password = make_password('mypass123!')
     username = factory.Faker('user_name')
     first_name = factory.Faker('first_name')
@@ -80,6 +81,7 @@ class SessionFactory(factory.DjangoModelFactory):
     class Meta:
         model = Session
 
+    status = SessionStatus.OPEN.value
     time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
     time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
     question = factory.SubFactory(QuestionFactory)

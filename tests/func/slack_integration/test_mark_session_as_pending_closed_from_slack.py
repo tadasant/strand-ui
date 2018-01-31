@@ -19,7 +19,7 @@ class TestMarkSessionAsPendingClosedFromSlack:
           }}
         '''
         response = client.post('/graphql', {'query': mutation})
-        print(response.content)
+
         assert response.status_code == 200
         assert response.json()['data']['markSessionAsPendingClosedFromSlack'] is None
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
