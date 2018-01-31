@@ -22,7 +22,7 @@ def execute_task_periodically(task, num_periods, period_length, args=None):
 
 
 def auto_close_pending_closed_session_task(args, countdown):
-    thread = threading.Thread(target=execute_task_with_countdown, args=(auto_close_pending_closed_session_task,),
+    thread = threading.Thread(target=execute_task_with_countdown, args=(auto_close_pending_closed_session,),
                               kwargs={'args': args, 'countdown': countdown}, daemon=True)
     thread.start()
 
