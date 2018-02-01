@@ -25,7 +25,7 @@ from app.slack_integration.types import (
     TopicFromSlackInputType,
     ReplyFromSlackInputType,
     DiscussionFromSlackInputType,
-    SlackAgentHelpChannelAndActivateInputType,
+    SlackAgentDiscussChannelAndActivateInputType,
     SlackAgentInputType,
     SlackAgentType,
     SlackChannelType,
@@ -131,20 +131,20 @@ class CreateSlackAgentMutation(graphene.Mutation):
         return CreateSlackAgentMutation(slack_agent=slack_agent)
 
 
-class UpdateSlackAgentHelpChannelAndActivateMutation(graphene.Mutation):
+class UpdateSlackAgentDiscussChannelAndActivateMutation(graphene.Mutation):
     class Arguments:
-        input = SlackAgentHelpChannelAndActivateInputType(required=True)
+        input = SlackAgentDiscussChannelAndActivateInputType(required=True)
 
     slack_agent = graphene.Field(SlackAgentType)
 
     @check_authorization
     def mutate(self, info, input):
         slack_agent = SlackAgent.objects.get(slack_team__id=input['slack_team_id'])
-        slack_agent.help_channel_id = input['help_channel_id']
+        slack_agent.discuss_channel_id = input['discuss_channel_id']
         slack_agent.activate()
         slack_agent.save()
 
-        return UpdateSlackAgentHelpChannelAndActivateMutation(slack_agent=slack_agent)
+        return UpdateSlackAgentDiscussChannelAndActivateMutation(slack_agent=slack_agent)
 
 
 class CreateMessageFromSlackMutation(graphene.Mutation):
@@ -405,7 +405,7 @@ class Mutation(graphene.ObjectType):
     create_slack_agent = CreateSlackAgentMutation.Field()
     create_slack_channel = CreateSlackChannelMutation.Field()
 
-    update_slack_agent_help_channel_and_activate = UpdateSlackAgentHelpChannelAndActivateMutation.Field()
+    update_slack_agent_discuss_channel_and_activate = UpdateSlackAgentDiscussChannelAndActivateMutation.Field()
 
     create_message_from_slack = CreateMessageFromSlackMutation.Field()
     create_user_and_message_from_slack = CreateUserAndMessageFromSlackMutation.Field()
