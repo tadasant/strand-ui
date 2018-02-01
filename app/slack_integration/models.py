@@ -4,7 +4,7 @@ from django.db import models
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
-from app.questions.models import Session
+from app.topics.models import Session
 from app.users.models import User
 from app.groups.models import Group
 

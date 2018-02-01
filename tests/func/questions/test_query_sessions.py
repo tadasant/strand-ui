@@ -7,11 +7,11 @@ class TestQuerySessions:
     def test_get_session(self, session_factory, client):
         session = session_factory()
 
-        query = {'query': f'{{ session(id: {session.id}) {{ question {{ title }} }} }}'}
+        query = {'query': f'{{ session(id: {session.id}) {{ topic {{ title }} }} }}'}
         response = client.post('/graphql', query)
 
         assert response.status_code == 200
-        assert response.json()['data']['session']['question']['title'] == session.question.title
+        assert response.json()['data']['session']['topic']['title'] == session.topic.title
 
     @pytest.mark.django_db
     def test_get_sessions(self, session_factory, client):

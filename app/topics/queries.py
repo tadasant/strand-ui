@@ -1,21 +1,21 @@
 import graphene
 
-from app.questions.models import Question, Session, Tag
-from app.questions.types import QuestionType, SessionType, TagType
+from app.topics.models import Topic, Session, Tag
+from app.topics.types import TopicType, SessionType, TagType
 
 
 class Query(graphene.ObjectType):
-    question = graphene.Field(QuestionType, id=graphene.Int())
+    topic = graphene.Field(TopicType, id=graphene.Int())
     tag = graphene.Field(TagType, name=graphene.String())
     session = graphene.Field(SessionType, id=graphene.Int())
 
-    questions = graphene.List(QuestionType)
+    topics = graphene.List(TopicType)
     tags = graphene.List(TagType)
     sessions = graphene.List(SessionType)
 
-    def resolve_question(self, info, id=None):
+    def resolve_topic(self, info, id=None):
         if id is not None:
-            return Question.objects.get(pk=id)
+            return Topic.objects.get(pk=id)
 
         return None
 
@@ -31,8 +31,8 @@ class Query(graphene.ObjectType):
 
         return None
 
-    def resolve_questions(self, info):
-        return Question.objects.all()
+    def resolve_topics(self, info):
+        return Topic.objects.all()
 
     def resolve_tags(self, info):
         return Tag.objects.all()

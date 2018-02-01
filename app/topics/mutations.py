@@ -1,37 +1,37 @@
 import graphene
 
 from app.api.authorization import check_authorization
-from app.questions.models import Question
-from app.questions.validators import QuestionValidator, SessionValidator, TagValidator
-from app.questions.types import (
-    QuestionType,
-    QuestionInputType,
+from app.topics.models import Topic
+from app.topics.validators import TopicValidator, SessionValidator, TagValidator
+from app.topics.types import (
+    TopicType,
+    TopicInputType,
     SessionType,
     SessionInputType,
-    SolveQuestionInputType,
+    SolveTopicInputType,
     TagType,
     TagInputType
 )
 from app.users.models import User
 
 
-class CreateQuestionMutation(graphene.Mutation):
+class CreateTopicMutation(graphene.Mutation):
     class Arguments:
-        input = QuestionInputType(required=True)
+        input = TopicInputType(required=True)
 
-    question = graphene.Field(QuestionType)
+    topic = graphene.Field(TopicType)
 
     @check_authorization
     def mutate(self, info, input):
         tags = input.pop('tags', [])
 
-        question_validator = QuestionValidator(data=input)
-        question_validator.is_valid(raise_exception=True)
-        question = question_validator.save()
+        topic_validator = TopicValidator(data=input)
+        topic_validator.is_valid(raise_exception=True)
+        topic = topic_validator.save()
 
-        question.add_or_create_tags(tags)
+        topic.add_or_create_tags(tags)
 
-        return CreateQuestionMutation(question=question)
+        return CreateTopicMutation(topic=topic)
 
 
 class CreateSessionMutation(graphene.Mutation):
@@ -64,31 +64,31 @@ class CreateTagMutation(graphene.Mutation):
         return CreateTagMutation(tag=tag)
 
 
-class SolveQuestionMutation(graphene.Mutation):
+class SolveTopicMutation(graphene.Mutation):
     class Arguments:
-        input = SolveQuestionInputType(required=True)
+        input = SolveTopicInputType(required=True)
 
-    question = graphene.Field(QuestionType)
+    topic = graphene.Field(TopicType)
     session = graphene.Field(SessionType)
 
     @check_authorization
     def mutate(self, info, input):
-        question = Question.objects.get(pk=input['id'])
+        topic = Topic.objects.get(pk=input['id'])
         solver = User.objects.get(pk=input['solver_id'])
 
-        question.session.mark_as_closed()
-        question.session.save()
+        topic.session.mark_as_closed()
+        topic.session.save()
 
-        question.mark_as_solved()
-        question.solver = solver
-        question.save()
+        topic.mark_as_solved()
+        topic.solver = solver
+        topic.save()
 
-        return SolveQuestionMutation(question=question, session=question.session)
+        return SolveTopicMutation(topic=topic, session=topic.session)
 
 
 class Mutation(graphene.ObjectType):
-    create_question = CreateQuestionMutation.Field()
+    create_topic = CreateTopicMutation.Field()
     create_session = CreateSessionMutation.Field()
     create_tag = CreateTagMutation.Field()
 
-    solve_question = SolveQuestionMutation.Field()
+    solve_topic = SolveTopicMutation.Field()

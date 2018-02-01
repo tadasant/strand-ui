@@ -16,28 +16,28 @@ class Tag(TimeStampedModel):
         return self.name
 
 
-class QuestionStatus(Enum):
+class TopicStatus(Enum):
     UNSOLVED = 'UNSOLVED'
     SOLVED = 'SOLVED'
 
 
-class Question(TimeStampedModel):
+class Topic(TimeStampedModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
 
-    status = FSMField(default=QuestionStatus.UNSOLVED.value, protected=True)
+    status = FSMField(default=TopicStatus.UNSOLVED.value, protected=True)
     is_anonymous = models.BooleanField(default=False)
 
-    original_poster = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='asked_questions')
-    solver = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='solved_questions')
+    original_poster = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='asked_topics')
+    solver = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='solved_topics')
     group = models.ForeignKey(to=Group, on_delete=models.SET_NULL, null=True)
 
-    tags = models.ManyToManyField(to=Tag, related_name='questions')
+    tags = models.ManyToManyField(to=Tag, related_name='topics')
 
     def can_mark_as_solved(self):
         return self.session.is_closed
 
-    @transition(field=status, source=QuestionStatus.UNSOLVED.value, target=QuestionStatus.SOLVED.value)
+    @transition(field=status, source=TopicStatus.UNSOLVED.value, target=TopicStatus.SOLVED.value)
     def mark_as_solved(self):
         pass
 
@@ -61,7 +61,7 @@ class Session(TimeStampedModel):
     time_start = models.DateTimeField(default=timezone.now)
     time_end = models.DateTimeField(null=True)
     status = FSMField(default=SessionStatus.OPEN.value, protected=True)
-    question = models.OneToOneField(to=Question, on_delete=models.CASCADE)
+    topic = models.OneToOneField(to=Topic, on_delete=models.CASCADE)
     participants = models.ManyToManyField(to=User, related_name='sessions')
 
     @property
@@ -87,4 +87,4 @@ class Session(TimeStampedModel):
         self.time_end = timezone.now()
 
     def __str__(self):
-        return f'Session for "{self.question.title}"'
+        return f'Session for "{self.topic.title}"'

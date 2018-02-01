@@ -5,7 +5,7 @@
   "fields": {
     "created": "2018-01-24T00:29:58.714Z",
     "modified": "2018-01-24T00:29:58.714Z",
-    "text": "hey <@U8F2Q2P7B> how\u2019s this going? Any follow-ups for Will or Vikas? If not, let us know so we can flag this question as answered :muscle:",
+    "text": "hey <@U8F2Q2P7B> how\u2019s this going? Any follow-ups for Will or Vikas? If not, let us know so we can flag this topic as answered :muscle:",
     "session": 23,
     "author": 76,
     "time": "2017-12-19T09:16:08Z",
@@ -746,7 +746,7 @@
   "fields": {
     "created": "2018-01-24T00:29:59.125Z",
     "modified": "2018-01-24T00:29:59.125Z",
-    "text": "look at this stackoverflow thread for explanation - <https://stackoverflow.com/questions/28901683/pandas-get-rows-which-are-not-in-other-dataframe>",
+    "text": "look at this stackoverflow thread for explanation - <https://stackoverflow.com/topics/28901683/pandas-get-rows-which-are-not-in-other-dataframe>",
     "session": 24,
     "author": 96,
     "time": "2017-12-20T14:09:52Z",
@@ -889,7 +889,7 @@
   "fields": {
     "created": "2018-01-24T00:29:59.166Z",
     "modified": "2018-01-24T00:29:59.166Z",
-    "text": "I have some questions for you",
+    "text": "I have some topics for you",
     "session": 24,
     "author": 96,
     "time": "2017-12-20T13:33:35Z",
@@ -1552,7 +1552,7 @@
   "fields": {
     "created": "2018-01-24T00:30:00.181Z",
     "modified": "2018-01-24T00:30:00.181Z",
-    "text": "(this is my question :)) I\u2019m finding that the (limited) code duplication is somewhat frustrating, in that if I make a decision like \u201call the text on this page should be center aligned\u201d and then go and add an alignment prop to every text component on that view (e.g. `AppDashboardDesktop`), I then have to also do it for every text component within every variant\u2026 but then this code duplication is nice when I decide I want to use a different font size in mobile vs. desktop, because I can change the mobile ones without changing the desktop ones. Trying to squeeze this all into one component with ternaries doesn't seem like a reasonable alternative",
+    "text": "(this is my topic :)) I\u2019m finding that the (limited) code duplication is somewhat frustrating, in that if I make a decision like \u201call the text on this page should be center aligned\u201d and then go and add an alignment prop to every text component on that view (e.g. `AppDashboardDesktop`), I then have to also do it for every text component within every variant\u2026 but then this code duplication is nice when I decide I want to use a different font size in mobile vs. desktop, because I can change the mobile ones without changing the desktop ones. Trying to squeeze this all into one component with ternaries doesn't seem like a reasonable alternative",
     "session": 28,
     "author": 112,
     "time": "2018-01-04T15:33:06Z",
@@ -1734,7 +1734,7 @@
   "fields": {
     "created": "2018-01-24T00:30:00.477Z",
     "modified": "2018-01-24T00:30:00.477Z",
-    "text": "This was my question! After reading through the latest CircleCI docs and blog posts, I landed on a solution that uses two jobs and one workflow. The jobs contain the relevant bash commands for building, logging into ECR, tagging and pushing the image, and running the task on ECS. Uploading the config.yml here.",
+    "text": "This was my topic! After reading through the latest CircleCI docs and blog posts, I landed on a solution that uses two jobs and one workflow. The jobs contain the relevant bash commands for building, logging into ECR, tagging and pushing the image, and running the task on ECS. Uploading the config.yml here.",
     "session": 29,
     "author": 117,
     "time": "2018-01-05T20:04:24Z",
@@ -1838,7 +1838,7 @@
   "fields": {
     "created": "2018-01-24T00:30:00.718Z",
     "modified": "2018-01-24T00:30:00.718Z",
-    "text": "Cool - any links you want to share here in case anyone else has a similar question? Posts that helped you figure it out? Since we store these questions afterwards, other users might find them helpful",
+    "text": "Cool - any links you want to share here in case anyone else has a similar topic? Posts that helped you figure it out? Since we store these topics afterwards, other users might find them helpful",
     "session": 30,
     "author": 76,
     "time": "2018-01-05T16:20:27Z",
@@ -2124,7 +2124,7 @@
   "fields": {
     "created": "2018-01-24T00:30:01.027Z",
     "modified": "2018-01-24T00:30:01.027Z",
-    "text": "(this is my question)",
+    "text": "(this is my topic)",
     "session": 31,
     "author": 112,
     "time": "2018-01-05T21:10:31Z",
@@ -2709,7 +2709,7 @@
   "fields": {
     "created": "2018-01-24T00:30:01.694Z",
     "modified": "2018-01-24T00:30:01.694Z",
-    "text": "update on my question here... bizarre behavior in that when the test initializes this DatabaseClientWrapper i'm using, the db file is created, and when it returns to the caller, the file gets deleted. thinking it's related to pytest fixtures, maybe tmpdir_factory\n```\nfrom peewee import DoesNotExist\n\nfrom src.models import database, Channel\n\n\nclass DatabaseClientWrapper(object):\n    def __init__(self):\n        self.create_tables_safely()\n\n    def create_tables_safely(self):\n        database.create_tables([Channel], safe=True)\n```",
+    "text": "update on my topic here... bizarre behavior in that when the test initializes this DatabaseClientWrapper i'm using, the db file is created, and when it returns to the caller, the file gets deleted. thinking it's related to pytest fixtures, maybe tmpdir_factory\n```\nfrom peewee import DoesNotExist\n\nfrom src.models import database, Channel\n\n\nclass DatabaseClientWrapper(object):\n    def __init__(self):\n        self.create_tables_safely()\n\n    def create_tables_safely(self):\n        database.create_tables([Channel], safe=True)\n```",
     "session": 33,
     "author": 112,
     "time": "2018-01-09T16:47:21Z",
@@ -3840,7 +3840,7 @@
   "fields": {
     "created": "2018-01-24T00:30:02.837Z",
     "modified": "2018-01-24T00:30:02.837Z",
-    "text": "his question was why was that evaluating to False",
+    "text": "his topic was why was that evaluating to False",
     "session": 35,
     "author": 112,
     "time": "2018-01-09T19:10:41Z",
@@ -4620,7 +4620,7 @@
   "fields": {
     "created": "2018-01-24T00:30:04.661Z",
     "modified": "2018-01-24T00:30:04.662Z",
-    "text": "<@U8CSK1KBQ> Yup, will post another session if I have another question. I'll definitely recommend this to some other developers if its okay with you guys. Really appreciate the dynamic here. I",
+    "text": "<@U8CSK1KBQ> Yup, will post another session if I have another topic. I'll definitely recommend this to some other developers if its okay with you guys. Really appreciate the dynamic here. I",
     "session": 40,
     "author": 45,
     "time": "2018-01-18T22:54:22Z",
@@ -4646,7 +4646,7 @@
   "fields": {
     "created": "2018-01-24T00:30:04.668Z",
     "modified": "2018-01-24T00:30:04.668Z",
-    "text": ":thumbsup: no problem feel free to make more sessions as questions come up",
+    "text": ":thumbsup: no problem feel free to make more sessions as topics come up",
     "session": 40,
     "author": 112,
     "time": "2018-01-18T21:49:47Z",
@@ -4724,7 +4724,7 @@
   "fields": {
     "created": "2018-01-24T00:30:04.690Z",
     "modified": "2018-01-24T00:30:04.691Z",
-    "text": "Let me know if I'm not reading the question correctly / there's more nuances",
+    "text": "Let me know if I'm not reading the topic correctly / there's more nuances",
     "session": 40,
     "author": 112,
     "time": "2018-01-18T20:36:33Z",
@@ -7194,7 +7194,7 @@
   "fields": {
     "created": "2018-01-24T00:30:08.415Z",
     "modified": "2018-01-24T00:30:08.415Z",
-    "text": "Yeah feel free to share with friends, either to post questions or to help out on posts that other people share",
+    "text": "Yeah feel free to share with friends, either to post topics or to help out on posts that other people share",
     "session": 50,
     "author": 76,
     "time": "2017-12-15T22:42:53Z",
@@ -7324,7 +7324,7 @@
   "fields": {
     "created": "2018-01-24T00:30:08.452Z",
     "modified": "2018-01-24T00:30:08.453Z",
-    "text": "fair question - per the docs, app.listen() calls server.listen() before it executes that callback",
+    "text": "fair topic - per the docs, app.listen() calls server.listen() before it executes that callback",
     "session": 50,
     "author": 112,
     "time": "2017-12-15T22:35:30Z",
@@ -7571,7 +7571,7 @@
   "fields": {
     "created": "2018-01-24T00:30:08.527Z",
     "modified": "2018-01-24T00:30:08.527Z",
-    "text": "a working but probably unideal solution to your direct question would probably be: add a parameter to getFeedData and isDelay called port, then do what you said: start app.listen() on different ports, and when making the requests in the tests, pass in the correct port number",
+    "text": "a working but probably unideal solution to your direct topic would probably be: add a parameter to getFeedData and isDelay called port, then do what you said: start app.listen() on different ports, and when making the requests in the tests, pass in the correct port number",
     "session": 50,
     "author": 112,
     "time": "2017-12-15T22:21:08Z",
@@ -7701,7 +7701,7 @@
   "fields": {
     "created": "2018-01-24T00:30:03.618Z",
     "modified": "2018-01-24T00:30:03.618Z",
-    "text": "After further discussion, seems like there's a wider array of possible settings than we initially brainstormed, and so a `setting` table is entirely appropriate and there's plenty to read about it. Here's a few links <https://stackoverflow.com/questions/10204902/database-design-for-user-settings> (scroll down to most upvoted answer), <http://culttt.com/2015/02/02/storing-user-settings-relational-database/> -- we're going to go with the \"property bag\" approach",
+    "text": "After further discussion, seems like there's a wider array of possible settings than we initially brainstormed, and so a `setting` table is entirely appropriate and there's plenty to read about it. Here's a few links <https://stackoverflow.com/topics/10204902/database-design-for-user-settings> (scroll down to most upvoted answer), <http://culttt.com/2015/02/02/storing-user-settings-relational-database/> -- we're going to go with the \"property bag\" approach",
     "message": 728,
     "author": 112,
     "time": "2018-01-16T14:25:17Z",
@@ -7740,7 +7740,7 @@
   "fields": {
     "created": "2018-01-24T00:30:07.154Z",
     "modified": "2018-01-24T00:30:07.155Z",
-    "text": "Missed replacing `context` with `this.el` in a few spots, maybe there's other small bugs, but that's the idea for the original question",
+    "text": "Missed replacing `context` with `this.el` in a few spots, maybe there's other small bugs, but that's the idea for the original topic",
     "message": 916,
     "author": 112,
     "time": "2018-01-22T02:46:28Z",
@@ -7766,7 +7766,7 @@
   "fields": {
     "created": "2018-01-24T00:30:08.545Z",
     "modified": "2018-01-24T00:30:08.545Z",
-    "text": "Anytime. Still working on the onboarding, so questions like this are helpful!",
+    "text": "Anytime. Still working on the onboarding, so topics like this are helpful!",
     "message": 1005,
     "author": 76,
     "time": "2017-12-15T22:15:23Z",
@@ -7792,7 +7792,7 @@
   "fields": {
     "created": "2018-01-24T00:30:08.558Z",
     "modified": "2018-01-24T00:30:08.558Z",
-    "text": "The way it works is that posts in <#C8BHN5A81|help> are flagged as :sos: until someone offers to help answer the question. In this case <@U8C281TT6> offered to help, so he switched the tag over to :ok: , but we forgot to mention it in this thread. In the future, if no one is helping you, you should tag the post in <#C8BHN5A81|help> as :sos:  until someone helps, and as :white_check_mark: once you\u2019ve been helped",
+    "text": "The way it works is that posts in <#C8BHN5A81|help> are flagged as :sos: until someone offers to help answer the topic. In this case <@U8C281TT6> offered to help, so he switched the tag over to :ok: , but we forgot to mention it in this thread. In the future, if no one is helping you, you should tag the post in <#C8BHN5A81|help> as :sos:  until someone helps, and as :white_check_mark: once you\u2019ve been helped",
     "message": 1005,
     "author": 76,
     "time": "2017-12-15T22:13:46Z",

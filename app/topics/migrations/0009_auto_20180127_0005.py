@@ -7,16 +7,16 @@ import django_fsm
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('questions', '0008_auto_20180125_1517'),
+        ('topics', '0008_auto_20180125_1517'),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='question',
+            model_name='topic',
             name='is_solved',
         ),
         migrations.AddField(
-            model_name='question',
+            model_name='topic',
             name='status',
             field=django_fsm.FSMField(default='UNSOLVED', max_length=50, protected=True),
         ),
@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
             field=django_fsm.FSMField(default='OPEN', max_length=50, protected=True),
         ),
         migrations.AlterField(
-            model_name='question',
+            model_name='topic',
             name='tags',
-            field=models.ManyToManyField(related_name='questions', to='questions.Tag'),
+            field=models.ManyToManyField(related_name='topics', to='topics.Tag'),
         ),
     ]

@@ -8,23 +8,23 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('questions', '0007_auto_20180125_1351'),
+        ('topics', '0007_auto_20180125_1351'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='question',
+            model_name='topic',
             name='group',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='groups.Group'),
         ),
         migrations.AlterField(
-            model_name='question',
+            model_name='topic',
             name='original_poster',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='asked_questions', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='asked_topics', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
-            model_name='question',
+            model_name='topic',
             name='solver',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='solved_questions', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='solved_topics', to=settings.AUTH_USER_MODEL),
         ),
     ]

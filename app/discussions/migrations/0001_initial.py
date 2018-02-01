@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('questions', '0004_auto_20180111_1455'),
+        ('topics', '0004_auto_20180111_1455'),
     ]
 
     operations = [
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField()),
                 ('time', models.DateTimeField()),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('session', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='questions.Session')),
+                ('session', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='topics.Session')),
             ],
             options={
                 'abstract': False,

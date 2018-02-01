@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Question',
+            name='Topic',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
                 ('is_solved', models.BooleanField(default=False)),
                 ('is_anonymous', models.BooleanField(default=False)),
                 ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='groups.Group')),
-                ('original_poster', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='asked_questions', to=settings.AUTH_USER_MODEL)),
-                ('solver', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='solved_questions', to=settings.AUTH_USER_MODEL)),
+                ('original_poster', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='asked_topics', to=settings.AUTH_USER_MODEL)),
+                ('solver', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='solved_topics', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('time_start', models.DateTimeField(default=datetime.datetime(2018, 1, 11, 1, 3, 44, 391517))),
                 ('time_end', models.DateTimeField(null=True)),
-                ('question', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='questions.Question')),
+                ('topic', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='topics.Topic')),
             ],
             options={
                 'abstract': False,
@@ -63,8 +63,8 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.AddField(
-            model_name='question',
+            model_name='topic',
             name='tags',
-            field=models.ManyToManyField(to='questions.Tag'),
+            field=models.ManyToManyField(to='topics.Tag'),
         ),
     ]

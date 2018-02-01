@@ -2,7 +2,7 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from app.api.authorization import check_authorization
-from app.questions.types import SessionInputType, TagInputType
+from app.topics.types import SessionInputType, TagInputType
 from app.slack_integration.models import (
     SlackAgent,
     SlackChannel,
@@ -159,13 +159,13 @@ class GroupFromSlackInputType(graphene.InputObjectType):
     group_name = graphene.String(required=True)
 
 
-class SolveQuestionFromSlackInputType(graphene.InputObjectType):
+class SolveTopicFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String()
     slack_user_id = graphene.String()
     time_end = graphene.String()
 
 
-class QuestionFromSlackInputType(graphene.InputObjectType):
+class TopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
     is_solved = graphene.Boolean()
@@ -174,7 +174,7 @@ class QuestionFromSlackInputType(graphene.InputObjectType):
     tags = graphene.List(TagInputType)
 
 
-class UserAndQuestionFromSlackInputType(graphene.InputObjectType):
+class UserAndTopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
     is_solved = graphene.Boolean()

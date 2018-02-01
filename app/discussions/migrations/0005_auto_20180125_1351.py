@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='message',
             name='session',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='questions.Session'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages', to='topics.Session'),
         ),
         migrations.AlterField(
             model_name='reply',

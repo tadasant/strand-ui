@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from app.questions.models import Session
+from app.topics.models import Session
 from app.slack_integration.models import (
     SlackChannel,
     SlackTeam,

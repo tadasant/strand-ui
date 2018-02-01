@@ -7,7 +7,7 @@ from slackclient import SlackClient
 from tests.factories import (
     GroupFactory,
     MessageFactory,
-    QuestionFactory,
+    TopicFactory,
     ReplyFactory,
     SessionFactory,
     SlackAgentFactory,
@@ -23,7 +23,7 @@ from tests.resources.TestSlackClient import TestSlackClient
 
 register(GroupFactory)
 register(MessageFactory)
-register(QuestionFactory)
+register(TopicFactory)
 register(ReplyFactory)
 register(SessionFactory)
 register(SlackAgentFactory)

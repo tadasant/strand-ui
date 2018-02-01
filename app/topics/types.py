@@ -1,12 +1,12 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from app.questions.models import Question, Session, Tag
+from app.topics.models import Topic, Session, Tag
 
 
-class QuestionType(DjangoObjectType):
+class TopicType(DjangoObjectType):
     class Meta:
-        model = Question
+        model = Topic
 
 
 class SessionType(DjangoObjectType):
@@ -23,7 +23,7 @@ class TagInputType(graphene.InputObjectType):
     name = graphene.String(required=True)
 
 
-class QuestionInputType(graphene.InputObjectType):
+class TopicInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
     is_solved = graphene.Boolean()
@@ -37,10 +37,10 @@ class QuestionInputType(graphene.InputObjectType):
 class SessionInputType(graphene.InputObjectType):
     time_start = graphene.String()
     time_end = graphene.String()
-    question_id = graphene.Int(required=True)
+    topic_id = graphene.Int(required=True)
 
 
-class QuestionAndTagsInputType(graphene.InputObjectType):
+class TopicAndTagsInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
     is_solved = graphene.Boolean()
@@ -49,6 +49,6 @@ class QuestionAndTagsInputType(graphene.InputObjectType):
     solver_id = graphene.Int()
 
 
-class SolveQuestionInputType(graphene.InputObjectType):
+class SolveTopicInputType(graphene.InputObjectType):
     id = graphene.Int()
     solver_id = graphene.Int()

@@ -6,7 +6,7 @@ from slackclient import SlackClient
 
 from app.discussions.models import Message, Reply
 from app.groups.models import Group
-from app.questions.models import Question, Session, Tag
+from app.topics.models import Topic, Session, Tag
 from app.slack_integration.models import SlackTeam, SlackChannel, SlackEvent, SlackUser
 from app.users.models import User
 
@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
         create_users_and_slack_users(client, group, slack_team)
 
-        create_questions_and_sessions(client, slack_team, options['bot_id'])
+        create_topics_and_sessions(client, slack_team, options['bot_id'])
 
 
 def create_group_and_slack_team(client):
@@ -60,16 +60,16 @@ def create_users_and_slack_users(client, group, slack_team):
         group.members.add(user)
 
 
-def get_question_info(messages, bot_id):
+def get_topic_info(messages, bot_id):
     for message in reversed(messages):
         if (all([x in message.get('text').lower() for x in ('title', 'description', 'tags')]) and message.get(
                 'user') == bot_id):
             try:
-                question_text = message.get('text')
-                title = re.search(r'[T|t]itle(?:.*?) (.*?)[\n]', question_text, re.DOTALL).group(1)
-                tags = re.search(r'[T|t]ags(?:.*?) (.*?)[\n]', question_text, re.DOTALL).group(1).split(',')
+                topic_text = message.get('text')
+                title = re.search(r'[T|t]itle(?:.*?) (.*?)[\n]', topic_text, re.DOTALL).group(1)
+                tags = re.search(r'[T|t]ags(?:.*?) (.*?)[\n]', topic_text, re.DOTALL).group(1).split(',')
                 tags = [tag.strip().lower().replace(' ', '-') for tag in tags]
-                description = re.search(r'[D|d]escription(?:.*?) (.*?)$', question_text, re.DOTALL).group(1).strip('\n')
+                description = re.search(r'[D|d]escription(?:.*?) (.*?)$', topic_text, re.DOTALL).group(1).strip('\n')
                 return {'title': title, 'tags': tags, 'description': description}
             except AttributeError:
                 continue
@@ -105,7 +105,7 @@ def get_replies(events):
     return replies
 
 
-def create_questions_and_sessions(client, slack_team, bot_id):
+def create_topics_and_sessions(client, slack_team, bot_id):
     response = client.api_call('channels.list')
     channels_info = response.get('channels')
     filtered_channels_info = filter(lambda x: 'session-' in x['name'], channels_info)
@@ -115,9 +115,9 @@ def create_questions_and_sessions(client, slack_team, bot_id):
         if is_valid_channel_history(channel_history['messages']):
             channel = client.api_call('channels.info', channel=channel_info['id'])['channel']
             temp_original_poster = User.objects.get(slackuser__id=bot_id)
-            question_info = get_question_info(channel_history['messages'], bot_id)
+            topic_info = get_topic_info(channel_history['messages'], bot_id)
 
-            if not question_info.get('title'):
+            if not topic_info.get('title'):
                 continue
 
             messages = get_messages(channel_history['messages'])
@@ -125,14 +125,14 @@ def create_questions_and_sessions(client, slack_team, bot_id):
             participants = list(set([message['slack_user_id'] for message in messages] +
                                     [reply['slack_user_id'] for reply in replies]))
 
-            question = Question.objects.create(title=question_info['title'], description=question_info['description'],
+            topic = Topic.objects.create(title=topic_info['title'], description=topic_info['description'],
                                                original_poster=temp_original_poster, group=slack_team.group)
 
-            for tag_name in question_info.get('tags', []):
+            for tag_name in topic_info.get('tags', []):
                 tag, created = Tag.objects.get_or_create(name=tag_name)
-                question.tags.add(tag)
+                topic.tags.add(tag)
 
-            session = Session.objects.create(question=question, time_start=messages[-1]['time'],
+            session = Session.objects.create(topic=topic, time_start=messages[-1]['time'],
                                              time_end=messages[0]['time'])
             session.participants.set(User.objects.filter(slackuser__id__in=participants))
 
