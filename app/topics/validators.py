@@ -15,12 +15,11 @@ class TagValidator(serializers.ModelSerializer):
 
 class TopicValidator(serializers.ModelSerializer):
     original_poster_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='original_poster')
-    solver_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='solver', required=False)
     group_id = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all(), source='group')
 
     class Meta:
         model = Topic
-        fields = ('title', 'description', 'status', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id')
+        fields = ('title', 'description', 'is_anonymous', 'original_poster_id', 'group_id')
 
 
 class DiscussionValidator(serializers.ModelSerializer):

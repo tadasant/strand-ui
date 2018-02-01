@@ -33,7 +33,6 @@ from app.slack_integration.types import (
     SlackEventType,
     SlackUserType,
     SlackUserInputType,
-    SolveTopicFromSlackInputType,
     UserFromSlackInputType,
     UserAndMessageFromSlackInputType,
     UserAndTopicFromSlackInputType,
@@ -379,27 +378,6 @@ class MarkDiscussionAsPendingClosedFromSlack(graphene.Mutation):
         return MarkDiscussionAsPendingClosedFromSlack(discussion=discussion)
 
 
-class SolveTopicFromSlackMutation(graphene.Mutation):
-    class Arguments:
-        input = SolveTopicFromSlackInputType(required=True)
-
-    topic = graphene.Field(TopicType)
-    discussion = graphene.Field(DiscussionType)
-
-    @check_authorization
-    def mutate(self, info, input):
-        user = User.objects.get(slack_users__id=input['slack_user_id'])
-        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
-        discussion.mark_as_closed()
-        discussion.save()
-
-        discussion.topic.mark_as_solved()
-        discussion.topic.solver_id = user.id
-        discussion.topic.save()
-
-        return SolveTopicFromSlackMutation(topic=discussion.topic, discussion=discussion)
-
-
 class Mutation(graphene.ObjectType):
     create_slack_user = CreateSlackUserMutation.Field()
     create_slack_agent = CreateSlackAgentMutation.Field()
@@ -419,4 +397,3 @@ class Mutation(graphene.ObjectType):
     create_discussion_from_slack = CreateDiscussionFromSlackMutation.Field()
     mark_discussion_as_pending_closed_from_slack = MarkDiscussionAsPendingClosedFromSlack.Field()
     create_user_from_slack = CreateUserFromSlackMutation.Field()
-    solve_topic_from_slack = SolveTopicFromSlackMutation.Field()

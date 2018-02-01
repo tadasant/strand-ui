@@ -4,7 +4,7 @@ from app.topics.models import Tag, Topic, Discussion
 
 
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'original_poster', 'group', 'status')
+    list_display = ('title', 'original_poster', 'group')
 
 
 class DiscussionAdmin(admin.ModelAdmin):

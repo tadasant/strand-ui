@@ -16,30 +16,16 @@ class Tag(TimeStampedModel):
         return self.name
 
 
-class TopicStatus(Enum):
-    UNSOLVED = 'UNSOLVED'
-    SOLVED = 'SOLVED'
-
-
 class Topic(TimeStampedModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
 
-    status = FSMField(default=TopicStatus.UNSOLVED.value, protected=True)
     is_anonymous = models.BooleanField(default=False)
 
     original_poster = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='asked_topics')
-    solver = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='solved_topics')
     group = models.ForeignKey(to=Group, on_delete=models.SET_NULL, null=True)
 
     tags = models.ManyToManyField(to=Tag, related_name='topics')
-
-    def can_mark_as_solved(self):
-        return self.discussion.is_closed
-
-    @transition(field=status, source=TopicStatus.UNSOLVED.value, target=TopicStatus.SOLVED.value)
-    def mark_as_solved(self):
-        pass
 
     def add_or_create_tags(self, tags):
         for tag_data in tags:

@@ -430,10 +430,8 @@
     "modified": "2018-01-24T00:54:37.870Z",
     "title": "Having an issue reading a text file that was submitted via a web form using POST...",
     "description": "Originally posted this on reddit, \r\n\r\nSo I wrote some code to parse through a CSV file in Jupyter, it works great but it's reading a local static file. I thought it would be simple to transition to the web (since I'm trying to make this into something my coworkers can easily access), but so far it has proved to be quite difficult. I finally got to the point where I'm submitting and reading the file, but now I realize every time I submit the same csv file, the script gets different data. Anyone know what's happening here? It sounds like a buffer issue but I don't know the proper way to upload and parse a text file via POST.\r\n\r\n<https://www.reddit.com/r/learnpython/comments/7k22zs/having_an_issue_with_reading_a_text_file_that_was/>",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 119,
-    "solver": 117,
     "group": 11,
     "tags": [
       1,
@@ -449,10 +447,8 @@
     "modified": "2018-01-24T00:54:18.268Z",
     "title": "Having an issue Pandas Data frame subtraction",
     "description": "TypeError: unsupported operand type(s) for -: 'str' and 'str'\r\n\r\nI'm using the operation like below\r\noutput = df1.subract(df2, axis=0, fill_value=0)\r\nRequirement:  have 2 DF's , 1st DF contains all data with correct values and 2nd DF is similar to first DF\r\nand contains extra rows in which some column values are NaN. here i need to subtract DF1 from DF2 and the result DF should contain only error(column contains NaN) rows",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 101,
-    "solver": 96,
     "group": 11,
     "tags": [
       1,
@@ -468,10 +464,8 @@
     "modified": "2018-01-24T00:53:55.818Z",
     "title": "transfering table data from one psql db to other  psql table in different db",
     "description": "I am stuck, trying to do that. I have tried a lot of different queries in psql console such as :\r\n```INSERT INTO \"pro-greffe_development\".departments\r\nSELECT name description department_number slug FROM banquesansfrais.departments;```\r\nSo more precisely I am trying to transfer the data in fields ```ame description department_number slug``` from the db ```banquesansfrais``` table ```departments``` into the db ```pro-greffe_development``` table departments. \r\nBoth these tables have schema set to ```public```.\r\nHere's what I get after I launch my query in psql console :\r\n```ERROR:  relation \"pro-greffe_development.departments\" does not exist\r\nLINE 1: INSERT INTO \"pro-greffe_development\".departments```",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 62,
-    "solver": 96,
     "group": 11,
     "tags": [
       4
@@ -486,10 +480,8 @@
     "modified": "2018-01-24T00:53:21.653Z",
     "title": "What are your commands?",
     "description": "I want to know all of Clippy\u2019s commands.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 42,
-    "solver": 76,
     "group": 11,
     "tags": [
       5
@@ -504,10 +496,8 @@
     "modified": "2018-01-24T00:52:57.924Z",
     "title": "How to resolve blockchain dns using Python Requests",
     "description": "There are certain blockchain domains that are resolved only by blockchain dns resolvers. \r\nFor ex: <http://Jstash.bazar>\r\nIf you try to open this link in a browser, it wont get resolved. But, just install the browser plugin from <https://blockchain-dns.info/>\r\nand then try to open the site again, it will open up smoothly.\r\nI want to scrap some data from this site using Python Requests (browserless) and have no idea as to how to resolve such blockchain domains.\r\nAny help would be highly appreciated.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 96,
-    "solver": 117,
     "group": 11,
     "tags": [
       1,
@@ -524,10 +514,8 @@
     "modified": "2018-01-24T00:52:37.678Z",
     "title": "Responsive web design with React, best practices",
     "description": "Diving into responsive web design with React for the first time. Wondering if my approach is an anti-pattern in any way, since it doesn\u2019t seem super common: for each view in my app, I\u2019m creating a \u201ccontainer\u201d component (e.g. `AppDashboard`) that uses a series of material-ui\u2019s `&lt;Hidden&gt;` component to basically do a switch statement across a bunch of child components that each lay out a different screen size, e.g. `AppDashboardDesktop` vs. `AppDashboardMobile`. I\u2019m separately extracting out all common children-of-children components, strings of text, etc so there\u2019s little code duplication between those two child components. I think this makes it a lot easier to manage the different layouts that end up pieced together with material-ui `&lt;Grid&gt;` components - you don\u2019t mess up the mobile view if you make changes to the desktop view. But it seems the more common approach would be to use just one file, and do e.g. `&lt;Grid sm={8} md={4} xl={3}&gt;`. Is this just the old webdev non-React way of thinking, or am I missing something?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 112,
-    "solver": 112,
     "group": 11,
     "tags": [
       8,
@@ -543,10 +531,8 @@
     "modified": "2018-01-24T00:52:25.640Z",
     "title": "Best practice for CD to Staging environment and manual deployment to Production environment using CircleCI",
     "description": "Currently using CircleCI to run tests. Would like to further leverage CircleCI to continuously deploy successful builds to a staging environment on AWS ECS with the option to manually deploy to production if staging was successful. In CircleCI v2.0, workflows seem to be the best practice. Working hypothesis is to have a workflow that deploys to staging and holds for approval before deploying to production. The deploy-to-staging and deploy-to-production jobs would each have bash scripts that use AWS\u2019s CLI. If anyone has experience here or if there is a more elegant solution via CircleCI than the bash scripts, would love to hear.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 117,
-    "solver": 117,
     "group": 11,
     "tags": [
       10,
@@ -563,10 +549,8 @@
     "modified": "2018-01-24T00:52:16.081Z",
     "title": "Change background-color of an element when value of input type color changes",
     "description": "I have a `&lt;div class=\"colorpicker_new_color\"&gt;&lt;/div&gt;` and `&lt;input type=\"color\" id=\"colorPicker\"&gt;&lt;/input&gt;` how do I make an event handler when `$('#colorPicker').val()` changes to put `$('.colorpicker_new_color').css(\"backgroundColor\") = $('#colorPicker').val()` and vice versa but I'll have to convert RGB into hex.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 112,
     "group": 11,
     "tags": [
       13,
@@ -585,10 +569,8 @@
     "modified": "2018-01-24T00:52:00.581Z",
     "title": "SVGs in React",
     "description": "I'm trying to replace a bunch of png's in my app with svg's. Proving to be a lot more difficult than I expected. I'm trying out libraries like react-inlinesvg so I can render the SVG's with supplemental CSS-in-JS to get the size scaling right. Turning out to be a mess of wrappers &amp; editing the SVG's parameters. Probably lacking some basic understanding of how SVG's are supposed to work, or maybe missing some React library that abstracts this all out - any ideas?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 112,
-    "solver": 112,
     "group": 11,
     "tags": [
       8,
@@ -605,10 +587,8 @@
     "modified": "2018-01-24T00:51:44.237Z",
     "title": "https website does not open with Chrome and Requests but works with firefox when using Proxy",
     "description": "I admit in advance that this is a very weird problem. I am still posting it hoping someone could figure out whats wrong.\r\nI am trying to access a webpage, url - <https://www.ticketmaster.com/member/payment_options>. I can open it using Google Chrome, Firefox and Python Requests as well.\r\nNow, I want to access the same page using a dedicated proxy from stormproxies. I follow the proxy setup on Firefox and Chrome, as well as use those in Requests code. The webpage opens up well in Firefox, but not in Chrome. It just keeps on waiting for the sever to respond. Same thing happens with Requests code. It times out if I use a timeout parameter.\r\n\r\nHere is the Requests code I am using:\r\n```import requests\r\n\r\nproxy = '&lt;proxy&gt;'\r\nproxies = {'http': 'http://{}'.format(proxy), 'https': 'http://{}'.format(proxy)}\r\n\r\n\r\nheaders = {\r\n    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',\r\n    'Accept-Encoding': 'gzip, deflate, br',\r\n    'Accept-Language': 'en-US,en;q=0.9',\r\n    'Cache-Control': 'max-age=0',\r\n    'Connection': 'keep-alive',\r\n    'Host': '<http://www.ticketmaster.com|www.ticketmaster.com>',\r\n    'Upgrade-Insecure-Requests': '1',\r\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'\r\n}\r\n\r\ns = requests.discussion()\r\ns.headers.update(headers)\r\n# s.proxies.update(proxies)\r\nurl = '<https://www.ticketmaster.com/member/payment_options>'\r\nr = s.get(url, timeout=30)\r\nprint(r.content.decode())```\r\n\r\nThis code would work fine, but as soon as you uncomment the line `s.proxies.update(proxies)`, it would throw TimeoutException.\r\n\r\nThe bigger issue here is that even Google Chrome isnt working.\r\nThe only reasons I could figure out is that Firefox has its own Proxy setup, but Google Chrome rather uses Windows Internet Explorer proxy settings and security settings.\r\n\r\nLet me know if any of you have come across this or if know a solution.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 96,
-    "solver": 117,
     "group": 11,
     "tags": [
       1,
@@ -628,10 +608,8 @@
     "modified": "2018-01-24T00:51:28.645Z",
     "title": "SqliteDatabase showing up empty (no tables) during pytest discussion, even though peewee's create_tables appears to run",
     "description": "I have a branch where this is not a problem, and a branch where this is a problem, can't figure out what in the diff is causing it... Maybe something to do with SqliteDatabase and how it works with threads?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 112,
-    "solver": 112,
     "group": 11,
     "tags": [
       1,
@@ -649,10 +627,8 @@
     "modified": "2018-01-24T00:50:49.153Z",
     "title": "Css basic, what affects the &lt;body&gt; to act this way?",
     "description": "body {\r\n    display: flex;\r\n    margin: 0;\r\n    text-align: center;\r\n    background: #424242;\r\n}\r\nthat's the css, and the dimensions are 1580\u00d7222, what could be affecting it to not be full screen",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 112,
     "group": 11,
     "tags": [
       16
@@ -667,10 +643,8 @@
     "modified": "2018-01-24T00:51:03.544Z",
     "title": "Error when using the Slack API",
     "description": "This is an error on my end (not Slack\u2019s). We\u2019re monitoring messages through the Slack event firehose. Attaching two screenshots. One is of the logs and one is of the relevant source code. It seems that the if statement on line 218 was not true, which resulted in the logging statements on lines 237-238. However, the channel ID of the message equals the HELP_CHANNEL and the user is not in ADMIN_USERS. Any help here would be much appreciated.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 117,
-    "solver": 112,
     "group": 11,
     "tags": [
       1,
@@ -686,10 +660,8 @@
     "modified": "2018-01-24T00:49:46.077Z",
     "title": "Selecting DOM elements",
     "description": "The 5th line is not finished in js.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 112,
     "group": 11,
     "tags": [
       15,
@@ -705,10 +677,8 @@
     "modified": "2018-01-24T00:49:23.855Z",
     "title": "Domain design of settings",
     "description": "We have a domain that includes an entity called team. What\u2019s the best way to model the concept of settings for a team? We currently have a team_settings table. Issues with this our two-fold. 1) What\u2019s the plural of settings? 2) It doesn\u2019t have an inherent identity - so should it be an entity?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 117,
-    "solver": 112,
     "group": 11,
     "tags": [
       29,
@@ -724,10 +694,8 @@
     "modified": "2018-01-24T00:49:10.250Z",
     "title": "creating a custom widget with flask wtforms",
     "description": "I am strugling to find resources that explain how to create custom widget with wtforms. I want to display a list of toggle buttons. So far I ve been able to create a list of checkboxes with `SelectMultipleFields`:\r\n`class PrecisionForm(FlaskForm):\r\n    phone_number     = StringField('Phone number', [validators.Length(min=4, max=25)])\r\n    contact_emails = SelectMultipleField(\r\n            'Contact emails',\r\n            [at_least_one],\r\n            choices=[],\r\n            option_widget=widgets.CheckboxInput(),\r\n            widget=widgets.ListWidget(prefix_label=False)\r\n            )\r\n`",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 62,
-    "solver": 112,
     "group": 11,
     "tags": [
       1,
@@ -744,10 +712,8 @@
     "modified": "2018-01-24T00:48:45.351Z",
     "title": "event delegation js",
     "description": "So I wrote first 2 in jQuery, seems like it's the same.. just another way to write it right?\r\nthe 3rd is in vanilla, now I am researching more... and stumbled upon this:\r\n<https://lists.evolt.org/archive/Week-of-Mon-20090209/127339.html>\r\nI copy pasted the part that I didn't get to work, it's from 2009, is it too old or what's with the syntax?\r\n<https://jsfiddle.net/d8ak0edq/1/>",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 112,
     "group": 11,
     "tags": [
       15,
@@ -764,10 +730,8 @@
     "modified": "2018-01-24T00:48:13.567Z",
     "title": "RDBMS Schema for a Scientific Experiment DataBase",
     "description": "I work with experimental data (structured into 4 sheets / CSV and 1 CSV / experiment currently). I would like to store this in an RDBMS to allow for some querying as well. Two of the aforementioned sheets are time series / voltage series. I'm unsure if I should avoid creating 4 tables / experiment each time. If I should just keep 4 master tables, I'm not sure what to use as a primary key. Each experiment often involves several sensors (so the fields in one of the time series tables would be experiment_id, sensor_id, raw_time,raw_current_electrode1...electroden. (So I'm unsure what a unique identifier would be)",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 45,
-    "solver": 112,
     "group": 11,
     "tags": [
       1,
@@ -784,10 +748,8 @@
     "modified": "2018-01-24T00:47:30.756Z",
     "title": "Time Series DB Handling",
     "description": "I work with experimental data (structured into 4 sheets / CSV and 1 CSV / experiment currently). I decided to store this data in 4 master tables, and use an experiment_ID and sensor_ID column to help query data. (In doing so, the DB will have no primary key). However, two of these tables are time series and may not have the same frequency of time. Can anyone recommend a good way to handle time series data?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 45,
-    "solver": 112,
     "group": 11,
     "tags": [
       1,
@@ -804,10 +766,8 @@
     "modified": "2018-01-24T00:47:02.773Z",
     "title": "HTMLCollection - adding different attributes affects the live collection differently",
     "description": "We all know `document.getElementsByClassName` and `document.getElementsByTagName` are live HTMLCollections.\r\nSo I made 2 examples, one with adding a class attribute, the other with bgcolor. Why does the first act like expected and the other gets it's job done...\r\n<https://jsfiddle.net/adkuca/84ryjp7s/2/>\r\n<https://jsfiddle.net/adkuca/f1o9h7be/>\r\nHow can I know what will work normally and what wont??",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 117,
     "group": 11,
     "tags": [
       15,
@@ -827,10 +787,8 @@
     "modified": "2018-01-24T00:46:26.925Z",
     "title": "Drop a level from Pandas Multiindex",
     "description": "I have a Pandas DF, image attached, and want to drop a level so the columns 'line up'. Can anyone advise?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 45,
-    "solver": 117,
     "group": 11,
     "tags": [
       36
@@ -845,10 +803,8 @@
     "modified": "2018-01-24T00:44:44.779Z",
     "title": "Flatten Index Hierarchy of a Pandas DF",
     "description": "How would I flatten this DF structure such that the columns 'calibration_type' and 'calibration_num' values would be shown in every row.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 45,
-    "solver": 117,
     "group": 11,
     "tags": [
       36
@@ -863,10 +819,8 @@
     "modified": "2018-01-24T00:44:17.669Z",
     "title": "Pytest failing despite custom error handling in Flask",
     "description": "Working on a Flask app and have a custom error handler for an exception I raise in a route. This works perfectly when testing manually with HTTP responses. However, when running a functional test with pytest, the test fails when the exception is initially raised before the Flask app gets a chance to handle it.",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 117,
-    "solver": null,
     "group": 11,
     "tags": [
       24,
@@ -883,10 +837,8 @@
     "modified": "2018-01-24T00:43:49.650Z",
     "title": "Mimic jQuery's Delegated Event Listener",
     "description": "So here I have a piece of code that basically does what jQuery's delegated event listener would do. This was purely just to learn.\r\n<https://jsfiddle.net/adkuca/rdrekqk2/2/>\r\nHow to make it that it would have the same syntax, like `outer.addDelegateEventListener('mousedown', 'div', function(evt){})`",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 46,
-    "solver": 112,
     "group": 11,
     "tags": [
       15,
@@ -904,10 +856,8 @@
     "modified": "2018-01-24T00:43:19.085Z",
     "title": "Trying to replicate c# function in python",
     "description": "So I'm trying to replicate function which is written in c#. In c# it passes two objects to the function, which is pretty clear how everything works, but I can't replicate same functionality in python",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 104,
-    "solver": 117,
     "group": 11,
     "tags": [
       1,
@@ -923,10 +873,8 @@
     "modified": "2018-01-24T00:41:27.198Z",
     "title": "Launching subprocesses in parallel in python script without blocking execution of the script",
     "description": "I am writting a test method for my flask app in which I need to 1) launch my flask app 2) expose it publicly with ngrok.\r\nThus I need to launch two processes from my test script :\r\n```python app.py```\r\n==&gt; launching my flask app\r\n```ngrok http 5000```\r\n==&gt; listening to port 5000 (on which the Flask app is running and exposing public Url\r\nin the case of the ngrok process I also need to get the output of the ngrok command in order to get the url on which I am publicly exposing the flask app.\r\nI need this to process to run in parallel and not to block the execution of my script.\r\nI am really unsure about how to do this. I was thinking about running background processes ? I went through <https://docs.python.org/2/library/subprocess.html>, but I cant figure much out of the docs. So far I have only be able to launch a process from my script but it\u2019s blocking the rest of my script.\r\nI will also need to kill the processes at the end of my script.\r\nCould someone please help and maybe give me an example as how they would achieve this?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 62,
-    "solver": 96,
     "group": 11,
     "tags": [
       1,
@@ -942,10 +890,8 @@
     "modified": "2018-01-24T00:42:53.966Z",
     "title": "JavaScript single request to two different ports",
     "description": "I'm testing a script where one function makes an http request and is then called in another function.\r\nThe first function is:\r\n```export function getFeedData (sub) {\r\n    if (getFeedId(sub) === 2) {\r\n        return axios.get('<http://localhost:4000>').then((data) =&gt; \r\nJSON.parse(data));\r\n    }\r\n}```\r\nAnd the second is:\r\n```export function isDelay (sub, stop) {\r\n    return getFeedData(sub).then((data) =&gt; {\r\n        return data.entity.filter((entityObj) =&gt; {\r\n            return entityObj.stop_time_update !== undefined;\r\n        });\r\n    }).then((newData) =&gt;  {\r\n        console.log(newData);\r\n    }).catch((err) =&gt; {\r\n        console.log(err);\r\n    });\r\n}```\r\nThe reason they're two different functions is that the second will eventually be longer, and I wanted to separate everything out for the sake of simplicity and making my code a bit more declarative.\r\nThe tests for these functions currently look like this:\r\n```import express from 'express';\r\nimport { getFeedId, getFeedData, reverseStop, isDelay } from \r\n'../mocks/apiMock';\r\n\r\nconst app = express();\r\napp.use(express.static('../mocks/MockData.json'));\r\n\r\nit('returns json data', (done) =&gt; {\r\n    app.listen(4000, function () {\r\n        expect.assertions(2);\r\n        return getFeedData('L').then((data) =&gt; {\r\n            expect(data).toBeDefined();\r\n            expect(data.header.gtfs_realtime_version).toBe('1.0');\r\n        });\r\n    });\r\n    done();\r\n});\r\n\r\nit('returns either the delay or time until the next train' , (done) \r\n=&gt; {\r\n    app.listen(4000, function () {\r\n        isDelay('L', 'Lorimer St');\r\n    });\r\n    done();\r\n});```\r\nThat second test doesn't run because it's trying to listen on a port that's already occupied.\r\nThe solution I had in mind would be to pass `app.listen()` `0` as its first parameter so it listens on a random port. However, I don't know how I could get my axios request to request that specific port. Is there a way to do this? Or perhaps a better solution to my problem?",
-    "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 54,
-    "solver": 112,
     "group": 11,
     "tags": [
       14,

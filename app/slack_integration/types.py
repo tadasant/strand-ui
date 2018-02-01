@@ -159,16 +159,9 @@ class GroupFromSlackInputType(graphene.InputObjectType):
     group_name = graphene.String(required=True)
 
 
-class SolveTopicFromSlackInputType(graphene.InputObjectType):
-    slack_channel_id = graphene.String()
-    slack_user_id = graphene.String()
-    time_end = graphene.String()
-
-
 class TopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
-    is_solved = graphene.Boolean()
     is_anonymous = graphene.Boolean()
     original_poster_slack_user_id = graphene.String(required=True)
     tags = graphene.List(TagInputType)
@@ -177,7 +170,6 @@ class TopicFromSlackInputType(graphene.InputObjectType):
 class UserAndTopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
-    is_solved = graphene.Boolean()
     is_anonymous = graphene.Boolean()
     original_poster_slack_user = graphene.Field(UserFromSlackInputType)
     tags = graphene.List(TagInputType)

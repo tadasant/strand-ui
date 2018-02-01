@@ -1,18 +1,15 @@
 import graphene
 
 from app.api.authorization import check_authorization
-from app.topics.models import Topic
-from app.topics.validators import TopicValidator, DiscussionValidator, TagValidator
 from app.topics.types import (
     TopicType,
     TopicInputType,
     DiscussionType,
     DiscussionInputType,
-    SolveTopicInputType,
     TagType,
     TagInputType
 )
-from app.users.models import User
+from app.topics.validators import TopicValidator, DiscussionValidator, TagValidator
 
 
 class CreateTopicMutation(graphene.Mutation):
@@ -64,31 +61,7 @@ class CreateTagMutation(graphene.Mutation):
         return CreateTagMutation(tag=tag)
 
 
-class SolveTopicMutation(graphene.Mutation):
-    class Arguments:
-        input = SolveTopicInputType(required=True)
-
-    topic = graphene.Field(TopicType)
-    discussion = graphene.Field(DiscussionType)
-
-    @check_authorization
-    def mutate(self, info, input):
-        topic = Topic.objects.get(pk=input['id'])
-        solver = User.objects.get(pk=input['solver_id'])
-
-        topic.discussion.mark_as_closed()
-        topic.discussion.save()
-
-        topic.mark_as_solved()
-        topic.solver = solver
-        topic.save()
-
-        return SolveTopicMutation(topic=topic, discussion=topic.discussion)
-
-
 class Mutation(graphene.ObjectType):
     create_topic = CreateTopicMutation.Field()
     create_discussion = CreateDiscussionMutation.Field()
     create_tag = CreateTagMutation.Field()
-
-    solve_topic = SolveTopicMutation.Field()

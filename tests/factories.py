@@ -57,11 +57,9 @@ class TopicFactory(factory.DjangoModelFactory):
 
     title = factory.Faker('sentence')
     description = factory.Faker('sentence')
-    status = 'UNSOLVED'
     is_anonymous = factory.Faker('pybool')
 
     original_poster = factory.SubFactory(UserFactory)
-    solver = factory.SubFactory(UserFactory)
     group = factory.SubFactory(GroupFactory)
 
     @factory.post_generation
