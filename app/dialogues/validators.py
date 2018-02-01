@@ -3,13 +3,13 @@
 from rest_framework import serializers
 
 from app.dialogues.models import Message, Reply
-from app.topics.models import Session
+from app.topics.models import Discussion
 from app.slack_integration.models import SlackEvent
 from app.users.models import User
 
 
 class MessageValidator(serializers.ModelSerializer):
-    session_id = serializers.PrimaryKeyRelatedField(queryset=Session.objects.all(), source='session')
+    discussion_id = serializers.PrimaryKeyRelatedField(queryset=Discussion.objects.all(), source='discussion')
     author_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source='author')
     origin_slack_event_id = serializers.PrimaryKeyRelatedField(queryset=SlackEvent.objects.all(),
                                                                source='origin_slack_event',
@@ -17,7 +17,7 @@ class MessageValidator(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = ('id', 'text', 'session_id', 'author_id', 'time', 'origin_slack_event_id')
+        fields = ('id', 'text', 'discussion_id', 'author_id', 'time', 'origin_slack_event_id')
 
 
 class ReplyValidator(serializers.ModelSerializer):

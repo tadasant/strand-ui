@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='session',
+            model_name='discussion',
             name='participants',
             field=models.ManyToManyField(to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
-            model_name='session',
+            model_name='discussion',
             name='time_start',
             field=models.DateTimeField(default=datetime.datetime(2018, 1, 11, 1, 8, 47, 283804)),
         ),

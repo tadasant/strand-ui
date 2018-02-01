@@ -4,7 +4,7 @@ from app.dialogues.models import Message, Reply
 
 
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ('time', 'author', 'session')
+    list_display = ('time', 'author', 'discussion')
 
 
 class ReplyAdmin(admin.ModelAdmin):

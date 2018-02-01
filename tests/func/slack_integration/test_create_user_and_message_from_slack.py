@@ -158,7 +158,7 @@ class TestCreateUserAndMessageFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createUserAndMessageFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Session matching query does not exist.'
+        assert response.json()['errors'][0]['message'] == 'Discussion matching query does not exist.'
 
     @pytest.mark.django_db
     def test_valid(self, auth_client, message_factory, slack_event_factory, slack_user_factory,

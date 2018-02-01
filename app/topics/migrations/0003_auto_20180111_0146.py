@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='session',
+            model_name='discussion',
             name='time_start',
             field=models.DateTimeField(default=datetime.datetime(2018, 1, 11, 1, 46, 43, 772158, tzinfo=utc)),
         ),

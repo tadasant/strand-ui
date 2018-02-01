@@ -2,7 +2,7 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from app.api.authorization import check_authorization
-from app.topics.types import SessionInputType, TagInputType
+from app.topics.types import DiscussionInputType, TagInputType
 from app.slack_integration.models import (
     SlackAgent,
     SlackChannel,
@@ -90,7 +90,7 @@ class SlackChannelInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
-    session_id = graphene.Int(required=True)
+    discussion_id = graphene.Int(required=True)
 
 
 class SlackAgentHelpChannelAndActivateInputType(graphene.InputObjectType):
@@ -113,14 +113,14 @@ class ReplyFromSlackInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
 
 
-class SessionFromSlackInputType(graphene.InputObjectType):
-    session = graphene.Field(SessionInputType, required=True)
+class DiscussionFromSlackInputType(graphene.InputObjectType):
+    discussion = graphene.Field(DiscussionInputType, required=True)
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
 
 
-class MarkSessionAsPendingClosedFromSlackInputType(graphene.InputObjectType):
+class MarkDiscussionAsPendingClosedFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String(required=True)
 
 

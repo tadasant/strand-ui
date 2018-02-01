@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('id', models.CharField(max_length=255, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=255)),
-                ('session', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='topics.Session')),
+                ('discussion', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='topics.Discussion')),
             ],
             options={
                 'abstract': False,

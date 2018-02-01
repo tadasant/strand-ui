@@ -35,7 +35,7 @@ class Topic(TimeStampedModel):
     tags = models.ManyToManyField(to=Tag, related_name='topics')
 
     def can_mark_as_solved(self):
-        return self.session.is_closed
+        return self.discussion.is_closed
 
     @transition(field=status, source=TopicStatus.UNSOLVED.value, target=TopicStatus.SOLVED.value)
     def mark_as_solved(self):
@@ -50,41 +50,41 @@ class Topic(TimeStampedModel):
         return f'"{self.title}"'
 
 
-class SessionStatus(Enum):
+class DiscussionStatus(Enum):
     OPEN = 'OPEN'
     STALE = 'STALE'
     PENDING_CLOSED = 'PENDING CLOSED'
     CLOSED = 'CLOSED'
 
 
-class Session(TimeStampedModel):
+class Discussion(TimeStampedModel):
     time_start = models.DateTimeField(default=timezone.now)
     time_end = models.DateTimeField(null=True)
-    status = FSMField(default=SessionStatus.OPEN.value, protected=True)
+    status = FSMField(default=DiscussionStatus.OPEN.value, protected=True)
     topic = models.OneToOneField(to=Topic, on_delete=models.CASCADE)
-    participants = models.ManyToManyField(to=User, related_name='sessions')
+    participants = models.ManyToManyField(to=User, related_name='discussions')
 
     @property
     def is_closed(self):
-        return self.status == SessionStatus.CLOSED.value
+        return self.status == DiscussionStatus.CLOSED.value
 
     # TODO: Check timestamp of last non-bot message.
     def can_mark_as_stale(self):
         return True
 
-    @transition(field=status, source=SessionStatus.OPEN.value, target=SessionStatus.STALE.value,
+    @transition(field=status, source=DiscussionStatus.OPEN.value, target=DiscussionStatus.STALE.value,
                 conditions=[can_mark_as_stale])
     def mark_as_stale(self):
         pass
 
-    @transition(field=status, source=SessionStatus.STALE.value, target=SessionStatus.PENDING_CLOSED.value)
+    @transition(field=status, source=DiscussionStatus.STALE.value, target=DiscussionStatus.PENDING_CLOSED.value)
     def mark_as_pending_closed(self):
         pass
 
     # TODO: Check timestamp of last non-bot message and PENDING CLOSED
-    @transition(field=status, source='*', target=SessionStatus.CLOSED.value)
+    @transition(field=status, source='*', target=DiscussionStatus.CLOSED.value)
     def mark_as_closed(self):
         self.time_end = timezone.now()
 
     def __str__(self):
-        return f'Session for "{self.topic.title}"'
+        return f'Discussion for "{self.topic.title}"'

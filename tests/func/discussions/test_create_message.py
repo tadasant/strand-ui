@@ -4,14 +4,14 @@ import pytest
 class TestCreateMessage:
 
     @pytest.mark.django_db
-    def test_unauthenticated(self, client, session_factory, user_factory, message_factory):
-        session = session_factory()
+    def test_unauthenticated(self, client, discussion_factory, user_factory, message_factory):
+        discussion = discussion_factory()
         user = user_factory()
-        message = message_factory.build(session=session, author=user)
+        message = message_factory.build(discussion=discussion, author=user)
 
         mutation = f'''
           mutation {{
-            createMessage(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
+            createMessage(input: {{text: "{message.text}", discussionId: {discussion.id}, authorId: {user.id},
                                    time: "{message.time}"}}) {{
               message {{
                 time
@@ -26,14 +26,14 @@ class TestCreateMessage:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, session_factory, user_factory, message_factory):
-        session = session_factory()
+    def test_valid(self, auth_client, discussion_factory, user_factory, message_factory):
+        discussion = discussion_factory()
         user = user_factory()
-        message = message_factory.build(session=session, author=user)
+        message = message_factory.build(discussion=discussion, author=user)
 
         mutation = f'''
           mutation {{
-            createMessage(input: {{text: "{message.text}", sessionId: {session.id}, authorId: {user.id},
+            createMessage(input: {{text: "{message.text}", discussionId: {discussion.id}, authorId: {user.id},
                                    time: "{message.time}"}}) {{
               message {{
                 text

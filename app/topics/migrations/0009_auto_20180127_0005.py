@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             field=django_fsm.FSMField(default='UNSOLVED', max_length=50, protected=True),
         ),
         migrations.AddField(
-            model_name='session',
+            model_name='discussion',
             name='status',
             field=django_fsm.FSMField(default='OPEN', max_length=50, protected=True),
         ),

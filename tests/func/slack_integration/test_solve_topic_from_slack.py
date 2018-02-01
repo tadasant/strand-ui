@@ -4,13 +4,13 @@ import pytest
 class TestSolveTopicFromSlack:
 
     @pytest.mark.django_db
-    def test_unauthenticated(self, client, user_factory, topic_factory, session_factory,
+    def test_unauthenticated(self, client, user_factory, topic_factory, discussion_factory,
                              slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         topic = topic_factory(original_poster=original_poster)
-        session = session_factory(topic=topic)
-        slack_channel = slack_channel_factory(session=session)
-        time_end = session_factory.build().time_end
+        discussion = discussion_factory(topic=topic)
+        slack_channel = slack_channel_factory(discussion=discussion)
+        time_end = discussion_factory.build().time_end
         slack_solver = slack_user_factory()
 
         mutation = f'''
@@ -19,7 +19,7 @@ class TestSolveTopicFromSlack:
                                             slackUserId: "{slack_solver.id}",
                                             timeEnd: "{time_end}"}}) {{
               topic {{
-                session {{
+                discussion {{
                   timeEnd
                 }}
                 solver {{
@@ -36,13 +36,13 @@ class TestSolveTopicFromSlack:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_invalid_slack_channel(self, auth_client, user_factory, topic_factory, session_factory,
+    def test_invalid_slack_channel(self, auth_client, user_factory, topic_factory, discussion_factory,
                                    slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         topic = topic_factory(original_poster=original_poster)
-        session = session_factory(topic=topic)
-        slack_channel = slack_channel_factory.build(session=session)
-        time_end = session_factory.build().time_end
+        discussion = discussion_factory(topic=topic)
+        slack_channel = slack_channel_factory.build(discussion=discussion)
+        time_end = discussion_factory.build().time_end
         slack_solver = slack_user_factory()
 
         mutation = f'''
@@ -51,7 +51,7 @@ class TestSolveTopicFromSlack:
                                             slackUserId: "{slack_solver.id}",
                                             timeEnd: "{time_end}"}}) {{
               topic {{
-                session {{
+                discussion {{
                   timeEnd
                 }}
                 solver {{
@@ -65,16 +65,16 @@ class TestSolveTopicFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['solveTopicFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Session matching query does not exist.'
+        assert response.json()['errors'][0]['message'] == 'Discussion matching query does not exist.'
 
     @pytest.mark.django_db
     def test_invalid_slack_user(self, auth_client, user_factory, topic_factory,
-                                session_factory, slack_channel_factory, slack_user_factory):
+                                discussion_factory, slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         topic = topic_factory(original_poster=original_poster)
-        session = session_factory(topic=topic)
-        slack_channel = slack_channel_factory(session=session)
-        time_end = session_factory.build().time_end
+        discussion = discussion_factory(topic=topic)
+        slack_channel = slack_channel_factory(discussion=discussion)
+        time_end = discussion_factory.build().time_end
         slack_solver = slack_user_factory.build()
 
         mutation = f'''
@@ -83,7 +83,7 @@ class TestSolveTopicFromSlack:
                                             slackUserId: "{slack_solver.id}",
                                             timeEnd: "{time_end}"}}) {{
               topic {{
-                session {{
+                discussion {{
                   timeEnd
                 }}
                 solver {{
@@ -100,13 +100,13 @@ class TestSolveTopicFromSlack:
         assert response.json()['errors'][0]['message'] == 'User matching query does not exist.'
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, user_factory, topic_factory, session_factory,
+    def test_valid(self, auth_client, user_factory, topic_factory, discussion_factory,
                    slack_channel_factory, slack_user_factory):
         original_poster = user_factory()
         topic = topic_factory(original_poster=original_poster)
-        session = session_factory(topic=topic)
-        slack_channel = slack_channel_factory(session=session)
-        time_end = session_factory.build().time_end
+        discussion = discussion_factory(topic=topic)
+        slack_channel = slack_channel_factory(discussion=discussion)
+        time_end = discussion_factory.build().time_end
         slack_solver = slack_user_factory()
 
         mutation = f'''
@@ -115,7 +115,7 @@ class TestSolveTopicFromSlack:
                                             slackUserId: "{slack_solver.id}",
                                             timeEnd: "{time_end}"}}) {{
               topic {{
-                session {{
+                discussion {{
                   timeEnd
                 }}
                 solver {{

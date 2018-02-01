@@ -604,7 +604,7 @@
     "created": "2018-01-24T00:30:01.237Z",
     "modified": "2018-01-24T00:51:44.237Z",
     "title": "https website does not open with Chrome and Requests but works with firefox when using Proxy",
-    "description": "I admit in advance that this is a very weird problem. I am still posting it hoping someone could figure out whats wrong.\r\nI am trying to access a webpage, url - <https://www.ticketmaster.com/member/payment_options>. I can open it using Google Chrome, Firefox and Python Requests as well.\r\nNow, I want to access the same page using a dedicated proxy from stormproxies. I follow the proxy setup on Firefox and Chrome, as well as use those in Requests code. The webpage opens up well in Firefox, but not in Chrome. It just keeps on waiting for the sever to respond. Same thing happens with Requests code. It times out if I use a timeout parameter.\r\n\r\nHere is the Requests code I am using:\r\n```import requests\r\n\r\nproxy = '&lt;proxy&gt;'\r\nproxies = {'http': 'http://{}'.format(proxy), 'https': 'http://{}'.format(proxy)}\r\n\r\n\r\nheaders = {\r\n    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',\r\n    'Accept-Encoding': 'gzip, deflate, br',\r\n    'Accept-Language': 'en-US,en;q=0.9',\r\n    'Cache-Control': 'max-age=0',\r\n    'Connection': 'keep-alive',\r\n    'Host': '<http://www.ticketmaster.com|www.ticketmaster.com>',\r\n    'Upgrade-Insecure-Requests': '1',\r\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'\r\n}\r\n\r\ns = requests.session()\r\ns.headers.update(headers)\r\n# s.proxies.update(proxies)\r\nurl = '<https://www.ticketmaster.com/member/payment_options>'\r\nr = s.get(url, timeout=30)\r\nprint(r.content.decode())```\r\n\r\nThis code would work fine, but as soon as you uncomment the line `s.proxies.update(proxies)`, it would throw TimeoutException.\r\n\r\nThe bigger issue here is that even Google Chrome isnt working.\r\nThe only reasons I could figure out is that Firefox has its own Proxy setup, but Google Chrome rather uses Windows Internet Explorer proxy settings and security settings.\r\n\r\nLet me know if any of you have come across this or if know a solution.",
+    "description": "I admit in advance that this is a very weird problem. I am still posting it hoping someone could figure out whats wrong.\r\nI am trying to access a webpage, url - <https://www.ticketmaster.com/member/payment_options>. I can open it using Google Chrome, Firefox and Python Requests as well.\r\nNow, I want to access the same page using a dedicated proxy from stormproxies. I follow the proxy setup on Firefox and Chrome, as well as use those in Requests code. The webpage opens up well in Firefox, but not in Chrome. It just keeps on waiting for the sever to respond. Same thing happens with Requests code. It times out if I use a timeout parameter.\r\n\r\nHere is the Requests code I am using:\r\n```import requests\r\n\r\nproxy = '&lt;proxy&gt;'\r\nproxies = {'http': 'http://{}'.format(proxy), 'https': 'http://{}'.format(proxy)}\r\n\r\n\r\nheaders = {\r\n    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',\r\n    'Accept-Encoding': 'gzip, deflate, br',\r\n    'Accept-Language': 'en-US,en;q=0.9',\r\n    'Cache-Control': 'max-age=0',\r\n    'Connection': 'keep-alive',\r\n    'Host': '<http://www.ticketmaster.com|www.ticketmaster.com>',\r\n    'Upgrade-Insecure-Requests': '1',\r\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'\r\n}\r\n\r\ns = requests.discussion()\r\ns.headers.update(headers)\r\n# s.proxies.update(proxies)\r\nurl = '<https://www.ticketmaster.com/member/payment_options>'\r\nr = s.get(url, timeout=30)\r\nprint(r.content.decode())```\r\n\r\nThis code would work fine, but as soon as you uncomment the line `s.proxies.update(proxies)`, it would throw TimeoutException.\r\n\r\nThe bigger issue here is that even Google Chrome isnt working.\r\nThe only reasons I could figure out is that Firefox has its own Proxy setup, but Google Chrome rather uses Windows Internet Explorer proxy settings and security settings.\r\n\r\nLet me know if any of you have come across this or if know a solution.",
     "status": "UNSOLVED",
     "is_anonymous": false,
     "original_poster": 96,
@@ -626,7 +626,7 @@
   "fields": {
     "created": "2018-01-24T00:30:01.655Z",
     "modified": "2018-01-24T00:51:28.645Z",
-    "title": "SqliteDatabase showing up empty (no tables) during pytest session, even though peewee's create_tables appears to run",
+    "title": "SqliteDatabase showing up empty (no tables) during pytest discussion, even though peewee's create_tables appears to run",
     "description": "I have a branch where this is not a problem, and a branch where this is a problem, can't figure out what in the diff is causing it... Maybe something to do with SqliteDatabase and how it works with threads?",
     "status": "UNSOLVED",
     "is_anonymous": false,
@@ -955,7 +955,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 23,
   "fields": {
     "created": "2018-01-24T00:29:58.682Z",
@@ -973,7 +973,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 24,
   "fields": {
     "created": "2018-01-24T00:29:59.061Z",
@@ -990,7 +990,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 25,
   "fields": {
     "created": "2018-01-24T00:29:59.368Z",
@@ -1007,7 +1007,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 26,
   "fields": {
     "created": "2018-01-24T00:29:59.626Z",
@@ -1022,7 +1022,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 27,
   "fields": {
     "created": "2018-01-24T00:29:59.832Z",
@@ -1040,7 +1040,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 28,
   "fields": {
     "created": "2018-01-24T00:30:00.099Z",
@@ -1057,7 +1057,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 29,
   "fields": {
     "created": "2018-01-24T00:30:00.416Z",
@@ -1073,7 +1073,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 30,
   "fields": {
     "created": "2018-01-24T00:30:00.685Z",
@@ -1092,7 +1092,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 31,
   "fields": {
     "created": "2018-01-24T00:30:01.004Z",
@@ -1108,7 +1108,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 32,
   "fields": {
     "created": "2018-01-24T00:30:01.261Z",
@@ -1126,7 +1126,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 33,
   "fields": {
     "created": "2018-01-24T00:30:01.672Z",
@@ -1142,7 +1142,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 34,
   "fields": {
     "created": "2018-01-24T00:30:01.960Z",
@@ -1160,7 +1160,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 35,
   "fields": {
     "created": "2018-01-24T00:30:02.655Z",
@@ -1178,7 +1178,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 36,
   "fields": {
     "created": "2018-01-24T00:30:03.130Z",
@@ -1194,7 +1194,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 37,
   "fields": {
     "created": "2018-01-24T00:30:03.595Z",
@@ -1210,7 +1210,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 38,
   "fields": {
     "created": "2018-01-24T00:30:03.846Z",
@@ -1227,7 +1227,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 39,
   "fields": {
     "created": "2018-01-24T00:30:04.173Z",
@@ -1244,7 +1244,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 40,
   "fields": {
     "created": "2018-01-24T00:30:04.643Z",
@@ -1262,7 +1262,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 42,
   "fields": {
     "created": "2018-01-24T00:30:05.143Z",
@@ -1279,7 +1279,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 43,
   "fields": {
     "created": "2018-01-24T00:30:05.730Z",
@@ -1297,7 +1297,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 44,
   "fields": {
     "created": "2018-01-24T00:30:06.144Z",
@@ -1315,7 +1315,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 45,
   "fields": {
     "created": "2018-01-24T00:30:06.456Z",
@@ -1332,7 +1332,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 46,
   "fields": {
     "created": "2018-01-24T00:30:06.785Z",
@@ -1349,7 +1349,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 47,
   "fields": {
     "created": "2018-01-24T00:30:07.071Z",
@@ -1366,7 +1366,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 48,
   "fields": {
     "created": "2018-01-24T00:30:07.370Z",
@@ -1384,7 +1384,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 49,
   "fields": {
     "created": "2018-01-24T00:30:07.908Z",
@@ -1401,7 +1401,7 @@
   }
 },
 {
-  "model": "topics.session",
+  "model": "topics.discussion",
   "pk": 50,
   "fields": {
     "created": "2018-01-24T00:30:08.401Z",

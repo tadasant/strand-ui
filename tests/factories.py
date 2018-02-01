@@ -1,13 +1,9 @@
-import pytz
-
-import factory
 import factory.fuzzy
+import pytz
 from django.contrib.auth.hashers import make_password
 
-from app.groups.models import Group
 from app.dialogues.models import Message, Reply
-from app.topics.models import Topic, Session, Tag
-from app.users.models import User
+from app.groups.models import Group
 from app.slack_integration.models import (
     SlackAgent,
     SlackAgentStatus,
@@ -17,6 +13,8 @@ from app.slack_integration.models import (
     SlackUser,
     SlackTeam
 )
+from app.topics.models import Topic, Discussion, Tag
+from app.users.models import User
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -76,9 +74,9 @@ class TopicFactory(factory.DjangoModelFactory):
                 self.tags.add(tag)
 
 
-class SessionFactory(factory.DjangoModelFactory):
+class DiscussionFactory(factory.DjangoModelFactory):
     class Meta:
-        model = Session
+        model = Discussion
 
     time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
     time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
@@ -99,7 +97,7 @@ class MessageFactory(factory.DjangoModelFactory):
         model = Message
 
     text = factory.Faker('sentence')
-    session = factory.SubFactory(SessionFactory)
+    discussion = factory.SubFactory(DiscussionFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
@@ -146,7 +144,7 @@ class SlackChannelFactory(factory.DjangoModelFactory):
     id = factory.Faker('md5')
     name = factory.Faker('name')
     slack_team = factory.SubFactory(SlackTeamFactory)
-    session = factory.SubFactory(SessionFactory)
+    discussion = factory.SubFactory(DiscussionFactory)
 
 
 class SlackUserFactory(factory.DjangoModelFactory):

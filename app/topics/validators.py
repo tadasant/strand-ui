@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 from app.groups.models import Group
-from app.topics.models import Topic, Session, Tag
+from app.topics.models import Topic, Discussion, Tag
 from app.users.models import User
 
 
@@ -23,9 +23,9 @@ class TopicValidator(serializers.ModelSerializer):
         fields = ('title', 'description', 'status', 'is_anonymous', 'original_poster_id', 'solver_id', 'group_id')
 
 
-class SessionValidator(serializers.ModelSerializer):
+class DiscussionValidator(serializers.ModelSerializer):
     topic_id = serializers.PrimaryKeyRelatedField(queryset=Topic.objects.all(), source='topic')
 
     class Meta:
-        model = Session
+        model = Discussion
         fields = ('id', 'status', 'time_start', 'time_end', 'topic_id')

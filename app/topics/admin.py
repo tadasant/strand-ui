@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from app.topics.models import Tag, Topic, Session
+from app.topics.models import Tag, Topic, Discussion
 
 
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', 'original_poster', 'group', 'status')
 
 
-class SessionAdmin(admin.ModelAdmin):
+class DiscussionAdmin(admin.ModelAdmin):
     list_display = ('topic', 'get_topic_original_poster', 'get_topic_group', 'status')
 
     def get_topic_original_poster(self, obj):
@@ -23,4 +23,4 @@ class SessionAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag)
 admin.site.register(Topic, admin_class=TopicAdmin)
-admin.site.register(Session, admin_class=SessionAdmin)
+admin.site.register(Discussion, admin_class=DiscussionAdmin)

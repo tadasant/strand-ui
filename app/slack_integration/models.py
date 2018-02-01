@@ -4,7 +4,7 @@ from django.db import models
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
-from app.topics.models import Session
+from app.topics.models import Discussion
 from app.users.models import User
 from app.groups.models import Group
 
@@ -116,7 +116,7 @@ class SlackChannel(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE, related_name='slack_channels')
-    session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
+    discussion = models.OneToOneField(to=Discussion, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'#{self.name}'

@@ -1559,9 +1559,9 @@
   "fields": {
     "created": "2018-01-24T00:30:07.915Z",
     "modified": "2018-01-24T00:30:07.915Z",
-    "name": "session-7",
+    "name": "discussion-7",
     "slack_team": "T8C26RNPN",
-    "session": 49
+    "discussion": 49
   }
 },
 {
@@ -1570,9 +1570,9 @@
   "fields": {
     "created": "2018-01-24T00:30:08.408Z",
     "modified": "2018-01-24T00:30:08.408Z",
-    "name": "session-9",
+    "name": "discussion-9",
     "slack_team": "T8C26RNPN",
-    "session": 50
+    "discussion": 50
   }
 },
 {
@@ -1581,9 +1581,9 @@
   "fields": {
     "created": "2018-01-24T00:29:58.704Z",
     "modified": "2018-01-24T00:29:58.705Z",
-    "name": "session-10",
+    "name": "discussion-10",
     "slack_team": "T8C26RNPN",
-    "session": 23
+    "discussion": 23
   }
 },
 {
@@ -1592,9 +1592,9 @@
   "fields": {
     "created": "2018-01-24T00:29:59.067Z",
     "modified": "2018-01-24T00:29:59.068Z",
-    "name": "session-11",
+    "name": "discussion-11",
     "slack_team": "T8C26RNPN",
-    "session": 24
+    "discussion": 24
   }
 },
 {
@@ -1603,9 +1603,9 @@
   "fields": {
     "created": "2018-01-24T00:29:59.633Z",
     "modified": "2018-01-24T00:29:59.633Z",
-    "name": "session-13",
+    "name": "discussion-13",
     "slack_team": "T8C26RNPN",
-    "session": 26
+    "discussion": 26
   }
 },
 {
@@ -1614,9 +1614,9 @@
   "fields": {
     "created": "2018-01-24T00:29:59.374Z",
     "modified": "2018-01-24T00:29:59.375Z",
-    "name": "session-12",
+    "name": "discussion-12",
     "slack_team": "T8C26RNPN",
-    "session": 25
+    "discussion": 25
   }
 },
 {
@@ -1625,9 +1625,9 @@
   "fields": {
     "created": "2018-01-24T00:30:00.108Z",
     "modified": "2018-01-24T00:30:00.108Z",
-    "name": "session-15",
+    "name": "discussion-15",
     "slack_team": "T8C26RNPN",
-    "session": 28
+    "discussion": 28
   }
 },
 {
@@ -1636,9 +1636,9 @@
   "fields": {
     "created": "2018-01-24T00:29:59.838Z",
     "modified": "2018-01-24T00:29:59.839Z",
-    "name": "session-14",
+    "name": "discussion-14",
     "slack_team": "T8C26RNPN",
-    "session": 27
+    "discussion": 27
   }
 },
 {
@@ -1647,9 +1647,9 @@
   "fields": {
     "created": "2018-01-24T00:30:00.423Z",
     "modified": "2018-01-24T00:30:00.423Z",
-    "name": "session-16",
+    "name": "discussion-16",
     "slack_team": "T8C26RNPN",
-    "session": 29
+    "discussion": 29
   }
 },
 {
@@ -1658,9 +1658,9 @@
   "fields": {
     "created": "2018-01-24T00:30:00.693Z",
     "modified": "2018-01-24T00:30:00.694Z",
-    "name": "session-17",
+    "name": "discussion-17",
     "slack_team": "T8C26RNPN",
-    "session": 30
+    "discussion": 30
   }
 },
 {
@@ -1669,9 +1669,9 @@
   "fields": {
     "created": "2018-01-24T00:30:01.967Z",
     "modified": "2018-01-24T00:30:01.967Z",
-    "name": "session-21",
+    "name": "discussion-21",
     "slack_team": "T8C26RNPN",
-    "session": 34
+    "discussion": 34
   }
 },
 {
@@ -1680,9 +1680,9 @@
   "fields": {
     "created": "2018-01-24T00:30:01.012Z",
     "modified": "2018-01-24T00:30:01.012Z",
-    "name": "session-18",
+    "name": "discussion-18",
     "slack_team": "T8C26RNPN",
-    "session": 31
+    "discussion": 31
   }
 },
 {
@@ -1691,9 +1691,9 @@
   "fields": {
     "created": "2018-01-24T00:30:01.679Z",
     "modified": "2018-01-24T00:30:01.680Z",
-    "name": "session-20",
+    "name": "discussion-20",
     "slack_team": "T8C26RNPN",
-    "session": 33
+    "discussion": 33
   }
 },
 {
@@ -1702,9 +1702,9 @@
   "fields": {
     "created": "2018-01-24T00:30:02.664Z",
     "modified": "2018-01-24T00:30:02.664Z",
-    "name": "session-23",
+    "name": "discussion-23",
     "slack_team": "T8C26RNPN",
-    "session": 35
+    "discussion": 35
   }
 },
 {
@@ -1713,9 +1713,9 @@
   "fields": {
     "created": "2018-01-24T00:30:01.268Z",
     "modified": "2018-01-24T00:30:01.268Z",
-    "name": "session-19",
+    "name": "discussion-19",
     "slack_team": "T8C26RNPN",
-    "session": 32
+    "discussion": 32
   }
 },
 {
@@ -1724,9 +1724,9 @@
   "fields": {
     "created": "2018-01-24T00:30:03.136Z",
     "modified": "2018-01-24T00:30:03.136Z",
-    "name": "session-24",
+    "name": "discussion-24",
     "slack_team": "T8C26RNPN",
-    "session": 36
+    "discussion": 36
   }
 },
 {
@@ -1735,9 +1735,9 @@
   "fields": {
     "created": "2018-01-24T00:30:03.602Z",
     "modified": "2018-01-24T00:30:03.602Z",
-    "name": "session-26",
+    "name": "discussion-26",
     "slack_team": "T8C26RNPN",
-    "session": 37
+    "discussion": 37
   }
 },
 {
@@ -1746,9 +1746,9 @@
   "fields": {
     "created": "2018-01-24T00:30:03.853Z",
     "modified": "2018-01-24T00:30:03.853Z",
-    "name": "session-27",
+    "name": "discussion-27",
     "slack_team": "T8C26RNPN",
-    "session": 38
+    "discussion": 38
   }
 },
 {
@@ -1757,9 +1757,9 @@
   "fields": {
     "created": "2018-01-24T00:30:04.181Z",
     "modified": "2018-01-24T00:30:04.181Z",
-    "name": "session-28",
+    "name": "discussion-28",
     "slack_team": "T8C26RNPN",
-    "session": 39
+    "discussion": 39
   }
 },
 {
@@ -1768,9 +1768,9 @@
   "fields": {
     "created": "2018-01-24T00:30:04.650Z",
     "modified": "2018-01-24T00:30:04.650Z",
-    "name": "session-30",
+    "name": "discussion-30",
     "slack_team": "T8C26RNPN",
-    "session": 40
+    "discussion": 40
   }
 },
 {
@@ -1779,9 +1779,9 @@
   "fields": {
     "created": "2018-01-24T00:30:05.150Z",
     "modified": "2018-01-24T00:30:05.150Z",
-    "name": "session-32",
+    "name": "discussion-32",
     "slack_team": "T8C26RNPN",
-    "session": 42
+    "discussion": 42
   }
 },
 {
@@ -1790,9 +1790,9 @@
   "fields": {
     "created": "2018-01-24T00:30:06.792Z",
     "modified": "2018-01-24T00:30:06.792Z",
-    "name": "session-37",
+    "name": "discussion-37",
     "slack_team": "T8C26RNPN",
-    "session": 46
+    "discussion": 46
   }
 },
 {
@@ -1801,9 +1801,9 @@
   "fields": {
     "created": "2018-01-24T00:30:06.151Z",
     "modified": "2018-01-24T00:30:06.151Z",
-    "name": "session-35",
+    "name": "discussion-35",
     "slack_team": "T8C26RNPN",
-    "session": 44
+    "discussion": 44
   }
 },
 {
@@ -1812,9 +1812,9 @@
   "fields": {
     "created": "2018-01-24T00:30:07.078Z",
     "modified": "2018-01-24T00:30:07.078Z",
-    "name": "session-38",
+    "name": "discussion-38",
     "slack_team": "T8C26RNPN",
-    "session": 47
+    "discussion": 47
   }
 },
 {
@@ -1823,9 +1823,9 @@
   "fields": {
     "created": "2018-01-24T00:30:06.463Z",
     "modified": "2018-01-24T00:30:06.464Z",
-    "name": "session-36",
+    "name": "discussion-36",
     "slack_team": "T8C26RNPN",
-    "session": 45
+    "discussion": 45
   }
 },
 {
@@ -1834,9 +1834,9 @@
   "fields": {
     "created": "2018-01-24T00:30:05.737Z",
     "modified": "2018-01-24T00:30:05.737Z",
-    "name": "session-34",
+    "name": "discussion-34",
     "slack_team": "T8C26RNPN",
-    "session": 43
+    "discussion": 43
   }
 },
 {
@@ -1845,9 +1845,9 @@
   "fields": {
     "created": "2018-01-24T00:30:07.377Z",
     "modified": "2018-01-24T00:30:07.377Z",
-    "name": "session-39",
+    "name": "discussion-39",
     "slack_team": "T8C26RNPN",
-    "session": 48
+    "discussion": 48
   }
 },
 {

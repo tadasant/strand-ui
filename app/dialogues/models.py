@@ -1,14 +1,14 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 
-from app.topics.models import Session
+from app.topics.models import Discussion
 from app.slack_integration.models import SlackEvent
 from app.users.models import User
 
 
 class Message(TimeStampedModel):
     text = models.TextField()
-    session = models.ForeignKey(to=Session, on_delete=models.CASCADE, related_name='messages')
+    discussion = models.ForeignKey(to=Discussion, on_delete=models.CASCADE, related_name='messages')
     author = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='messages')
     time = models.DateTimeField()
     origin_slack_event = models.ForeignKey(to=SlackEvent, on_delete=models.SET_NULL, related_name='message',

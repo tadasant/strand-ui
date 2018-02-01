@@ -1,7 +1,7 @@
 import graphene
 from graphene_django.types import DjangoObjectType
 
-from app.topics.models import Topic, Session, Tag
+from app.topics.models import Topic, Discussion, Tag
 
 
 class TopicType(DjangoObjectType):
@@ -9,9 +9,9 @@ class TopicType(DjangoObjectType):
         model = Topic
 
 
-class SessionType(DjangoObjectType):
+class DiscussionType(DjangoObjectType):
     class Meta:
-        model = Session
+        model = Discussion
 
 
 class TagType(DjangoObjectType):
@@ -34,7 +34,7 @@ class TopicInputType(graphene.InputObjectType):
     tags = graphene.List(TagInputType)
 
 
-class SessionInputType(graphene.InputObjectType):
+class DiscussionInputType(graphene.InputObjectType):
     time_start = graphene.String()
     time_end = graphene.String()
     topic_id = graphene.Int(required=True)

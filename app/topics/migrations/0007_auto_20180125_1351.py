@@ -12,8 +12,8 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='session',
+            model_name='discussion',
             name='participants',
-            field=models.ManyToManyField(related_name='sessions', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(related_name='discussions', to=settings.AUTH_USER_MODEL),
         ),
     ]

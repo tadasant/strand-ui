@@ -16,7 +16,7 @@ class ReplyType(DjangoObjectType):
 
 class MessageInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
-    session_id = graphene.Int(required=True)
+    discussion_id = graphene.Int(required=True)
     author_id = graphene.Int(required=True)
     time = graphene.String(required=True)
 

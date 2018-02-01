@@ -9,7 +9,7 @@ from tests.factories import (
     MessageFactory,
     TopicFactory,
     ReplyFactory,
-    SessionFactory,
+    DiscussionFactory,
     SlackAgentFactory,
     SlackChannelFactory,
     SlackEventFactory,
@@ -25,7 +25,7 @@ register(GroupFactory)
 register(MessageFactory)
 register(TopicFactory)
 register(ReplyFactory)
-register(SessionFactory)
+register(DiscussionFactory)
 register(SlackAgentFactory)
 register(SlackChannelFactory)
 register(SlackEventFactory)
