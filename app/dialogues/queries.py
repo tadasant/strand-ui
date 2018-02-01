@@ -1,7 +1,7 @@
 import graphene
 
-from app.discussions.types import MessageType, ReplyType
-from app.discussions.models import Message, Reply
+from app.dialogues.types import MessageType, ReplyType
+from app.dialogues.models import Message, Reply
 
 
 class Query(graphene.ObjectType):

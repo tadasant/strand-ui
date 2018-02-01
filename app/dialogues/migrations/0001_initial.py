@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField()),
                 ('time', models.DateTimeField()),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('message', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='discussions.Message')),
+                ('message', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dialogues.Message')),
             ],
             options={
                 'abstract': False,

@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('slack_integration', '0002_auto_20180115_1844'),
-        ('discussions', '0001_initial'),
+        ('dialogues', '0001_initial'),
     ]
 
     operations = [

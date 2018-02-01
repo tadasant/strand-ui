@@ -1,8 +1,8 @@
 import graphene
 
 from app.api.authorization import check_authorization
-from app.discussions.validators import MessageValidator, ReplyValidator
-from app.discussions.types import (
+from app.dialogues.validators import MessageValidator, ReplyValidator
+from app.dialogues.types import (
     MessageType,
     ReplyType,
     MessageInputType,

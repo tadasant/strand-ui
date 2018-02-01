@@ -82,4 +82,4 @@ the path to the fixture, which will override this behavior.
 
 When loading fixtures, keep in mind the relationships between them. Always load them from top down, so as not to have
 integrity errors. As of commit `3b73a3b`, the order is *users*, *groups*, *topics*, *slack_integration*, and
-*discussions*.
+*dialogues*.

@@ -5,7 +5,7 @@ import factory.fuzzy
 from django.contrib.auth.hashers import make_password
 
 from app.groups.models import Group
-from app.discussions.models import Message, Reply
+from app.dialogues.models import Message, Reply
 from app.topics.models import Topic, Session, Tag
 from app.users.models import User
 from app.slack_integration.models import (

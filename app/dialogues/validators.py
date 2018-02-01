@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from app.discussions.models import Message, Reply
+from app.dialogues.models import Message, Reply
 from app.topics.models import Session
 from app.slack_integration.models import SlackEvent
 from app.users.models import User

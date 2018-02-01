@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('discussions', '0004_auto_20180123_1636'),
+        ('dialogues', '0004_auto_20180123_1636'),
     ]
 
     operations = [
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='reply',
             name='message',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='replies', to='discussions.Message'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='replies', to='dialogues.Message'),
         ),
         migrations.AlterField(
             model_name='reply',

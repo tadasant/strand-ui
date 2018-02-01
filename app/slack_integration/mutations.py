@@ -7,9 +7,9 @@ from slackclient import SlackClient
 
 from app.api.authorization import check_authorization
 from app.groups.models import Group
-from app.discussions.models import Message
-from app.discussions.types import MessageType, ReplyType
-from app.discussions.validators import MessageValidator, ReplyValidator
+from app.dialogues.models import Message
+from app.dialogues.types import MessageType, ReplyType
+from app.dialogues.validators import MessageValidator, ReplyValidator
 from app.topics.models import Session
 from app.topics.types import SessionType, TopicType
 from app.topics.validators import TopicValidator, SessionValidator

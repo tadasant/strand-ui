@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.discussions.models import Message, Reply
+from app.dialogues.models import Message, Reply
 
 
 class MessageAdmin(admin.ModelAdmin):

@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('discussions', '0003_auto_20180116_1618'),
+        ('dialogues', '0003_auto_20180116_1618'),
     ]
 
     operations = [
