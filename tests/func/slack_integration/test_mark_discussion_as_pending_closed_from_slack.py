@@ -85,4 +85,5 @@ class TestMarkDiscussionAsPendingClosedFromSlack:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['markDiscussionAsPendingClosedFromSlack']['discussion']['status'] == 'PENDING CLOSED'
+        assert response.json()['data']['markDiscussionAsPendingClosedFromSlack']['discussion'][
+                   'status'] == 'PENDING CLOSED'

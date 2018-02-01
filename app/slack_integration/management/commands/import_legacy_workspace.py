@@ -6,8 +6,8 @@ from slackclient import SlackClient
 
 from app.dialogues.models import Message, Reply
 from app.groups.models import Group
-from app.topics.models import Topic, Discussion, Tag
 from app.slack_integration.models import SlackTeam, SlackChannel, SlackEvent, SlackUser
+from app.topics.models import Topic, Discussion, Tag
 from app.users.models import User
 
 
@@ -126,14 +126,14 @@ def create_topics_and_discussions(client, slack_team, bot_id):
                                     [reply['slack_user_id'] for reply in replies]))
 
             topic = Topic.objects.create(title=topic_info['title'], description=topic_info['description'],
-                                               original_poster=temp_original_poster, group=slack_team.group)
+                                         original_poster=temp_original_poster, group=slack_team.group)
 
             for tag_name in topic_info.get('tags', []):
                 tag, created = Tag.objects.get_or_create(name=tag_name)
                 topic.tags.add(tag)
 
             discussion = Discussion.objects.create(topic=topic, time_start=messages[-1]['time'],
-                                             time_end=messages[0]['time'])
+                                                   time_end=messages[0]['time'])
             discussion.participants.set(User.objects.filter(slackuser__id__in=participants))
 
             slack_channel = SlackChannel.objects.create(id=channel['id'], name=channel['name'],
