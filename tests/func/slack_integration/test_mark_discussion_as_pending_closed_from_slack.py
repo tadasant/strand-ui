@@ -67,7 +67,8 @@ class TestMarkDiscussionAsPendingClosedFromSlack:
                                                           "'mark_as_pending_closed'"
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, topic_factory, discussion_factory, slack_channel_factory, auto_close_pending_closed_discussion_factory):
+    def test_valid(self, auth_client, topic_factory, discussion_factory, slack_channel_factory,
+                   auto_close_pending_closed_discussion_factory):
         topic = topic_factory()
         discussion = discussion_factory(topic=topic, status='STALE')
         slack_channel = slack_channel_factory(discussion=discussion)
