@@ -17,7 +17,7 @@ $ brew install postgres
 $ initdb -D ~/.postgres/DATABASE_NAME
 $ pg_ctl start -D ~/.postgres/DATABASE_NAME
 $ createdb DATABASE_NAME
-$ createuser --superuser --createdb --createrole --login --pwprompt --encrypted USERNAME
+$ createuser --superuser --createdb --createrole --login --pwprompt --encrypted solutionloft
 $ ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 ```
 
@@ -30,7 +30,7 @@ and look like this:
 ```JSON
 {
   "NAME": "DATABASE_NAME",
-  "USER": "USERNAME",
+  "USER": "solutionloft",
   "PASSWORD": "PASSWORD",
   "HOST": "",
   "PORT": "5432"

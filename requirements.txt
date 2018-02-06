@@ -38,6 +38,7 @@ pytest==3.3.2
 pytest-cache==1.0
 pytest-cov==2.5.1
 pytest-django==3.1.2
+pytest-env==0.6.2
 pytest-factoryboy==1.3.1
 pytest-flake8==0.9.1
 pytest-mock==1.6.3
