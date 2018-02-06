@@ -3,10 +3,10 @@ import pytest
 
 class TestCreateMessageFromSlack:
     @pytest.mark.django_db
-    def test_unauthenticated(self, client, session_factory, slack_channel_factory, user_factory, slack_user_factory,
+    def test_unauthenticated(self, client, discussion_factory, slack_channel_factory, user_factory, slack_user_factory,
                              slack_event_factory, message_factory):
-        session = session_factory()
-        slack_channel = slack_channel_factory(session=session)
+        discussion = discussion_factory()
+        slack_channel = slack_channel_factory(discussion=discussion)
         user = user_factory()
         slack_user = slack_user_factory(user=user)
 
@@ -34,10 +34,10 @@ class TestCreateMessageFromSlack:
         assert response.json()['errors'][0]['message'] == 'Unauthorized'
 
     @pytest.mark.django_db
-    def test_invalid_slack_user(self, auth_client, session_factory, slack_channel_factory, user_factory,
+    def test_invalid_slack_user(self, auth_client, discussion_factory, slack_channel_factory, user_factory,
                                 slack_user_factory, slack_event_factory, message_factory):
-        session = session_factory()
-        slack_channel = slack_channel_factory(session=session)
+        discussion = discussion_factory()
+        slack_channel = slack_channel_factory(discussion=discussion)
         user = user_factory()
         slack_user = slack_user_factory.build(user=user)
 
@@ -65,10 +65,10 @@ class TestCreateMessageFromSlack:
         assert response.json()['errors'][0]['message'] == 'User matching query does not exist.'
 
     @pytest.mark.django_db
-    def test_invalid_slack_channel(self, auth_client, session_factory, slack_channel_factory, user_factory,
+    def test_invalid_slack_channel(self, auth_client, discussion_factory, slack_channel_factory, user_factory,
                                    slack_user_factory, slack_event_factory, message_factory):
-        session = session_factory()
-        slack_channel = slack_channel_factory.build(session=session)
+        discussion = discussion_factory()
+        slack_channel = slack_channel_factory.build(discussion=discussion)
         user = user_factory()
         slack_user = slack_user_factory(user=user)
 
@@ -93,13 +93,13 @@ class TestCreateMessageFromSlack:
 
         assert response.status_code == 200
         assert response.json()['data']['createMessageFromSlack'] is None
-        assert response.json()['errors'][0]['message'] == 'Session matching query does not exist.'
+        assert response.json()['errors'][0]['message'] == 'Discussion matching query does not exist.'
 
     @pytest.mark.django_db
-    def test_valid(self, auth_client, session_factory, slack_channel_factory, user_factory,
+    def test_valid(self, auth_client, discussion_factory, slack_channel_factory, user_factory,
                    slack_user_factory, slack_event_factory, message_factory):
-        session = session_factory()
-        slack_channel = slack_channel_factory(session=session)
+        discussion = discussion_factory()
+        slack_channel = slack_channel_factory(discussion=discussion)
         user = user_factory()
         slack_user = slack_user_factory(user=user)
 
@@ -118,7 +118,7 @@ class TestCreateMessageFromSlack:
                 originSlackEvent {{
                   ts
                 }}
-                session {{
+                discussion {{
                   id
                   participants {{
                     id
@@ -133,8 +133,8 @@ class TestCreateMessageFromSlack:
         assert response.status_code == 200
         assert response.json()['data']['createMessageFromSlack']['message']['author']['id'] == \
             str(slack_user.user.id)
-        assert response.json()['data']['createMessageFromSlack']['message']['session']['id'] == str(session.id)
+        assert response.json()['data']['createMessageFromSlack']['message']['discussion']['id'] == str(discussion.id)
         assert response.json()['data']['createMessageFromSlack']['message']['originSlackEvent']['ts'] == \
             str(slack_event.ts)
-        assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['session'][
+        assert {'id': str(user.id)} in response.json()['data']['createMessageFromSlack']['message']['discussion'][
             'participants']

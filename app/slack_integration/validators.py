@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from app.questions.models import Session
+from app.topics.models import Discussion
 from app.slack_integration.models import (
     SlackChannel,
     SlackTeam,
@@ -26,8 +26,8 @@ class SlackUserValidator(serializers.ModelSerializer):
 
 class SlackChannelValidator(serializers.ModelSerializer):
     slack_team_id = serializers.PrimaryKeyRelatedField(queryset=SlackTeam.objects.all(), source='slack_team')
-    session_id = serializers.PrimaryKeyRelatedField(queryset=Session.objects.all(), source='session')
+    discussion_id = serializers.PrimaryKeyRelatedField(queryset=Discussion.objects.all(), source='discussion')
 
     class Meta:
         model = SlackChannel
-        fields = ('id', 'name', 'slack_team_id', 'session_id')
+        fields = ('id', 'name', 'slack_team_id', 'discussion_id')

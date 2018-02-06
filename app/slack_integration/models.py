@@ -4,7 +4,7 @@ from django.db import models
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
-from app.questions.models import Session
+from app.topics.models import Discussion
 from app.users.models import User
 from app.groups.models import Group
 
@@ -20,7 +20,7 @@ class SlackAgentStatus(Enum):
 class SlackAgent(TimeStampedModel):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent', primary_key=True)
     status = FSMField(default=SlackAgentStatus.INITIATED.value, protected=True)
-    help_channel_id = models.CharField(max_length=255, blank=True, null=True)
+    discuss_channel_id = models.CharField(max_length=255, blank=True, null=True)
 
     def create_slack_application_installation_from_oauth(self, oauth_info):
         slack_user = SlackUser.objects.get(id=oauth_info['user_id'])
@@ -47,7 +47,7 @@ class SlackAgent(TimeStampedModel):
         pass
 
     def can_activate(self):
-        if self.help_channel_id:
+        if self.discuss_channel_id:
             return True
         else:
             return False
@@ -116,7 +116,7 @@ class SlackChannel(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE, related_name='slack_channels')
-    session = models.OneToOneField(to=Session, on_delete=models.CASCADE, null=True)
+    discussion = models.OneToOneField(to=Discussion, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'#{self.name}'

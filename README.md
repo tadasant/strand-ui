@@ -17,7 +17,7 @@ $ brew install postgres
 $ initdb -D ~/.postgres/DATABASE_NAME
 $ pg_ctl start -D ~/.postgres/DATABASE_NAME
 $ createdb DATABASE_NAME
-$ createuser --superuser --createdb --createrole --login --pwprompt --encrypted USERNAME
+$ createuser --superuser --createdb --createrole --login --pwprompt --encrypted solutionloft
 $ ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
 ```
 
@@ -30,7 +30,7 @@ and look like this:
 ```JSON
 {
   "NAME": "DATABASE_NAME",
-  "USER": "USERNAME",
+  "USER": "solutionloft",
   "PASSWORD": "PASSWORD",
   "HOST": "",
   "PORT": "5432"
@@ -81,8 +81,8 @@ the path to the fixture, which will override this behavior.
 `$ python manage.py loaddata fixture_name`
 
 When loading fixtures, keep in mind the relationships between them. Always load them from top down, so as not to have
-integrity errors. As of commit `3b73a3b`, the order is *users*, *groups*, *questions*, *slack_integration*, and
-*discussions*.
+integrity errors. As of commit `3b73a3b`, the order is *users*, *groups*, *topics*, *slack_integration*, and
+*dialogues*.
 
 ## Task Management
 
@@ -128,10 +128,10 @@ If something goes awry, you can clear the task queue by running `$ celery -A app
 ### Setting up Periodic Tasks
 
 We have two types of tasks at the moment. One is a periodic task, which runs every 5 minutes
-and marks sessions as stale if there has been no non-bot activity for over 30 minutes. Another is
-an asynchronous task that runs 5 minutes after a session has been marked as pending closed. If
-there is no new activity since it was marked as pending closed, then the task closes the session and
-the respective session.
+and marks discussions as stale if there has been no non-bot activity for over 30 minutes. Another is
+an asynchronous task that runs 5 minutes after a discussion has been marked as pending closed. If
+there is no new activity since it was marked as pending closed, then the task closes the discussion and
+the respective discussion.
 
 The periodic task needs to exist in the `django_celery_beat` table in order for the beat to populate
 it to the task queue every 5 minutes. To do this, we have a management command to create it if you haven't

@@ -1,13 +1,9 @@
-import pytz
-
-import factory
 import factory.fuzzy
+import pytz
 from django.contrib.auth.hashers import make_password
 
+from app.dialogues.models import Message, Reply
 from app.groups.models import Group
-from app.discussions.models import Message, Reply
-from app.questions.models import Question, Session, Tag, SessionStatus
-from app.users.models import User
 from app.slack_integration.models import (
     SlackAgent,
     SlackAgentStatus,
@@ -17,6 +13,8 @@ from app.slack_integration.models import (
     SlackUser,
     SlackTeam
 )
+from app.topics.models import Topic, Discussion, Tag, DiscussionStatus
+from app.users.models import User
 
 
 class UserFactory(factory.DjangoModelFactory):
@@ -54,17 +52,15 @@ class TagFactory(factory.DjangoModelFactory):
     name = factory.Faker('word')
 
 
-class QuestionFactory(factory.DjangoModelFactory):
+class TopicFactory(factory.DjangoModelFactory):
     class Meta:
-        model = Question
+        model = Topic
 
     title = factory.Faker('sentence')
     description = factory.Faker('sentence')
-    status = 'UNSOLVED'
     is_anonymous = factory.Faker('pybool')
 
     original_poster = factory.SubFactory(UserFactory)
-    solver = factory.SubFactory(UserFactory)
     group = factory.SubFactory(GroupFactory)
 
     @factory.post_generation
@@ -77,14 +73,14 @@ class QuestionFactory(factory.DjangoModelFactory):
                 self.tags.add(tag)
 
 
-class SessionFactory(factory.DjangoModelFactory):
+class DiscussionFactory(factory.DjangoModelFactory):
     class Meta:
-        model = Session
+        model = Discussion
 
-    status = SessionStatus.OPEN.value
+    status = DiscussionStatus.OPEN.value
     time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
     time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
-    question = factory.SubFactory(QuestionFactory)
+    topic = factory.SubFactory(TopicFactory)
 
     @factory.post_generation
     def participants(self, create, extracted):
@@ -101,7 +97,7 @@ class MessageFactory(factory.DjangoModelFactory):
         model = Message
 
     text = factory.Faker('sentence')
-    session = factory.SubFactory(SessionFactory)
+    discussion = factory.SubFactory(DiscussionFactory)
     author = factory.SubFactory(UserFactory)
     time = factory.Faker('date_time_this_decade', tzinfo=pytz.UTC)
 
@@ -128,7 +124,7 @@ class SlackAgentFactory(factory.DjangoModelFactory):
         model = SlackAgent
 
     group = factory.SubFactory(GroupFactory)
-    help_channel_id = factory.Faker('md5')
+    discuss_channel_id = factory.Faker('md5')
     status = SlackAgentStatus.INITIATED.value
 
 
@@ -148,7 +144,7 @@ class SlackChannelFactory(factory.DjangoModelFactory):
     id = factory.Faker('md5')
     name = factory.Faker('name')
     slack_team = factory.SubFactory(SlackTeamFactory)
-    session = factory.SubFactory(SessionFactory)
+    discussion = factory.SubFactory(DiscussionFactory)
 
 
 class SlackUserFactory(factory.DjangoModelFactory):

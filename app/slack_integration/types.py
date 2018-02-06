@@ -2,7 +2,6 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from app.api.authorization import check_authorization
-from app.questions.types import SessionInputType, TagInputType
 from app.slack_integration.models import (
     SlackAgent,
     SlackChannel,
@@ -11,6 +10,7 @@ from app.slack_integration.models import (
     SlackApplicationInstallation,
     SlackUser
 )
+from app.topics.types import DiscussionInputType, TagInputType
 
 
 class SlackAgentType(DjangoObjectType):
@@ -90,12 +90,12 @@ class SlackChannelInputType(graphene.InputObjectType):
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
-    session_id = graphene.Int(required=True)
+    discussion_id = graphene.Int(required=True)
 
 
-class SlackAgentHelpChannelAndActivateInputType(graphene.InputObjectType):
+class SlackAgentDiscussChannelAndActivateInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
-    help_channel_id = graphene.String(required=True)
+    discuss_channel_id = graphene.String(required=True)
 
 
 class MessageFromSlackInputType(graphene.InputObjectType):
@@ -113,14 +113,14 @@ class ReplyFromSlackInputType(graphene.InputObjectType):
     text = graphene.String(required=True)
 
 
-class SessionFromSlackInputType(graphene.InputObjectType):
-    session = graphene.Field(SessionInputType, required=True)
+class DiscussionFromSlackInputType(graphene.InputObjectType):
+    discussion = graphene.Field(DiscussionInputType, required=True)
     id = graphene.String(required=True)
     name = graphene.String(required=True)
     slack_team_id = graphene.String(required=True)
 
 
-class MarkSessionAsPendingClosedFromSlackInputType(graphene.InputObjectType):
+class MarkDiscussionAsPendingClosedFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String(required=True)
 
 
@@ -159,25 +159,22 @@ class GroupFromSlackInputType(graphene.InputObjectType):
     group_name = graphene.String(required=True)
 
 
-class SolveQuestionFromSlackInputType(graphene.InputObjectType):
+class CloseDiscussionFromSlackInputType(graphene.InputObjectType):
     slack_channel_id = graphene.String()
-    slack_user_id = graphene.String()
     time_end = graphene.String()
 
 
-class QuestionFromSlackInputType(graphene.InputObjectType):
+class TopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
-    is_solved = graphene.Boolean()
     is_anonymous = graphene.Boolean()
     original_poster_slack_user_id = graphene.String(required=True)
     tags = graphene.List(TagInputType)
 
 
-class UserAndQuestionFromSlackInputType(graphene.InputObjectType):
+class UserAndTopicFromSlackInputType(graphene.InputObjectType):
     title = graphene.String(required=True)
     description = graphene.String(required=True)
-    is_solved = graphene.Boolean()
     is_anonymous = graphene.Boolean()
     original_poster_slack_user = graphene.Field(UserFromSlackInputType)
     tags = graphene.List(TagInputType)

@@ -29,5 +29,5 @@ SLACK_VERIFICATION_TOKEN = os.environ['SLACK_VERIFICATION_TOKEN']
 # Celery
 CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 
-# Session Auto-Close Delay
+# Discussion Auto-Close Delay
 AUTO_CLOSE_DELAY = 300

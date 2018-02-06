@@ -31,5 +31,5 @@ SLACK_VERIFICATION_TOKEN = 'wRto4JPoZXVH2ru3HHJ4nBRL'
 # Celery
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-# Session Auto-Close Delay
+# Discussion Auto-Close Delay
 AUTO_CLOSE_DELAY = 300

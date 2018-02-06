@@ -4,13 +4,13 @@ from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
 from slackclient import SlackClient
 
-from app.questions.tasks import auto_close_pending_closed_session
+from app.topics.tasks import auto_close_pending_closed_discussion
 from tests.factories import (
     GroupFactory,
     MessageFactory,
-    QuestionFactory,
+    TopicFactory,
     ReplyFactory,
-    SessionFactory,
+    DiscussionFactory,
     SlackAgentFactory,
     SlackChannelFactory,
     SlackEventFactory,
@@ -21,13 +21,13 @@ from tests.factories import (
     UserFactory
 )
 from tests.resources.TestSlackClient import TestSlackClient
-from tests.resources.test_celery_tasks import auto_close_pending_closed_session_task, mark_stale_sessions_task
+from tests.resources.test_celery_tasks import auto_close_pending_closed_discussion_task, mark_stale_discussions_task
 
 register(GroupFactory)
 register(MessageFactory)
-register(QuestionFactory)
+register(TopicFactory)
 register(ReplyFactory)
-register(SessionFactory)
+register(DiscussionFactory)
 register(SlackAgentFactory)
 register(SlackChannelFactory)
 register(SlackEventFactory)
@@ -100,22 +100,23 @@ def slack_client_factory(mocker):
 
 
 @pytest.fixture()
-def auto_close_pending_closed_session_factory(mocker, transactional_db):
+def auto_close_pending_closed_discussion_factory(mocker, transactional_db):
     """Pytest fixture to patch async_delay using test resource
 
-    Created a test resource for the auto_close_pending_closed_session
+    Created a test resource for the auto_close_pending_closed_discussion
     task that executes after the intended delay without the need of
     a Celery worker.
     """
-    mocker.patch.object(auto_close_pending_closed_session, 'apply_async', new=auto_close_pending_closed_session_task)
+    mocker.patch.object(auto_close_pending_closed_discussion, 'apply_async',
+                        new=auto_close_pending_closed_discussion_task)
 
 
 @pytest.fixture()
-def mark_stale_sessions_factory(transactional_db):
-    """Pytest fixture to monitor for stale sessions.
+def mark_stale_discussions_factory(transactional_db):
+    """Pytest fixture to monitor for stale discussions.
 
     This is in lieu of creating mock resources to mimick a
     Celery Beat and Celery worker. This does a timed loop
-    10 times and executes the mark_stale_session task.
+    10 times and executes the mark_stale_discussion task.
     """
-    return mark_stale_sessions_task
+    return mark_stale_discussions_task

@@ -1,0 +1,1367 @@
+[
+{
+  "model": "topics.tag",
+  "pk": 1,
+  "fields": {
+    "created": "2018-01-24T00:27:45.232Z",
+    "modified": "2018-01-24T00:27:45.233Z",
+    "name": "python"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 2,
+  "fields": {
+    "created": "2018-01-24T00:27:45.240Z",
+    "modified": "2018-01-24T00:27:45.240Z",
+    "name": "apache"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 3,
+  "fields": {
+    "created": "2018-01-24T00:28:46.822Z",
+    "modified": "2018-01-24T00:28:46.822Z",
+    "name": "pandas."
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 4,
+  "fields": {
+    "created": "2018-01-24T00:28:47.156Z",
+    "modified": "2018-01-24T00:28:47.156Z",
+    "name": "postgrsql"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 5,
+  "fields": {
+    "created": "2018-01-24T00:28:48.419Z",
+    "modified": "2018-01-24T00:28:48.419Z",
+    "name": "iphone"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 6,
+  "fields": {
+    "created": "2018-01-24T00:28:48.624Z",
+    "modified": "2018-01-24T00:28:48.624Z",
+    "name": "requests"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 7,
+  "fields": {
+    "created": "2018-01-24T00:28:48.628Z",
+    "modified": "2018-01-24T00:28:48.628Z",
+    "name": "blockchain-dns"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 8,
+  "fields": {
+    "created": "2018-01-24T00:28:48.889Z",
+    "modified": "2018-01-24T00:28:48.889Z",
+    "name": "react"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 9,
+  "fields": {
+    "created": "2018-01-24T00:28:48.894Z",
+    "modified": "2018-01-24T00:28:48.894Z",
+    "name": "material-ui"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 10,
+  "fields": {
+    "created": "2018-01-24T00:28:49.124Z",
+    "modified": "2018-01-24T00:28:49.125Z",
+    "name": "circleci"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 11,
+  "fields": {
+    "created": "2018-01-24T00:28:49.129Z",
+    "modified": "2018-01-24T00:28:49.129Z",
+    "name": "ecs"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 12,
+  "fields": {
+    "created": "2018-01-24T00:28:49.133Z",
+    "modified": "2018-01-24T00:28:49.133Z",
+    "name": "cd"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 13,
+  "fields": {
+    "created": "2018-01-24T00:28:49.412Z",
+    "modified": "2018-01-24T00:28:49.413Z",
+    "name": "event-handler"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 14,
+  "fields": {
+    "created": "2018-01-24T00:28:49.417Z",
+    "modified": "2018-01-24T00:28:49.417Z",
+    "name": "javascript"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 15,
+  "fields": {
+    "created": "2018-01-24T00:28:49.422Z",
+    "modified": "2018-01-24T00:28:49.422Z",
+    "name": "js"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 16,
+  "fields": {
+    "created": "2018-01-24T00:28:49.425Z",
+    "modified": "2018-01-24T00:28:49.426Z",
+    "name": "css"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 17,
+  "fields": {
+    "created": "2018-01-24T00:28:49.430Z",
+    "modified": "2018-01-24T00:28:49.430Z",
+    "name": "html"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 18,
+  "fields": {
+    "created": "2018-01-24T00:29:19.927Z",
+    "modified": "2018-01-24T00:29:19.927Z",
+    "name": "svg"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 19,
+  "fields": {
+    "created": "2018-01-24T00:29:19.931Z",
+    "modified": "2018-01-24T00:29:19.932Z",
+    "name": "react-scripts"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 20,
+  "fields": {
+    "created": "2018-01-24T00:29:20.158Z",
+    "modified": "2018-01-24T00:29:20.158Z",
+    "name": "chrome"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 21,
+  "fields": {
+    "created": "2018-01-24T00:29:20.163Z",
+    "modified": "2018-01-24T00:29:20.163Z",
+    "name": "proxy"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 22,
+  "fields": {
+    "created": "2018-01-24T00:29:20.167Z",
+    "modified": "2018-01-24T00:29:20.167Z",
+    "name": "ssl"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 23,
+  "fields": {
+    "created": "2018-01-24T00:29:20.171Z",
+    "modified": "2018-01-24T00:29:20.171Z",
+    "name": "tls-v1.2"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 24,
+  "fields": {
+    "created": "2018-01-24T00:29:20.532Z",
+    "modified": "2018-01-24T00:29:20.532Z",
+    "name": "pytest"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 25,
+  "fields": {
+    "created": "2018-01-24T00:29:20.536Z",
+    "modified": "2018-01-24T00:29:20.536Z",
+    "name": "peewee"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 26,
+  "fields": {
+    "created": "2018-01-24T00:29:20.541Z",
+    "modified": "2018-01-24T00:29:20.542Z",
+    "name": "sqlite"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 27,
+  "fields": {
+    "created": "2018-01-24T00:30:02.649Z",
+    "modified": "2018-01-24T00:30:02.649Z",
+    "name": "slack"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 28,
+  "fields": {
+    "created": "2018-01-24T00:30:03.111Z",
+    "modified": "2018-01-24T00:30:03.111Z",
+    "name": "dom"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 29,
+  "fields": {
+    "created": "2018-01-24T00:30:03.587Z",
+    "modified": "2018-01-24T00:30:03.587Z",
+    "name": "ddd"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 30,
+  "fields": {
+    "created": "2018-01-24T00:30:03.592Z",
+    "modified": "2018-01-24T00:30:03.592Z",
+    "name": "design"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 31,
+  "fields": {
+    "created": "2018-01-24T00:30:03.834Z",
+    "modified": "2018-01-24T00:30:03.834Z",
+    "name": "form"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 32,
+  "fields": {
+    "created": "2018-01-24T00:30:03.842Z",
+    "modified": "2018-01-24T00:30:03.843Z",
+    "name": "wtforms"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 33,
+  "fields": {
+    "created": "2018-01-24T00:30:04.146Z",
+    "modified": "2018-01-24T00:30:04.146Z",
+    "name": "delegation"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 34,
+  "fields": {
+    "created": "2018-01-24T00:30:04.169Z",
+    "modified": "2018-01-24T00:30:04.170Z",
+    "name": "event"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 35,
+  "fields": {
+    "created": "2018-01-24T00:30:04.632Z",
+    "modified": "2018-01-24T00:30:04.632Z",
+    "name": "mysql"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 36,
+  "fields": {
+    "created": "2018-01-24T00:30:04.640Z",
+    "modified": "2018-01-24T00:30:04.640Z",
+    "name": "pandas"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 37,
+  "fields": {
+    "created": "2018-01-24T00:30:05.718Z",
+    "modified": "2018-01-24T00:30:05.718Z",
+    "name": "vanilla"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 38,
+  "fields": {
+    "created": "2018-01-24T00:30:05.722Z",
+    "modified": "2018-01-24T00:30:05.722Z",
+    "name": "live"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 39,
+  "fields": {
+    "created": "2018-01-24T00:30:05.727Z",
+    "modified": "2018-01-24T00:30:05.727Z",
+    "name": "collection"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 40,
+  "fields": {
+    "created": "2018-01-24T00:30:06.773Z",
+    "modified": "2018-01-24T00:30:06.773Z",
+    "name": "flask"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 41,
+  "fields": {
+    "created": "2018-01-24T00:30:06.781Z",
+    "modified": "2018-01-24T00:30:06.782Z",
+    "name": "flask_restful"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 42,
+  "fields": {
+    "created": "2018-01-24T00:30:07.063Z",
+    "modified": "2018-01-24T00:30:07.064Z",
+    "name": "delegate"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 43,
+  "fields": {
+    "created": "2018-01-24T00:30:07.067Z",
+    "modified": "2018-01-24T00:30:07.067Z",
+    "name": "event-listener"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 44,
+  "fields": {
+    "created": "2018-01-24T00:30:07.363Z",
+    "modified": "2018-01-24T00:30:07.363Z",
+    "name": "c#"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 45,
+  "fields": {
+    "created": "2018-01-24T00:30:07.903Z",
+    "modified": "2018-01-24T00:30:07.903Z",
+    "name": "subprocess"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 46,
+  "fields": {
+    "created": "2018-01-24T00:30:08.376Z",
+    "modified": "2018-01-24T00:30:08.376Z",
+    "name": "express.js"
+  }
+},
+{
+  "model": "topics.tag",
+  "pk": 47,
+  "fields": {
+    "created": "2018-01-24T00:30:08.392Z",
+    "modified": "2018-01-24T00:30:08.392Z",
+    "name": "jest"
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 24,
+  "fields": {
+    "created": "2018-01-24T00:29:58.669Z",
+    "modified": "2018-01-24T00:54:37.870Z",
+    "title": "Having an issue reading a text file that was submitted via a web form using POST...",
+    "description": "Originally posted this on reddit, \r\n\r\nSo I wrote some code to parse through a CSV file in Jupyter, it works great but it's reading a local static file. I thought it would be simple to transition to the web (since I'm trying to make this into something my coworkers can easily access), but so far it has proved to be quite difficult. I finally got to the point where I'm submitting and reading the file, but now I realize every time I submit the same csv file, the script gets different data. Anyone know what's happening here? It sounds like a buffer issue but I don't know the proper way to upload and parse a text file via POST.\r\n\r\n<https://www.reddit.com/r/learnpython/comments/7k22zs/having_an_issue_with_reading_a_text_file_that_was/>",
+    "is_anonymous": false,
+    "original_poster": 119,
+    "group": 11,
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 25,
+  "fields": {
+    "created": "2018-01-24T00:29:59.052Z",
+    "modified": "2018-01-24T00:54:18.268Z",
+    "title": "Having an issue Pandas Data frame subtraction",
+    "description": "TypeError: unsupported operand type(s) for -: 'str' and 'str'\r\n\r\nI'm using the operation like below\r\noutput = df1.subract(df2, axis=0, fill_value=0)\r\nRequirement:  have 2 DF's , 1st DF contains all data with correct values and 2nd DF is similar to first DF\r\nand contains extra rows in which some column values are NaN. here i need to subtract DF1 from DF2 and the result DF should contain only error(column contains NaN) rows",
+    "is_anonymous": false,
+    "original_poster": 101,
+    "group": 11,
+    "tags": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 26,
+  "fields": {
+    "created": "2018-01-24T00:29:59.363Z",
+    "modified": "2018-01-24T00:53:55.818Z",
+    "title": "transfering table data from one psql db to other  psql table in different db",
+    "description": "I am stuck, trying to do that. I have tried a lot of different queries in psql console such as :\r\n```INSERT INTO \"pro-greffe_development\".departments\r\nSELECT name description department_number slug FROM banquesansfrais.departments;```\r\nSo more precisely I am trying to transfer the data in fields ```ame description department_number slug``` from the db ```banquesansfrais``` table ```departments``` into the db ```pro-greffe_development``` table departments. \r\nBoth these tables have schema set to ```public```.\r\nHere's what I get after I launch my query in psql console :\r\n```ERROR:  relation \"pro-greffe_development.departments\" does not exist\r\nLINE 1: INSERT INTO \"pro-greffe_development\".departments```",
+    "is_anonymous": false,
+    "original_poster": 62,
+    "group": 11,
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 27,
+  "fields": {
+    "created": "2018-01-24T00:29:59.621Z",
+    "modified": "2018-01-24T00:53:21.653Z",
+    "title": "What are your commands?",
+    "description": "I want to know all of Clippy\u2019s commands.",
+    "is_anonymous": false,
+    "original_poster": 42,
+    "group": 11,
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 28,
+  "fields": {
+    "created": "2018-01-24T00:29:59.819Z",
+    "modified": "2018-01-24T00:52:57.924Z",
+    "title": "How to resolve blockchain dns using Python Requests",
+    "description": "There are certain blockchain domains that are resolved only by blockchain dns resolvers. \r\nFor ex: <http://Jstash.bazar>\r\nIf you try to open this link in a browser, it wont get resolved. But, just install the browser plugin from <https://blockchain-dns.info/>\r\nand then try to open the site again, it will open up smoothly.\r\nI want to scrap some data from this site using Python Requests (browserless) and have no idea as to how to resolve such blockchain domains.\r\nAny help would be highly appreciated.",
+    "is_anonymous": false,
+    "original_poster": 96,
+    "group": 11,
+    "tags": [
+      1,
+      6,
+      7
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 29,
+  "fields": {
+    "created": "2018-01-24T00:30:00.090Z",
+    "modified": "2018-01-24T00:52:37.678Z",
+    "title": "Responsive web design with React, best practices",
+    "description": "Diving into responsive web design with React for the first time. Wondering if my approach is an anti-pattern in any way, since it doesn\u2019t seem super common: for each view in my app, I\u2019m creating a \u201ccontainer\u201d component (e.g. `AppDashboard`) that uses a series of material-ui\u2019s `&lt;Hidden&gt;` component to basically do a switch statement across a bunch of child components that each lay out a different screen size, e.g. `AppDashboardDesktop` vs. `AppDashboardMobile`. I\u2019m separately extracting out all common children-of-children components, strings of text, etc so there\u2019s little code duplication between those two child components. I think this makes it a lot easier to manage the different layouts that end up pieced together with material-ui `&lt;Grid&gt;` components - you don\u2019t mess up the mobile view if you make changes to the desktop view. But it seems the more common approach would be to use just one file, and do e.g. `&lt;Grid sm={8} md={4} xl={3}&gt;`. Is this just the old webdev non-React way of thinking, or am I missing something?",
+    "is_anonymous": false,
+    "original_poster": 112,
+    "group": 11,
+    "tags": [
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 30,
+  "fields": {
+    "created": "2018-01-24T00:30:00.401Z",
+    "modified": "2018-01-24T00:52:25.640Z",
+    "title": "Best practice for CD to Staging environment and manual deployment to Production environment using CircleCI",
+    "description": "Currently using CircleCI to run tests. Would like to further leverage CircleCI to continuously deploy successful builds to a staging environment on AWS ECS with the option to manually deploy to production if staging was successful. In CircleCI v2.0, workflows seem to be the best practice. Working hypothesis is to have a workflow that deploys to staging and holds for approval before deploying to production. The deploy-to-staging and deploy-to-production jobs would each have bash scripts that use AWS\u2019s CLI. If anyone has experience here or if there is a more elegant solution via CircleCI than the bash scripts, would love to hear.",
+    "is_anonymous": false,
+    "original_poster": 117,
+    "group": 11,
+    "tags": [
+      10,
+      11,
+      12
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 31,
+  "fields": {
+    "created": "2018-01-24T00:30:00.667Z",
+    "modified": "2018-01-24T00:52:16.081Z",
+    "title": "Change background-color of an element when value of input type color changes",
+    "description": "I have a `&lt;div class=\"colorpicker_new_color\"&gt;&lt;/div&gt;` and `&lt;input type=\"color\" id=\"colorPicker\"&gt;&lt;/input&gt;` how do I make an event handler when `$('#colorPicker').val()` changes to put `$('.colorpicker_new_color').css(\"backgroundColor\") = $('#colorPicker').val()` and vice versa but I'll have to convert RGB into hex.",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      13,
+      14,
+      15,
+      16,
+      17
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 32,
+  "fields": {
+    "created": "2018-01-24T00:30:00.992Z",
+    "modified": "2018-01-24T00:52:00.581Z",
+    "title": "SVGs in React",
+    "description": "I'm trying to replace a bunch of png's in my app with svg's. Proving to be a lot more difficult than I expected. I'm trying out libraries like react-inlinesvg so I can render the SVG's with supplemental CSS-in-JS to get the size scaling right. Turning out to be a mess of wrappers &amp; editing the SVG's parameters. Probably lacking some basic understanding of how SVG's are supposed to work, or maybe missing some React library that abstracts this all out - any ideas?",
+    "is_anonymous": false,
+    "original_poster": 112,
+    "group": 11,
+    "tags": [
+      8,
+      18,
+      19
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 33,
+  "fields": {
+    "created": "2018-01-24T00:30:01.237Z",
+    "modified": "2018-01-24T00:51:44.237Z",
+    "title": "https website does not open with Chrome and Requests but works with firefox when using Proxy",
+    "description": "I admit in advance that this is a very weird problem. I am still posting it hoping someone could figure out whats wrong.\r\nI am trying to access a webpage, url - <https://www.ticketmaster.com/member/payment_options>. I can open it using Google Chrome, Firefox and Python Requests as well.\r\nNow, I want to access the same page using a dedicated proxy from stormproxies. I follow the proxy setup on Firefox and Chrome, as well as use those in Requests code. The webpage opens up well in Firefox, but not in Chrome. It just keeps on waiting for the sever to respond. Same thing happens with Requests code. It times out if I use a timeout parameter.\r\n\r\nHere is the Requests code I am using:\r\n```import requests\r\n\r\nproxy = '&lt;proxy&gt;'\r\nproxies = {'http': 'http://{}'.format(proxy), 'https': 'http://{}'.format(proxy)}\r\n\r\n\r\nheaders = {\r\n    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',\r\n    'Accept-Encoding': 'gzip, deflate, br',\r\n    'Accept-Language': 'en-US,en;q=0.9',\r\n    'Cache-Control': 'max-age=0',\r\n    'Connection': 'keep-alive',\r\n    'Host': '<http://www.ticketmaster.com|www.ticketmaster.com>',\r\n    'Upgrade-Insecure-Requests': '1',\r\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'\r\n}\r\n\r\ns = requests.discussion()\r\ns.headers.update(headers)\r\n# s.proxies.update(proxies)\r\nurl = '<https://www.ticketmaster.com/member/payment_options>'\r\nr = s.get(url, timeout=30)\r\nprint(r.content.decode())```\r\n\r\nThis code would work fine, but as soon as you uncomment the line `s.proxies.update(proxies)`, it would throw TimeoutException.\r\n\r\nThe bigger issue here is that even Google Chrome isnt working.\r\nThe only reasons I could figure out is that Firefox has its own Proxy setup, but Google Chrome rather uses Windows Internet Explorer proxy settings and security settings.\r\n\r\nLet me know if any of you have come across this or if know a solution.",
+    "is_anonymous": false,
+    "original_poster": 96,
+    "group": 11,
+    "tags": [
+      1,
+      6,
+      20,
+      21,
+      22,
+      23
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 34,
+  "fields": {
+    "created": "2018-01-24T00:30:01.655Z",
+    "modified": "2018-01-24T00:51:28.645Z",
+    "title": "SqliteDatabase showing up empty (no tables) during pytest discussion, even though peewee's create_tables appears to run",
+    "description": "I have a branch where this is not a problem, and a branch where this is a problem, can't figure out what in the diff is causing it... Maybe something to do with SqliteDatabase and how it works with threads?",
+    "is_anonymous": false,
+    "original_poster": 112,
+    "group": 11,
+    "tags": [
+      1,
+      24,
+      25,
+      26
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 35,
+  "fields": {
+    "created": "2018-01-24T00:30:01.953Z",
+    "modified": "2018-01-24T00:50:49.153Z",
+    "title": "Css basic, what affects the &lt;body&gt; to act this way?",
+    "description": "body {\r\n    display: flex;\r\n    margin: 0;\r\n    text-align: center;\r\n    background: #424242;\r\n}\r\nthat's the css, and the dimensions are 1580\u00d7222, what could be affecting it to not be full screen",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      16
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 36,
+  "fields": {
+    "created": "2018-01-24T00:30:02.645Z",
+    "modified": "2018-01-24T00:51:03.544Z",
+    "title": "Error when using the Slack API",
+    "description": "This is an error on my end (not Slack\u2019s). We\u2019re monitoring messages through the Slack event firehose. Attaching two screenshots. One is of the logs and one is of the relevant source code. It seems that the if statement on line 218 was not true, which resulted in the logging statements on lines 237-238. However, the channel ID of the message equals the HELP_CHANNEL and the user is not in ADMIN_USERS. Any help here would be much appreciated.",
+    "is_anonymous": false,
+    "original_poster": 117,
+    "group": 11,
+    "tags": [
+      1,
+      27
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 37,
+  "fields": {
+    "created": "2018-01-24T00:30:03.103Z",
+    "modified": "2018-01-24T00:49:46.077Z",
+    "title": "Selecting DOM elements",
+    "description": "The 5th line is not finished in js.",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      15,
+      28
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 38,
+  "fields": {
+    "created": "2018-01-24T00:30:03.583Z",
+    "modified": "2018-01-24T00:49:23.855Z",
+    "title": "Domain design of settings",
+    "description": "We have a domain that includes an entity called team. What\u2019s the best way to model the concept of settings for a team? We currently have a team_settings table. Issues with this our two-fold. 1) What\u2019s the plural of settings? 2) It doesn\u2019t have an inherent identity - so should it be an entity?",
+    "is_anonymous": false,
+    "original_poster": 117,
+    "group": 11,
+    "tags": [
+      29,
+      30
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 39,
+  "fields": {
+    "created": "2018-01-24T00:30:03.832Z",
+    "modified": "2018-01-24T00:49:10.250Z",
+    "title": "creating a custom widget with flask wtforms",
+    "description": "I am strugling to find resources that explain how to create custom widget with wtforms. I want to display a list of toggle buttons. So far I ve been able to create a list of checkboxes with `SelectMultipleFields`:\r\n`class PrecisionForm(FlaskForm):\r\n    phone_number     = StringField('Phone number', [validators.Length(min=4, max=25)])\r\n    contact_emails = SelectMultipleField(\r\n            'Contact emails',\r\n            [at_least_one],\r\n            choices=[],\r\n            option_widget=widgets.CheckboxInput(),\r\n            widget=widgets.ListWidget(prefix_label=False)\r\n            )\r\n`",
+    "is_anonymous": false,
+    "original_poster": 62,
+    "group": 11,
+    "tags": [
+      1,
+      31,
+      32
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 40,
+  "fields": {
+    "created": "2018-01-24T00:30:04.138Z",
+    "modified": "2018-01-24T00:48:45.351Z",
+    "title": "event delegation js",
+    "description": "So I wrote first 2 in jQuery, seems like it's the same.. just another way to write it right?\r\nthe 3rd is in vanilla, now I am researching more... and stumbled upon this:\r\n<https://lists.evolt.org/archive/Week-of-Mon-20090209/127339.html>\r\nI copy pasted the part that I didn't get to work, it's from 2009, is it too old or what's with the syntax?\r\n<https://jsfiddle.net/d8ak0edq/1/>",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      15,
+      33,
+      34
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 41,
+  "fields": {
+    "created": "2018-01-24T00:30:04.629Z",
+    "modified": "2018-01-24T00:48:13.567Z",
+    "title": "RDBMS Schema for a Scientific Experiment DataBase",
+    "description": "I work with experimental data (structured into 4 sheets / CSV and 1 CSV / experiment currently). I would like to store this in an RDBMS to allow for some querying as well. Two of the aforementioned sheets are time series / voltage series. I'm unsure if I should avoid creating 4 tables / experiment each time. If I should just keep 4 master tables, I'm not sure what to use as a primary key. Each experiment often involves several sensors (so the fields in one of the time series tables would be experiment_id, sensor_id, raw_time,raw_current_electrode1...electroden. (So I'm unsure what a unique identifier would be)",
+    "is_anonymous": false,
+    "original_poster": 45,
+    "group": 11,
+    "tags": [
+      1,
+      35,
+      36
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 43,
+  "fields": {
+    "created": "2018-01-24T00:30:05.131Z",
+    "modified": "2018-01-24T00:47:30.756Z",
+    "title": "Time Series DB Handling",
+    "description": "I work with experimental data (structured into 4 sheets / CSV and 1 CSV / experiment currently). I decided to store this data in 4 master tables, and use an experiment_ID and sensor_ID column to help query data. (In doing so, the DB will have no primary key). However, two of these tables are time series and may not have the same frequency of time. Can anyone recommend a good way to handle time series data?",
+    "is_anonymous": false,
+    "original_poster": 45,
+    "group": 11,
+    "tags": [
+      1,
+      35,
+      36
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 44,
+  "fields": {
+    "created": "2018-01-24T00:30:05.705Z",
+    "modified": "2018-01-24T00:47:02.773Z",
+    "title": "HTMLCollection - adding different attributes affects the live collection differently",
+    "description": "We all know `document.getElementsByClassName` and `document.getElementsByTagName` are live HTMLCollections.\r\nSo I made 2 examples, one with adding a class attribute, the other with bgcolor. Why does the first act like expected and the other gets it's job done...\r\n<https://jsfiddle.net/adkuca/84ryjp7s/2/>\r\n<https://jsfiddle.net/adkuca/f1o9h7be/>\r\nHow can I know what will work normally and what wont??",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      15,
+      17,
+      28,
+      37,
+      38,
+      39
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 45,
+  "fields": {
+    "created": "2018-01-24T00:30:06.137Z",
+    "modified": "2018-01-24T00:46:26.925Z",
+    "title": "Drop a level from Pandas Multiindex",
+    "description": "I have a Pandas DF, image attached, and want to drop a level so the columns 'line up'. Can anyone advise?",
+    "is_anonymous": false,
+    "original_poster": 45,
+    "group": 11,
+    "tags": [
+      36
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 46,
+  "fields": {
+    "created": "2018-01-24T00:30:06.450Z",
+    "modified": "2018-01-24T00:44:44.779Z",
+    "title": "Flatten Index Hierarchy of a Pandas DF",
+    "description": "How would I flatten this DF structure such that the columns 'calibration_type' and 'calibration_num' values would be shown in every row.",
+    "is_anonymous": false,
+    "original_poster": 45,
+    "group": 11,
+    "tags": [
+      36
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 47,
+  "fields": {
+    "created": "2018-01-24T00:30:06.770Z",
+    "modified": "2018-01-24T00:44:17.669Z",
+    "title": "Pytest failing despite custom error handling in Flask",
+    "description": "Working on a Flask app and have a custom error handler for an exception I raise in a route. This works perfectly when testing manually with HTTP responses. However, when running a functional test with pytest, the test fails when the exception is initially raised before the Flask app gets a chance to handle it.",
+    "is_anonymous": false,
+    "original_poster": 117,
+    "group": 11,
+    "tags": [
+      24,
+      40,
+      41
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 48,
+  "fields": {
+    "created": "2018-01-24T00:30:07.052Z",
+    "modified": "2018-01-24T00:43:49.650Z",
+    "title": "Mimic jQuery's Delegated Event Listener",
+    "description": "So here I have a piece of code that basically does what jQuery's delegated event listener would do. This was purely just to learn.\r\n<https://jsfiddle.net/adkuca/rdrekqk2/2/>\r\nHow to make it that it would have the same syntax, like `outer.addDelegateEventListener('mousedown', 'div', function(evt){})`",
+    "is_anonymous": false,
+    "original_poster": 46,
+    "group": 11,
+    "tags": [
+      15,
+      37,
+      42,
+      43
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 49,
+  "fields": {
+    "created": "2018-01-24T00:30:07.359Z",
+    "modified": "2018-01-24T00:43:19.085Z",
+    "title": "Trying to replicate c# function in python",
+    "description": "So I'm trying to replicate function which is written in c#. In c# it passes two objects to the function, which is pretty clear how everything works, but I can't replicate same functionality in python",
+    "is_anonymous": false,
+    "original_poster": 104,
+    "group": 11,
+    "tags": [
+      1,
+      44
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 50,
+  "fields": {
+    "created": "2018-01-24T00:30:07.895Z",
+    "modified": "2018-01-24T00:41:27.198Z",
+    "title": "Launching subprocesses in parallel in python script without blocking execution of the script",
+    "description": "I am writting a test method for my flask app in which I need to 1) launch my flask app 2) expose it publicly with ngrok.\r\nThus I need to launch two processes from my test script :\r\n```python app.py```\r\n==&gt; launching my flask app\r\n```ngrok http 5000```\r\n==&gt; listening to port 5000 (on which the Flask app is running and exposing public Url\r\nin the case of the ngrok process I also need to get the output of the ngrok command in order to get the url on which I am publicly exposing the flask app.\r\nI need this to process to run in parallel and not to block the execution of my script.\r\nI am really unsure about how to do this. I was thinking about running background processes ? I went through <https://docs.python.org/2/library/subprocess.html>, but I cant figure much out of the docs. So far I have only be able to launch a process from my script but it\u2019s blocking the rest of my script.\r\nI will also need to kill the processes at the end of my script.\r\nCould someone please help and maybe give me an example as how they would achieve this?",
+    "is_anonymous": false,
+    "original_poster": 62,
+    "group": 11,
+    "tags": [
+      1,
+      45
+    ]
+  }
+},
+{
+  "model": "topics.topic",
+  "pk": 51,
+  "fields": {
+    "created": "2018-01-24T00:30:08.362Z",
+    "modified": "2018-01-24T00:42:53.966Z",
+    "title": "JavaScript single request to two different ports",
+    "description": "I'm testing a script where one function makes an http request and is then called in another function.\r\nThe first function is:\r\n```export function getFeedData (sub) {\r\n    if (getFeedId(sub) === 2) {\r\n        return axios.get('<http://localhost:4000>').then((data) =&gt; \r\nJSON.parse(data));\r\n    }\r\n}```\r\nAnd the second is:\r\n```export function isDelay (sub, stop) {\r\n    return getFeedData(sub).then((data) =&gt; {\r\n        return data.entity.filter((entityObj) =&gt; {\r\n            return entityObj.stop_time_update !== undefined;\r\n        });\r\n    }).then((newData) =&gt;  {\r\n        console.log(newData);\r\n    }).catch((err) =&gt; {\r\n        console.log(err);\r\n    });\r\n}```\r\nThe reason they're two different functions is that the second will eventually be longer, and I wanted to separate everything out for the sake of simplicity and making my code a bit more declarative.\r\nThe tests for these functions currently look like this:\r\n```import express from 'express';\r\nimport { getFeedId, getFeedData, reverseStop, isDelay } from \r\n'../mocks/apiMock';\r\n\r\nconst app = express();\r\napp.use(express.static('../mocks/MockData.json'));\r\n\r\nit('returns json data', (done) =&gt; {\r\n    app.listen(4000, function () {\r\n        expect.assertions(2);\r\n        return getFeedData('L').then((data) =&gt; {\r\n            expect(data).toBeDefined();\r\n            expect(data.header.gtfs_realtime_version).toBe('1.0');\r\n        });\r\n    });\r\n    done();\r\n});\r\n\r\nit('returns either the delay or time until the next train' , (done) \r\n=&gt; {\r\n    app.listen(4000, function () {\r\n        isDelay('L', 'Lorimer St');\r\n    });\r\n    done();\r\n});```\r\nThat second test doesn't run because it's trying to listen on a port that's already occupied.\r\nThe solution I had in mind would be to pass `app.listen()` `0` as its first parameter so it listens on a random port. However, I don't know how I could get my axios request to request that specific port. Is there a way to do this? Or perhaps a better solution to my problem?",
+    "is_anonymous": false,
+    "original_poster": 54,
+    "group": 11,
+    "tags": [
+      14,
+      46,
+      47
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 23,
+  "fields": {
+    "created": "2018-01-24T00:29:58.682Z",
+    "modified": "2018-01-24T00:29:58.682Z",
+    "time_start": "2017-12-15T22:14:42Z",
+    "time_end": "2017-12-19T09:16:08Z",
+    "status": "OPEN",
+    "topic": 24,
+    "participants": [
+      71,
+      76,
+      117,
+      119
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 24,
+  "fields": {
+    "created": "2018-01-24T00:29:59.061Z",
+    "modified": "2018-01-24T00:29:59.061Z",
+    "time_start": "2017-12-20T11:39:27Z",
+    "time_end": "2017-12-21T10:28:14Z",
+    "status": "OPEN",
+    "topic": 25,
+    "participants": [
+      71,
+      96,
+      101
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 25,
+  "fields": {
+    "created": "2018-01-24T00:29:59.368Z",
+    "modified": "2018-01-24T00:29:59.368Z",
+    "time_start": "2017-12-27T12:52:44Z",
+    "time_end": "2017-12-27T14:31:34Z",
+    "status": "OPEN",
+    "topic": 26,
+    "participants": [
+      62,
+      71,
+      96
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 26,
+  "fields": {
+    "created": "2018-01-24T00:29:59.626Z",
+    "modified": "2018-01-24T00:29:59.627Z",
+    "time_start": "2017-12-27T17:58:13Z",
+    "time_end": "2017-12-27T17:58:13Z",
+    "status": "OPEN",
+    "topic": 27,
+    "participants": [
+      71
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 27,
+  "fields": {
+    "created": "2018-01-24T00:29:59.832Z",
+    "modified": "2018-01-24T00:29:59.832Z",
+    "time_start": "2018-01-04T14:52:53Z",
+    "time_end": "2018-01-04T15:12:19Z",
+    "status": "OPEN",
+    "topic": 28,
+    "participants": [
+      71,
+      76,
+      96,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 28,
+  "fields": {
+    "created": "2018-01-24T00:30:00.099Z",
+    "modified": "2018-01-24T00:30:00.099Z",
+    "time_start": "2018-01-04T15:01:19Z",
+    "time_end": "2018-01-05T15:42:35Z",
+    "status": "OPEN",
+    "topic": 29,
+    "participants": [
+      71,
+      76,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 29,
+  "fields": {
+    "created": "2018-01-24T00:30:00.416Z",
+    "modified": "2018-01-24T00:30:00.416Z",
+    "time_start": "2018-01-04T23:49:57Z",
+    "time_end": "2018-01-05T20:18:14Z",
+    "status": "OPEN",
+    "topic": 30,
+    "participants": [
+      71,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 30,
+  "fields": {
+    "created": "2018-01-24T00:30:00.685Z",
+    "modified": "2018-01-24T00:30:00.685Z",
+    "time_start": "2018-01-05T08:34:21Z",
+    "time_end": "2018-01-05T16:22:49Z",
+    "status": "OPEN",
+    "topic": 31,
+    "participants": [
+      46,
+      64,
+      71,
+      76,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 31,
+  "fields": {
+    "created": "2018-01-24T00:30:01.004Z",
+    "modified": "2018-01-24T00:30:01.005Z",
+    "time_start": "2018-01-05T20:57:27Z",
+    "time_end": "2018-01-05T21:16:33Z",
+    "status": "OPEN",
+    "topic": 32,
+    "participants": [
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 32,
+  "fields": {
+    "created": "2018-01-24T00:30:01.261Z",
+    "modified": "2018-01-24T00:30:01.261Z",
+    "time_start": "2018-01-08T12:48:08Z",
+    "time_end": "2018-01-09T20:55:57Z",
+    "status": "OPEN",
+    "topic": 33,
+    "participants": [
+      71,
+      76,
+      96,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 33,
+  "fields": {
+    "created": "2018-01-24T00:30:01.672Z",
+    "modified": "2018-01-24T00:30:01.672Z",
+    "time_start": "2018-01-09T14:32:05Z",
+    "time_end": "2018-01-09T16:54:46Z",
+    "status": "OPEN",
+    "topic": 34,
+    "participants": [
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 34,
+  "fields": {
+    "created": "2018-01-24T00:30:01.960Z",
+    "modified": "2018-01-24T00:30:01.960Z",
+    "time_start": "2018-01-09T14:55:42Z",
+    "time_end": "2018-01-09T15:30:42Z",
+    "status": "OPEN",
+    "topic": 35,
+    "participants": [
+      46,
+      71,
+      76,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 35,
+  "fields": {
+    "created": "2018-01-24T00:30:02.655Z",
+    "modified": "2018-01-24T00:30:02.656Z",
+    "time_start": "2018-01-09T16:09:47Z",
+    "time_end": "2018-01-09T20:57:25Z",
+    "status": "OPEN",
+    "topic": 36,
+    "participants": [
+      71,
+      96,
+      112,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 36,
+  "fields": {
+    "created": "2018-01-24T00:30:03.130Z",
+    "modified": "2018-01-24T00:30:03.130Z",
+    "time_start": "2018-01-10T22:43:15Z",
+    "time_end": "2018-01-11T00:27:40Z",
+    "status": "OPEN",
+    "topic": 37,
+    "participants": [
+      71,
+      76
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 37,
+  "fields": {
+    "created": "2018-01-24T00:30:03.595Z",
+    "modified": "2018-01-24T00:30:03.595Z",
+    "time_start": "2018-01-12T20:39:53Z",
+    "time_end": "2018-01-15T17:58:39Z",
+    "status": "OPEN",
+    "topic": 38,
+    "participants": [
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 38,
+  "fields": {
+    "created": "2018-01-24T00:30:03.846Z",
+    "modified": "2018-01-24T00:30:03.846Z",
+    "time_start": "2018-01-14T12:17:09Z",
+    "time_end": "2018-01-16T17:59:15Z",
+    "status": "OPEN",
+    "topic": 39,
+    "participants": [
+      62,
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 39,
+  "fields": {
+    "created": "2018-01-24T00:30:04.173Z",
+    "modified": "2018-01-24T00:30:04.173Z",
+    "time_start": "2018-01-15T18:27:15Z",
+    "time_end": "2018-01-15T19:04:51Z",
+    "status": "OPEN",
+    "topic": 40,
+    "participants": [
+      46,
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 40,
+  "fields": {
+    "created": "2018-01-24T00:30:04.643Z",
+    "modified": "2018-01-24T00:30:04.644Z",
+    "time_start": "2018-01-18T20:17:19Z",
+    "time_end": "2018-01-18T22:55:15Z",
+    "status": "OPEN",
+    "topic": 41,
+    "participants": [
+      45,
+      71,
+      76,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 42,
+  "fields": {
+    "created": "2018-01-24T00:30:05.143Z",
+    "modified": "2018-01-24T00:30:05.144Z",
+    "time_start": "2018-01-19T00:28:46Z",
+    "time_end": "2018-01-19T00:53:27Z",
+    "status": "OPEN",
+    "topic": 43,
+    "participants": [
+      45,
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 43,
+  "fields": {
+    "created": "2018-01-24T00:30:05.730Z",
+    "modified": "2018-01-24T00:30:05.730Z",
+    "time_start": "2018-01-19T17:27:07Z",
+    "time_end": "2018-01-19T18:29:09Z",
+    "status": "OPEN",
+    "topic": 44,
+    "participants": [
+      46,
+      71,
+      76,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 44,
+  "fields": {
+    "created": "2018-01-24T00:30:06.144Z",
+    "modified": "2018-01-24T00:30:06.144Z",
+    "time_start": "2018-01-19T17:55:31Z",
+    "time_end": "2018-01-19T22:08:42Z",
+    "status": "OPEN",
+    "topic": 45,
+    "participants": [
+      45,
+      71,
+      76,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 45,
+  "fields": {
+    "created": "2018-01-24T00:30:06.456Z",
+    "modified": "2018-01-24T00:30:06.456Z",
+    "time_start": "2018-01-19T22:05:49Z",
+    "time_end": "2018-01-19T22:26:44Z",
+    "status": "OPEN",
+    "topic": 46,
+    "participants": [
+      45,
+      71,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 46,
+  "fields": {
+    "created": "2018-01-24T00:30:06.785Z",
+    "modified": "2018-01-24T00:30:06.785Z",
+    "time_start": "2018-01-20T17:04:20Z",
+    "time_end": "2018-01-23T19:37:27Z",
+    "status": "OPEN",
+    "topic": 47,
+    "participants": [
+      71,
+      112,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 47,
+  "fields": {
+    "created": "2018-01-24T00:30:07.071Z",
+    "modified": "2018-01-24T00:30:07.071Z",
+    "time_start": "2018-01-21T21:36:16Z",
+    "time_end": "2018-01-22T02:40:06Z",
+    "status": "OPEN",
+    "topic": 48,
+    "participants": [
+      46,
+      71,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 48,
+  "fields": {
+    "created": "2018-01-24T00:30:07.370Z",
+    "modified": "2018-01-24T00:30:07.370Z",
+    "time_start": "2018-01-23T20:11:34Z",
+    "time_end": "2018-01-23T21:47:42Z",
+    "status": "OPEN",
+    "topic": 49,
+    "participants": [
+      71,
+      76,
+      104,
+      117
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 49,
+  "fields": {
+    "created": "2018-01-24T00:30:07.908Z",
+    "modified": "2018-01-24T00:30:07.908Z",
+    "time_start": "2017-12-13T20:19:52Z",
+    "time_end": "2017-12-13T22:00:52Z",
+    "status": "OPEN",
+    "topic": 50,
+    "participants": [
+      71,
+      96,
+      112
+    ]
+  }
+},
+{
+  "model": "topics.discussion",
+  "pk": 50,
+  "fields": {
+    "created": "2018-01-24T00:30:08.401Z",
+    "modified": "2018-01-24T00:30:08.401Z",
+    "time_start": "2017-12-15T22:06:16Z",
+    "time_end": "2017-12-15T22:43:27Z",
+    "status": "OPEN",
+    "topic": 51,
+    "participants": [
+      54,
+      71,
+      76,
+      112
+    ]
+  }
+}
+]
