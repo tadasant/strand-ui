@@ -1,18 +1,15 @@
 from datetime import datetime
 
-from django.conf import settings
 import graphene
 import requests
+from django.conf import settings
 from slackclient import SlackClient
 
 from app.api.authorization import check_authorization
-from app.groups.models import Group
 from app.dialogues.models import Message
 from app.dialogues.types import MessageType, ReplyType
 from app.dialogues.validators import MessageValidator, ReplyValidator
-from app.topics.models import Discussion
-from app.topics.types import DiscussionType, TopicType
-from app.topics.validators import TopicValidator, DiscussionValidator
+from app.groups.models import Group
 from app.slack_integration.models import (
     SlackAgent,
     SlackEvent,
@@ -36,12 +33,15 @@ from app.slack_integration.types import (
     UserFromSlackInputType,
     UserAndMessageFromSlackInputType,
     UserAndTopicFromSlackInputType,
-    UserAndReplyFromSlackInputType
-)
+    UserAndReplyFromSlackInputType,
+    CloseDiscussionFromSlackInputType)
 from app.slack_integration.validators import (
     SlackChannelValidator,
     SlackUserValidator
 )
+from app.topics.models import Discussion
+from app.topics.types import DiscussionType, TopicType
+from app.topics.validators import TopicValidator, DiscussionValidator
 from app.users.models import User
 from app.users.types import UserType
 
@@ -321,7 +321,7 @@ class CreateTopicFromSlackMutation(graphene.Mutation):
         tags = input.pop('tags', [])
 
         topic_validator = TopicValidator(data=dict(**input, original_poster_id=slack_user.user.id,
-                                                         group_id=slack_user.slack_team.slack_agent.group.id))
+                                                   group_id=slack_user.slack_team.slack_agent.group.id))
         topic_validator.is_valid(raise_exception=True)
         topic = topic_validator.save()
 
@@ -354,7 +354,7 @@ class CreateUserAndTopicFromSlackMutation(graphene.Mutation):
         tags = input.pop('tags', [])
 
         topic_validator = TopicValidator(data=dict(**input, original_poster_id=slack_user.user.id,
-                                                         group_id=slack_user.slack_team.slack_agent.group.id))
+                                                   group_id=slack_user.slack_team.slack_agent.group.id))
         topic_validator.is_valid(raise_exception=True)
         topic = topic_validator.save()
 
@@ -378,6 +378,21 @@ class MarkDiscussionAsPendingClosedFromSlack(graphene.Mutation):
         return MarkDiscussionAsPendingClosedFromSlack(discussion=discussion)
 
 
+class CloseDiscussionFromSlackMutation(graphene.Mutation):
+    class Arguments:
+        input = CloseDiscussionFromSlackInputType(required=True)
+
+    discussion = graphene.Field(DiscussionType)
+
+    @check_authorization
+    def mutate(self, info, input):
+        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
+        discussion.mark_as_closed()
+        discussion.save()
+
+        return CloseDiscussionFromSlackMutation(discussion=discussion)
+
+
 class Mutation(graphene.ObjectType):
     create_slack_user = CreateSlackUserMutation.Field()
     create_slack_agent = CreateSlackAgentMutation.Field()
@@ -397,3 +412,4 @@ class Mutation(graphene.ObjectType):
     create_discussion_from_slack = CreateDiscussionFromSlackMutation.Field()
     mark_discussion_as_pending_closed_from_slack = MarkDiscussionAsPendingClosedFromSlack.Field()
     create_user_from_slack = CreateUserFromSlackMutation.Field()
+    close_discussion_from_slack = CloseDiscussionFromSlackMutation.Field()

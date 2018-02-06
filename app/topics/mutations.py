@@ -1,14 +1,15 @@
 import graphene
 
 from app.api.authorization import check_authorization
+from app.topics.models import Discussion
 from app.topics.types import (
     TopicType,
     TopicInputType,
     DiscussionType,
     DiscussionInputType,
     TagType,
-    TagInputType
-)
+    TagInputType,
+    CloseDiscussionInputType)
 from app.topics.validators import TopicValidator, DiscussionValidator, TagValidator
 
 
@@ -61,7 +62,25 @@ class CreateTagMutation(graphene.Mutation):
         return CreateTagMutation(tag=tag)
 
 
+class CloseDiscussionMutation(graphene.Mutation):
+    class Arguments:
+        input = CloseDiscussionInputType(required=True)
+
+    discussion = graphene.Field(DiscussionType)
+
+    @check_authorization
+    def mutate(self, info, input):
+        discussion = Discussion.objects.get(pk=input['id'])
+
+        discussion.mark_as_closed()
+        discussion.save()
+
+        return CloseDiscussionMutation(discussion=discussion)
+
+
 class Mutation(graphene.ObjectType):
     create_topic = CreateTopicMutation.Field()
     create_discussion = CreateDiscussionMutation.Field()
     create_tag = CreateTagMutation.Field()
+
+    close_discussion = CloseDiscussionMutation.Field()

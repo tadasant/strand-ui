@@ -2,7 +2,6 @@ import graphene
 from graphene_django.types import DjangoObjectType
 
 from app.api.authorization import check_authorization
-from app.topics.types import DiscussionInputType, TagInputType
 from app.slack_integration.models import (
     SlackAgent,
     SlackChannel,
@@ -11,6 +10,7 @@ from app.slack_integration.models import (
     SlackApplicationInstallation,
     SlackUser
 )
+from app.topics.types import DiscussionInputType, TagInputType
 
 
 class SlackAgentType(DjangoObjectType):
@@ -157,6 +157,11 @@ class GroupFromSlackInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
     slack_team_name = graphene.String(required=True)
     group_name = graphene.String(required=True)
+
+
+class CloseDiscussionFromSlackInputType(graphene.InputObjectType):
+    slack_channel_id = graphene.String()
+    time_end = graphene.String()
 
 
 class TopicFromSlackInputType(graphene.InputObjectType):

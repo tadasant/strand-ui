@@ -43,3 +43,7 @@ class TopicAndTagsInputType(graphene.InputObjectType):
     description = graphene.String(required=True)
     is_anonymous = graphene.Boolean()
     original_poster_id = graphene.Int(required=True)
+
+
+class CloseDiscussionInputType(graphene.InputObjectType):
+    id = graphene.Int()
