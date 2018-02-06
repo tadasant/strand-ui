@@ -372,8 +372,7 @@ class MarkDiscussionAsPendingClosedFromSlack(graphene.Mutation):
     @check_authorization
     def mutate(self, info, input):
         discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
-        discussion.mark_as_pending_closed()
-        discussion.save()
+        discussion.standby_to_auto_close()
 
         return MarkDiscussionAsPendingClosedFromSlack(discussion=discussion)
 

@@ -13,7 +13,7 @@ from app.slack_integration.models import (
     SlackUser,
     SlackTeam
 )
-from app.topics.models import Topic, Discussion, Tag
+from app.topics.models import Topic, Discussion, Tag, DiscussionStatus
 from app.users.models import User
 
 
@@ -22,6 +22,7 @@ class UserFactory(factory.DjangoModelFactory):
         model = User
 
     email = factory.Faker('safe_email')
+    is_bot = factory.Faker('pybool')
     password = make_password('mypass123!')
     username = factory.Faker('user_name')
     first_name = factory.Faker('first_name')
@@ -76,6 +77,7 @@ class DiscussionFactory(factory.DjangoModelFactory):
     class Meta:
         model = Discussion
 
+    status = DiscussionStatus.OPEN.value
     time_start = factory.Faker('past_datetime', tzinfo=pytz.UTC)
     time_end = factory.Faker('future_datetime', tzinfo=pytz.UTC)
     topic = factory.SubFactory(TopicFactory)

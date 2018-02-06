@@ -1,12 +1,13 @@
 from enum import Enum
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django_fsm import FSMField, transition
 from model_utils.models import TimeStampedModel
 
-from app.users.models import User
 from app.groups.models import Group
+from app.users.models import User
 
 
 class Tag(TimeStampedModel):
@@ -51,12 +52,40 @@ class Discussion(TimeStampedModel):
     participants = models.ManyToManyField(to=User, related_name='discussions')
 
     @property
+    def datetime_of_last_non_bot_message(self):
+        last_non_bot_message = self.messages.filter(author__is_bot=False).order_by('time').last()
+        if last_non_bot_message:
+            return last_non_bot_message.time
+        else:
+            return self.time_start
+
+    @property
+    def minutes_since_last_non_bot_message(self):
+        time_delta = timezone.now() - self.datetime_of_last_non_bot_message
+        minutes = round(time_delta.seconds / 60, 2)
+        return minutes
+
+    @property
     def is_closed(self):
         return self.status == DiscussionStatus.CLOSED.value
 
-    # TODO: Check timestamp of last non-bot message.
+    @property
+    def is_stale(self):
+        return self.status == DiscussionStatus.STALE.value
+
+    def standby_to_auto_close(self):
+        self.mark_as_pending_closed()
+        self.save()
+
+        from app.topics.tasks import auto_close_pending_closed_discussion
+        auto_close_pending_closed_discussion.apply_async(args=[self.id, self.datetime_of_last_non_bot_message],
+                                                         countdown=settings.AUTO_CLOSE_DELAY)
+
     def can_mark_as_stale(self):
-        return True
+        if self.minutes_since_last_non_bot_message >= 30.0:
+            return True
+        else:
+            return False
 
     @transition(field=status, source=DiscussionStatus.OPEN.value, target=DiscussionStatus.STALE.value,
                 conditions=[can_mark_as_stale])
