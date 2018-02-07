@@ -1,3 +1,4 @@
+from rest_framework.authentication import TokenAuthentication
 
 
 def check_authorization(resolve_function):
@@ -9,7 +10,10 @@ def check_authorization(resolve_function):
     false, an exception is raised.
     """
     def wrapper(self, info, **kwargs):
-        if not info.context.user.is_authenticated:
+        token_authentication = TokenAuthentication()
+        user, token = token_authentication.authenticate(info.context)
+
+        if not user.is_authenticated:
             raise Exception('Unauthorized')
         return resolve_function(self, info, **kwargs)
     return wrapper
