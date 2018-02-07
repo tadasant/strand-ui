@@ -3,8 +3,6 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from app.topics.models import Discussion
-
 
 class TestCreateReply:
 
