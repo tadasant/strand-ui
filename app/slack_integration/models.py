@@ -53,7 +53,8 @@ class SlackAgent(TimeStampedModel):
             return False
 
     @transition(field=status, source=[SlackAgentStatus.AUTHENTICATED.value, SlackAgentStatus.PAUSED.value,
-                                      SlackAgentStatus.INACTIVE.value], target=SlackAgentStatus.ACTIVE.value,
+                                      SlackAgentStatus.INACTIVE.value, SlackAgentStatus.ACTIVE.value],
+                target=SlackAgentStatus.ACTIVE.value,
                 conditions=[can_activate])
     def activate(self):
         pass
