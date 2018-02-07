@@ -10,10 +10,14 @@ def check_authorization(resolve_function):
     false, an exception is raised.
     """
     def wrapper(self, info, **kwargs):
-        token_authentication = TokenAuthentication()
-        user, token = token_authentication.authenticate(info.context)
+        try:
+            token_authentication = TokenAuthentication()
+            user, token = token_authentication.authenticate(info.context)
+        except TypeError:
+            raise Exception('Unauthorized')
 
         if not user.is_authenticated:
             raise Exception('Unauthorized')
+
         return resolve_function(self, info, **kwargs)
     return wrapper

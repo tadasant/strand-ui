@@ -1,6 +1,7 @@
 import pytest
 import responses
 from pytest_factoryboy.fixture import register
+from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 from slackclient import SlackClient
 
@@ -39,7 +40,7 @@ register(UserFactory)
 
 
 @pytest.fixture()
-def auth_client(user_factory, transactional_db):
+def auth_client(user_factory):
     """Pytest fixture for authenticated API client
 
     Most of our mutations require authentication. Rather than authenticate
@@ -48,7 +49,8 @@ def auth_client(user_factory, transactional_db):
     """
     user = user_factory()
     client = APIClient()
-    client.force_login(user=user)
+    token = Token.objects.get(user=user)
+    client.credentials(HTTP_AUTHORIZATION=f'Token {token}')
     return client
 
 
