@@ -70,6 +70,10 @@ class Discussion(TimeStampedModel):
         return self.status == DiscussionStatus.CLOSED.value
 
     @property
+    def is_pending_closed(self):
+        return self.status == DiscussionStatus.PENDING_CLOSED.value
+
+    @property
     def is_stale(self):
         return self.status == DiscussionStatus.STALE.value
 
@@ -87,6 +91,11 @@ class Discussion(TimeStampedModel):
         else:
             return False
 
+    @transition(field=status, source=[DiscussionStatus.STALE.value, DiscussionStatus.PENDING_CLOSED.value],
+                target=DiscussionStatus.OPEN.value)
+    def mark_as_open(self):
+        pass
+
     @transition(field=status, source=DiscussionStatus.OPEN.value, target=DiscussionStatus.STALE.value,
                 conditions=[can_mark_as_stale])
     def mark_as_stale(self):
@@ -96,7 +105,6 @@ class Discussion(TimeStampedModel):
     def mark_as_pending_closed(self):
         pass
 
-    # TODO: Check timestamp of last non-bot message and PENDING CLOSED
     @transition(field=status, source='*', target=DiscussionStatus.CLOSED.value)
     def mark_as_closed(self):
         self.time_end = timezone.now()
