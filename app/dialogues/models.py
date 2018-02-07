@@ -51,9 +51,9 @@ def update_discussion_status_from_message(sender, instance=None, created=False, 
 
 @receiver(post_save, sender=Reply)
 def update_discussion_status_from_reply(sender, instance=None, created=False, **kwargs):
-    """Mark discussion as open if message is created.
+    """Mark discussion as open if reply is created.
 
-    Fires on post_save signal for messages. Only marks
+    Fires on post_save signal for replies. Only marks
     a discussion as open if it is currently stale or
     pending closed.
     """

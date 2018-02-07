@@ -20,7 +20,7 @@ class MessageValidator(serializers.ModelSerializer):
         fields = ('id', 'text', 'discussion_id', 'author_id', 'time', 'origin_slack_event_id')
 
     def validate(self, data):
-        if Discussion.objects.get(pk=data['discussion_id']).is_closed:
+        if Discussion.objects.get(pk=data.get('discussion').id).is_closed:
             raise serializers.ValidationError('Cannot create message in closed discussion')
         return data
 
@@ -37,6 +37,6 @@ class ReplyValidator(serializers.ModelSerializer):
         fields = ('id', 'text', 'message_id', 'author_id', 'time', 'origin_slack_event_id')
 
     def validate(self, data):
-        if Message.objects.get(pk=data['message_id']).discussion.is_closed:
+        if Message.objects.get(pk=data.get('message').id).discussion.is_closed:
             raise serializers.ValidationError('Cannot create reply to message in closed discussion')
         return data
