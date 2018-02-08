@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_beat',
     'django_celery_results',
+    'channels',
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
@@ -65,6 +66,23 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+# ASGI configuration
+# https://channels.readthedocs.io/en/latest/installation.html
+
+ASGI_APPLICATION = 'config.routing.application'
+
+# Channel layer settings
+# https://channels.readthedocs.io/en/latest/installation.html
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': ['redis://localhost:6379'],
+        },
+    }
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -81,7 +99,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
 
 # Override auth user model
 AUTH_USER_MODEL = 'users.User'

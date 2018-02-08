@@ -1,10 +1,13 @@
 import pytest
+import asyncio
 import responses
 from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
 from slackclient import SlackClient
+from channels.testing import WebsocketCommunicator
 
 from app.topics.tasks import auto_close_pending_closed_discussion
+from config.asgi import get_default_application
 from tests.factories import (
     GroupFactory,
     MessageFactory,
@@ -120,3 +123,12 @@ def mark_stale_discussions_factory(transactional_db):
     10 times and executes the mark_stale_discussion task.
     """
     return mark_stale_discussions_task
+
+
+@pytest.fixture()
+@pytest.mark.asyncio
+async def websocket_communicator(event_loop):
+    communicator = WebsocketCommunicator(get_default_application(), '/subscriptions')
+    await communicator.connect()
+    yield communicator
+    await communicator.disconnect()

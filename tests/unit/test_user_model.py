@@ -2,8 +2,7 @@ import pytest
 from django.db.utils import IntegrityError
 
 
-class TestUserModel():
-    """Test potential exceptions for User model."""
+class TestUserModel:
 
     @pytest.mark.django_db
     def test_email_is_null(self, user_factory):

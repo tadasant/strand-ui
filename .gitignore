@@ -6,3 +6,4 @@ misc.xml
 db.config.json
 .cache/
 .coverage
+.pytest_cache
