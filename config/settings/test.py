@@ -31,3 +31,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # Discussion Auto-Close Delay
 AUTO_CLOSE_DELAY = 4
+
+SLACK_APP_VERIFICATION_TOKEN = 'anoTH3rRANDoMCOmbo'
+SLACK_APP_STALE_DISCUSSION_ENDPOINT = 'http://slackapp.com/stalediscussions'
+SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT = 'http://slackapp.com/autocloseddiscussions'

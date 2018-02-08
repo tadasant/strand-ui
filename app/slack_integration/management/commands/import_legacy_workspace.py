@@ -22,7 +22,7 @@ class Command(BaseCommand):
         client = SlackClient(options['slack_api_token'])
         group, slack_team = create_group_and_slack_team(client)
 
-        #create_users_and_slack_users(client, group, slack_team)
+        create_users_and_slack_users(client, group, slack_team)
 
         create_topics_and_discussions(client, slack_team, options['bot_id'])
 

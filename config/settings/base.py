@@ -66,23 +66,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-# ASGI configuration
-# https://channels.readthedocs.io/en/latest/installation.html
-
-ASGI_APPLICATION = 'config.routing.application'
-
-# Channel layer settings
-# https://channels.readthedocs.io/en/latest/installation.html
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': ['redis://localhost:6379'],
-        },
-    }
-}
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

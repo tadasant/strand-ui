@@ -31,3 +31,8 @@ CELERY_BROKER_URL = os.environ['CELERY_BROKER_URL']
 
 # Discussion Auto-Close Delay
 AUTO_CLOSE_DELAY = 300
+
+# Slack App Verification Token
+SLACK_APP_VERIFICATION_TOKEN = os.environ['SLACK_APP_VERIFICATION_TOKEN']
+SLACK_APP_STALE_DISCUSSION_ENDPOINT = 'http://slackapp.com/stalediscussions'
+SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT = 'http://slackapp.com/autocloseddiscussions'

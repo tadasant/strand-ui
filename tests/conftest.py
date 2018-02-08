@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 from slackclient import SlackClient
 from channels.testing import WebsocketCommunicator
 from django.conf import settings
+import asyncio
 
 from app.topics.tasks import auto_close_pending_closed_discussion
 from config.asgi import get_default_application
@@ -43,9 +44,17 @@ register(UserFactory)
 from channels_redis.core import RedisChannelLayer
 
 
+@pytest.yield_fixture(scope='session')
+def event_loop(request):
+    """Create an instance of the default event loop for each test case."""
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
+
+
 @pytest.fixture()
 @pytest.mark.asyncio
-async def channel_layer():
+async def channel_layer(event_loop):
     """
     Channel layer fixture that flushes automatically.
     """
@@ -117,7 +126,7 @@ def slack_client_factory(mocker):
 
 
 @pytest.fixture()
-def auto_close_pending_closed_discussion_factory(mocker, transactional_db, event_loop):
+def auto_close_pending_closed_discussion_factory(mocker, transactional_db):
     """Pytest fixture to patch async_delay using test resource
 
     Created a test resource for the auto_close_pending_closed_discussion
@@ -129,7 +138,7 @@ def auto_close_pending_closed_discussion_factory(mocker, transactional_db, event
 
 
 @pytest.fixture()
-def mark_stale_discussions_factory(transactional_db, event_loop):
+def mark_stale_discussions_factory(transactional_db):
     """Pytest fixture to monitor for stale discussions.
 
     This is in lieu of creating mock resources to mimick a
