@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_beat',
     'django_celery_results',
-    'channels',
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
@@ -82,6 +81,7 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = 'config.wsgi.application'
 
 # Override auth user model
 AUTH_USER_MODEL = 'users.User'

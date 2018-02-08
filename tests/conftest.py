@@ -5,10 +5,8 @@ from rest_framework.test import APIClient
 from slackclient import SlackClient
 from channels.testing import WebsocketCommunicator
 from django.conf import settings
-import asyncio
 
 from app.topics.tasks import auto_close_pending_closed_discussion
-from config.asgi import get_default_application
 from tests.factories import (
     GroupFactory,
     MessageFactory,
@@ -40,28 +38,6 @@ register(SlackTeamFactory)
 register(SlackUserFactory)
 register(TagFactory)
 register(UserFactory)
-
-from channels_redis.core import RedisChannelLayer
-
-
-@pytest.yield_fixture(scope='session')
-def event_loop(request):
-    """Create an instance of the default event loop for each test case."""
-    loop = asyncio.get_event_loop_policy().new_event_loop()
-    yield loop
-    loop.close()
-
-
-@pytest.fixture()
-@pytest.mark.asyncio
-async def channel_layer(event_loop):
-    """
-    Channel layer fixture that flushes automatically.
-    """
-    channel_layer = RedisChannelLayer(**settings.CHANNEL_LAYERS['default']['CONFIG'])
-    yield channel_layer
-    await channel_layer.flush()
-    await channel_layer.close()
 
 
 @pytest.fixture()
@@ -146,13 +122,3 @@ def mark_stale_discussions_factory(transactional_db):
     10 times and executes the mark_stale_discussion task.
     """
     return mark_stale_discussions_task
-
-
-@pytest.fixture()
-@pytest.mark.asyncio
-async def communicator(channel_layer, event_loop):
-    communicator = WebsocketCommunicator(get_default_application(), '/subscriptions')
-    await communicator.connect()
-    yield communicator
-    await communicator.disconnect()
-
