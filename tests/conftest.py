@@ -3,8 +3,6 @@ import responses
 from pytest_factoryboy.fixture import register
 from rest_framework.test import APIClient
 from slackclient import SlackClient
-from channels.testing import WebsocketCommunicator
-from django.conf import settings
 
 from app.topics.tasks import auto_close_pending_closed_discussion
 from tests.factories import (
