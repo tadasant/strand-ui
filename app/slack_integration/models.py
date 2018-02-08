@@ -83,8 +83,8 @@ class SlackTeam(TimeStampedModel):
 class SlackUser(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
     real_name = models.CharField(max_length=255)
     display_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, null=True)
@@ -116,7 +116,7 @@ class SlackChannel(TimeStampedModel):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     slack_team = models.ForeignKey(to=SlackTeam, on_delete=models.CASCADE, related_name='slack_channels')
-    discussion = models.OneToOneField(to=Discussion, on_delete=models.CASCADE, null=True)
+    discussion = models.OneToOneField(to=Discussion, on_delete=models.CASCADE, null=True, related_name='slack_channel')
 
     def __str__(self):
         return f'#{self.name}'
