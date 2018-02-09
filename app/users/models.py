@@ -18,6 +18,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), blank=True, null=True, unique=True)
     avatar_url = models.CharField(max_length=255, blank=True, null=True)
     is_bot = models.BooleanField(default=False)
+    alias = models.CharField(max_length=20, unique=True)
 
     objects = CustomUserManager()
 

@@ -30,7 +30,7 @@ class TestCreateUserAndMessageFromSlack:
                                                     text: "{message.text}"}}) {{
               slackUser {{
                 user {{
-                  firstName
+                  alias
                 }}
               }}
             }}
@@ -69,7 +69,7 @@ class TestCreateUserAndMessageFromSlack:
                                                     text: "{message.text}"}}) {{
               slackUser {{
                 user {{
-                  firstName
+                  alias
                 }}
               }}
             }}
@@ -107,7 +107,7 @@ class TestCreateUserAndMessageFromSlack:
                                                     text: "{message.text}"}}) {{
               slackUser {{
                 user {{
-                  firstName
+                  alias
                 }}
               }}
             }}
@@ -148,7 +148,7 @@ class TestCreateUserAndMessageFromSlack:
                                                     text: "{message.text}"}}) {{
               slackUser {{
                 user {{
-                  firstName
+                  alias
                 }}
               }}
             }}
@@ -187,7 +187,7 @@ class TestCreateUserAndMessageFromSlack:
                                                     text: "{message.text}"}}) {{
               slackUser {{
                 user {{
-                  firstName
+                  alias
                 }}
               }}
             }}
@@ -196,5 +196,4 @@ class TestCreateUserAndMessageFromSlack:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createUserAndMessageFromSlack']['slackUser']['user']['firstName'] == \
-            slack_user.first_name
+        assert response.json()['data']['createUserAndMessageFromSlack']['slackUser']['user']['alias']

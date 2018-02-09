@@ -10,7 +10,7 @@ class TestCreateUser:
           mutation {{
             createUser(input: {{email: "{user.email}", username: "{user.username}"}}) {{
               user {{
-                username
+                alias
               }}
             }}
           }}
@@ -29,7 +29,7 @@ class TestCreateUser:
           mutation {{
             createUser(input: {{email: "{user.email}", username: "{user.username}"}}) {{
               user {{
-                username
+                alias
               }}
             }}
           }}
@@ -37,4 +37,4 @@ class TestCreateUser:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createUser']['user']['username'] == user.username
+        assert response.json()['data']['createUser']['user']['alias']

@@ -17,7 +17,7 @@ class TestCreateSlackUser:
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
-                realName
+                id
               }}
             }}
           }}
@@ -41,7 +41,7 @@ class TestCreateSlackUser:
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
-                realName
+                id
               }}
             }}
           }}
@@ -66,7 +66,7 @@ class TestCreateSlackUser:
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: 1}}) {{
               slackUser {{
-                realName
+                id
               }}
             }}
           }}
@@ -90,7 +90,7 @@ class TestCreateSlackUser:
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
-                realName
+                id
               }}
             }}
           }}
@@ -98,4 +98,4 @@ class TestCreateSlackUser:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createSlackUser']['slackUser']['realName'] == slack_user.real_name
+        assert response.json()['data']['createSlackUser']['slackUser']['id'] == slack_user.id

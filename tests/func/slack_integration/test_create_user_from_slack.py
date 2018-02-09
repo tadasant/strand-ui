@@ -120,8 +120,7 @@ class TestCreateUserFromSlack:
                                          slackTeamId: "{slack_team.id}"}}) {{
               slackUser {{
                 user {{
-                  email
-                  isBot
+                  alias
                 }}
               }}
             }}
@@ -130,5 +129,4 @@ class TestCreateUserFromSlack:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createUserFromSlack']['slackUser']['user']['email'] == slack_user.email
-        assert response.json()['data']['createUserFromSlack']['slackUser']['user']['isBot'] == slack_user.is_bot
+        assert response.json()['data']['createUserFromSlack']['slackUser']['user']['alias']

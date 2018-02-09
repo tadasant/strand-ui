@@ -65,6 +65,23 @@ class SlackApplicationInstallationType(DjangoObjectType):
 class SlackUserType(DjangoObjectType):
     class Meta:
         model = SlackUser
+        only_fields = ('id', 'display_name', 'slack_team', 'user')
+
+    @check_authorization
+    def resolve_id(self, info):
+        return self.id
+
+    @check_authorization
+    def resolve_slack_team(self, info):
+        return self.slack_team
+
+    @check_authorization
+    def resolve_display_name(self, info):
+        return self.display_name
+
+    @check_authorization
+    def resolve_user(self, info):
+        return self.user
 
 
 class SlackUserInputType(graphene.InputObjectType):
