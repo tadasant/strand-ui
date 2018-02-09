@@ -2,11 +2,14 @@ from enum import Enum
 
 from django.db import models
 from django_fsm import FSMField, transition
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 from model_utils.models import TimeStampedModel
 
 from app.topics.models import Discussion
 from app.users.models import User
 from app.groups.models import Group
+from app.slack_integration.wrappers import SlackAppClientWrapper
 
 
 class SlackAgentStatus(Enum):
@@ -34,6 +37,10 @@ class SlackAgent(TimeStampedModel):
                                                                                      bot_access_token=oauth_info[
                                                                                          'bot']['bot_access_token'])
         return slack_application_installation
+
+    @property
+    def is_initiated(self):
+        return self.status == SlackAgentStatus.INITIATED.value
 
     def can_authenticate(self):
         if self.slack_application_installation:
@@ -89,7 +96,7 @@ class SlackUser(TimeStampedModel):
     real_name = models.CharField(max_length=255)
     display_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255, null=True)
-    avatar_72 = models.CharField(max_length=255)
+    image_72 = models.CharField(max_length=255)
     is_bot = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
@@ -128,4 +135,39 @@ class SlackEvent(TimeStampedModel):
 
 
 @receiver(post_save, sender=SlackApplicationInstallation)
-def post_slack_agent(sender, instance, created=False, **kwargs)
+def post_save_slack_application_installation(sender, instance=None, created=False, **kwargs):
+    """Update Slack Agent on Slack App
+
+    If this is triggered by a new application installation, then it will be ignored. This is
+    because a new application installation would translate to a new status on the Slack Agent
+    and result in two requests being sent. Instead we reserve POST requests for Slack Agent on
+    pre-save when the status is changing from INITIATED to AUTHENTICATED.
+
+    If this is triggered by updates to an existing installation, then the request will be a
+    PUT. In the future, we will need to handle deletes.
+    """
+    if not created:
+        SlackAppClientWrapper.put_slack_agent(instance.slack_agent)
+
+
+@receiver(pre_save, sender=SlackAgent)
+def pre_save_slack_agent(sender, instance=None, update_fields=None, **kwargs):
+    """Create or update Slack Agent on Slack App
+
+    If this is triggered by changing the status of a Slack Agent from
+    INITIATED to AUTHENTICATED, then the Slack Agent needs to be
+    created on the Slack App. If this is triggered by some other
+    attribute change, then the Slack Agent needs to be updated on the
+    Slack App. If this triggered by creating a Slack Agent, then we
+    do nothing.
+    """
+    try:
+        slack_agent = SlackAgent.objects.get(pk=instance.pk)
+    except SlackAgent.DoesNotExist:
+        pass
+    else:
+        if instance.status == SlackAgentStatus.AUTHENTICATED.value and \
+                slack_agent.status == SlackAgentStatus.INITIATED.value:
+            SlackAppClientWrapper.post_slack_agent(instance)
+        else:
+            SlackAppClientWrapper.put_slack_agent(instance)

@@ -112,7 +112,7 @@ class CreateSlackAgentMutation(graphene.Mutation):
                                real_name=user_info.get('real_name'),
                                display_name=user_info['profile'].get('display_name'),
                                email=user_info['profile'].get('email'),
-                               avatar_72=user_info['profile'].get('image_72'),
+                               image_72=user_info['profile'].get('image_72'),
                                is_bot=user_info.get('is_bot'), is_admin=user_info.get('is_admin'),
                                slack_team=slack_team)
 
