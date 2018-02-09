@@ -23,7 +23,7 @@ class Topic(TimeStampedModel):
 
     is_anonymous = models.BooleanField(default=False)
 
-    original_poster = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='asked_topics')
+    original_poster = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='topics')
     group = models.ForeignKey(to=Group, on_delete=models.SET_NULL, null=True)
 
     tags = models.ManyToManyField(to=Tag, related_name='topics')

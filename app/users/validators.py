@@ -9,3 +9,7 @@ class UserValidator(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('email', 'username', 'avatar_url', 'is_bot')
+
+    def create(self, validated_data):
+        alias = User.objects.generate_random_alias(4)
+        return User(**validated_data, alias=alias)

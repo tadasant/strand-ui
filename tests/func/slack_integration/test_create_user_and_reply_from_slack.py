@@ -35,10 +35,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                id
+                alias
               }}
               reply {{
                 message {{
@@ -86,10 +86,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                email
+                alias
               }}
               reply {{
                 message {{
@@ -137,10 +137,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                email
+                alias
               }}
               reply {{
                 message {{
@@ -189,10 +189,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                email
+                alias
               }}
               reply {{
                 message {{
@@ -240,10 +240,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                email
+                alias
               }}
               reply {{
                 message {{
@@ -291,10 +291,10 @@ class TestCreateUserAndReplyFromSlack:
                                                  slackChannelId: "{slack_channel.id}",
                                                  text: "{reply.text}"}}) {{
               slackUser {{
-                name
+                id
               }}
               user {{
-                email
+                alias
               }}
               reply {{
                 message {{
@@ -307,6 +307,6 @@ class TestCreateUserAndReplyFromSlack:
         response = auth_client.post('/graphql', {'query': mutation})
 
         assert response.status_code == 200
-        assert response.json()['data']['createUserAndReplyFromSlack']['slackUser']['name'] == slack_user.name
-        assert response.json()['data']['createUserAndReplyFromSlack']['user']['email'] == slack_user.email
+        assert response.json()['data']['createUserAndReplyFromSlack']['slackUser']['id'] == slack_user.id
+        assert response.json()['data']['createUserAndReplyFromSlack']['user']['alias']
         assert response.json()['data']['createUserAndReplyFromSlack']['reply']['message']['id'] == str(message.id)
