@@ -125,3 +125,7 @@ class SlackChannel(TimeStampedModel):
 
 class SlackEvent(TimeStampedModel):
     ts = models.CharField(max_length=255)
+
+
+@receiver(post_save, sender=SlackApplicationInstallation)
+def post_slack_agent(sender, instance, created=False, **kwargs)
