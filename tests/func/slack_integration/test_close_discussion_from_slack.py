@@ -63,7 +63,7 @@ class TestCloseDiscussionFromSlack:
                 id
                 status
               }}
-            }}          
+            }}
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
@@ -88,7 +88,7 @@ class TestCloseDiscussionFromSlack:
                 id
                 status
               }}
-            }}          
+            }}
           }}
         '''
         response = auth_client.post('/graphql', {'query': mutation})
