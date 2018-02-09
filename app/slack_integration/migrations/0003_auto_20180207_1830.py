@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('slack_integration', '0002_auto_20180201_2201'),
+        ('slack_integration', '0003_auto_20180208_1558'),
     ]
 
     operations = [
