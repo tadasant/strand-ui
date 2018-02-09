@@ -32,7 +32,8 @@ def create_group_and_slack_team(client):
     team_info = response.get('team')
     group, _ = Group.objects.get_or_create(name=team_info.get('name'))
     slack_agent, _ = SlackAgent.objects.get_or_create(group=group)
-    slack_team, _ = SlackTeam.objects.get_or_create(id=team_info.get('id'), name=team_info.get('name'), slack_agent=slack_agent)
+    slack_team, _ = SlackTeam.objects.get_or_create(id=team_info.get('id'), name=team_info.get('name'),
+                                                    slack_agent=slack_agent)
     return group, slack_team
 
 
@@ -43,8 +44,8 @@ def create_users_and_slack_users(client, group, slack_team):
         user, created = User.objects.get_or_create(email=user_info['profile'].get('email'),
                                                    defaults=dict(username=(user_info['profile'].get('display_name') or
                                                                            user_info.get('name')),
-                                                                 first_name=user_info['profile'].get('first_name',''),
-                                                                 last_name=user_info['profile'].get('last_name',''),
+                                                                 first_name=user_info['profile'].get('first_name', ''),
+                                                                 last_name=user_info['profile'].get('last_name', ''),
                                                                  avatar_url=user_info['profile'].get('image_72')))
         SlackUser.objects.get_or_create(id=user_info.get('id'),
                                         defaults=dict(name=user_info.get('name'),

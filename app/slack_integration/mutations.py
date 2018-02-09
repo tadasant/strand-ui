@@ -156,7 +156,7 @@ class CreateMessageFromSlackMutation(graphene.Mutation):
     @check_authorization
     def mutate(self, info, input):
         slack_event = SlackEvent.objects.create(ts=input['origin_slack_event_ts'])
-        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
+        discussion = Discussion.objects.get(slack_channel__id=input['slack_channel_id'])
         author = User.objects.get(slack_users__id=input['slack_user_id'])
 
         time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
@@ -192,7 +192,7 @@ class CreateUserAndMessageFromSlackMutation(graphene.Mutation):
             user = User.objects.create_user_from_slack_user(slack_user)
 
         slack_event = SlackEvent.objects.create(ts=input.pop('origin_slack_event_ts'))
-        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
+        discussion = Discussion.objects.get(slack_channel__id=input['slack_channel_id'])
 
         time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
         message_validator = MessageValidator(data=dict(text=input['text'], time=time, discussion_id=discussion.id,
@@ -216,7 +216,7 @@ class CreateReplyFromSlackMutation(graphene.Mutation):
     def mutate(self, info, input):
         slack_event = SlackEvent.objects.create(ts=input.pop('origin_slack_event_ts'))
         message = Message.objects.get(origin_slack_event__ts=input['message_origin_slack_event_ts'],
-                                      discussion__slackchannel__id=input['slack_channel_id'])
+                                      discussion__slack_channel__id=input['slack_channel_id'])
         author = User.objects.get(slack_users__id=input['slack_user_id'])
 
         time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
@@ -253,7 +253,7 @@ class CreateUserAndReplyFromSlackMutation(graphene.Mutation):
 
         slack_event = SlackEvent.objects.create(ts=input.pop('origin_slack_event_ts'))
         message = Message.objects.get(origin_slack_event__ts=input['message_origin_slack_event_ts'],
-                                      discussion__slackchannel__id=input['slack_channel_id'])
+                                      discussion__slack_channel__id=input['slack_channel_id'])
 
         time = datetime.fromtimestamp(int(slack_event.ts.split('.')[0]))
         reply_validator = ReplyValidator(data=dict(text=input['text'], time=time, author_id=user.id,
@@ -371,7 +371,7 @@ class MarkDiscussionAsPendingClosedFromSlack(graphene.Mutation):
 
     @check_authorization
     def mutate(self, info, input):
-        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
+        discussion = Discussion.objects.get(slack_channel__id=input['slack_channel_id'])
         discussion.standby_to_auto_close()
 
         return MarkDiscussionAsPendingClosedFromSlack(discussion=discussion)
@@ -385,7 +385,7 @@ class CloseDiscussionFromSlackMutation(graphene.Mutation):
 
     @check_authorization
     def mutate(self, info, input):
-        discussion = Discussion.objects.get(slackchannel__id=input['slack_channel_id'])
+        discussion = Discussion.objects.get(slack_channel__id=input['slack_channel_id'])
         discussion.mark_as_closed()
         discussion.save()
 

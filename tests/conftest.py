@@ -87,6 +87,16 @@ def slack_oauth_request(request):
 
 
 @pytest.fixture()
+def slack_app_request_factory(mocker):
+    """Pytest fixture for calls from requests to Slack App
+
+    Uses the responses library that was built at Dropbox to mock
+    out requests. We use this to ensure the requests was called.
+    """
+    mocker.patch('requests.post')
+
+
+@pytest.fixture()
 def slack_client_factory(mocker):
     """Pytest fixture to patch api_call using test resource
 

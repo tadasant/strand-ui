@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 
 import pytest
 import pytz
+import requests
+from django.conf import settings
 
 from app.topics.models import Discussion
 from tests.utils import wait_until
@@ -9,7 +11,8 @@ from tests.utils import wait_until
 
 class TestMarkingDiscussionAsStale:
     @pytest.mark.django_db(transaction=True)
-    def test_does_become_stale_with_no_messages(self, mark_stale_discussions_factory, discussion_factory):
+    def test_does_become_stale_with_no_messages(self, mark_stale_discussions_factory, discussion_factory,
+                                                slack_app_request_factory):
         mark_stale_discussions_factory(num_periods=3, period_length=1.5)
 
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=58)
@@ -18,12 +21,13 @@ class TestMarkingDiscussionAsStale:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_stale, timeout=7)
 
         assert Discussion.objects.get(pk=discussion.id).is_stale
+        assert requests.post.call_count == 0
 
     @pytest.mark.django_db(transaction=True)
     def test_does_not_become_stale_with_non_bot_message(self, mark_stale_discussions_factory, auth_client,
-                                                        discussion_factory,
-                                                        slack_channel_factory, message_factory, user_factory,
-                                                        slack_user_factory, slack_event_factory):
+                                                        discussion_factory, slack_channel_factory, message_factory,
+                                                        user_factory, slack_user_factory, slack_event_factory,
+                                                        slack_app_request_factory):
         mark_stale_discussions_factory(num_periods=3, period_length=1.5)
 
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=58)
@@ -50,11 +54,12 @@ class TestMarkingDiscussionAsStale:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_stale, timeout=5)
 
         assert not Discussion.objects.get(pk=discussion.id).is_stale
+        assert requests.post.call_count == 0
 
     @pytest.mark.django_db()
     def test_does_become_stale_with_bot_message(self, mark_stale_discussions_factory, auth_client, discussion_factory,
                                                 slack_channel_factory, message_factory, user_factory,
-                                                slack_user_factory, slack_event_factory):
+                                                slack_user_factory, slack_event_factory, slack_app_request_factory):
         mark_stale_discussions_factory(num_periods=3, period_length=1.5)
 
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=29, seconds=57)
@@ -79,15 +84,23 @@ class TestMarkingDiscussionAsStale:
         assert response.status_code == 200
 
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_stale, timeout=5)
+        discussion = Discussion.objects.get(pk=discussion.id)
 
-        assert Discussion.objects.get(pk=discussion.id).is_stale
+        assert discussion.is_stale
+        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT,
+                                              headers={
+                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
+                                              },
+                                              data={'discussion_id': discussion.id,
+                                                    'slack_channel_id': discussion.slack_channel.id,
+                                                    'status': discussion.status})
 
 
 class TestClosingPendingClosedDiscussion:
     @pytest.mark.django_db(transaction=True)
     def test_does_get_closed(self, auto_close_pending_closed_discussion_factory, auth_client, discussion_factory,
                              slack_channel_factory, message_factory, user_factory, slack_user_factory,
-                             slack_event_factory):
+                             slack_event_factory, slack_app_request_factory):
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         discussion = discussion_factory(time_start=original_time)
         slack_channel = slack_channel_factory(discussion=discussion)
@@ -127,14 +140,22 @@ class TestClosingPendingClosedDiscussion:
         assert not Discussion.objects.get(pk=discussion.id).is_closed
 
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_closed, timeout=5)
+        discussion = Discussion.objects.get(pk=discussion.id)
 
-        assert Discussion.objects.get(pk=discussion.id).is_closed
+        assert discussion.is_closed
+        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
+                                              headers={
+                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
+                                              },
+                                              data={'discussion_id': discussion.id,
+                                                    'slack_channel_id': discussion.slack_channel.id,
+                                                    'status': discussion.status})
 
     @pytest.mark.django_db
     def test_does_not_get_closed_with_non_bot_message(self, auto_close_pending_closed_discussion_factory,
                                                       auth_client, discussion_factory, slack_channel_factory,
                                                       message_factory, user_factory, slack_user_factory,
-                                                      slack_event_factory):
+                                                      slack_event_factory, slack_app_request_factory):
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         discussion = discussion_factory(time_start=original_time)
         slack_channel = slack_channel_factory(discussion=discussion)
@@ -193,12 +214,13 @@ class TestClosingPendingClosedDiscussion:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_closed, timeout=5)
 
         assert not Discussion.objects.get(pk=discussion.id).is_closed
+        assert requests.post.call_count == 0
 
     @pytest.mark.django_db
     def test_does_get_closed_with_bot_message(self, auto_close_pending_closed_discussion_factory,
                                               auth_client, discussion_factory, slack_channel_factory,
                                               message_factory, user_factory, slack_user_factory,
-                                              slack_event_factory):
+                                              slack_event_factory, slack_app_request_factory):
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         discussion = discussion_factory(time_start=original_time)
         slack_channel = slack_channel_factory(discussion=discussion)
@@ -239,6 +261,7 @@ class TestClosingPendingClosedDiscussion:
         response = auth_client.post('/graphql', {'query': mutation})
         assert response.status_code == 200
         assert not Discussion.objects.get(pk=discussion.id).is_closed
+        assert requests.post.call_count == 0
 
         # New message sent
         slack_event = slack_event_factory(ts=datetime.now(pytz.UTC).timestamp())
@@ -257,12 +280,21 @@ class TestClosingPendingClosedDiscussion:
         assert response.status_code == 200
 
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_closed, timeout=5)
+        discussion = Discussion.objects.get(pk=discussion.id)
 
-        assert Discussion.objects.get(pk=discussion.id).is_closed
+        assert discussion.is_closed
+        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
+                                              headers={
+                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
+                                              },
+                                              data={'discussion_id': discussion.id,
+                                                    'slack_channel_id': discussion.slack_channel.id,
+                                                    'status': discussion.status})
 
     @pytest.mark.django_db
     def test_does_get_closed_with_no_messages_ever(self, auto_close_pending_closed_discussion_factory,
-                                                   auth_client, discussion_factory, slack_channel_factory):
+                                                   auth_client, discussion_factory, slack_channel_factory,
+                                                   slack_app_request_factory):
         original_time = datetime.now(tz=pytz.UTC) - timedelta(minutes=31)
         discussion = discussion_factory(time_start=original_time)
         slack_channel = slack_channel_factory(discussion=discussion)
@@ -286,3 +318,10 @@ class TestClosingPendingClosedDiscussion:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_closed
+        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
+                                              headers={
+                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
+                                              },
+                                              data={'discussion_id': discussion.id,
+                                                    'slack_channel_id': discussion.slack_channel.id,
+                                                    'status': discussion.status})

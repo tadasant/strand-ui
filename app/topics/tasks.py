@@ -22,7 +22,8 @@ def mark_stale_discussions():
         if discussion.minutes_since_last_non_bot_message >= 30.0:
             discussion.mark_as_stale()
             discussion.save()
-            post_discussion_to_slack_app(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, discussion)
+            if discussion.slack_channel:
+                post_discussion_to_slack_app(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, discussion)
 
 
 @celery_app.task
@@ -35,5 +36,5 @@ def auto_close_pending_closed_discussion(discussion_id, datetime_of_last_non_bot
     if datetime_of_last_non_bot_message == discussion.datetime_of_last_non_bot_message:
         discussion.mark_as_closed()
         discussion.save()
-        post_discussion_to_slack_app(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT, discussion)
-
+        if discussion.slack_channel:
+            post_discussion_to_slack_app(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT, discussion)
