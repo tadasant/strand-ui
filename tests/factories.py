@@ -124,7 +124,7 @@ class SlackAgentFactory(factory.DjangoModelFactory):
         model = SlackAgent
 
     group = factory.SubFactory(GroupFactory)
-    discuss_channel_id = factory.Faker('md5')
+    topic_channel_id = factory.Faker('md5')
     status = SlackAgentStatus.INITIATED.value
 
 

@@ -93,9 +93,9 @@ class SlackChannelInputType(graphene.InputObjectType):
     discussion_id = graphene.Int(required=True)
 
 
-class SlackAgentDiscussChannelAndActivateInputType(graphene.InputObjectType):
+class SlackAgentTopicChannelAndActivateInputType(graphene.InputObjectType):
     slack_team_id = graphene.String(required=True)
-    discuss_channel_id = graphene.String(required=True)
+    topic_channel_id = graphene.String(required=True)
 
 
 class MessageFromSlackInputType(graphene.InputObjectType):

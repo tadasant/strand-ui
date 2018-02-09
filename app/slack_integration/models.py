@@ -20,7 +20,7 @@ class SlackAgentStatus(Enum):
 class SlackAgent(TimeStampedModel):
     group = models.OneToOneField(Group, on_delete=models.CASCADE, related_name='slack_agent', primary_key=True)
     status = FSMField(default=SlackAgentStatus.INITIATED.value, protected=True)
-    discuss_channel_id = models.CharField(max_length=255, blank=True, null=True)
+    topic_channel_id = models.CharField(max_length=255, blank=True, null=True)
 
     def create_slack_application_installation_from_oauth(self, oauth_info):
         slack_user = SlackUser.objects.get(id=oauth_info['user_id'])
@@ -47,13 +47,14 @@ class SlackAgent(TimeStampedModel):
         pass
 
     def can_activate(self):
-        if self.discuss_channel_id:
+        if self.topic_channel_id:
             return True
         else:
             return False
 
     @transition(field=status, source=[SlackAgentStatus.AUTHENTICATED.value, SlackAgentStatus.PAUSED.value,
-                                      SlackAgentStatus.INACTIVE.value], target=SlackAgentStatus.ACTIVE.value,
+                                      SlackAgentStatus.INACTIVE.value, SlackAgentStatus.ACTIVE.value],
+                target=SlackAgentStatus.ACTIVE.value,
                 conditions=[can_activate])
     def activate(self):
         pass

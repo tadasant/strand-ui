@@ -3,10 +3,10 @@
   "model": "slack_integration.slackagent",
   "pk": 1,
   "fields": {
-    "created": "2018-02-08T16:09:01.154Z",
-    "modified": "2018-02-08T16:09:01.154Z",
-    "status": "INITIATED",
-    "discuss_channel_id": null
+    "created": "2018-01-25T19:36:15.525Z",
+    "modified": "2018-01-25T22:16:52.063Z",
+    "status": "AUTHENTICATED",
+    "topic_channel_id": null
   }
 },
 {
