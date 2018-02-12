@@ -4,7 +4,14 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "dependencies": {
+    "apollo-cache-inmemory": "^1.1.7",
+    "apollo-client": "^2.2.3",
+    "apollo-client-preset": "^1.0.8",
+    "apollo-link-http": "^1.3.3",
+    "graphql": "^0.13.0",
+    "graphql-tag": "^2.7.3",
     "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
@@ -13,8 +20,8 @@
     "parcel-bundler": "^1.5.1"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --out-dir build/",
-    "build staging": "parcel build index.html --no-minify --out-dir build/"
+    "start": "parcel index.html --open --https",
+    "build": "REALM=production parcel build index.html --out-dir build/",
+    "build-staging": "REALM=staging parcel build index.html --no-minify --out-dir build/"
   }
 }
