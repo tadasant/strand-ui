@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Grid from 'material-ui/es/Grid/Grid';
 import Typography from 'material-ui/es/Typography/Typography';
-import Button from 'material-ui/es/Button/Button';
+import AddToSlackButton from './AddToSlackButton.react';
 
 class Install extends Component {
   render() {
@@ -16,7 +16,7 @@ class Install extends Component {
             direction='column'
             spacing={16}>
             <Grid item>
-              <Typography variant='display1' style={{color: 'rgba(0, 0, 0, 0.87)', lineHeight: '10rem'}}>
+              <Typography variant='display1' style={{color: 'rgba(0, 0, 0, 0.87)'}}>
                 Installing CodeClippy in Your Slack Workspace
               </Typography>
             </Grid>
@@ -34,11 +34,12 @@ class Install extends Component {
               </Typography>
             </Grid>
             <Grid item>
-              <Button variant='raised'>Add to Slack Button</Button>
+              <AddToSlackButton />
             </Grid>
             <Grid item>
               <Typography variant='caption'>
-                Not an admin? Join our community instead.
+                Not an admin in your workspace?
+                Join <a target='_blank' href='https://www.codeclippy.com/get-started'>our community</a> instead.
               </Typography>
             </Grid>
           </Grid>
