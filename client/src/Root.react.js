@@ -3,7 +3,6 @@ import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
-import 'typeface-roboto'
 import 'typeface-rajdhani'
 import 'typeface-montserrat'
 
