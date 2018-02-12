@@ -1,5 +1,5 @@
 const navigationLabelToPath = {
-    'Install Slack App': '/install',
+    'Install': '/install',
 };
 
 export default {navigationLabelToPath};

@@ -18,6 +18,7 @@ class ShellDesktop extends Component {
             <ClippyLogo style={{height: '75%'}}/>
             {Object.keys(consts.navigationLabelToPath).map(label => (
               <Button
+                style={{marginLeft: 'auto'}}
                 key={label}
                 color='secondary'
                 onClick={this.props.openPageGenerator(consts.navigationLabelToPath[label])}>
