@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
-    'storages',
+    'storages'
     'app.users',
     'app.groups',
     'app.topics',
@@ -118,11 +118,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-
-
-STATIC_URL = '/static/'
 
 # Graphene
 # https://github.com/graphql-python/graphene-django/blob/master/docs/tutorial-plain.rst
