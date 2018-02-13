@@ -27,22 +27,26 @@ class Install extends Component {
     this.state = {
       installingSlackApplication: false,
       successInstallationSlackApplication: undefined, // true/false after attempt
+      errors: [],
     }
   }
 
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
     if (params.code) {
-      console.log(params.code);
       this.setState(() => ({installingSlackApplication: true}), () => {
         this.props.attemptInstall(params.code, process.env.SLACK_CLIENT_ID, this.redirectUri)
           .then(({data}) => {
             console.log(`Data: ${data}`);
             this.setState(() => ({installingSlackApplication: false, successInstallationSlackApplication: true}));
           })
-          .catch((error) => {
-            console.log(`Error: ${error}`);
-            this.setState(() => ({installingSlackApplication: false, successInstallationSlackApplication: false}));
+          .catch((response) => {
+            console.log(`Error: ${response}`);
+            this.setState(() => ({
+              installingSlackApplication: false,
+              successInstallationSlackApplication: false,
+              errors: response.graphQLErrors,
+            }));
           })
       })
     }
