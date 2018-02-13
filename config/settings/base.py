@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
-    'storages'
+    'storages',
     'app.users',
     'app.groups',
     'app.topics',
