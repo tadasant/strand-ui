@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -18,7 +18,7 @@ DATABASES = {
     }
 }
 
-ENABLE_GRAPHIQL = False
+ENABLE_GRAPHIQL = True
 CSRF_COOKIE_SECURE = True
 
 # Slack credentials

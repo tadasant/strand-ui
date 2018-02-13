@@ -14,10 +14,12 @@ import os
 
 if os.environ.get('ENVIRONMENT') == 'PROD':
     from config.settings.production import *
+elif os.environ.get('ENVIRONMENT') == 'STAGING':
+    from config.settings.staging import *
 elif os.environ.get('ENVIRONMENT') == 'TEST':
-    from config.settings.test import *
+    from config.settings.testing import *
 else:
-    from config.settings.local import *
+    from config.settings.development import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
