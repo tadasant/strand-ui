@@ -177,8 +177,8 @@ class GroupFromSlackInputType(graphene.InputObjectType):
 
 
 class CloseDiscussionFromSlackInputType(graphene.InputObjectType):
-    slack_channel_id = graphene.String()
-    time_end = graphene.String()
+    slack_channel_id = graphene.String(required=True)
+    slack_user_id = graphene.String(required=True)
 
 
 class TopicFromSlackInputType(graphene.InputObjectType):
