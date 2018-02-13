@@ -3,6 +3,7 @@ import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
+import PropTypes from 'prop-types';
 import 'typeface-rajdhani'
 import 'typeface-montserrat'
 
@@ -49,7 +50,15 @@ const codeClippyTheme = createMuiTheme({
   'palette': themePallete,
 });
 
+const propTypes = {
+  uiHost: PropTypes.string.isRequired,
+};
+
 class Root extends Component {
+  getChildContext() {
+    return {uiHost: this.props.uiHost};
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={codeClippyTheme}>
@@ -60,5 +69,11 @@ class Root extends Component {
     )
   }
 }
+
+Root.childContextTypes = {
+  uiHost: PropTypes.string,
+};
+
+Root.propTypes = propTypes;
 
 export default Root;
