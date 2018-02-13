@@ -12,3 +12,4 @@ db.config.json
 client/.cache/
 client/dist/
 client/node_modules/
+client/build/
