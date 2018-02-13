@@ -20,7 +20,7 @@ class AddToSlackButton extends Component {
     ];
     const button_url = `https://slack.com/oauth/authorize?${queryParams.join('&')}`;
     return (
-      <a target='_blank' href={button_url}>
+      <a href={button_url}>
         <img alt="Add to Slack" height="40" width="139" src={src} />
       </a>
     );

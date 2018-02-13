@@ -2,8 +2,35 @@ import React, {Component} from 'react';
 import Grid from 'material-ui/es/Grid/Grid';
 import Typography from 'material-ui/es/Typography/Typography';
 import AddToSlackButton from './AddToSlackButton.react';
+import queryString from 'query-string';
+import withRouter from 'react-router-dom/es/withRouter';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
+};
 
 class Install extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      installingSlackApplication: false,
+      successInstallationSlackApplication: undefined, // true/false after attempt
+    }
+  }
+
+  componentDidMount() {
+    const params = queryString.parse(this.props.location.search);
+    if (params.code) {
+      console.log(params.code);
+      this.setState(() => ({installingSlackApplication: true}))
+      // TODO kick off the mutation with params.code
+    }
+  }
+
   render() {
     return (
       <Grid
@@ -50,4 +77,6 @@ class Install extends Component {
   }
 }
 
-export default Install;
+Install.propTypes = propTypes;
+
+export default withRouter(Install);
