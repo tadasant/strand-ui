@@ -37,3 +37,7 @@ AUTO_CLOSE_DELAY = 300
 SLACK_APP_VERIFICATION_TOKEN = 'anoTH3rRANDoMCOmbo'
 SLACK_APP_STALE_DISCUSSION_ENDPOINT = 'http://slackapp.com/stalediscussions'
 SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT = 'http://slackapp.com/autocloseddiscussions'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_URL = '/static/'

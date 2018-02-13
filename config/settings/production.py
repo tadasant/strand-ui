@@ -36,3 +36,20 @@ AUTO_CLOSE_DELAY = 300
 SLACK_APP_VERIFICATION_TOKEN = os.environ['SLACK_APP_VERIFICATION_TOKEN']
 SLACK_APP_STALE_DISCUSSION_ENDPOINT = os.environ['SLACK_APP_STALE_DISCUSSION_ENDPOINT']
 SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT = os.environ['SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT']
+
+# django-storages
+# http://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'mysite/static'),
+]
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
