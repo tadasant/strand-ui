@@ -7,33 +7,35 @@ DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-DB_CREDENTIALS = json.load(open(os.path.join(BASE_DIR, 'db.config.json'), 'r'))
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_CREDENTIALS['NAME'],
-        'USER': DB_CREDENTIALS['USER'],
-        'PASSWORD': DB_CREDENTIALS['PASSWORD'],
-        'HOST': DB_CREDENTIALS['HOST'],
-        'PORT': DB_CREDENTIALS['PORT']
+        'NAME': 'solutionloft',
+        'USER': 'solutionloft',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
-ENABLE_GRAPHIQL = True
+ENABLE_GRAPHIQL = False
 CSRF_COOKIE_SECURE = False
 
 # Slack credentials
-SLACK_CLIENT_ID = '299839214388.299854203762'
-SLACK_CLIENT_SECRET = '6d9bb9189b347be559ee46159025b96c'
-SLACK_VERIFICATION_TOKEN = 'wRto4JPoZXVH2ru3HHJ4nBRL'
+SLACK_CLIENT_ID = '000000000000.111111111111'
+SLACK_CLIENT_SECRET = '1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a'
+SLACK_VERIFICATION_TOKEN = '123ABC123ABC123ABC123ABC'
 
 # Celery
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # Discussion Auto-Close Delay
-AUTO_CLOSE_DELAY = 300
+AUTO_CLOSE_DELAY = 4
 
 SLACK_APP_VERIFICATION_TOKEN = 'anoTH3rRANDoMCOmbo'
 SLACK_APP_STALE_DISCUSSION_ENDPOINT = 'http://slackapp.com/stalediscussions'
 SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT = 'http://slackapp.com/autocloseddiscussions'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_URL = '/static/'

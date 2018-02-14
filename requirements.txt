@@ -2,6 +2,8 @@ amqp==2.2.2
 apipkg==1.4
 attrs==17.4.0
 billiard==3.5.0.3
+boto3==1.5.27
+botocore==1.8.41
 celery==4.1.0
 certifi==2017.11.5
 chardet==3.0.4
@@ -13,7 +15,9 @@ django-celery-results==1.0.1
 django-cors-headers==2.1.0
 django-fsm==2.6.0
 django-model-utils==3.1.1
+django-storages==1.6.5
 djangorestframework==3.7.7
+docutils==0.14
 ephem==3.7.6.0
 execnet==1.5.0
 factory-boy==2.8.1
@@ -27,9 +31,11 @@ hyperlink==17.3.1
 idna==2.6
 inflection==0.3.1
 iso8601==0.1.12
+jmespath==0.9.3
 kombu==4.1.0
 mccabe==0.6.1
 msgpack-python==0.5.4
+pbr==3.1.1
 pep8==1.7.1
 pluggy==0.6.0
 promise==2.1
@@ -52,6 +58,7 @@ redis==2.10.6
 requests==2.18.4
 responses==0.8.1
 Rx==1.6.0
+s3transfer==0.1.12
 singledispatch==3.4.0.3
 six==1.11.0
 slackclient==1.1.0

@@ -1,8 +1,12 @@
 import os
 
+# Prevent HTTP Host header attacks
+# https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com']
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -18,7 +22,7 @@ DATABASES = {
     }
 }
 
-ENABLE_GRAPHIQL = False
+ENABLE_GRAPHIQL = True
 CSRF_COOKIE_SECURE = True
 
 # Slack credentials
@@ -48,6 +52,7 @@ AWS_LOCATION = 'static'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+
 STATICFILES_DIRS = []  # This will be the path to the React build folder
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

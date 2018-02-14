@@ -139,3 +139,37 @@ the respective discussion.
 The periodic task needs to exist in the `django_celery_beat` table in order for the beat to populate
 it to the task queue every 5 minutes. To do this, we have a management command to create it if you haven't
 already done so. To execute it, run `$ python manage create_periodic_tasks`.
+
+## Deploying to Staging
+
+### How it works
+
+We deploy the portal to a staging environment using AWS's [Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)
+service. This takes care of creating a web server. The web server then uses our WSGI application to respond
+to requests.
+
+After initial setup, the application can be deployed at any time by running `eb deploy`. This assumes
+you've already run `eb init`, etc. The `deploy` command makes use of git by taking the last commit from the
+current branch your on. The code in that commit is zipped and uploaded to an s3 bucket. From there
+the code is pulled onto one of the servers in the Elastic Beanstalk environment (called `portal-staging`).
+What's great about Elastic Beanstalk is that it supports load balancing, auto-scaling and more. In the deployment
+phase, this means we can roll out a new version to only 30% of the servers before the entire fleet.
+
+Once the code is pulled onto one of the servers, the extensions specified in `.ebextensions/` specify what actions
+are taken before the application is run. In `01_packages.confg`, we specify `yum` packages that we require in order
+to run our application (e.g. a Postgres package and a git package). In `django.config`, we specify the path to the
+WSGI application under the `option_settings`. We also specify container commands that we want to run before the app
+is started. These include `01_migrate`, which migrates the database to the same state as our migrations, and
+`02_collectstatic`, which copies all files from the static folder into the `STATIC_ROOT` directory.
+
+In order to have access to the `STATIC_ROOT` directory, which we have set to be an S3 bucket, we use the instance role
+assigned to instances that run our application called `portal-elasticbeanstalk-staging-role`.
+
+### Steps
+
+1. Install the Elastic Beanstalk command line interface - instructions [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html).
+
+2. Run `eb init` to initialize the repository on your local machine. You should be able to select `portal` as
+the application and `portal-staging` as the environment.
+
+3. Run `eb deploy` to deploy the application to staging.
