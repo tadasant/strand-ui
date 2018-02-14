@@ -50,8 +50,6 @@
       "src",
       "test"
     ],
-    "setupFiles": [
-      "testSetup.js"
-    ]
+    "globalSetup": "<rootDir>/test/setup.js"
   }
 }
