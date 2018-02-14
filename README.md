@@ -165,6 +165,12 @@ is started. These include `01_migrate`, which migrates the database to the same 
 In order to have access to the `STATIC_ROOT` directory, which we have set to be an S3 bucket, we use the instance role
 assigned to instances that run our application called `portal-elasticbeanstalk-staging-role`.
 
+To simulate production, we use an [ElasticCache](https://aws.amazon.com/elasticache/) Redis cluster. In staging, we're
+using security group rules for privacy (e.g. only allowing inbound requests from the application server). For the v 0.1,
+this is probably still completely fine. However, at some point we may want to start using encryption in-transport or
+encryption at-rest. To connect to the Redis cluster, you can use the `telnet` client from an instance in the same subnet
+with access to the cluster.
+
 ### Steps
 
 1. Install the Elastic Beanstalk command line interface - instructions [here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html).
