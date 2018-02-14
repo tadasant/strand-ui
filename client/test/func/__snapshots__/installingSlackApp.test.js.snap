@@ -7,6 +7,8 @@ exports[`installing slack app renders the page when a user clicks the navigation
       "/",
     ]
   }
+  initialIndex={0}
+  keyLength={0}
 >
   <Router
     history={
@@ -18,14 +20,12 @@ exports[`installing slack app renders the page when a user clicks the navigation
         "entries": Array [
           Object {
             "hash": "",
-            "key": "5pmte9",
             "pathname": "/install",
             "search": "",
             "state": undefined,
           },
           Object {
             "hash": "",
-            "key": "ue2svz",
             "pathname": "/install",
             "search": "",
             "state": undefined,
@@ -39,7 +39,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "key": "ue2svz",
           "pathname": "/install",
           "search": "",
           "state": undefined,
@@ -64,14 +63,12 @@ exports[`installing slack app renders the page when a user clicks the navigation
                 "entries": Array [
                   Object {
                     "hash": "",
-                    "key": "5pmte9",
                     "pathname": "/install",
                     "search": "",
                     "state": undefined,
                   },
                   Object {
                     "hash": "",
-                    "key": "ue2svz",
                     "pathname": "/install",
                     "search": "",
                     "state": undefined,
@@ -85,7 +82,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
                 "listen": [Function],
                 "location": Object {
                   "hash": "",
-                  "key": "ue2svz",
                   "pathname": "/install",
                   "search": "",
                   "state": undefined,
@@ -97,7 +93,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
             location={
               Object {
                 "hash": "",
-                "key": "5pmte9",
                 "pathname": "/install",
                 "search": "",
                 "state": undefined,
@@ -1047,7 +1042,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
           location={
             Object {
               "hash": "",
-              "key": "5pmte9",
               "pathname": "/install",
               "search": "",
               "state": undefined,
@@ -1065,14 +1059,12 @@ exports[`installing slack app renders the page when a user clicks the navigation
                 "entries": Array [
                   Object {
                     "hash": "",
-                    "key": "5pmte9",
                     "pathname": "/install",
                     "search": "",
                     "state": undefined,
                   },
                   Object {
                     "hash": "",
-                    "key": "ue2svz",
                     "pathname": "/install",
                     "search": "",
                     "state": undefined,
@@ -1086,7 +1078,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
                 "listen": [Function],
                 "location": Object {
                   "hash": "",
-                  "key": "ue2svz",
                   "pathname": "/install",
                   "search": "",
                   "state": undefined,
@@ -1098,7 +1089,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
             location={
               Object {
                 "hash": "",
-                "key": "5pmte9",
                 "pathname": "/install",
                 "search": "",
                 "state": undefined,
@@ -1124,14 +1114,12 @@ exports[`installing slack app renders the page when a user clicks the navigation
                   "entries": Array [
                     Object {
                       "hash": "",
-                      "key": "5pmte9",
                       "pathname": "/install",
                       "search": "",
                       "state": undefined,
                     },
                     Object {
                       "hash": "",
-                      "key": "ue2svz",
                       "pathname": "/install",
                       "search": "",
                       "state": undefined,
@@ -1145,7 +1133,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
                   "listen": [Function],
                   "location": Object {
                     "hash": "",
-                    "key": "ue2svz",
                     "pathname": "/install",
                     "search": "",
                     "state": undefined,
@@ -1157,7 +1144,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
               location={
                 Object {
                   "hash": "",
-                  "key": "5pmte9",
                   "pathname": "/install",
                   "search": "",
                   "state": undefined,
@@ -1186,14 +1172,12 @@ exports[`installing slack app renders the page when a user clicks the navigation
                       "entries": Array [
                         Object {
                           "hash": "",
-                          "key": "5pmte9",
                           "pathname": "/install",
                           "search": "",
                           "state": undefined,
                         },
                         Object {
                           "hash": "",
-                          "key": "ue2svz",
                           "pathname": "/install",
                           "search": "",
                           "state": undefined,
@@ -1207,7 +1191,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
                       "listen": [Function],
                       "location": Object {
                         "hash": "",
-                        "key": "ue2svz",
                         "pathname": "/install",
                         "search": "",
                         "state": undefined,
@@ -1219,7 +1202,6 @@ exports[`installing slack app renders the page when a user clicks the navigation
                   location={
                     Object {
                       "hash": "",
-                      "key": "5pmte9",
                       "pathname": "/install",
                       "search": "",
                       "state": undefined,

@@ -1,24 +1,13 @@
-import MemoryRouter from 'react-router-dom/MemoryRouter';
-import App from 'src/App.react';
 import Install from 'src/install/Install.react';
 import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
-import React from 'react';
-import {mount} from 'enzyme';
-import PropTypes from 'prop-types';
+import {mountApplication} from 'test/helper/applicationMock';
 
 describe('installing slack app', () => {
   it('renders the page when a user clicks the navigation button (desktop)', () => {
-    // TODO go to /, click nav button, snapshot
-    const wrapper = mount(
-      <MemoryRouter initialEntries={['/']}>
-        <App/>
-      </MemoryRouter>,
-      {
-        context: {uiHost: 'localhost'},
-        childContextTypes: {uiHost: PropTypes.string}
-      }
-    );
+    const wrapper = mountApplication('/');
+
     wrapper.find(`Button[id="${navigationLabelToPath.Install}-button"]`).prop('onClick')();
+
     expect(wrapper.find(Install)).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
