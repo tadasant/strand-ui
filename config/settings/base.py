@@ -14,10 +14,12 @@ import os
 
 if os.environ.get('ENVIRONMENT') == 'PROD':
     from config.settings.production import *
+elif os.environ.get('ENVIRONMENT') == 'STAGING':
+    from config.settings.staging import *
 elif os.environ.get('ENVIRONMENT') == 'TEST':
-    from config.settings.test import *
+    from config.settings.testing import *
 else:
-    from config.settings.local import *
+    from config.settings.development import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,9 +30,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '+-t%(!_0ue0g5f=&p-2=2me_oktk#l=eaz!t631(j+$nv0fjm)'
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
+    'storages',
     'app.users',
     'app.groups',
     'app.topics',
@@ -118,12 +118,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
 
 # Graphene
 # https://github.com/graphql-python/graphene-django/blob/master/docs/tutorial-plain.rst
