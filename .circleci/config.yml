@@ -51,7 +51,7 @@ jobs:
     docker:
       - image: node:9.5
 
-    working_directory: ~/repo/client
+    working_directory: ~/repo
 
     steps:
       - checkout
@@ -63,7 +63,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            yarn install
+            cd client && yarn install
 
       - save_cache:
           paths:
@@ -73,7 +73,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            yarn test
+            cd client && yarn test
 
       - store_artifacts:
           path: test-reports
