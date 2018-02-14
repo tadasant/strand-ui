@@ -3,7 +3,7 @@
 
 version: 2
 jobs:
-  build:
+  build-backend:
     docker:
       - image: circleci/python:3.6.1
 
@@ -14,14 +14,6 @@ jobs:
           POSTGRES_PASSWORD: ""
 
       - image: redis
-
-      - image: node
-
-    dependencies:
-      override:
-        - yarn
-      cache_directories:
-        - ~/.cache/yarn
 
     working_directory: ~/repo
 
@@ -39,7 +31,6 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            cd client && yarn
 
       - save_cache:
           paths:
@@ -51,7 +42,36 @@ jobs:
           command: |
             . venv/bin/activate
             pytest --pep8 --flake8
-            cd client && yarn test
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+
+  build-frontend:
+    docker:
+      - image: node:9.5
+
+    working_directory: ~/repo/client
+
+    steps:
+      - restore_cache:
+          keys:
+          - v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: install dependencies
+          command: |
+            yarn install
+
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: run tests
+          command: |
+            yarn test
 
       - store_artifacts:
           path: test-reports
