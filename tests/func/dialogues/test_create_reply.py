@@ -69,13 +69,17 @@ class TestCreateReply:
         assert response.json()['data']['createReply']['reply']['text'] == reply.text
 
     @pytest.mark.django_db()
-    def test_marks_discussion_as_open(self, auth_client, discussion_factory, message_factory, reply_factory):
+    def test_marks_discussion_as_open(self, auth_client, discussion_factory, user_factory, message_factory,
+                                      reply_factory):
+        message_author = user_factory(is_bot=False)
+        reply_author = user_factory(is_bot=False)
         discussion = discussion_factory()
-        message = message_factory(time=datetime.now(tz=pytz.UTC) - timedelta(minutes=31), discussion=discussion)
+        message = message_factory(time=datetime.now(tz=pytz.UTC) - timedelta(minutes=31), discussion=discussion,
+                                  author=message_author)
         discussion.mark_as_stale()
         discussion.save()
 
-        reply = reply_factory.build(message=message)
+        reply = reply_factory.build(message=message, author=reply_author)
 
         mutation = f'''
           mutation {{
