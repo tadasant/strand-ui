@@ -4,6 +4,7 @@ import pytest
 import pytz
 import requests
 from django.conf import settings
+from unittest.mock import ANY
 
 from app.slack_integration.wrappers import SlackAppClientWrapper
 from app.topics.models import Discussion
@@ -88,9 +89,7 @@ class TestMarkingDiscussionAsStale:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_stale
-        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT,
-                                              headers=SlackAppClientWrapper._construct_headers(),
-                                              data=SlackAppClientWrapper._construct_discussion_payload(discussion))
+        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, headers=ANY, data=ANY)
 
 
 class TestClosingPendingClosedDiscussion:
@@ -141,8 +140,7 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=SlackAppClientWrapper._construct_headers(),
-                                              data=SlackAppClientWrapper._construct_discussion_payload(discussion))
+                                              headers=ANY, data=ANY)
 
     @pytest.mark.django_db
     def test_does_not_get_closed_with_non_bot_message(self, auto_close_pending_closed_discussion_factory,
@@ -277,8 +275,7 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=SlackAppClientWrapper._construct_headers(),
-                                              data=SlackAppClientWrapper._construct_discussion_payload(discussion))
+                                              headers=ANY, data=ANY)
 
     @pytest.mark.django_db
     def test_does_get_closed_with_no_messages_ever(self, auto_close_pending_closed_discussion_factory,
@@ -308,5 +305,4 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=SlackAppClientWrapper._construct_headers(),
-                                              data=SlackAppClientWrapper._construct_discussion_payload(discussion))
+                                              headers=ANY, data=ANY)
