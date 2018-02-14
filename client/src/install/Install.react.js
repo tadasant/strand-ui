@@ -7,6 +7,7 @@ import withRouter from 'react-router-dom/es/withRouter';
 import PropTypes from 'prop-types';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
+import InstallationStatus from './InstallationStatus.react';
 
 const propTypes = {
   location: PropTypes.shape({
@@ -83,6 +84,13 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <AddToSlackButton redirectUri={this.redirectUri}/>
+              {this.state.successInstallationSlackApplication === undefined
+                ? null
+                : <InstallationStatus
+                  installingSlackApplication={this.state.installingSlackApplication}
+                  successInstallationSlackApplication={this.state.successInstallationSlackApplication}
+                  errors={this.state.errors}
+                />}
             </Grid>
             <Grid item>
               <Typography variant='caption'>
