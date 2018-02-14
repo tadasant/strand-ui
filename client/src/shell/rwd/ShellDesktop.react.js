@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {AppBar, Button, Toolbar} from 'material-ui';
-import 'typeface-roboto';
 import consts from '../common/MenuConstants';
 import ClippyLogo from '../common/ClippyLogo.react';
+import AppBar from 'material-ui/AppBar/AppBar';
+import Toolbar from 'material-ui/Toolbar/Toolbar';
+import Button from 'material-ui/Button/Button';
 
 const propTypes = {
   openPageGenerator: PropTypes.func.isRequired,

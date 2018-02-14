@@ -8,6 +8,7 @@
     "apollo-client": "^2.2.3",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-http": "^1.3.3",
+    "enzyme-adapter-react-16": "^1.1.1",
     "graphql": "^0.13.0",
     "graphql-tag": "^2.7.3",
     "material-ui": "^1.0.0-beta.33",
@@ -42,14 +43,7 @@
     "build": "REALM=production node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/",
     "build-staging": "REALM=staging node_modules/parcel-bundler/bin/cli.js build index.html --no-minify --out-dir build/",
     "test": "jest",
-    "test-watch": "jest --watch # watches tests related to files changed in git"
-  },
-  "jest": {
-    "moduleDirectories": [
-      "node_modules",
-      "src",
-      "test"
-    ],
-    "globalSetup": "<rootDir>/test/setup.js"
+    "test-watch": "jest --watch # watches tests related to files changed in git",
+    "test-watch-all": "jest --watchAll"
   }
 }

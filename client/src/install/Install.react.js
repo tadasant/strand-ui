@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Grid from 'material-ui/es/Grid/Grid';
-import Typography from 'material-ui/es/Typography/Typography';
+import Grid from 'material-ui/Grid/Grid';
+import Typography from 'material-ui/Typography/Typography';
 import AddToSlackButton from './AddToSlackButton.react';
 import queryString from 'query-string';
-import withRouter from 'react-router-dom/es/withRouter';
+import withRouter from 'react-router-dom/withRouter';
 import PropTypes from 'prop-types';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
