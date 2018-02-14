@@ -15,9 +15,11 @@ jobs:
 
       - image: redis
 
-      - image: node:9.5
-
     working_directory: ~/repo
+
+    dependencies:
+      override:
+        - yarn
 
     steps:
       - checkout
