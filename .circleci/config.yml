@@ -54,6 +54,8 @@ jobs:
     working_directory: ~/repo/client
 
     steps:
+      - checkout
+
       - restore_cache:
           keys:
           - v1-npm-dependencies-{{ checksum "yarn.lock" }}
