@@ -15,7 +15,7 @@ jobs:
 
       - image: redis
 
-      - image: circleci/node:latest
+      - image: node
 
     dependencies:
       override:
