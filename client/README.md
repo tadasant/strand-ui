@@ -37,7 +37,7 @@ Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leve
 
 It's important to make sure you're running on the up-to-date GraphQL schema. Extract from CCP by going to project root and doing:
 
-`python manage.py graphql_schema --out client/test/schema.json`
+`python manage.py graphql_schema --indent 2 --out client/test/schema.json`
 
 Commit the schema. CCU-26 will automate this process.
 
