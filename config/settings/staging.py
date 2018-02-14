@@ -26,7 +26,6 @@ ENABLE_GRAPHIQL = True
 CSRF_COOKIE_SECURE = True
 
 # Slack credentials
-SLACK_CLIENT_ID = os.environ['SLACK_CLIENT_ID']
 SLACK_CLIENT_SECRET = os.environ['SLACK_CLIENT_SECRET']
 
 # Celery
