@@ -7,7 +7,7 @@ import {mount} from 'enzyme';
 import PropTypes from 'prop-types';
 
 describe('installing slack app', () => {
-  it('renders the page when a user clicks the navigation button', () => {
+  it('renders the page when a user clicks the navigation button (desktop)', () => {
     // TODO go to /, click nav button, snapshot
     const wrapper = mount(
       <MemoryRouter initialEntries={['/']}>
@@ -19,7 +19,8 @@ describe('installing slack app', () => {
       }
     );
     wrapper.find(`Button[id="${navigationLabelToPath.Install}-button"]`).prop('onClick')();
-    // expect(tree).toMatchSnapshot();
+    expect(wrapper.find(Install)).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('shows a success message when a user successfully installs the app', async () => {
