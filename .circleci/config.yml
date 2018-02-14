@@ -31,6 +31,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
+            cd client && yarn
 
       - save_cache:
           paths:
@@ -42,6 +43,7 @@ jobs:
           command: |
             . venv/bin/activate
             pytest --pep8 --flake8
+            cd client && yarn test
 
       - store_artifacts:
           path: test-reports
