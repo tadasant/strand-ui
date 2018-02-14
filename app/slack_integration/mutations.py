@@ -386,9 +386,13 @@ class CloseDiscussionFromSlackMutation(graphene.Mutation):
     @check_authorization
     def mutate(self, info, input):
         discussion = Discussion.objects.get(slack_channel__id=input['slack_channel_id'])
+        slack_user = SlackUser.objects.get(id=input['slack_user_id'])
+
+        if not slack_user.can_close_discussion(discussion):
+            raise Exception('Slack user does not have permission to close discussion')
+
         discussion.mark_as_closed()
         discussion.save()
-
         return CloseDiscussionFromSlackMutation(discussion=discussion)
 
 

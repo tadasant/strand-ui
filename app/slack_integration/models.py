@@ -96,6 +96,12 @@ class SlackUser(TimeStampedModel):
     slack_team = models.ForeignKey(SlackTeam, on_delete=models.CASCADE, related_name='slack_users')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='slack_users')
 
+    def can_close_discussion(self, discussion):
+        if self.is_admin or discussion.topic.original_poster == self.user:
+            return True
+        else:
+            return False
+
     def __str__(self):
         return f'{self.real_name or self.name}'
 

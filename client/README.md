@@ -24,11 +24,11 @@ Do not commit these built files.
 [Breakdown](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use) of intended implementation 
 
 Basically the hierarchy is:
-1) .env.${REALM}.local
-2) .env.${REALM}
-3) .env.local (excluded if $REALM == 'test')
+1) .env.${NODE_ENV}.local
+2) .env.${NODE_ENV}
+3) .env.local (excluded if NODE_ENV == 'test')
 4) .env
 
 1 takes priority over 2, etc.
 
-Note that `parcel build` override `NODE_ENV` to be production, hence our use of `REALM` in the script & in `index.js`.
+Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leveraging `REALM` in the script & in `index.js`.
