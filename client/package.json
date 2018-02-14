@@ -24,17 +24,18 @@
     "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "parcel-bundler": "^1.5.1"
+    "parcel-bundler": "git://github.com/tadas412/parcel.git"
   },
   "scripts": {
-    "start": "parcel index.html --open --port 5000",
-    "build": "REALM=production parcel build index.html --out-dir build/",
-    "build-staging": "REALM=staging parcel build index.html --no-minify --out-dir build/"
+    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 5000",
+    "build": "REALM=production node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/",
+    "build-staging": "REALM=staging node_modules/parcel-bundler/bin/cli.js build index.html --no-minify --out-dir build/"
   }
 }

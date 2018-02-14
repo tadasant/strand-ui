@@ -5,29 +5,50 @@ import AddToSlackButton from './AddToSlackButton.react';
 import queryString from 'query-string';
 import withRouter from 'react-router-dom/es/withRouter';
 import PropTypes from 'prop-types';
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
 
 const propTypes = {
   location: PropTypes.shape({
     search: PropTypes.string,
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
+  // GraphQL
+  attemptInstall: PropTypes.func.isRequired,
 };
 
 class Install extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
+
+    const redirectHost = context.uiHost; // From config (see index.js)
+    this.redirectUri = `${redirectHost}${props.location.pathname}`;
 
     this.state = {
       installingSlackApplication: false,
       successInstallationSlackApplication: undefined, // true/false after attempt
+      errors: [],
     }
   }
 
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
     if (params.code) {
-      console.log(params.code);
-      this.setState(() => ({installingSlackApplication: true}))
-      // TODO kick off the mutation with params.code
+      this.setState(() => ({installingSlackApplication: true}), () => {
+        this.props.attemptInstall(params.code, process.env.SLACK_CLIENT_ID, this.redirectUri)
+          .then(({data}) => {
+            console.log(`Data: ${data}`);
+            this.setState(() => ({installingSlackApplication: false, successInstallationSlackApplication: true}));
+          })
+          .catch((response) => {
+            console.log(`Error: ${response}`);
+            this.setState(() => ({
+              installingSlackApplication: false,
+              successInstallationSlackApplication: false,
+              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message).join("; ") : []
+            }));
+          })
+      })
     }
   }
 
@@ -61,7 +82,7 @@ class Install extends Component {
               </Typography>
             </Grid>
             <Grid item>
-              <AddToSlackButton />
+              <AddToSlackButton redirectUri={this.redirectUri}/>
             </Grid>
             <Grid item>
               <Typography variant='caption'>
@@ -79,4 +100,24 @@ class Install extends Component {
 
 Install.propTypes = propTypes;
 
-export default withRouter(Install);
+Install.contextTypes = {
+  uiHost: PropTypes.string.isRequired,
+};
+
+const attemptSlackInstallation = gql`
+  mutation($code: String!, $clientId: String!, $redirectUri: String!) {
+    attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
+      slackTeam {
+        name
+      }
+    }
+  }
+`;
+
+const InstallWithResult = graphql(attemptSlackInstallation, {
+  props: ({mutate}) => ({
+    attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
+  }),
+})(withRouter(Install));
+
+export default InstallWithResult;

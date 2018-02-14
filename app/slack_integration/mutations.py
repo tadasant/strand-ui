@@ -23,7 +23,7 @@ from app.slack_integration.types import (
     ReplyFromSlackInputType,
     DiscussionFromSlackInputType,
     SlackAgentTopicChannelAndActivateInputType,
-    SlackAgentInputType,
+    AttemptSlackInstallationInputType,
     SlackAgentType,
     SlackChannelType,
     SlackChannelInputType,
@@ -34,7 +34,7 @@ from app.slack_integration.types import (
     UserAndMessageFromSlackInputType,
     UserAndTopicFromSlackInputType,
     UserAndReplyFromSlackInputType,
-    CloseDiscussionFromSlackInputType)
+    CloseDiscussionFromSlackInputType, SlackTeamType)
 from app.slack_integration.validators import (
     SlackChannelValidator,
     SlackUserValidator
@@ -76,15 +76,15 @@ class CreateSlackChannelMutation(graphene.Mutation):
         return CreateSlackChannelMutation(slack_channel=slack_channel)
 
 
-class CreateSlackAgentMutation(graphene.Mutation):
+class AttemptSlackInstallationMutation(graphene.Mutation):
     class Arguments:
-        input = SlackAgentInputType(required=True)
+        input = AttemptSlackInstallationInputType(required=True)
 
-    slack_agent = graphene.Field(SlackAgentType)
+    slack_team = graphene.Field(SlackTeamType)
 
     def mutate(self, info, input):
         response = requests.get('https://slack.com/api/oauth.access',
-                                params={'code': input.code, 'client_id': settings.SLACK_CLIENT_ID,
+                                params={'code': input.code, 'client_id': input.client_id,
                                         'client_secret': settings.SLACK_CLIENT_SECRET})
         if not response.json().get('ok'):
             raise Exception(f'''Error accessing OAuth: {response.json()['error']}''')
@@ -127,7 +127,7 @@ class CreateSlackAgentMutation(graphene.Mutation):
         slack_agent.authenticate()
         slack_agent.save()
 
-        return CreateSlackAgentMutation(slack_agent=slack_agent)
+        return AttemptSlackInstallationMutation(slack_team=slack_team)
 
 
 class UpdateSlackAgentTopicChannelAndActivateMutation(graphene.Mutation):
@@ -397,8 +397,9 @@ class CloseDiscussionFromSlackMutation(graphene.Mutation):
 
 
 class Mutation(graphene.ObjectType):
+    attempt_slack_installation = AttemptSlackInstallationMutation.Field()
+
     create_slack_user = CreateSlackUserMutation.Field()
-    create_slack_agent = CreateSlackAgentMutation.Field()
     create_slack_channel = CreateSlackChannelMutation.Field()
 
     update_slack_agent_topic_channel_and_activate = UpdateSlackAgentTopicChannelAndActivateMutation.Field()
