@@ -19,6 +19,7 @@ class ShellDesktop extends Component {
             <ClippyLogo style={{height: '75%'}}/>
             {Object.keys(consts.navigationLabelToPath).map(label => (
               <Button
+                id={`${consts.navigationLabelToPath[label]}-button`}
                 style={{marginLeft: 'auto'}}
                 key={label}
                 color='secondary'

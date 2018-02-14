@@ -1,6 +1,7 @@
 import MemoryRouter from 'react-router-dom/MemoryRouter';
 import App from 'src/App.react';
 import Install from 'src/install/Install.react';
+import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
 import React from 'react';
 import {mount} from 'enzyme';
 import PropTypes from 'prop-types';
@@ -17,7 +18,8 @@ describe('installing slack app', () => {
         childContextTypes: {uiHost: PropTypes.string}
       }
     );
-    expect(wrapper.find(Install)).toHaveLength(1);
+    wrapper.find(`Button[id="${navigationLabelToPath.Install}-button"]`).prop('onClick')();
+    // expect(tree).toMatchSnapshot();
   });
 
   it('shows a success message when a user successfully installs the app', async () => {

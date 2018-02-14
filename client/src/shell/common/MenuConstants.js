@@ -1,4 +1,4 @@
-const navigationLabelToPath = {
+export const navigationLabelToPath = {
     'Install': '/install',
 };
 
