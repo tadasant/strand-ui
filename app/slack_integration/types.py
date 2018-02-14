@@ -99,8 +99,10 @@ class SlackUserInputType(graphene.InputObjectType):
     user_id = graphene.Int(required=True)
 
 
-class SlackAgentInputType(graphene.InputObjectType):
+class AttemptSlackInstallationInputType(graphene.InputObjectType):
     code = graphene.String(required=True)
+    client_id = graphene.String(required=True)
+    redirect_uri = graphene.String(required=True)
 
 
 class SlackChannelInputType(graphene.InputObjectType):

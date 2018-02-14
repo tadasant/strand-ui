@@ -45,7 +45,7 @@ class Install extends Component {
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: false,
-              errors: response.graphQLErrors,
+              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message).join("; ") : []
             }));
           })
       })
@@ -105,16 +105,18 @@ Install.contextTypes = {
 };
 
 const attemptSlackInstallation = gql`
-  mutation attemptSlackInstallation($code: String!, $client_id: String!, $redirect_uri: String!) {
-    attemptSlackInstallation(code: $code, client_id: $client_id, redirect_uri: $redirect_uri) {
-      teamName
+  mutation($code: String!, $clientId: String!, $redirectUri: String!) {
+    attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
+      slackTeam {
+        name
+      }
     }
   }
 `;
 
 const InstallWithResult = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
-    attemptInstall: (code, client_id, redirect_uri) => mutate({variables: {code, client_id, redirect_uri}}),
+    attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
   }),
 })(withRouter(Install));
 
