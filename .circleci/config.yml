@@ -15,7 +15,7 @@ jobs:
 
       - image: redis
 
-      - image: node:9.5
+      - image: circleci/node:9.5
 
     working_directory: ~/repo
 
