@@ -58,7 +58,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-npm-dependencies-{{ checksum "yarn.lock" }}
+          - v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
 
       - run:
           name: install dependencies
@@ -67,8 +67,8 @@ jobs:
 
       - save_cache:
           paths:
-            - ./node_modules
-          key: v1-npm-dependencies-{{ checksum "yarn.lock" }}
+            - ./client/node_modules
+          key: v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
 
       - run:
           name: run tests
