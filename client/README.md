@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-We use `yarn` (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
+We use [yarn](https://yarnpkg.com/en/) (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
 
 Run `cd client && yarn install` to set up your `node_modules`.
 
@@ -40,3 +40,9 @@ It's important to make sure you're running on the up-to-date GraphQL schema. Ext
 `python manage.py graphql_schema --out client/test/schema.json`
 
 Commit the schema. CCU-26 will automate this process.
+
+We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing. 
+
+While developing, using `yarn test-watch`. This will watch test files that are testing the production files to which you have made edits (based on git).
+
+Otherwise, `yarn test` will run the whole test suite.
