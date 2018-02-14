@@ -6,7 +6,6 @@ import requests
 from django.conf import settings
 from unittest.mock import ANY
 
-from app.slack_integration.wrappers import SlackAppClientWrapper
 from app.topics.models import Discussion
 from tests.utils import wait_until
 
