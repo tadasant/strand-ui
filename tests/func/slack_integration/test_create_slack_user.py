@@ -13,7 +13,7 @@ class TestCreateSlackUser:
           mutation {{
             createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
                                      realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
-                                     avatar72: "{slack_user.avatar_72}", isBot: {str(slack_user.is_bot).lower()},
+                                     image72: "{slack_user.image_72}", isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
@@ -37,7 +37,7 @@ class TestCreateSlackUser:
           mutation {{
             createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
                                      realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
-                                     avatar72: "{slack_user.avatar_72}", isBot: {str(slack_user.is_bot).lower()},
+                                     image72: "{slack_user.image_72}", isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{
@@ -62,7 +62,7 @@ class TestCreateSlackUser:
           mutation {{
             createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
                                      realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
-                                     avatar72: "{slack_user.avatar_72}", isBot: {str(slack_user.is_bot).lower()},
+                                     image72: "{slack_user.image_72}", isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: 1}}) {{
               slackUser {{
@@ -86,7 +86,7 @@ class TestCreateSlackUser:
           mutation {{
             createSlackUser(input: {{id: "{slack_user.id}", name: "{slack_user.name}",
                                      realName: "{slack_user.real_name}", displayName: "{slack_user.display_name}",
-                                     avatar72: "{slack_user.avatar_72}", isBot: {str(slack_user.is_bot).lower()},
+                                     image72: "{slack_user.image_72}", isBot: {str(slack_user.is_bot).lower()},
                                      isAdmin: {str(slack_user.is_admin).lower()}, slackTeamId: "{slack_team.id}",
                                      userId: {user.id}}}) {{
               slackUser {{

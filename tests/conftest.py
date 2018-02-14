@@ -96,6 +96,7 @@ def slack_app_request_factory(mocker):
     out requests. We use this to ensure the requests was called.
     """
     mocker.patch('requests.post')
+    mocker.patch('requests.put')
 
 
 @pytest.fixture()

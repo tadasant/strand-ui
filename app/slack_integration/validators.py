@@ -18,9 +18,9 @@ class SlackUserValidator(serializers.ModelSerializer):
 
     class Meta:
         model = SlackUser
-        fields = ('id', 'name', 'first_name', 'last_name', 'real_name', 'display_name', 'email', 'avatar_72',
+        fields = ('id', 'name', 'first_name', 'last_name', 'real_name', 'display_name', 'email', 'image_72',
                   'is_bot', 'is_admin', 'slack_team_id', 'user_id')
-        required_fields = ('id', 'name', 'real_name', 'display_name', 'avatar_72', 'is_bot', 'is_admin',
+        required_fields = ('id', 'name', 'real_name', 'display_name', 'image_72', 'is_bot', 'is_admin',
                            'slack_team_id', 'user_id')
 
 

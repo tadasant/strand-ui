@@ -13,7 +13,7 @@ class CustomUserManager(UserManager):
         email = self.normalize_email(slack_user.email)
         username = self.model.normalize_username(slack_user.display_name or slack_user.name)
         user = self.model(email=email, username=username, first_name=slack_user.first_name,
-                          last_name=slack_user.last_name, avatar_url=slack_user.avatar_72, is_bot=slack_user.is_bot,
+                          last_name=slack_user.last_name, avatar_url=slack_user.image_72, is_bot=slack_user.is_bot,
                           alias=self.generate_random_alias(4))
         user.set_password(None)
         user.save(using=self._db)

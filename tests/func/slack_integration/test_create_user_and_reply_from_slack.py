@@ -25,7 +25,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"
@@ -76,7 +76,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"
@@ -127,7 +127,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"
@@ -179,7 +179,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"
@@ -230,7 +230,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"
@@ -281,7 +281,7 @@ class TestCreateUserAndReplyFromSlack:
                                                    realName: "{slack_user.real_name}",
                                                    displayName: "{slack_user.display_name}",
                                                    email: "{slack_user.email}",
-                                                   avatar72: "{slack_user.avatar_72}",
+                                                   image72: "{slack_user.image_72}",
                                                    isBot: {str(slack_user.is_bot).lower()},
                                                    isAdmin: {str(slack_user.is_admin).lower()},
                                                    slackTeamId: "{slack_user.slack_team.id}"

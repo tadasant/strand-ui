@@ -4,6 +4,7 @@ import pytest
 import pytz
 import requests
 from django.conf import settings
+from unittest.mock import ANY
 
 from app.topics.models import Discussion
 from tests.utils import wait_until
@@ -87,13 +88,7 @@ class TestMarkingDiscussionAsStale:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_stale
-        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT,
-                                              headers={
-                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
-                                              },
-                                              data={'discussion_id': discussion.id,
-                                                    'slack_channel_id': discussion.slack_channel.id,
-                                                    'status': discussion.status})
+        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, headers=ANY, data=ANY)
 
 
 class TestClosingPendingClosedDiscussion:
@@ -144,12 +139,7 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers={
-                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
-                                              },
-                                              data={'discussion_id': discussion.id,
-                                                    'slack_channel_id': discussion.slack_channel.id,
-                                                    'status': discussion.status})
+                                              headers=ANY, data=ANY)
 
     @pytest.mark.django_db
     def test_does_not_get_closed_with_non_bot_message(self, auto_close_pending_closed_discussion_factory,
@@ -284,12 +274,7 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers={
-                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
-                                              },
-                                              data={'discussion_id': discussion.id,
-                                                    'slack_channel_id': discussion.slack_channel.id,
-                                                    'status': discussion.status})
+                                              headers=ANY, data=ANY)
 
     @pytest.mark.django_db
     def test_does_get_closed_with_no_messages_ever(self, auto_close_pending_closed_discussion_factory,
@@ -319,9 +304,4 @@ class TestClosingPendingClosedDiscussion:
 
         assert discussion.is_closed
         requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers={
-                                                  'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'
-                                              },
-                                              data={'discussion_id': discussion.id,
-                                                    'slack_channel_id': discussion.slack_channel.id,
-                                                    'status': discussion.status})
+                                              headers=ANY, data=ANY)

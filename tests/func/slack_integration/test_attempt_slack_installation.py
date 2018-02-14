@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 
 class TestAttemptSlackInstallation:
@@ -25,7 +26,7 @@ class TestAttemptSlackInstallation:
 
     @pytest.mark.django_db
     @pytest.mark.parametrize('slack_oauth_request', ['valid_token'], indirect=True)
-    def test_valid(self, client, slack_oauth_request, slack_client_factory):
+    def test_valid(self, client, slack_oauth_request, slack_client_factory, slack_app_request_factory):
         code = '123456789012.123456789012.1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890ABCDEFGHIJKLMNOPQR'
         client_id = '123456789012.123456789012.123456'
         redirect_uri = 'www.app.codeclippy.com/install'

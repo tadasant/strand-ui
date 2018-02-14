@@ -1,14 +1,6 @@
-from django.conf import settings
-import requests
-
 from app.api.celery import celery_app
 from app.topics.models import Discussion, DiscussionStatus
-
-
-def post_discussion_to_slack_app(endpoint, discussion):
-    payload = {'discussion_id': discussion.id, 'slack_channel_id': discussion.slack_channel.id,
-               'status': discussion.status}
-    requests.post(endpoint, data=payload, headers={'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'})
+from app.slack_integration.wrappers import SlackAppClientWrapper
 
 
 @celery_app.task
@@ -23,7 +15,7 @@ def mark_stale_discussions():
             discussion.mark_as_stale()
             discussion.save()
             if discussion.slack_channel:
-                post_discussion_to_slack_app(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, discussion)
+                SlackAppClientWrapper.post_stale_discussion(discussion)
 
 
 @celery_app.task
@@ -37,4 +29,4 @@ def auto_close_pending_closed_discussion(discussion_id, datetime_of_last_non_bot
         discussion.mark_as_closed()
         discussion.save()
         if discussion.slack_channel:
-            post_discussion_to_slack_app(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT, discussion)
+            SlackAppClientWrapper.post_auto_closed_discussion(discussion)

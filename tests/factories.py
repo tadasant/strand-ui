@@ -159,7 +159,7 @@ class SlackUserFactory(factory.DjangoModelFactory):
     real_name = factory.LazyAttribute(lambda x: f'{x.first_name} {x.last_name}')
     display_name = factory.Faker('user_name')
     email = factory.Faker('safe_email')
-    avatar_72 = factory.Faker('image_url')
+    image_72 = factory.Faker('image_url')
     is_bot = factory.Faker('pybool')
     is_admin = factory.Faker('pybool')
 
