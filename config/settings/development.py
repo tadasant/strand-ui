@@ -1,6 +1,10 @@
 import os
 import json
 
+# Prevent HTTP Host header attacks
+# https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['docker.for.mac.localhost']
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
