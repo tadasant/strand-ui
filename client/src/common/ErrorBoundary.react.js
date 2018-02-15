@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class ErrorBoundary extends Component {
@@ -15,18 +15,8 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    if (this.state.error && Raven.isSetup()) {
-      return (
-        <div
-          className='snap'
-          onClick={() => Raven.lastEventId() && Raven.showReportDialog()}>
-          <p>Sorry! Something went wrong.</p>
-          <p>Our team has been notified, but click here fill out a report.</p>
-        </div>
-      );
-    } else {
-      return this.props.children;
-    }
+    // TODO could add a nice "there was an error, help us out" kind of screen here
+    return this.props.children;
   }
 }
 
