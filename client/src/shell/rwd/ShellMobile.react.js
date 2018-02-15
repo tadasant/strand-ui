@@ -4,7 +4,7 @@ import {findDOMNode} from 'react-dom';
 import consts from '../common/MenuConstants';
 import ClippyLogo from '../common/ClippyLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';
-import Popover from "material-ui/Popover/Popover";
+import Popover from 'material-ui/Popover/Popover';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import Toolbar from 'material-ui/Toolbar/Toolbar';

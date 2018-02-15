@@ -1,18 +1,18 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography/Typography';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography/Typography'
 
 const propTypes = {
   installingSlackApplication: PropTypes.bool.isRequired,
   successInstallationSlackApplication: PropTypes.bool,
-  errors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  errors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
 };
 
 class InstallationStatus extends Component {
   renderSuccess() {
     return (
-      <Typography variant='subheading' style={{color: 'green'}}>
-        Successfully installed! The CodeClippy bot should have DM'd you with setup instructions.
+      <Typography variant="subheading" style={{color: 'green'}}>
+        Successfully installed! The CodeClippy bot should have direct messaged you with setup instructions.
       </Typography>
     )
   }
@@ -30,15 +30,14 @@ class InstallationStatus extends Component {
     return <Typography variant='subheading' style={{color: 'green'}}>Installing...</Typography>
   }
 
-
   render() {
     if (this.props.installingSlackApplication) {
-      return this.renderInstalling();
+      return this.renderInstalling()
     }
-    return this.props.successInstallationSlackApplication ? this.renderSuccess() : this.renderFailure();
+    return this.props.successInstallationSlackApplication ? this.renderSuccess() : this.renderFailure()
   }
 }
 
 InstallationStatus.propTypes = propTypes;
 
-export default InstallationStatus;
+export default InstallationStatus
