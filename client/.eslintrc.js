@@ -16,7 +16,8 @@ module.exports = {
     'indent': ['error', 2],
     'no-console': 'warn',
     'react/no-find-dom-node': 'warn',
-    'jsx-quotes': ['error', 'prefer-single']
+    'jsx-quotes': ['error', 'prefer-single'],
+    'comma-dangle': ['error', 'always-multiline']
   },
   'env': {
     'jest/globals': true,

@@ -25,7 +25,7 @@ describe('installing slack app', () => {
       AttemptSlackInstallationMutation: (_, info) => {
         expect(info.input.code).toEqual(mockSlackCode); // ensuring the code is pulled from the URL
         return {}
-      }
+      },
     };
     const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`, {graphqlMocks});
     await flushPromises(); // wait for GraphQL call to complete
@@ -40,7 +40,7 @@ describe('installing slack app', () => {
     const graphqlMocks = {
       AttemptSlackInstallationMutation: () => {
         throw 'This error message should be displayed on UI'
-      }
+      },
     };
     const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`, {graphqlMocks});
     await flushPromises(); // wait for GraphQL call to complete

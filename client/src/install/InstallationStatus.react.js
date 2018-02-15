@@ -5,7 +5,7 @@ import Typography from 'material-ui/Typography/Typography'
 const propTypes = {
   installingSlackApplication: PropTypes.bool.isRequired,
   successInstallationSlackApplication: PropTypes.bool,
-  errors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  errors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 class InstallationStatus extends Component {

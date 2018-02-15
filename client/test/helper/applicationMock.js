@@ -33,7 +33,7 @@ export const mountApplication = (endpoint, options) => {
     </ApolloProvider>,
     {
       context: {uiHost: 'localhost'},
-      childContextTypes: {uiHost: PropTypes.string}
+      childContextTypes: {uiHost: PropTypes.string},
     }
   );
 };
@@ -42,7 +42,7 @@ const generateMockApolloClient = (graphqlMocks) => {
   const schema = buildClientSchema(graphqlIntrospectionResult.data);
   addMockFunctionsToSchema({
     schema,
-    mocks: graphqlMocks || {}
+    mocks: graphqlMocks || {},
   });
   const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
   return new ApolloClient({

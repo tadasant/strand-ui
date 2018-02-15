@@ -41,7 +41,7 @@ class Install extends Component {
             console.log(`Data: ${JSON.stringify(data)}`);
             this.setState(() => ({
               installingSlackApplication: false,
-              successInstallationSlackApplication: true
+              successInstallationSlackApplication: true,
             }));
           })
           .catch((response) => {
@@ -49,7 +49,7 @@ class Install extends Component {
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: false,
-              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : []
+              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : [],
             }));
           })
       })

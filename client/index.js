@@ -5,8 +5,10 @@ import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {ApolloProvider} from 'react-apollo';
 import Root from './src/Root.react';
+import ErrorBoundary from './src/common/ErrorBoundary.react';
 
 // Last of config setup (used because parcel.js sets $NODE_ENV to production for all `parcel build` ops)
+// TODO this isn't great, not sure how to fix? parcel PR?
 let graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
 let uiHost = process.env.UI_HOST;
 if (process.env.REALM === 'staging') {
@@ -16,7 +18,7 @@ if (process.env.REALM === 'staging') {
 }
 
 // sentry.io
-if (process.env.REALM in ['production', 'staging']) {
+if (process.env.REALM === 'production' || process.env.REALM === 'staging') {
   const sentryioKey = process.env.SENTRY_IO_KEY;
   const sentryioProject = process.env.SENTRY_IO_PROJECT;
   Raven.config(`http://${sentryioKey}@sentry.io/${sentryioProject}`, {
@@ -25,15 +27,16 @@ if (process.env.REALM in ['production', 'staging']) {
   }).install();
 }
 
-
 const client = new ApolloClient({
   link: new HttpLink({uri: graphQLUrl}),
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Root uiHost={uiHost}/>
-  </ApolloProvider>,
+  <ErrorBoundary>
+    <ApolloProvider client={client}>
+      <Root uiHost={uiHost}/>
+    </ApolloProvider>
+  </ErrorBoundary>,
   document.getElementById('root'),
 );
