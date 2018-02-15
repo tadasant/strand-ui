@@ -21,6 +21,7 @@ describe('installing slack app', () => {
 
   it('shows a success message when a user successfully installs the app', async () => {
     const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`);
+    // TODO assert that 12345 was used
     await flushPromises(); // wait for GraphQL call to complete
     wrapper.update();
 
@@ -30,7 +31,17 @@ describe('installing slack app', () => {
   });
 
   it('shows a failure message when we fail to install the app', async () => {
-    // TODO start at /install, click the button, return to /install w/ a code, await response w/ failure
-    expect(true).toBe(true);
+    const graphqlMocks = {
+      AttemptSlackInstallationMutation: () => {
+        throw 'This error message should be displayed on UI'
+      }
+    };
+    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`, {graphqlMocks});
+    await flushPromises(); // wait for GraphQL call to complete
+    wrapper.update();
+
+    const installationStatusComponent = wrapper.find(InstallationStatus);
+    expect(installationStatusComponent).toHaveLength(1);
+    expect(installationStatusComponent).toMatchSnapshot();
   })
 });

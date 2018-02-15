@@ -46,7 +46,7 @@ class Install extends Component {
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: false,
-              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message).join("; ") : []
+              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : []
             }));
           })
       })
