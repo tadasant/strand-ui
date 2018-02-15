@@ -11,7 +11,7 @@ const propTypes = {
 class InstallationStatus extends Component {
   renderSuccess() {
     return (
-      <Typography variant="subheading" style={{color: 'green'}}>
+      <Typography variant='subheading' style={{color: 'green'}}>
         Successfully installed! The CodeClippy bot should have direct messaged you with setup instructions.
       </Typography>
     )
