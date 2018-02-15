@@ -1,4 +1,5 @@
 from django.contrib import admin
+from fsm_admin.mixins import FSMTransitionMixin
 
 from app.topics.models import Tag, Topic, Discussion
 
@@ -7,8 +8,11 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', 'original_poster', 'group')
 
 
-class DiscussionAdmin(admin.ModelAdmin):
+class DiscussionAdmin(FSMTransitionMixin, admin.ModelAdmin):
+    fsm_field = ['status', ]
+
     list_display = ('topic', 'get_topic_original_poster', 'get_topic_group', 'status')
+    readonly_fields = ('status',)
 
     def get_topic_original_poster(self, obj):
         return obj.topic.original_poster

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_fsm',
+    'fsm_admin',
     'corsheaders',
     'storages',
     'app.users',
@@ -88,7 +90,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Override auth user model
 AUTH_USER_MODEL = 'users.User'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
