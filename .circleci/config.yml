@@ -74,6 +74,7 @@ jobs:
           name: run tests
           command: |
             cd client && yarn test
+            ./node_modules/eslint/bin/eslint.js . --quiet
 
       - store_artifacts:
           path: test-reports
