@@ -8,12 +8,13 @@ db.config.json
 .coverage
 .pytest_cache
 
-
+# Frontend
 client/.cache/
 client/dist/
 client/node_modules/
 client/build/
 client/.env.local
+client/yarn-error.log
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

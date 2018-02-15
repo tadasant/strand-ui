@@ -32,3 +32,11 @@ Basically the hierarchy is:
 1 takes priority over 2, etc.
 
 Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leveraging `REALM` in the script & in `index.js`.
+
+## Running tests
+
+It's important to make sure you're running on the up-to-date GraphQL schema. Extract from CCP by going to project root and doing:
+
+`python manage.py graphql_schema --out client/test/schema.json`
+
+Commit the schema. CCU-26 will automate this process.
