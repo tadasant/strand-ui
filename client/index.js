@@ -15,6 +15,17 @@ if (process.env.REALM === 'staging') {
   uiHost = 'https://www.staging.codeclippy.com/';
 }
 
+// sentry.io
+if (process.env.REALM in ['production', 'staging']) {
+  const sentryioKey = process.env.SENTRY_IO_KEY;
+  const sentryioProject = process.env.SENTRY_IO_PROJECT;
+  Raven.config(`http://${sentryioKey}@sentry.io/${sentryioProject}`, {
+    environment: process.env.REALM,
+    tags: {release: process.env.VERSION},
+  }).install();
+}
+
+
 const client = new ApolloClient({
   link: new HttpLink({uri: graphQLUrl}),
   cache: new InMemoryCache(),
