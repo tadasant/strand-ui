@@ -16,17 +16,8 @@ import PropTypes from 'prop-types';
   Mount the entire application (minus stuff in Root.react.js).
  */
 export const mountApplication = (endpoint) => {
-  const schema = buildClientSchema(graphqlIntrospectionResult.data);
-  addMockFunctionsToSchema({schema});
-
-  const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
-  const client = new ApolloClient({
-    cache: apolloCache,
-    link: new SchemaLink({schema}),
-  });
-
   return mount(
-    <ApolloProvider client={client}>
+    <ApolloProvider client={global.__MOCK_APOLLO_CLIENT__}>
       <MemoryRouter initialEntries={[endpoint]} initialIndex={0} keyLength={0}>
         {/*keyLength is 0 so keys aren't generated (they break jest snapshots)*/}
         <App/>
