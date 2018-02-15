@@ -1,7 +1,8 @@
 module.exports = {
   "moduleDirectories": [
     "node_modules",
-    "./"
+    "./",
+    "src/"
   ],
   "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
   "moduleNameMapper": {
