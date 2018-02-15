@@ -1,6 +1,10 @@
-import Install from 'src/install/Install.react';
 import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
+import InstallationStatus from 'src/install/InstallationStatus.react';
+
+function flushPromises() {
+  return new Promise(resolve => setImmediate(resolve));
+}
 
 describe('installing slack app', () => {
   it('sends the user to Slack when the user navigates to the page and clicks the button', async () => {
@@ -13,18 +17,16 @@ describe('installing slack app', () => {
     const anchorHref = wrapper.find('a[id="add-to-slack-button"]').prop('href');
     expect(anchorHref).toContain('slack.com/oauth');
     expect(anchorHref).toContain(process.env.SLACK_CLIENT_ID);
-
-    // TODO start at /install, click the button, return to /install w/ a code, await response w/ success
-    expect(true).toBe(true);
   });
 
   it('shows a success message when a user successfully installs the app', async () => {
     const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`);
-    const status = wrapper.find('InstallationStatus');
-    // TODO start at /install, click the button, return to /install w/ a code, await response w/ success
-    // expect(wrapper.find(Install)).toHaveLength(1);
-    // expect(wrapper).toMatchSnapshot();
-    expect(true).toBe(true);
+    await flushPromises(); // wait for GraphQL call to complete
+    wrapper.update();
+
+    const installationStatusComponent = wrapper.find(InstallationStatus);
+    expect(installationStatusComponent).toHaveLength(1);
+    expect(installationStatusComponent).toMatchSnapshot();
   });
 
   it('shows a failure message when we fail to install the app', async () => {
