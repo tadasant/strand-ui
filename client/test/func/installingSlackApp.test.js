@@ -22,12 +22,12 @@ describe('installing slack app', () => {
   it('shows a success message when a user successfully installs the app', async () => {
     const mockSlackCode = '12345';
     const graphqlMocks = {
-      AttemptSlackInstallationMutation: (_, input) => {
-        expect(input.code).toEqual(mockSlackCode); // ensuring the code is pulled from the URL
+      AttemptSlackInstallationMutation: (_, info) => {
+        expect(info.input.code).toEqual(mockSlackCode); // ensuring the code is pulled from the URL
         return {}
       }
     };
-    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${slackCode}`, {graphqlMocks});
+    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`, {graphqlMocks});
     await flushPromises(); // wait for GraphQL call to complete
     wrapper.update();
 
@@ -36,7 +36,7 @@ describe('installing slack app', () => {
     expect(installationStatusComponent).toMatchSnapshot();
   });
 
-  it.only('shows a failure message when we fail to install the app', async () => {
+  it('shows a failure message when we fail to install the app', async () => {
     const graphqlMocks = {
       AttemptSlackInstallationMutation: () => {
         throw 'This error message should be displayed on UI'
