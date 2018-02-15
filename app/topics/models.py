@@ -92,20 +92,22 @@ class Discussion(TimeStampedModel):
             return False
 
     @transition(field=status, source=[DiscussionStatus.STALE.value, DiscussionStatus.PENDING_CLOSED.value],
-                target=DiscussionStatus.OPEN.value)
+                target=DiscussionStatus.OPEN.value, custom={'button_name': 'Mark as Open'})
     def mark_as_open(self):
         pass
 
     @transition(field=status, source=DiscussionStatus.OPEN.value, target=DiscussionStatus.STALE.value,
-                conditions=[can_mark_as_stale])
+                conditions=[can_mark_as_stale], custom={'button_name': 'Mark as Stale'})
     def mark_as_stale(self):
         pass
 
-    @transition(field=status, source=DiscussionStatus.STALE.value, target=DiscussionStatus.PENDING_CLOSED.value)
+    @transition(field=status, source=DiscussionStatus.STALE.value, target=DiscussionStatus.PENDING_CLOSED.value,
+                custom={'button_name': 'Mark as Pending Closed'})
     def mark_as_pending_closed(self):
         pass
 
-    @transition(field=status, source='*', target=DiscussionStatus.CLOSED.value)
+    @transition(field=status, source='*', target=DiscussionStatus.CLOSED.value,
+                custom={'button_name': 'Mark as Closed'})
     def mark_as_closed(self):
         self.time_end = timezone.now()
 
