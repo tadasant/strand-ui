@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
-import 'typeface-roboto';
 import consts from '../common/MenuConstants';
 import ClippyLogo from '../common/ClippyLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';

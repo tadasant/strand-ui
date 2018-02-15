@@ -6,6 +6,7 @@ import App from './App.react';
 import PropTypes from 'prop-types';
 import 'typeface-rajdhani'
 import 'typeface-montserrat'
+import 'typeface-roboto';
 
 export const themePallete = {
   'primary': {

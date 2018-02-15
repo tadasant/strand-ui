@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import 'typeface-roboto';
 import logoWithText from '../../../assets/codeclippy_lighttext.png';
 import logo from '../../../assets/codeclippy.png';
 import PropTypes from 'prop-types';
