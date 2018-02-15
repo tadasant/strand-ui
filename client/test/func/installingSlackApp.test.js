@@ -19,6 +19,8 @@ describe('installing slack app', () => {
   });
 
   it('shows a success message when a user successfully installs the app', async () => {
+    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`);
+    const status = wrapper.find('InstallationStatus');
     // TODO start at /install, click the button, return to /install w/ a code, await response w/ success
     // expect(wrapper.find(Install)).toHaveLength(1);
     // expect(wrapper).toMatchSnapshot();
