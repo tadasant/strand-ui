@@ -2,7 +2,7 @@ import os
 
 # Prevent HTTP Host header attacks
 # https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com', 'staging.codeclippy.com']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,6 +23,11 @@ DATABASES = {
 }
 
 ENABLE_GRAPHIQL = True
+
+# SSL/HTTPS
+# https://docs.djangoproject.com/en/2.0/topics/security/
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 
 # Slack credentials

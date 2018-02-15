@@ -19,6 +19,11 @@ DATABASES = {
 }
 
 ENABLE_GRAPHIQL = False
+
+# SSL/HTTPS
+# https://docs.djangoproject.com/en/2.0/topics/security/
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 
 # Slack credentials
