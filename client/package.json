@@ -47,16 +47,14 @@
     "react-test-renderer": "^16.2.0"
   },
   "config": {
-    "stagingcdn": "http://strand-ui-staging.s3-website-us-east-1.amazonaws.com",
-    "productioncdn": "https://production.s3.amazonaws.com/static/"
+    "stagingcdn": "https://strand-ui-staging.s3-website-us-east-1.amazonaws.com",
+    "productioncdn": "https://strand-ui-production.s3-website-us-east-1.amazonaws.com"
   },
   "scripts": {
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
-    "start-build": "node_modules/parcel-bundler/bin/cli.js build/index.html --open --port 3000",
-    "build-cmd": "node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
-    "build-production": "REALM=production yarn build-cmd --public-url $npm_package_config_productioncdn",
+    "build-cmd": "rm -rf build/ && node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
     "build-staging": "REALM=staging yarn build-cmd --public-url $npm_package_config_stagingcdn",
-    "build": "REALM=development yarn build-cmd --public-url localhost:3000/build/",
+    "build": "REALM=production yarn build-cmd --public-url $npm_package_config_productioncdn",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
