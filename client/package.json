@@ -23,10 +23,7 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "typeface-montserrat": "^0.0.54",
-    "typeface-rajdhani": "^0.0.54",
-    "typeface-roboto": "^0.0.54"
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -50,15 +47,16 @@
     "react-test-renderer": "^16.2.0"
   },
   "config": {
-    "staging-cdn": "https://staging.s3.amazonaws.com/static/",
-    "production-cdn": "https://production.s3.amazonaws.com/static/"
+    "stagingcdn": "http://strand-ui-staging.s3-website-us-east-1.amazonaws.com",
+    "productioncdn": "https://production.s3.amazonaws.com/static/"
   },
   "scripts": {
-    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 5000",
-    "build-cmd": "node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/ ",
-    "build-production": "REALM=production yarn build-cmd -- --public-url $npm_package_config_production-cdn",
-    "build-staging": "REALM=staging yarn build-cmd -- --public-url $npm_package_config_staging-cdn",
-    "build": "REALM=development yarn build-cmd -- --public-url static/",
+    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
+    "start-build": "node_modules/parcel-bundler/bin/cli.js build/index.html --open --port 3000",
+    "build-cmd": "node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
+    "build-production": "REALM=production yarn build-cmd --public-url $npm_package_config_productioncdn",
+    "build-staging": "REALM=staging yarn build-cmd --public-url $npm_package_config_stagingcdn",
+    "build": "REALM=development yarn build-cmd --public-url localhost:3000/build/",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
