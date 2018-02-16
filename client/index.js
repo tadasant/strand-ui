@@ -14,7 +14,7 @@ let uiHost = process.env.UI_HOST;
 if (process.env.REALM === 'staging') {
   // Staging build should mirror production except...
   graphQLUrl = 'https://www.staging.codeclippy.com/graphql';
-  uiHost = 'https://www.staging.codeclippy.com/';
+  uiHost = 'https://www.staging.codeclippy.com';
 }
 
 // sentry.io
