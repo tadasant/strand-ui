@@ -31,5 +31,6 @@ module.exports = {
     'document': true,
     'setImmediate': true,
     'Raven': true,
+    'global': true,
   }
 };
