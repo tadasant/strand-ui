@@ -89,7 +89,7 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <AddToSlackButton redirectUri={this.redirectUri}/>
-              {this.state.successInstallationSlackApplication === undefined
+              {this.state.successInstallationSlackApplication === undefined && !this.state.installingSlackApplication
                 ? null
                 : <InstallationStatus
                   installingSlackApplication={this.state.installingSlackApplication}
