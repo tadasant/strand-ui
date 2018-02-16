@@ -1,5 +1,5 @@
 export const navigationLabelToPath = {
-    'Install': '/install',
+  'Install': '/install',
 };
 
 export default {navigationLabelToPath};

@@ -39,7 +39,10 @@ class Install extends Component {
         this.props.attemptInstall(params.code, process.env.SLACK_CLIENT_ID, this.redirectUri)
           .then(({data}) => {
             console.log(`Data: ${JSON.stringify(data)}`);
-            this.setState(() => ({installingSlackApplication: false, successInstallationSlackApplication: true}));
+            this.setState(() => ({
+              installingSlackApplication: false,
+              successInstallationSlackApplication: true
+            }));
           })
           .catch((response) => {
             console.log(`Error: ${JSON.stringify(response)}`);
@@ -95,7 +98,8 @@ class Install extends Component {
             <Grid item>
               <Typography variant='caption'>
                 Not an admin in your workspace?
-                Join <a target='_blank' href='https://www.codeclippy.com/get-started'>our community</a> instead.
+                Join <a target='_blank' rel='noopener noreferrer' href='https://www.codeclippy.com/get-started'>our
+                community</a> instead.
               </Typography>
             </Grid>
           </Grid>

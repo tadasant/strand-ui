@@ -28,14 +28,14 @@ class Shell extends Component {
 
   render() {
     return (
-        <div>
-          <Hidden mdUp>
-            <ShellMobile openPageGenerator={this.openPageGenerator}/>
-          </Hidden>
-          <Hidden smDown>
-            <ShellDesktop openPageGenerator={this.openPageGenerator}/>
-          </Hidden>
-        </div>
+      <div>
+        <Hidden mdUp>
+          <ShellMobile openPageGenerator={this.openPageGenerator}/>
+        </Hidden>
+        <Hidden smDown>
+          <ShellDesktop openPageGenerator={this.openPageGenerator}/>
+        </Hidden>
+      </div>
     );
   }
 }

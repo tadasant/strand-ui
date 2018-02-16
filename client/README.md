@@ -1,5 +1,7 @@
 # CodeClippy Portal - UI
 
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 ## Getting Started
 
 We use [yarn](https://yarnpkg.com/en/) (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
@@ -46,3 +48,13 @@ We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/
 While developing, using `yarn test-watch`. This will watch test files that are testing the production files to which you have made edits (based on git).
 
 Otherwise, `yarn test` will run the whole test suite.
+
+## Running eslint in PyCharm
+
+To run on all files: `cd client && ./node_modules/eslint/bin/eslint.js --fix .`
+
+To set up a single file hotkey:
+1) Preference
+2) Keymap
+3) "Fix ESLint Problems"
+4) Recommend ctrl + opt + L (similar to cmd + opt + L code reformat) 
