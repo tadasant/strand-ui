@@ -1,7 +1,5 @@
 # CodeClippy Portal - UI
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
 ## Getting Started
 
 We use [yarn](https://yarnpkg.com/en/) (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
@@ -12,12 +10,24 @@ To run locally (with hot module replacement!), simply run `yarn start`.
 
 ## Deployment
 
-Staging: `yarn build staging`
+We host our UI as a static website on S3. Both https://www.staging.app.codeclippy.com/ and https://www.app.codeclippy.com/.
+
+Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn` or `productioncdn`, is
+set to the appropriate s3 bucket endpoint.
+
+Generally, use existing CircleCI workflows to deploy staging/production builds. If you need to do a manual deploy:
+
+Staging: `yarn build-staging`
 Production: `yarn build`
 
 The output build files will be placed in `build/`.
 
-Do not commit these built files.
+Do not commit these built files. Upload them to S3:
+
+Staging: `aws s3 rm s3://strand-ui-staging/ --recursive && aws s3 cp build/ s3://strand-ui-staging/ --recursive`
+Production: `aws s3 rm s3://strand-ui-production/ --recursive && aws s3 cp build/ s3://strand-ui-production/ --recursive`
+
+[HTTPS Configuration Reference](https://medium.com/@sbuckpesch/setup-aws-s3-static-website-hosting-using-ssl-acm-34d41d32e394)
 
 ## .env file management
 
