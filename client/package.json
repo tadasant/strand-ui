@@ -49,10 +49,16 @@
     "parcel-bundler": "git://github.com/tadas412/parcel.git",
     "react-test-renderer": "^16.2.0"
   },
+  "config": {
+    "staging-cdn": "https://staging.s3.amazonaws.com/static/",
+    "production-cdn": "https://production.s3.amazonaws.com/static/"
+  },
   "scripts": {
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 5000",
-    "build": "REALM=production node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/",
-    "build-staging": "REALM=staging node_modules/parcel-bundler/bin/cli.js build index.html --no-minify --out-dir build/",
+    "build-cmd": "node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/ ",
+    "build-production": "REALM=production yarn build-cmd -- --public-url $npm_package_config_production-cdn",
+    "build-staging": "REALM=staging yarn build-cmd -- --public-url $npm_package_config_staging-cdn",
+    "build": "REALM=development yarn build-cmd -- --public-url static/",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
