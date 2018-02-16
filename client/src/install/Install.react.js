@@ -37,19 +37,21 @@ class Install extends Component {
     if (params.code) {
       this.setState(() => ({installingSlackApplication: true}), () => {
         this.props.attemptInstall(params.code, process.env.SLACK_CLIENT_ID, this.redirectUri)
-          .then(({data}) => {
-            console.log(`Data: ${JSON.stringify(data)}`);
+          .then(() => {
             this.setState(() => ({
               installingSlackApplication: false,
-              successInstallationSlackApplication: true
+              successInstallationSlackApplication: true,
             }));
           })
           .catch((response) => {
-            console.log(`Error: ${JSON.stringify(response)}`);
+            // TODO refactor this out as we start using it in other places
+            if (Raven.isSetup()) {
+              Raven.captureException(Error(`Installation error: ${JSON.stringify(response)}`));
+            }
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: false,
-              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : []
+              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : [],
             }));
           })
       })
@@ -87,7 +89,7 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <AddToSlackButton redirectUri={this.redirectUri}/>
-              {this.state.successInstallationSlackApplication === undefined
+              {this.state.successInstallationSlackApplication === undefined && !this.state.installingSlackApplication
                 ? null
                 : <InstallationStatus
                   installingSlackApplication={this.state.installingSlackApplication}
