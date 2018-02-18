@@ -24,8 +24,8 @@ The output build files will be placed in `build/`.
 
 Do not commit these built files. Upload them to S3:
 
-Staging: `aws s3 rm s3://strand-ui-staging/ --recursive && aws s3 cp build/ s3://strand-ui-staging/ --recursive`
-Production: `aws s3 rm s3://strand-ui-production/ --recursive && aws s3 cp build/ s3://strand-ui-production/ --recursive`
+Staging: `aws s3 rm s3://staging.app.codeclippy.com/ --recursive && aws s3 cp build/ s3://staging.app.codeclippy.com/ --recursive`
+Production: `aws s3 rm s3://app.codeclippy.com/ --recursive && aws s3 cp build/ s3://app.codeclippy.com/ --recursive`
 
 [HTTPS Configuration Reference](https://medium.com/@sbuckpesch/setup-aws-s3-static-website-hosting-using-ssl-acm-34d41d32e394)
 
