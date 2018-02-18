@@ -22,7 +22,7 @@ Production: `yarn build`
 
 The output build files will be placed in `build/`.
 
-Do not commit these built files. Upload them to S3:
+Do not commit these built files. Upload them to S3. Note that the bucket names must be set equal to the domain to make DNS work correctly:
 
 Staging: `aws s3 rm s3://staging.app.codeclippy.com/ --recursive && aws s3 cp build/ s3://staging.app.codeclippy.com/ --recursive`
 Production: `aws s3 rm s3://app.codeclippy.com/ --recursive && aws s3 cp build/ s3://app.codeclippy.com/ --recursive`

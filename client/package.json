@@ -53,8 +53,8 @@
   "scripts": {
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
     "build-cmd": "rm -rf build/ && node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
-    "build-staging": "REALM=staging yarn build-cmd --public-url $npm_package_config_stagingcdn",
-    "build": "REALM=production yarn build-cmd --public-url $npm_package_config_productioncdn",
+    "build-staging": "REALM=staging yarn build-cmd --public-url \"$npm_package_config_stagingcdn\"",
+    "build": "REALM=production yarn build-cmd --public-url \"$npm_package_config_productioncdn\"",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
