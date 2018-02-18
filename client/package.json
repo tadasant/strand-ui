@@ -47,8 +47,8 @@
     "react-test-renderer": "^16.2.0"
   },
   "config": {
-    "stagingcdn": "https://strand-ui-staging.s3-website-us-east-1.amazonaws.com",
-    "productioncdn": "https://strand-ui-production.s3-website-us-east-1.amazonaws.com"
+    "stagingcdn": "https://staging.app.codeclippy.com",
+    "productioncdn": "https://app.codeclippy.com"
   },
   "scripts": {
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
