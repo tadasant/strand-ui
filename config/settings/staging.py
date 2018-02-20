@@ -2,7 +2,7 @@ import os
 
 # Prevent HTTP Host header attacks
 # https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com', 'staging.app.codeclippy.com']
+ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com', 'staging.api.codeclippy.com']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
