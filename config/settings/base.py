@@ -149,10 +149,3 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_ENABLE_UTC = True
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-
-
-# django-cors-headers
-CORS_ORIGIN_WHITELIST = (
-    'codeclippy.com',
-    'localhost:5000'
-)
