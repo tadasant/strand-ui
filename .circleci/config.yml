@@ -80,46 +80,6 @@ jobs:
           path: test-reports
           destination: test-reports
 
-  deploy-ui-staging:
-    docker:
-      - image: node:9.5
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-          - v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
-
-      - run:
-          name: Install Dependencies
-          command: |
-            cd client && yarn install
-            cd client/node_modules/parcel-bundler && yarn install
-
-      - save_cache:
-          paths:
-            - ./client/node_modules
-          key: v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
-
-      - run:
-          name: Build UI Distribution
-          command: |
-            yarn build-staging
-
-      - run:
-          name: Login to AWS
-          command: |
-            sudo pip install awscli
-            eval $(aws ecr get-login --no-include-email --region us-east-1)
-
-      - run:
-          name: Upload to S3
-          command: |
-            aws s3 rm s3://www.staging.app.codeclippy.com/ --recursive && aws s3 cp build/ s3://www.staging.app.codeclippy.com/ --recursive
-
 workflows:
   version: 2
   build_front_and_back:
