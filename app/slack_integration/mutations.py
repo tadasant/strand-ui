@@ -90,7 +90,7 @@ class AttemptSlackInstallationMutation(graphene.Mutation):
             raise Exception(f'''Error accessing OAuth: {response.json()['error']}''')
         oauth_info = response.json()
 
-        slack_client = SlackClient(oauth_info['access_token'])
+        slack_client = SlackClient(oauth_info['bot']['bot_access_token'])
 
         response = slack_client.api_call('team.info')
         if not response.get('ok'):
