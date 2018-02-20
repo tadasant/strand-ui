@@ -59,7 +59,7 @@ class SlackAppClientWrapper:
         headers = SlackAppClientWrapper._construct_headers()
         payload = SlackAppClientWrapper._construct_discussion_payload(discussion)
 
-        requests.post(endpoint, data=payload, headers=headers)
+        requests.post(endpoint, json=payload, headers=headers)
 
     @staticmethod
     def post_auto_closed_discussion(discussion):
@@ -76,7 +76,7 @@ class SlackAppClientWrapper:
         headers = SlackAppClientWrapper._construct_headers()
         payload = SlackAppClientWrapper._construct_slack_agent_payload(slack_agent)
         print(payload)
-        resp = requests.post(settings.SLACK_APP_SLACK_AGENT_ENDPOINT, data=payload, headers=headers)
+        resp = requests.post(settings.SLACK_APP_SLACK_AGENT_ENDPOINT, json=payload, headers=headers)
         print(resp.content)
 
     @staticmethod
@@ -84,5 +84,5 @@ class SlackAppClientWrapper:
         headers = SlackAppClientWrapper._construct_headers()
         payload = SlackAppClientWrapper._construct_slack_agent_payload(slack_agent)
         print(payload)
-        resp = requests.put(settings.SLACK_APP_SLACK_AGENT_ENDPOINT, data=payload, headers=headers)
+        resp = requests.put(settings.SLACK_APP_SLACK_AGENT_ENDPOINT, json=payload, headers=headers)
         print(resp.content)
