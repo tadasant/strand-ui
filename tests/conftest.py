@@ -1,5 +1,6 @@
 import pytest
 import responses
+from django.conf import settings
 from pytest_factoryboy.fixture import register
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
@@ -55,7 +56,28 @@ def auth_client(user_factory):
 
 
 @pytest.fixture()
-def slack_oauth_request(request):
+def slack_app_request_factory():
+    """Pytest fixture for calls from requests to Slack App
+
+    Uses the responses library that was built at Dropbox to mock
+    out requests. We use this to ensure the requests was called.
+    """
+    request_mock = responses.RequestsMock(False)
+    request_mock.start()
+
+    request_mock.add(responses.POST, settings.SLACK_APP_SLACK_AGENT_ENDPOINT, status=200)
+    request_mock.add(responses.PUT, settings.SLACK_APP_SLACK_AGENT_ENDPOINT, status=200)
+    request_mock.add(responses.POST, settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, status=200)
+    request_mock.add(responses.POST, settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT, status=200)
+
+    yield request_mock
+
+    request_mock.stop()
+    request_mock.reset()
+
+
+@pytest.fixture()
+def slack_oauth_request(slack_app_request_factory, request):
     """Pytest fixture for calls from requests to Slack
 
     Uses the responses library that was built at Dropbox to mock out
@@ -67,9 +89,6 @@ def slack_oauth_request(request):
 
     See: http://cra.mr/2014/05/20/mocking-requests-with-responses.
     """
-    request_mock = responses.RequestsMock(False)
-    request_mock.start()
-
     if request.param == 'valid_token':
         response = {'ok': True, 'access_token': '',
                     'scope': '',
@@ -80,23 +99,13 @@ def slack_oauth_request(request):
     else:
         response = {'ok': False, 'error': 'invalid_code'}
 
-    request_mock.add(responses.GET, 'https://slack.com/api/oauth.access', json=response)
+    slack_app_request_factory.add(responses.GET, 'https://slack.com/api/oauth.access', json=response)
+    slack_app_request_factory.add(responses.POST, settings.SLACK_APP_SLACK_AGENT_ENDPOINT, status=200)
+    slack_app_request_factory.add(responses.PUT, settings.SLACK_APP_SLACK_AGENT_ENDPOINT, status=200)
+    slack_app_request_factory.add(responses.POST, settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, status=200)
+    slack_app_request_factory.add(responses.POST, settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT, status=200)
 
-    yield request_mock
-
-    request_mock.stop()
-    request_mock.reset()
-
-
-@pytest.fixture()
-def slack_app_request_factory(mocker):
-    """Pytest fixture for calls from requests to Slack App
-
-    Uses the responses library that was built at Dropbox to mock
-    out requests. We use this to ensure the requests was called.
-    """
-    mocker.patch('requests.post')
-    mocker.patch('requests.put')
+    yield slack_app_request_factory
 
 
 @pytest.fixture()

@@ -2,9 +2,7 @@ from datetime import datetime, timedelta
 
 import pytest
 import pytz
-import requests
 from django.conf import settings
-from unittest.mock import ANY
 
 from app.topics.models import Discussion
 from tests.utils import wait_until
@@ -22,7 +20,7 @@ class TestMarkingDiscussionAsStale:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_stale, timeout=7)
 
         assert Discussion.objects.get(pk=discussion.id).is_stale
-        assert requests.post.call_count == 0
+        assert len(slack_app_request_factory.calls) == 0
 
     @pytest.mark.django_db(transaction=True)
     def test_does_not_become_stale_with_non_bot_message(self, mark_stale_discussions_factory, auth_client,
@@ -55,7 +53,7 @@ class TestMarkingDiscussionAsStale:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_stale, timeout=5)
 
         assert not Discussion.objects.get(pk=discussion.id).is_stale
-        assert requests.post.call_count == 0
+        assert len(slack_app_request_factory.calls) == 0
 
     @pytest.mark.django_db()
     def test_does_become_stale_with_bot_message(self, mark_stale_discussions_factory, auth_client, discussion_factory,
@@ -88,7 +86,8 @@ class TestMarkingDiscussionAsStale:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_stale
-        requests.post.assert_called_once_with(settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT, headers=ANY, data=ANY)
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.url == settings.SLACK_APP_STALE_DISCUSSION_ENDPOINT
 
 
 class TestClosingPendingClosedDiscussion:
@@ -138,8 +137,8 @@ class TestClosingPendingClosedDiscussion:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_closed
-        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=ANY, data=ANY)
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.url == settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT
 
     @pytest.mark.django_db
     def test_does_not_get_closed_with_non_bot_message(self, auto_close_pending_closed_discussion_factory,
@@ -204,7 +203,7 @@ class TestClosingPendingClosedDiscussion:
         wait_until(condition=lambda: Discussion.objects.get(pk=discussion.id).is_closed, timeout=5)
 
         assert not Discussion.objects.get(pk=discussion.id).is_closed
-        assert requests.post.call_count == 0
+        assert len(slack_app_request_factory.calls) == 0
 
     @pytest.mark.django_db
     def test_does_get_closed_with_bot_message(self, auto_close_pending_closed_discussion_factory,
@@ -251,7 +250,7 @@ class TestClosingPendingClosedDiscussion:
         response = auth_client.post('/graphql', {'query': mutation})
         assert response.status_code == 200
         assert not Discussion.objects.get(pk=discussion.id).is_closed
-        assert requests.post.call_count == 0
+        assert len(slack_app_request_factory.calls) == 0
 
         # New message sent
         slack_event = slack_event_factory(ts=datetime.now(pytz.UTC).timestamp())
@@ -273,8 +272,8 @@ class TestClosingPendingClosedDiscussion:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_closed
-        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=ANY, data=ANY)
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.url == settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT
 
     @pytest.mark.django_db
     def test_does_get_closed_with_no_messages_ever(self, auto_close_pending_closed_discussion_factory,
@@ -303,5 +302,5 @@ class TestClosingPendingClosedDiscussion:
         discussion = Discussion.objects.get(pk=discussion.id)
 
         assert discussion.is_closed
-        requests.post.assert_called_once_with(settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT,
-                                              headers=ANY, data=ANY)
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.url == settings.SLACK_APP_AUTO_CLOSED_DISCUSSION_ENDPOINT
