@@ -2,7 +2,7 @@ import os
 
 # Prevent HTTP Host header attacks
 # https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com', 'staging.api.codeclippy.com']
+ALLOWED_HOSTS = ['portal-staging.us-east-1.elasticbeanstalk.com', 'staging.api.trystrand.com']
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -60,3 +60,8 @@ AWS_LOCATION = 'static'
 STATICFILES_DIRS = []  # This will be the path to the React build folder
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# CORS
+# https://github.com/ottoyiu/django-cors-headers
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_PREFLIGHT_MAX_AGE = 0

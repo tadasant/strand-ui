@@ -44,3 +44,9 @@ SLACK_APP_SLACK_AGENT_ENDPOINT = 'http://slackapp.com/slackagents'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
+
+# CORS
+# https://github.com/ottoyiu/django-cors-headers
+CORS_ORIGIN_WHITELIST = (
+    'localhost:5000',
+)

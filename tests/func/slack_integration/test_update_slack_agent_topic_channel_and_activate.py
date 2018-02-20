@@ -1,5 +1,4 @@
 import pytest
-import requests
 
 
 class TestUpdateSlackAgentTopicChannelAndActivate:
@@ -12,8 +11,8 @@ class TestUpdateSlackAgentTopicChannelAndActivate:
         slack_agent.authenticate()
         slack_agent.save()
 
-        assert requests.post.call_count == 1
-        assert requests.put.call_count == 0
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.method == 'POST'
 
         slack_team = slack_team_factory(slack_agent=slack_agent)
         topic_channel_id = slack_agent_factory.build().topic_channel_id
@@ -42,8 +41,8 @@ class TestUpdateSlackAgentTopicChannelAndActivate:
         slack_agent.authenticate()
         slack_agent.save()
 
-        assert requests.post.call_count == 1
-        assert requests.put.call_count == 0
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.method == 'POST'
 
         slack_team = slack_team_factory.build(slack_agent=slack_agent)
         topic_channel_id = slack_agent_factory.build().topic_channel_id
@@ -96,8 +95,8 @@ class TestUpdateSlackAgentTopicChannelAndActivate:
         slack_agent.authenticate()
         slack_agent.save()
 
-        assert requests.post.call_count == 1
-        assert requests.put.call_count == 0
+        assert len(slack_app_request_factory.calls) == 1
+        assert slack_app_request_factory.calls[0].request.method == 'POST'
 
         slack_team = slack_team_factory(slack_agent=slack_agent)
         topic_channel_id = slack_agent_factory.build().topic_channel_id
@@ -120,5 +119,5 @@ class TestUpdateSlackAgentTopicChannelAndActivate:
                    'topicChannelId'] == topic_channel_id
         assert response.json()['data']['updateSlackAgentTopicChannelAndActivate']['slackAgent']['status'] == 'ACTIVE'
 
-        assert requests.post.call_count == 1
-        assert requests.put.call_count == 1
+        assert len(slack_app_request_factory.calls) == 2
+        assert slack_app_request_factory.calls[1].request.method == 'PUT'
