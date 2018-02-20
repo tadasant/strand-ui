@@ -63,7 +63,4 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # CORS
 # https://github.com/ottoyiu/django-cors-headers
-CORS_ORIGIN_WHITELIST = [
-    'staging.app.codeclippy.com',
-    'https://staging.app.codeclippy.com'
-]
+CORS_ORIGIN_ALLOW_ALL = True
