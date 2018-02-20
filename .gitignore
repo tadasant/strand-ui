@@ -15,8 +15,6 @@ client/node_modules/
 client/build/
 client/.env.local
 client/yarn-error.log
-client/.env.production
-client/.env.staging
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
