@@ -23,10 +23,7 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "typeface-montserrat": "^0.0.54",
-    "typeface-rajdhani": "^0.0.54",
-    "typeface-roboto": "^0.0.54"
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -49,10 +46,15 @@
     "parcel-bundler": "git://github.com/tadas412/parcel.git",
     "react-test-renderer": "^16.2.0"
   },
+  "config": {
+    "stagingcdn": "https://staging.app.codeclippy.com",
+    "productioncdn": "https://app.codeclippy.com"
+  },
   "scripts": {
-    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 5000",
-    "build": "REALM=production node_modules/parcel-bundler/bin/cli.js build index.html --out-dir build/",
-    "build-staging": "REALM=staging node_modules/parcel-bundler/bin/cli.js build index.html --no-minify --out-dir build/",
+    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
+    "build-cmd": "rm -rf build/ && node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
+    "build-staging": "REALM=staging yarn build-cmd --public-url \"$npm_package_config_stagingcdn\"",
+    "build": "REALM=production yarn build-cmd --public-url \"$npm_package_config_productioncdn\"",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
