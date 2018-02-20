@@ -64,3 +64,4 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # CORS
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_PREFLIGHT_MAX_AGE = 0
