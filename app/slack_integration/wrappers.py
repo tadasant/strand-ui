@@ -6,7 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 class SlackAppClientWrapper:
     @staticmethod
     def _construct_headers():
-        headers = {'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}'}
+        headers = {'Authorization': f'Token {settings.SLACK_APP_VERIFICATION_TOKEN}',
+                   'Content-Type': 'application/json'}
         return headers
 
     @staticmethod
@@ -74,7 +75,7 @@ class SlackAppClientWrapper:
     def post_slack_agent(slack_agent):
         headers = SlackAppClientWrapper._construct_headers()
         payload = SlackAppClientWrapper._construct_slack_agent_payload(slack_agent)
-        print(payload)
+
         requests.post(settings.SLACK_APP_SLACK_AGENT_ENDPOINT, data=payload, headers=headers)
 
     @staticmethod
