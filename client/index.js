@@ -21,7 +21,7 @@ if (process.env.REALM === 'staging') {
 if (process.env.REALM === 'production' || process.env.REALM === 'staging') {
   const sentryioKey = process.env.SENTRY_IO_KEY;
   const sentryioProject = process.env.SENTRY_IO_PROJECT;
-  Raven.config(`http://${sentryioKey}@sentry.io/${sentryioProject}`, {
+  Raven.config(`https://${sentryioKey}@sentry.io/${sentryioProject}`, {
     environment: process.env.REALM,
     tags: {release: process.env.VERSION},
   }).install();
