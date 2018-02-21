@@ -42,7 +42,7 @@ Staging: `aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp bui
 
 Production can be found at  https://app.trystrand.com/.
 
-Same instructions as above apply: namely, check `package.json` for `productioncdn` and `.env` for `VERSION`.
+Same instructions as above apply: namely, check `package.json` for `productioncdn` and `version` and `.env` for `VERSION`.
 
 Merge to master and [create a release](https://help.github.com/articles/creating-releases/) on GitHub.
 
