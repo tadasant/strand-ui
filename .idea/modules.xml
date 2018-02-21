@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/code-clippy-portal.iml" filepath="$PROJECT_DIR$/.idea/code-clippy-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/strand-ui.iml" filepath="$PROJECT_DIR$/.idea/strand-ui.iml" />
     </modules>
   </component>
 </project>
