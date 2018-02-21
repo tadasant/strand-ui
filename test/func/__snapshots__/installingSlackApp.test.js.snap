@@ -82,7 +82,7 @@ exports[`installing slack app shows a failure message when we fail to install th
       >
         Failed to install.
         <br />
-        Errors:
+        Errors: 
         This error message should be displayed on UI
       </h3>
     </Typography>
