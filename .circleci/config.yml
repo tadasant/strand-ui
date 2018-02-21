@@ -29,8 +29,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            yarn test
-            ./node_modules/eslint/bin/eslint.js . --quiet
+            yarn test && ./node_modules/.bin/eslint . --quiet
 
       - store_artifacts:
           path: test-reports
