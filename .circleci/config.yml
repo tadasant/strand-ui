@@ -14,22 +14,22 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
+          - v1-npm-dependencies-{{ checksum "yarn.lock" }}
 
       - run:
           name: install dependencies
           command: |
-            cd client && yarn install
+            yarn install
 
       - save_cache:
           paths:
-            - ./client/node_modules
-          key: v1-npm-dependencies-{{ checksum "client/yarn.lock" }}
+            - ./node_modules
+          key: v1-npm-dependencies-{{ checksum "yarn.lock" }}
 
       - run:
           name: run tests
           command: |
-            cd client && yarn test
+            yarn test
             ./node_modules/eslint/bin/eslint.js . --quiet
 
       - store_artifacts:
