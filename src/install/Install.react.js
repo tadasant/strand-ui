@@ -76,15 +76,17 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <Typography variant='body1'>
-                Text bla bla use Strand in your own team to do XYZ. Make sure you are:
-              </Typography>
-              <ul>
-                <li>Something</li>
-                <li>Admin</li>
-                <li>Sensitive Info</li>
-              </ul>
-              <Typography variant='body1'>
-                If all good, click below to install.
+                Use Strand to have more productive discussions in Slack. Strand makes conversations focused,&nbsp;
+                productive, and easy to share with the rest of your team. Please be aware that:
+                <ul>
+                  <li>You need to be an <u>admin</u> in your Workspace to add Strand</li>
+                  <li>
+                    Strand will soon be able to store your transcripts online to make them easier to search and&nbsp;
+                    share with your teammates. Therefore, Strand stores the conversations that it participates in.&nbsp;
+                    These are never reviewed by a human and the feature will be opt-in once released, but we&nbsp;
+                    prefer to be transparent about it.
+                  </li>
+                </ul>
               </Typography>
             </Grid>
             <Grid item>
