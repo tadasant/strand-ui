@@ -5,38 +5,44 @@ import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
 import PropTypes from 'prop-types';
 
-export const themePallete = {
+// Use http://mcg.mbitson.com/ to generate a palette
+// 2/21/18: http://mcg.mbitson.com/#!?strand1=%23e8ebe4&strand2=%2348466d&strand3=%23190b28&strand4=%237ca982&strand5=%23f1e9da&themename=Strand
+export const themePalette = {
+  // strand1
   'primary': {
-    '50': '#e6e8e9',
-    '100': '#c2c6c9',
-    '200': '#99a1a5',
-    '300': '#707b80',
-    '400': '#515e65',
-    '500': '#32424a',
-    '600': '#2d3c43',
-    '700': '#26333a',
-    '800': '#1f2b32',
-    '900': '#131d22',
-    'A100': '#66ccff',
-    'A200': '#33bbff',
-    'A400': '#00aaff',
-    'A700': '#0099e6',
+    50: '#fcfdfc',
+    100: '#f8f9f7',
+    200: '#f4f5f2',
+    300: '#eff1ec',
+    400: '#ebeee8',
+    500: '#e8ebe4',
+    600: '#e5e9e1',
+    700: '#e2e5dd',
+    800: '#dee2d9',
+    900: '#d8ddd1',
+    A100: '#ffffff',
+    A200: '#ffffff',
+    A400: '#ffffff',
+    A700: '#ffffff',
+    'contrastDefaultColor': 'dark',
   },
+  // strand2
   'secondary': {
-    '50': '#fcfcfc',
-    '100': '#f8f8f8',
-    '200': '#f3f4f4',
-    '300': '#eeeff0',
-    '400': '#eaebec',
-    '500': '#e6e8e9',
-    '600': '#e3e5e6',
-    '700': '#dfe2e3',
-    '800': '#dbdedf',
-    '900': '#d5d8d9',
-    'A100': '#ffffff',
-    'A200': '#ffffff',
-    'A400': '#ffffff',
-    'A700': '#ffffff',
+    50: '#e9e9ed',
+    100: '#c8c8d3',
+    200: '#a4a3b6',
+    300: '#7f7e99',
+    400: '#636283',
+    500: '#48466d',
+    600: '#413f65',
+    700: '#38375a',
+    800: '#302f50',
+    900: '#21203e',
+    A100: '#8884ff',
+    A200: '#5751ff',
+    A400: '#261eff',
+    A700: '#0e04ff',
+    'contrastDefaultColor': 'light',
   },
 };
 
@@ -45,7 +51,7 @@ const strandTheme = createMuiTheme({
     fontFamily: 'Montserrat',
     // for some headers, use '\'Rajdhani\', sans-serif',
   },
-  'palette': themePallete,
+  'palette': themePalette,
 });
 
 const propTypes = {

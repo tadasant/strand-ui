@@ -8,6 +8,11 @@ import PropTypes from 'prop-types';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import InstallationStatus from './InstallationStatus.react';
+import withStyles from 'material-ui/styles/withStyles';
+
+const styles = theme => ({
+  body1: theme.typography.body1,
+});
 
 const propTypes = {
   location: PropTypes.shape({
@@ -16,6 +21,9 @@ const propTypes = {
   }).isRequired,
   // GraphQL
   attemptInstall: PropTypes.func.isRequired,
+  classes: PropTypes.shape({
+    body1: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 class Install extends Component {
@@ -76,16 +84,20 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <Typography variant='body1'>
-                Text bla bla use Strand in your own team to do XYZ. Make sure you are:
+                Use Strand to have more productive discussions in Slack. Strand makes discussions more focused&nbsp;
+                and easier to share with your team. Please be aware that:
               </Typography>
-              <ul>
-                <li>Something</li>
-                <li>Admin</li>
-                <li>Sensitive Info</li>
-              </ul>
-              <Typography variant='body1'>
-                If all good, click below to install.
-              </Typography>
+              <div className={this.props.classes.body1}>
+                <ul>
+                  <li>You need to be an <u>admin</u> in your Workspace to add Strand</li>
+                  <li>
+                    Strand will soon be able to store your transcripts online to make them easier to search and&nbsp;
+                    share with your teammates. Therefore, Strand stores the conversations that it participates in.&nbsp;
+                    These are never reviewed by a human and the feature will be opt-in once released, but we&nbsp;
+                    prefer to be transparent about it.
+                  </li>
+                </ul>
+              </div>
             </Grid>
             <Grid item>
               <AddToSlackButton redirectUri={this.redirectUri}/>
@@ -133,6 +145,6 @@ const InstallWithResult = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
     attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
   }),
-})(withRouter(Install));
+})(withRouter(withStyles(styles)(Install)));
 
 export default InstallWithResult;
