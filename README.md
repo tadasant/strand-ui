@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+It is recommended that you use WebStorm (not PyCharm) for development.
+
 We use [yarn](https://yarnpkg.com/en/) (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
 
 Run `cd client && yarn install` to set up your `node_modules`.
