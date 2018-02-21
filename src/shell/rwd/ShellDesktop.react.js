@@ -22,7 +22,6 @@ class ShellDesktop extends Component {
                 id={`${consts.navigationLabelToPath[label]}-button`}
                 style={{marginLeft: 'auto'}}
                 key={label}
-                color='secondary'
                 onClick={this.props.openPageGenerator(consts.navigationLabelToPath[label])}>
                 {label}
               </Button>

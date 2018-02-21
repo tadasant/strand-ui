@@ -54,7 +54,6 @@ class ShellMobile extends Component {
             <StrandLogo omitText style={{height: '75%'}}/>
             <IconButton
               ref={(node) => this.menuButtonNode = node}
-              color='secondary'
               aria-label='Menu'
               onClick={this.openNavMenu}
               style={{width: 'unset'}}
