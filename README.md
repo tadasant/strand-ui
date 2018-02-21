@@ -19,7 +19,14 @@ We host our UI as a static website on S3. Both https://www.staging.app.trystrand
 Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn` or `productioncdn`, is
 set to the appropriate s3 bucket endpoint.
 
-Generally, use existing CircleCI workflows to deploy staging/production builds. If you need to do a manual deploy:
+Generally, use existing CircleCI workflows to deploy staging/production builds. Note that you probably want to bust
+the CloudFront cache after deploying (otherwise the changes won't be live for up to half a day). Do this by:
+1) Open CloudFront in [AWS Console](https://console.aws.amazon.com/cloudfront) 
+2) Open the relevant Distribution
+3) Go to Invalidations
+4) Create a new Invalidation for `*` (all files)
+
+If you need to do a manual deploy without using CircleCI:
 
 Staging: `yarn build-staging`
 Production: `yarn build`
