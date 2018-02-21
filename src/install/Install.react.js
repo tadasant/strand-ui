@@ -8,6 +8,11 @@ import PropTypes from 'prop-types';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import InstallationStatus from './InstallationStatus.react';
+import withStyles from 'material-ui/styles/withStyles';
+
+const styles = theme => ({
+  body1: theme.typography.body1,
+});
 
 const propTypes = {
   location: PropTypes.shape({
@@ -16,6 +21,9 @@ const propTypes = {
   }).isRequired,
   // GraphQL
   attemptInstall: PropTypes.func.isRequired,
+  classes: PropTypes.shape({
+    body1: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 class Install extends Component {
@@ -78,6 +86,8 @@ class Install extends Component {
               <Typography variant='body1'>
                 Use Strand to have more productive discussions in Slack. Strand makes conversations focused,&nbsp;
                 productive, and easy to share with the rest of your team. Please be aware that:
+              </Typography>
+              <div className={this.props.classes.body1}>
                 <ul>
                   <li>You need to be an <u>admin</u> in your Workspace to add Strand</li>
                   <li>
@@ -87,7 +97,7 @@ class Install extends Component {
                     prefer to be transparent about it.
                   </li>
                 </ul>
-              </Typography>
+              </div>
             </Grid>
             <Grid item>
               <AddToSlackButton redirectUri={this.redirectUri}/>
@@ -135,6 +145,6 @@ const InstallWithResult = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
     attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
   }),
-})(withRouter(Install));
+})(withRouter(withStyles(styles)(Install)));
 
 export default InstallWithResult;
