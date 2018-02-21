@@ -3,7 +3,7 @@
 
 version: 2
 jobs:
-  build:
+  build-test:
     docker:
       - image: node:9.5
 
@@ -35,8 +35,138 @@ jobs:
           path: test-reports
           destination: test-reports
 
+  deploy-to-staging:
+    docker:
+      - image: node:9.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            yarn install
+            cd node_modules/parcel-bundler && yarn install
+
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build UI Distribution
+          command: |
+            yarn build-staging
+
+      - run:
+          name: Install awscli
+          command: |
+            apt-get update && \
+                            apt-get install -y \
+                                python \
+                                python-dev \
+                                python-pip \
+                                python-setuptools \
+                                groff \
+                                less \
+                            && pip install --upgrade awscli \
+                            && apt-get clean
+
+      - run:
+          name: Login to AWS
+          command: |
+            aws ecr get-login --no-include-email --region us-east-1
+
+      - run:
+          name: Upload to S3
+          command: |
+            aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive
+
+  deploy-to-production:
+    docker:
+      - image: node:9.5
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            yarn install
+            cd node_modules/parcel-bundler && yarn install
+
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-npm-dependencies-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build UI Distribution
+          command: |
+            yarn build
+
+      - run:
+          name: Install awscli
+          command: |
+            apt-get update && \
+                            apt-get install -y \
+                                python \
+                                python-dev \
+                                python-pip \
+                                python-setuptools \
+                                groff \
+                                less \
+                            && pip install --upgrade awscli \
+                            && apt-get clean
+
+      - run:
+          name: Login to AWS
+          command: |
+            aws ecr get-login --no-include-email --region us-east-1
+
+      - run:
+          name: Upload to S3
+          command: |
+            aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp build/ s3://app.trystrand.com/ --recursive
+
 workflows:
   version: 2
   build:
     jobs:
-      - build
+      - build-test
+
+      - hold-for-staging:
+          type: approval
+          requires:
+           - build-test
+
+      - deploy-to-staging:
+          requires:
+            - hold-for-staging
+
+      - hold-for-production:
+          type: approval
+          requires:
+           - build-test
+          filters:
+            branches:
+              only: master
+
+      - deploy-to-production:
+          requires:
+            - hold-for-production
+          filters:
+            branches:
+              only: master
