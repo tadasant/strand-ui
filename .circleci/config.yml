@@ -73,6 +73,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
+            apt install python-pip python-dev && pip install awscli
             aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive
 
 
