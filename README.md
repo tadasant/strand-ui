@@ -12,12 +12,12 @@ Run `cd client && yarn install` to set up your `node_modules`.
 
 To run locally (with hot module replacement!), simply run `yarn start`.
 
-## Deployment
+## Deploying to Staging
 
-We host our UI as a static website on S3. Both https://www.staging.app.trystrand.com/ and https://www.app.trystrand.com/.
+We host our UI as a static website on S3. Staging is at https://staging.app.trystrand.com/
 
-Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn` or `productioncdn`, is
-set to the appropriate s3 bucket endpoint.
+Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn`, is
+set to the appropriate s3 bucket endpoint, and the `.env` file has the appropriate `VERSION` number.
 
 Generally, use existing CircleCI workflows to deploy staging/production builds. Note that you probably want to bust
 the CloudFront cache after deploying (otherwise the changes won't be live for up to half a day). Do this by:
@@ -28,17 +28,25 @@ the CloudFront cache after deploying (otherwise the changes won't be live for up
 
 If you need to do a manual deploy without using CircleCI:
 
-Staging: `yarn build-staging`
-Production: `yarn build`
+`yarn build-staging`
 
 The output build files will be placed in `build/`.
 
 Do not commit these built files. Upload them to S3. Note that the bucket names must be set equal to the domain to make DNS work correctly:
 
 Staging: `aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive`
-Production: `aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp build/ s3://app.trystrand.com/ --recursive`
 
 [HTTPS Configuration Reference](https://medium.com/@sbuckpesch/setup-aws-s3-static-website-hosting-using-ssl-acm-34d41d32e394)
+
+## Releasing to Production
+
+Production can be found at  https://app.trystrand.com/.
+
+Same instructions as above apply: namely, check `package.json` for `productioncdn` and `.env` for `VERSION`.
+
+Merge to master and [create a release](https://help.github.com/articles/creating-releases/) on GitHub.
+
+Using CircleCI, approve the deploy to production.
 
 ## .env file management
 
@@ -70,12 +78,14 @@ While developing, using `yarn test-watch`. This will watch test files that are t
 
 Otherwise, `yarn test` will run the whole test suite.
 
-## Running eslint in PyCharm
+Use `yarn test -u` if you need to update jest snapshots.
 
-To run on all files: `cd client && ./node_modules/eslint/bin/eslint.js --fix .`
+## Running eslint in WebStorm
+
+To run on all files: `./node_modules/eslint/bin/eslint.js --fix .`
 
 To set up a single file hotkey:
-1) Preference
+1) Preferences
 2) Keymap
 3) "Fix ESLint Problems"
 4) Recommend ctrl + opt + L (similar to cmd + opt + L code reformat) 
