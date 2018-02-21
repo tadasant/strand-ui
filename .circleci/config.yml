@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            cd client && yarn install
+            yarn install
             cd node_modules/parcel-bundler && yarn install
 
       - save_cache:
@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Login to AWS
           command: |
-            sudo apt-get -y -qq install awscli
+            apt-get -y -qq install awscli
             eval $(aws ecr get-login --no-include-email --region us-east-1)
 
       - run:
