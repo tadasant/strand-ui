@@ -84,8 +84,8 @@ class Install extends Component {
             </Grid>
             <Grid item>
               <Typography variant='body1'>
-                Use Strand to have more productive discussions in Slack. Strand makes conversations focused,&nbsp;
-                productive, and easy to share with the rest of your team. Please be aware that:
+                Use Strand to have more productive discussions in Slack. Strand makes discussions more focused&nbsp;
+                and easier to share with your team. Please be aware that:
               </Typography>
               <div className={this.props.classes.body1}>
                 <ul>
