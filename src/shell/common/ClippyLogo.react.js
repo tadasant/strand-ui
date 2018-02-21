@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import logoWithText from '../../../assets/codeclippy_lighttext.png';
-import logo from '../../../assets/codeclippy.png';
+import logoWithText from '../../../assets/strand_darktext.png';
+import logo from '../../../assets/strand.png';
 import PropTypes from 'prop-types';
 
 const propTypes = {
@@ -9,12 +9,12 @@ const propTypes = {
   style: PropTypes.object,
 };
 
-class ClippyLogo extends Component {
+class StrandLogo extends Component {
   render() {
     return (
       <Link to='/' style={this.props.style}>
         <img
-          alt='clippy-logo'
+          alt='strand-logo'
           src={this.props.omitText ? logo : logoWithText}
           style={{height: '100%', verticalAlign: 'middle'}}
         />
@@ -23,6 +23,6 @@ class ClippyLogo extends Component {
   }
 }
 
-ClippyLogo.propTypes = propTypes;
+StrandLogo.propTypes = propTypes;
 
-export default ClippyLogo;
+export default StrandLogo;

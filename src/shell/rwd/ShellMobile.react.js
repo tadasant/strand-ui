@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
 import consts from '../common/MenuConstants';
-import ClippyLogo from '../common/ClippyLogo.react';
+import StrandLogo from '../common/StrandLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';
 import Popover from 'material-ui/Popover/Popover';
 import MenuItem from 'material-ui/Menu/MenuItem';
@@ -51,7 +51,7 @@ class ShellMobile extends Component {
       <div>
         <AppBar position='fixed'>
           <Toolbar style={{margin: 'auto', height: '56px'}}>
-            <ClippyLogo omitText style={{height: '75%'}}/>
+            <StrandLogo omitText style={{height: '75%'}}/>
             <IconButton
               ref={(node) => this.menuButtonNode = node}
               color='secondary'

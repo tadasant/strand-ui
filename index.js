@@ -11,10 +11,12 @@ import ErrorBoundary from './src/common/ErrorBoundary.react';
 // TODO this isn't great, not sure how to fix? parcel PR?
 let graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
 let uiHost = process.env.UI_HOST;
+let slackClientId = process.env.SLACK_CLIENT_ID;
 if (process.env.REALM === 'staging') {
   // Staging build should mirror production except...
-  graphQLUrl = 'https://staging.api.codeclippy.com/graphql';
-  uiHost = 'https://staging.app.codeclippy.com';
+  graphQLUrl = 'https://staging.api.trystrand.com/graphql';
+  uiHost = 'https://staging.app.trystrand.com';
+  slackClientId = '299839214388.299767954400';
 }
 
 // sentry.io
@@ -35,7 +37,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ErrorBoundary>
     <ApolloProvider client={client}>
-      <Root uiHost={uiHost}/>
+      <Root uiHost={uiHost} slackClientId={slackClientId}/>
     </ApolloProvider>
   </ErrorBoundary>,
   document.getElementById('root'),

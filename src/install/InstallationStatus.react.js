@@ -12,7 +12,7 @@ class InstallationStatus extends Component {
   renderSuccess() {
     return (
       <Typography variant='subheading' style={{color: 'green'}}>
-        {'Successfully installed! The CodeClippy bot should have DM\'d you with setup instructions.'}
+        {'Successfully installed! The Strand bot should have DM\'d you with setup instructions.'}
       </Typography>
     )
   }

@@ -40,7 +40,7 @@ export const themePallete = {
   },
 };
 
-const codeClippyTheme = createMuiTheme({
+const strandTheme = createMuiTheme({
   typography: {
     fontFamily: 'Montserrat',
     // for some headers, use '\'Rajdhani\', sans-serif',
@@ -50,16 +50,17 @@ const codeClippyTheme = createMuiTheme({
 
 const propTypes = {
   uiHost: PropTypes.string.isRequired,
+  slackClientId: PropTypes.string.isRequired,
 };
 
 class Root extends Component {
   getChildContext() {
-    return {uiHost: this.props.uiHost};
+    return {uiHost: this.props.uiHost, slackClientId: this.props.slackClientId};
   }
 
   render() {
     return (
-      <MuiThemeProvider theme={codeClippyTheme}>
+      <MuiThemeProvider theme={strandTheme}>
         <BrowserRouter>
           <App/>
         </BrowserRouter>
@@ -70,6 +71,7 @@ class Root extends Component {
 
 Root.childContextTypes = {
   uiHost: PropTypes.string,
+  slackClientId: PropTypes.string,
 };
 
 Root.propTypes = propTypes;

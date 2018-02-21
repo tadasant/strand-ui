@@ -32,8 +32,8 @@ export const mountApplication = (endpoint, options) => {
       </MemoryRouter>
     </ApolloProvider>,
     {
-      context: {uiHost: 'localhost'},
-      childContextTypes: {uiHost: PropTypes.string},
+      context: {uiHost: process.env.UI_HOST, slackClientId: process.env.SLACK_CLIENT_ID},
+      childContextTypes: {uiHost: PropTypes.string, slackClientId: PropTypes.string},
     }
   );
 };

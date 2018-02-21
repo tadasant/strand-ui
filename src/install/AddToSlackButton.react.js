@@ -9,8 +9,9 @@ const propTypes = {
 class AddToSlackButton extends Component {
   render() {
     const src = `https://platform.slack-edge.com/img/add_to_slack${this.props.size === 'large' ? '@2x' : null}.png`;
+    const slackClientId = this.context.slackClientId; // From config (see index.js)
     const queryParams = [
-      `client_id=${process.env.SLACK_CLIENT_ID}`,
+      `client_id=${slackClientId}`,
       `scope=${process.env.SLACK_SCOPES}`,
       `redirect_uri=${this.props.redirectUri}`,
     ];
@@ -28,5 +29,9 @@ AddToSlackButton.defaultProps = {
 };
 
 AddToSlackButton.propTypes = propTypes;
+
+AddToSlackButton.contextTypes = {
+  slackClientId: PropTypes.string.isRequired,
+};
 
 export default AddToSlackButton;

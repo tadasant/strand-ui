@@ -1,4 +1,4 @@
-# CodeClippy Portal - UI
+# Strand Portal - UI
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ To run locally (with hot module replacement!), simply run `yarn start`.
 
 ## Deployment
 
-We host our UI as a static website on S3. Both https://www.staging.app.codeclippy.com/ and https://www.app.codeclippy.com/.
+We host our UI as a static website on S3. Both https://www.staging.app.trystrand.com/ and https://www.app.trystrand.com/.
 
 Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn` or `productioncdn`, is
 set to the appropriate s3 bucket endpoint.
@@ -24,8 +24,8 @@ The output build files will be placed in `build/`.
 
 Do not commit these built files. Upload them to S3. Note that the bucket names must be set equal to the domain to make DNS work correctly:
 
-Staging: `aws s3 rm s3://staging.app.codeclippy.com/ --recursive && aws s3 cp build/ s3://staging.app.codeclippy.com/ --recursive`
-Production: `aws s3 rm s3://app.codeclippy.com/ --recursive && aws s3 cp build/ s3://app.codeclippy.com/ --recursive`
+Staging: `aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive`
+Production: `aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp build/ s3://app.trystrand.com/ --recursive`
 
 [HTTPS Configuration Reference](https://medium.com/@sbuckpesch/setup-aws-s3-static-website-hosting-using-ssl-acm-34d41d32e394)
 

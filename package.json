@@ -47,8 +47,8 @@
     "react-test-renderer": "^16.2.0"
   },
   "config": {
-    "stagingcdn": "https://staging.app.codeclippy.com",
-    "productioncdn": "https://app.codeclippy.com"
+    "stagingcdn": "https://staging.app.trystrand.com",
+    "productioncdn": "https://app.trystrand.com"
   },
   "scripts": {
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",

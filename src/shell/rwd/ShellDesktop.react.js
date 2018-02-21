@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import consts from '../common/MenuConstants';
-import ClippyLogo from '../common/ClippyLogo.react';
+import StrandLogo from '../common/StrandLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';
 import Toolbar from 'material-ui/Toolbar/Toolbar';
 import Button from 'material-ui/Button/Button';
@@ -16,7 +16,7 @@ class ShellDesktop extends Component {
       <div>
         <AppBar position='fixed'>
           <Toolbar style={{height: '56px'}}>
-            <ClippyLogo style={{height: '75%'}}/>
+            <StrandLogo style={{height: '75%'}}/>
             {Object.keys(consts.navigationLabelToPath).map(label => (
               <Button
                 id={`${consts.navigationLabelToPath[label]}-button`}
