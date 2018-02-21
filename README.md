@@ -1,5 +1,7 @@
 # Strand Portal - UI
 
+[![CodeFactor](https://www.codefactor.io/repository/github/solutionloft/strand-ui/badge)](https://www.codefactor.io/repository/github/solutionloft/strand-ui)
+
 ## Getting Started
 
 It is recommended that you use WebStorm (not PyCharm) for development.
