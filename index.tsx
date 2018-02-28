@@ -1,3 +1,6 @@
+// Triple slash directive to grab our global types for the project (needs to be above imports)
+/// <reference path="index.d.ts" />
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {ApolloClient} from 'apollo-client';
