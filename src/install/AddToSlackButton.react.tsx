@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import * as CONFIG from '../../config';
+import * as CONFIG from '../config';
 
 interface PropTypes {
   size?: string,

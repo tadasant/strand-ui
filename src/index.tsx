@@ -9,7 +9,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 import {ApolloProvider} from 'react-apollo';
 import Root from './Root.react';
 import ErrorBoundary from './common/ErrorBoundary.react';
-import * as CONFIG from '../config';
+import * as CONFIG from './config';
 import * as Raven from 'raven-js';
 
 // Environment variable check

@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import * as Raven from 'raven-js';
 import InstallationStatus from './InstallationStatus.react';
 import AddToSlackButton from './AddToSlackButton.react';
-import * as CONFIG from '../../config';
+import * as CONFIG from '../config';
 
 const styles = theme => ({
   body1: theme.typography.body1,
