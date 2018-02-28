@@ -1,34 +1,37 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import Grid from 'material-ui/Grid/Grid';
 import Typography from 'material-ui/Typography/Typography';
-import AddToSlackButton from './AddToSlackButton.react';
-import queryString from 'query-string';
-import withRouter from 'react-router-dom/withRouter';
-import PropTypes from 'prop-types';
+import withStyles from 'material-ui/styles/withStyles';
+import * as queryString from 'query-string';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
-import InstallationStatus from './InstallationStatus.react';
-import withStyles from 'material-ui/styles/withStyles';
 import * as Raven from 'raven-js';
+import InstallationStatus from './InstallationStatus.react';
+import AddToSlackButton from './AddToSlackButton.react';
 import * as CONFIG from '../../config';
 
 const styles = theme => ({
   body1: theme.typography.body1,
 });
 
-const propTypes = {
-  location: PropTypes.shape({
-    search: PropTypes.string,
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  // GraphQL
-  attemptInstall: PropTypes.func.isRequired,
-  classes: PropTypes.shape({
-    body1: PropTypes.string.isRequired,
-  }).isRequired,
-};
+interface PropTypes extends RouteComponentProps<any> {
+  attemptInstall: Function,
+  classes: {
+    body1: string,
+  },
+}
 
-class Install extends Component {
+interface StateTypes {
+  installingSlackApplication: boolean,
+  successInstallationSlackApplication?: boolean,
+  errors: string[],
+}
+
+class Install extends Component<PropTypes, StateTypes> {
+  private redirectUri: string;
+
   constructor(props) {
     super(props);
 
@@ -125,8 +128,6 @@ class Install extends Component {
   }
 }
 
-Install.propTypes = propTypes;
-
 const attemptSlackInstallation = gql`
   mutation($code: String!, $clientId: String!, $redirectUri: String!) {
     attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
@@ -137,6 +138,7 @@ const attemptSlackInstallation = gql`
   }
 `;
 
+// TODO [UI-47] can do more with apollo-codegen here
 const InstallWithResult = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
     attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
