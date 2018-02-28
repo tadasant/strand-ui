@@ -12,16 +12,7 @@ import ErrorBoundary from './common/ErrorBoundary.react';
 import * as CONFIG from './config';
 import * as Raven from 'raven-js';
 
-// Environment variable check
-console.assert(
-  [CONFIG.GRAPHQL_URL, CONFIG.SLACK_CLIENT_ID, CONFIG.UI_HOST, CONFIG.SLACK_SCOPES, CONFIG.NODE_ENV]
-    .every(x => x != undefined),
-  'Missing required general environment variables'
-);
-console.assert(
-  [CONFIG.VERSION, CONFIG.SENTRY_KEY, CONFIG.SENTRY_PROJECT_ID].every(x => x != undefined),
-  'Missing required deployment environment variables'
-);
+const GRAPHQL_URL = process.env.GRAPHQL_URL;
 
 // sentry.io setup
 if (CONFIG.NODE_ENV === 'production' || CONFIG.NODE_ENV === 'staging') {

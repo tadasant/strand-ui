@@ -1,3 +1,5 @@
+// dotenv-webpack ensures these all exist at build time via .env.example
+
 export const GRAPHQL_URL = process.env.GRAPHQL_URL;
 export const SLACK_CLIENT_ID = process.env.SLACK_CLIENT_ID;
 export const UI_HOST = process.env.UI_HOST;

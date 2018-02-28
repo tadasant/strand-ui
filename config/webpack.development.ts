@@ -6,7 +6,7 @@ export default merge(common, {
   plugins: [
     new Dotenv({
       path: './env/.env.development',
-      sample: true,
+      safe: './env/.env.example',
     }),
   ],
 });

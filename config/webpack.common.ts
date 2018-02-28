@@ -7,14 +7,6 @@ const config = {
   entry: './src/index.tsx',
   module: {
     rules: [
-      // Use babel for transpiling ES6 (only needed for non-typescript)
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
       // Bundle files (e.g. images)
       {
         test: /\.(png|jpg|gif)$/,

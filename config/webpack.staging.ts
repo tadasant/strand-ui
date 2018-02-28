@@ -6,7 +6,7 @@ export default merge(deployment, {
   plugins: [
     new Dotenv({
       path: './env/.env.staging',
-      sample: true,
+      safe: './env/.env.example',
     }),
   ],
 });
