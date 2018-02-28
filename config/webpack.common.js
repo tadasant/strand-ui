@@ -1,5 +1,4 @@
 const HTMLPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
@@ -45,8 +44,6 @@ const config = {
     new HTMLPlugin({
       template: 'index.html',
     }),
-    // Integrate .env files
-    new Dotenv(),
     // HMR plugins
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
