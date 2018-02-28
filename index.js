@@ -12,12 +12,6 @@ import ErrorBoundary from './src/common/ErrorBoundary.react';
 let graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
 let uiHost = process.env.UI_HOST;
 let slackClientId = process.env.SLACK_CLIENT_ID;
-if (process.env.REALM === 'staging') {
-  // Staging build should mirror production except...
-  graphQLUrl = 'https://staging.api.trystrand.com/graphql';
-  uiHost = 'https://staging.app.trystrand.com';
-  slackClientId = '299839214388.299767954400';
-}
 
 // sentry.io
 if (process.env.REALM === 'production' || process.env.REALM === 'staging') {

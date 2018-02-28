@@ -59,13 +59,11 @@
     "productioncdn": "https://app.trystrand.com"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server --mode development --open",
-    "build-wp-dev": "webpack --mode development",
+    "start": "webpack-dev-server --mode development --open",
+    "build-cmd": "webpack --mode development",
+    "build-staging": "REALM=staging yarn build-cmd --mode production",
+    "build": "REALM=production yarn build-cmd --mode production",
     "build-wp": "webpack --mode production",
-    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
-    "build-cmd": "rm -rf build/ && node_modules/parcel-bundler/bin/cli.js build --out-dir build/ index.html",
-    "build-staging": "REALM=staging yarn build-cmd --public-url \"$npm_package_config_stagingcdn\"",
-    "build": "REALM=production yarn build-cmd --public-url \"$npm_package_config_productioncdn\"",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"
