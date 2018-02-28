@@ -9,6 +9,7 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 import InstallationStatus from './InstallationStatus.react';
 import withStyles from 'material-ui/styles/withStyles';
+import * as Raven from 'raven-js';
 
 const styles = theme => ({
   body1: theme.typography.body1,

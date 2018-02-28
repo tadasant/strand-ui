@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
+import * as Raven from 'raven-js';
 
 class ErrorBoundary extends Component {
   constructor(props) {

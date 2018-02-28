@@ -30,7 +30,6 @@ module.exports = {
     'console': true,
     'document': true,
     'setImmediate': true,
-    'Raven': true,
     'global': true,
   }
 };
