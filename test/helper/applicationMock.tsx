@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme/build/index';
 import App from 'src/App.react';
 import {MemoryRouter} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
 import {addMockFunctionsToSchema} from 'graphql-tools';
 import {SchemaLink} from 'apollo-link-schema';
-import * as graphqlIntrospectionResult from '../schema';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {buildClientSchema} from 'graphql';
 import {ApolloClient} from 'apollo-client';
 import get from 'lodash/get';
+import * as graphqlIntrospectionResult from '../schema.json';
 
 
 /*
@@ -21,7 +21,7 @@ import get from 'lodash/get';
     }
   }
  */
-export const mountApplication = (endpoint, options) => {
+export const mountApplication = (endpoint, options?: {}) => {
   const mockApolloClient = generateMockApolloClient(get(options, 'graphqlMocks'));
   return mount(
     <ApolloProvider client={mockApolloClient}>
@@ -39,7 +39,7 @@ const generateMockApolloClient = (graphqlMocks) => {
     schema,
     mocks: graphqlMocks || {},
   });
-  const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+  const apolloCache = new InMemoryCache();
   return new ApolloClient({
     cache: apolloCache,
     link: new SchemaLink({schema}),

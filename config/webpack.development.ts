@@ -1,11 +1,11 @@
 const merge = require('webpack-merge');
-const deployment = require('./webpack.deployment.js');
+const common = require('./webpack.common.ts');
 const Dotenv = require('dotenv-webpack');
 
-module.exports = merge(deployment, {
+export default merge(common, {
   plugins: [
     new Dotenv({
-      path: './env/.env.staging',
+      path: './env/.env.development',
       sample: true,
     }),
   ],
