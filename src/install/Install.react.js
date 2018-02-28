@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import InstallationStatus from './InstallationStatus.react';
 import withStyles from 'material-ui/styles/withStyles';
 import * as Raven from 'raven-js';
+import * as CONFIG from '../../config';
 
 const styles = theme => ({
   body1: theme.typography.body1,
@@ -28,11 +29,10 @@ const propTypes = {
 };
 
 class Install extends Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
 
-    const redirectHost = context.uiHost; // From config (see index.tsx)
-    this.redirectUri = `${redirectHost}${props.location.pathname}`;
+    this.redirectUri = `${CONFIG.UI_HOST}${props.location.pathname}`;
 
     this.state = {
       installingSlackApplication: false,
@@ -45,7 +45,7 @@ class Install extends Component {
     const params = queryString.parse(this.props.location.search);
     if (params.code) {
       this.setState(() => ({installingSlackApplication: true}), () => {
-        this.props.attemptInstall(params.code, this.context.slackClientId, this.redirectUri)
+        this.props.attemptInstall(params.code, CONFIG.SLACK_CLIENT_ID, this.redirectUri)
           .then(() => {
             this.setState(() => ({
               installingSlackApplication: false,
@@ -126,11 +126,6 @@ class Install extends Component {
 }
 
 Install.propTypes = propTypes;
-
-Install.contextTypes = {
-  uiHost: PropTypes.string.isRequired,
-  slackClientId: PropTypes.string.isRequired,
-};
 
 const attemptSlackInstallation = gql`
   mutation($code: String!, $clientId: String!, $redirectUri: String!) {

@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
 import PropTypes from 'prop-types';
-import {hot} from 'react-hot-loader';
 
 // Use http://mcg.mbitson.com/ to generate a palette
 // 2/21/18: http://mcg.mbitson.com/#!?strand1=%23e8ebe4&strand2=%2348466d&strand3=%23190b28&strand4=%237ca982&strand5=%23f1e9da&themename=Strand
@@ -55,16 +55,9 @@ const strandTheme = createMuiTheme({
   'palette': themePalette,
 });
 
-const propTypes = {
-  uiHost: PropTypes.string.isRequired,
-  slackClientId: PropTypes.string.isRequired,
-};
+interface PropTypes {}
 
-class Root extends Component {
-  getChildContext() {
-    return {uiHost: this.props.uiHost, slackClientId: this.props.slackClientId};
-  }
-
+class Root extends Component<PropTypes> {
   render() {
     return (
       <MuiThemeProvider theme={strandTheme}>
@@ -76,11 +69,4 @@ class Root extends Component {
   }
 }
 
-Root.childContextTypes = {
-  uiHost: PropTypes.string,
-  slackClientId: PropTypes.string,
-};
-
-Root.propTypes = propTypes;
-
-export default hot(module)(Root);
+export default Root;

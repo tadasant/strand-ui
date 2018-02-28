@@ -14,7 +14,7 @@ import get from 'lodash/get';
 
 
 /*
-  Mount the entire application (minus stuff in Root.react.js).
+  Mount the entire application (minus stuff in Root.react.tsx).
 
   (optional) options: {
     graphqlMocks: {
@@ -31,10 +31,6 @@ export const mountApplication = (endpoint, options) => {
         <App/>
       </MemoryRouter>
     </ApolloProvider>,
-    {
-      context: {uiHost: process.env.UI_HOST, slackClientId: process.env.SLACK_CLIENT_ID},
-      childContextTypes: {uiHost: PropTypes.string, slackClientId: PropTypes.string},
-    }
   );
 };
 

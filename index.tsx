@@ -7,31 +7,37 @@ import {ApolloProvider} from 'react-apollo';
 import Root from './src/Root.react';
 import ErrorBoundary from './src/common/ErrorBoundary.react';
 import * as Raven from 'raven-js';
+import * as CONFIG from './config';
 
-// TODO can get rid of these consts/contexts, just use the ENV vars as needed directly
-const graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
-const uiHost = process.env.UI_HOST;
-const slackClientId = process.env.SLACK_CLIENT_ID;
+// Environment variable check
+console.assert(
+  [CONFIG.GRAPHQL_URL, CONFIG.SLACK_CLIENT_ID, CONFIG.UI_HOST, CONFIG.SLACK_SCOPES, CONFIG.NODE_ENV]
+    .every(x => x != undefined),
+  'Missing required general environment variables'
+);
+console.assert(
+  [CONFIG.VERSION, CONFIG.SENTRY_KEY, CONFIG.SENTRY_PROJECT_ID].every(x => x != undefined),
+  'Missing required deployment environment variables'
+);
 
-// sentry.io
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-  const sentryioKey = process.env.SENTRY_IO_KEY;
-  const sentryioProject = process.env.SENTRY_IO_PROJECT;
-  Raven.config(`https://${sentryioKey}@sentry.io/${sentryioProject}`, {
-    environment: process.env.NODE_ENV,
-    release: process.env.VERSION,
+// sentry.io setup
+if (CONFIG.NODE_ENV === 'production' || CONFIG.NODE_ENV === 'staging') {
+  Raven.config(`https://${CONFIG.SENTRY_KEY}@sentry.io/${CONFIG.SENTRY_PROJECT_ID}`, {
+    environment: CONFIG.NODE_ENV,
+    release: CONFIG.VERSION,
   }).install();
 }
 
+// GraphQL client setup
 const client = new ApolloClient({
-  link: new HttpLink({uri: graphQLUrl}),
+  link: new HttpLink({uri: CONFIG.GRAPHQL_URL}),
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <ErrorBoundary>
     <ApolloProvider client={client}>
-      <Root uiHost={uiHost} slackClientId={slackClientId}/>
+      <Root/>
     </ApolloProvider>
   </ErrorBoundary>,
   document.getElementById('root'),
