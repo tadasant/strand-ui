@@ -1,3 +1,4 @@
+import './public-path';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {ApolloClient} from 'apollo-client';
@@ -7,18 +8,17 @@ import {ApolloProvider} from 'react-apollo';
 import Root from './src/Root.react';
 import ErrorBoundary from './src/common/ErrorBoundary.react';
 
-// Last of config setup (used because parcel.js sets $NODE_ENV to production for all `parcel build` ops)
-// TODO this isn't great, not sure how to fix? parcel PR?
-let graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
-let uiHost = process.env.UI_HOST;
-let slackClientId = process.env.SLACK_CLIENT_ID;
+// TODO can get rid of these consts/contexts, just use the ENV vars as needed directly
+const graphQLUrl = process.env.PORTAL_GRAPHQL_URL;
+const uiHost = process.env.UI_HOST;
+const slackClientId = process.env.SLACK_CLIENT_ID;
 
 // sentry.io
-if (process.env.REALM === 'production' || process.env.REALM === 'staging') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   const sentryioKey = process.env.SENTRY_IO_KEY;
   const sentryioProject = process.env.SENTRY_IO_PROJECT;
   Raven.config(`https://${sentryioKey}@sentry.io/${sentryioProject}`, {
-    environment: process.env.REALM,
+    environment: process.env.NODE_ENV,
     tags: {release: process.env.VERSION},
   }).install();
 }

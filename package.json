@@ -60,10 +60,9 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "build-cmd": "webpack --mode development",
-    "build-staging": "REALM=staging yarn build-cmd --mode production",
-    "build": "REALM=production yarn build-cmd --mode production",
-    "build-wp": "webpack --mode production",
+    "build-cmd": "webpack --mode production",
+    "build-staging": "yarn build-cmd --env.NODE_ENV=staging --output-public-path \"$npm_package_config_stagingcdn\"",
+    "build": "yarn build-cmd --env.NODE_ENV=production --output-public-path \"$npm_package_config_productioncdn\"",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"

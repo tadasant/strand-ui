@@ -45,11 +45,10 @@ const config = {
     new HTMLPlugin({
       template: 'index.html',
     }),
-    // Integrates .env files
+    // Integrate .env files
     new Dotenv(),
-    // HMR convenience plugin
+    // HMR plugins
     new webpack.NamedModulesPlugin(),
-    // HMR plugin
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
