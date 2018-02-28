@@ -3,7 +3,6 @@ import {mount} from 'enzyme/build/index';
 import App from 'src/App.react';
 import {MemoryRouter} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
-import PropTypes from 'prop-types';
 import {addMockFunctionsToSchema} from 'graphql-tools';
 import {SchemaLink} from 'apollo-link-schema';
 import * as graphqlIntrospectionResult from '../schema';

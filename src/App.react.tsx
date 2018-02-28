@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {Fragment, SFC} from 'react';
+import {Fragment, StatelessComponent} from 'react';
 import {Route, Redirect, Switch} from 'react-router';
 import Shell from './shell/Shell.react';
 import Install from './install/Install.react';
 
-const App: SFC = () => (
+const App: StatelessComponent = () => (
   <Fragment>
     <Shell/>
     <Switch>

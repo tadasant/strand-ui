@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
 import * as CONFIG from '../../config';
 
-const propTypes = {
-  size: PropTypes.string,
-  redirectUri: PropTypes.string.isRequired,
-};
+interface PropTypes {
+  size?: string,
+  redirectUri: string,
+}
 
-class AddToSlackButton extends Component {
+class AddToSlackButton extends Component<PropTypes> {
+  public static defaultProps: Partial<PropTypes> = {
+    size: 'large',
+  };
+
   render() {
     const src = `https://platform.slack-edge.com/img/add_to_slack${this.props.size === 'large' ? '@2x' : null}.png`;
     const queryParams = [
@@ -27,7 +31,5 @@ class AddToSlackButton extends Component {
 AddToSlackButton.defaultProps = {
   size: 'large',
 };
-
-AddToSlackButton.propTypes = propTypes;
 
 export default AddToSlackButton;
