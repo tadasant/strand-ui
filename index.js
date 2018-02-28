@@ -1,4 +1,3 @@
-import './public-path';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {ApolloClient} from 'apollo-client';
