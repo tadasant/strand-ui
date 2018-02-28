@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = merge(deployment, {
   plugins: [
     new Dotenv({
-      path: './.env.staging',
+      path: './env/.env.staging',
       sample: true,
     }),
   ],

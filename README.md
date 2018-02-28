@@ -89,3 +89,7 @@ To set up a single file hotkey:
 2) Keymap
 3) "Fix ESLint Problems"
 4) Recommend ctrl + opt + L (similar to cmd + opt + L code reformat) 
+
+## Webpack, TypeScript, .env files, oh my...
+
+// TODO

@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = merge(common, {
   plugins: [
     new Dotenv({
-      path: './.env.development',
+      path: './env/.env.development',
       sample: true,
     }),
   ],
