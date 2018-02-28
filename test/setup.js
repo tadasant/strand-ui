@@ -3,7 +3,7 @@ import {configure} from 'enzyme';
 import dotenv from 'dotenv'
 
 // environment variables
-dotenv.config();
+dotenv.config({path: 'env/.env.test'});
 
 // enzyme
 configure({adapter: new Adapter()});

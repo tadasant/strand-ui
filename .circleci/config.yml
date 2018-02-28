@@ -52,7 +52,6 @@ jobs:
           name: Install Dependencies
           command: |
             yarn install
-            cd node_modules/parcel-bundler && yarn install
 
       - save_cache:
           paths:
@@ -86,7 +85,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive
+            aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp dist/ s3://staging.app.trystrand.com/ --recursive
 
   deploy-to-production:
     docker:
@@ -105,7 +104,6 @@ jobs:
           name: Install Dependencies
           command: |
             yarn install
-            cd node_modules/parcel-bundler && yarn install
 
       - save_cache:
           paths:
@@ -139,7 +137,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp build/ s3://app.trystrand.com/ --recursive
+            aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp dist/ s3://app.trystrand.com/ --recursive
 
 workflows:
   version: 2

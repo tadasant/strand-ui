@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
 import PropTypes from 'prop-types';
+import {hot} from 'react-hot-loader';
 
 // Use http://mcg.mbitson.com/ to generate a palette
 // 2/21/18: http://mcg.mbitson.com/#!?strand1=%23e8ebe4&strand2=%2348466d&strand3=%23190b28&strand4=%237ca982&strand5=%23f1e9da&themename=Strand
@@ -82,4 +83,4 @@ Root.childContextTypes = {
 
 Root.propTypes = propTypes;
 
-export default Root;
+export default hot(module)(Root);
