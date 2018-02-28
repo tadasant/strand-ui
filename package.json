@@ -1,7 +1,7 @@
 {
   "name": "client",
-  "version": "0.1.0",
-  "main": "src/index.js",
+  "version": "0.1.1",
+  "main": "src/index.tsx",
   "types": "src/index.d.ts",
   "license": "UNLICENSED",
   "dependencies": {
@@ -63,17 +63,18 @@
     "typescript": "^2.7.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
-    "webpack-dev-server": "^3.1.0"
+    "webpack-dev-server": "^3.1.0",
+    "webpack-merge": "^4.1.2"
   },
   "config": {
-    "stagingcdn": "https://staging.app.trystrand.com",
-    "productioncdn": "https://app.trystrand.com"
+    "stagingcdn": "https://staging.app.trystrand.com/",
+    "productioncdn": "https://app.trystrand.com/"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --open --config config/webpack.development.js",
     "build-cmd": "webpack --mode production",
-    "build-staging": "yarn build-cmd --env.NODE_ENV=staging --output-public-path \"$npm_package_config_stagingcdn\"",
-    "build": "yarn build-cmd --env.NODE_ENV=production --output-public-path \"$npm_package_config_productioncdn\"",
+    "build-staging": "yarn build-cmd --env.NODE_ENV=staging --output-public-path \"$npm_package_config_stagingcdn\" --config config/webpack.staging.js",
+    "build": "yarn build-cmd --env.NODE_ENV=production --output-public-path \"$npm_package_config_productioncdn\" --config config/webpack.production.js",
     "test": "jest",
     "test-watch": "jest --watch # watches tests related to files changed in git",
     "test-watch-all": "jest --watchAll"

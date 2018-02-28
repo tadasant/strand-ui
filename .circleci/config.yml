@@ -85,7 +85,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp build/ s3://staging.app.trystrand.com/ --recursive
+            aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp dist/ s3://staging.app.trystrand.com/ --recursive
 
   deploy-to-production:
     docker:
@@ -137,7 +137,7 @@ jobs:
       - run:
           name: Upload to S3
           command: |
-            aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp build/ s3://app.trystrand.com/ --recursive
+            aws s3 rm s3://app.trystrand.com/ --recursive && aws s3 cp dist/ s3://app.trystrand.com/ --recursive
 
 workflows:
   version: 2
