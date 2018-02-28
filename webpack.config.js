@@ -27,6 +27,7 @@ const config = {
   },
   devtool: 'inline-source-map',
   devServer: {
+    historyApiFallback: true,
     contentBase: './',
     port: 3000,
     hot: true,
