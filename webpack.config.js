@@ -62,7 +62,7 @@ const config = {
     new CleanWebpackPlugin(['dist']),
     // Builds the .html file for entering into bundle
     new HTMLPlugin({
-      template: 'index.html',
+      template: 'INDEX_TEMPLATE.html',
     }),
     // Integrate .env files
     new Dotenv(),
