@@ -5,8 +5,8 @@ import * as logoWithText from '../../../assets/strand_darktext.png';
 import * as logo from '../../../assets/strand.png';
 
 interface PropTypes {
-  omitText?: string,
-  style?: object
+  omitText?: boolean,
+  style?: {}
 }
 
 class StrandLogo extends Component<PropTypes> {

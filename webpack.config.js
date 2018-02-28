@@ -69,6 +69,11 @@ const config = {
     // HMR plugins
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    // Prevents webpack watch from going into infinite loop (& stopping on retry)
+    new webpack.WatchIgnorePlugin([
+      /\.js$/,
+      /\.d\.ts$/,
+    ]),
   ],
 };
 
