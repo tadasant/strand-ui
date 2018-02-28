@@ -55,8 +55,8 @@
     "webpack-dev-server": "^3.1.0"
   },
   "config": {
-    "stagingcdn": "https://staging.app.trystrand.com",
-    "productioncdn": "https://app.trystrand.com"
+    "stagingcdn": "https://staging.app.trystrand.com/",
+    "productioncdn": "https://app.trystrand.com/"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
