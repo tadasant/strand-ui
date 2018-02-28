@@ -52,7 +52,6 @@ jobs:
           name: Install Dependencies
           command: |
             yarn install
-            cd node_modules/parcel-bundler && yarn install
 
       - save_cache:
           paths:
@@ -105,7 +104,6 @@ jobs:
           name: Install Dependencies
           command: |
             yarn install
-            cd node_modules/parcel-bundler && yarn install
 
       - save_cache:
           paths:
