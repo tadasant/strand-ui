@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import {ApolloClient} from 'apollo-client';
 import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
   const sentryioProject = process.env.SENTRY_IO_PROJECT;
   Raven.config(`https://${sentryioKey}@sentry.io/${sentryioProject}`, {
     environment: process.env.NODE_ENV,
-    tags: {release: process.env.VERSION},
+    release: process.env.VERSION,
   }).install();
 }
 

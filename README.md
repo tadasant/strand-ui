@@ -62,7 +62,7 @@ Basically the hierarchy is:
 
 1 takes priority over 2, etc.
 
-Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leveraging `REALM` in the script & in `index.js`.
+Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leveraging `REALM` in the script & in `index.tsx`.
 
 ## Running tests
 

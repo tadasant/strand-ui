@@ -31,7 +31,7 @@ class Install extends Component {
   constructor(props, context) {
     super(props);
 
-    const redirectHost = context.uiHost; // From config (see index.js)
+    const redirectHost = context.uiHost; // From config (see index.tsx)
     this.redirectUri = `${redirectHost}${props.location.pathname}`;
 
     this.state = {

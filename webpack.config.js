@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const config = {
   // Root JS file for bundling
-  entry: './index.js',
+  entry: './index.tsx',
   module: {
     rules: [
       // Use babel for transpiling ES6 (only needed for non-typescript)
