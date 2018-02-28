@@ -17,7 +17,7 @@ To run locally (with hot module replacement!), simply run `yarn start`.
 We host our UI as a static website on S3. Staging is at https://staging.app.trystrand.com/
 
 Before deploying, ensure that the `package.json` entry for `config`, namely `stagingcdn`, is
-set to the appropriate s3 bucket endpoint, and the `.env` file has the appropriate `VERSION` number.
+set to the appropriate s3 bucket endpoint, and the `.env` files have the appropriate `VERSION` number set throughout.
 
 Generally, use existing CircleCI workflows to deploy staging/production builds. Note that you probably want to bust
 the CloudFront cache after deploying (otherwise the changes won't be live for up to half a day). Do this by:
@@ -42,7 +42,7 @@ Staging: `aws s3 rm s3://staging.app.trystrand.com/ --recursive && aws s3 cp bui
 
 Production can be found at  https://app.trystrand.com/.
 
-Same instructions as above apply: namely, check `package.json` for `productioncdn` and `.env` for `VERSION`.
+Same instructions as above apply: namely, check `package.json` for `productioncdn` and `.env` files for `VERSION`.
 
 Merge to master and [create a release](https://help.github.com/articles/creating-releases/) on GitHub.
 
@@ -66,11 +66,11 @@ Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leve
 
 ## Running tests
 
-It's important to make sure you're running on the up-to-date GraphQL schema. Extract from CCP by going to project root and doing:
+It's important to make sure you're running on the up-to-date GraphQL schema. Extract from API by going to its project root and doing:
 
-`python manage.py graphql_schema --indent 2 --out client/test/schema.json`
+`python manage.py graphql_schema --indent 2 --out schema.json`
 
-Commit the schema. CCU-26 will automate this process.
+Commit the schema to `test/schema.json` in UI. UI-26 will automate this process.
 
 We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing. 
 
