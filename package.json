@@ -44,16 +44,19 @@
     "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.10",
+    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "jest": "^22.3.0",
     "react-test-renderer": "^16.2.0",
     "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^3.1.0"
   },
   "config": {
     "stagingcdn": "https://staging.app.trystrand.com",
     "productioncdn": "https://app.trystrand.com"
   },
   "scripts": {
+    "start:dev": "webpack-dev-server --mode development --open",
     "build-wp-dev": "webpack --mode development",
     "build-wp": "webpack --mode production",
     "start": "node_modules/parcel-bundler/bin/cli.js index.html --open --port 3000",
