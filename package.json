@@ -1,8 +1,8 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "license": "UNLICENSED",
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.7",
