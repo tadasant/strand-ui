@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 import consts from '../common/MenuConstants';
 import StrandLogo from '../common/StrandLogo.react';
@@ -10,11 +10,19 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import Toolbar from 'material-ui/Toolbar/Toolbar';
 import MenuIcon from 'material-ui-icons/Menu';
 
-const propTypes = {
-  openPageGenerator: PropTypes.func.isRequired,
-};
+interface PropTypes {
+  openPageGenerator: Function,
+}
 
-class ShellMobile extends Component {
+interface StateTypes {
+  showNavMenu: boolean,
+  menuIconAnchor?: HTMLElement,
+}
+
+class ShellMobile extends Component<PropTypes, StateTypes> {
+  // Used to store a ref to the menu button
+  private menuButtonNode: HTMLInputElement;
+
   constructor(props) {
     super(props);
 
@@ -31,7 +39,7 @@ class ShellMobile extends Component {
   openNavMenu() {
     this.setState(prevState => ({
       showNavMenu: !prevState.showNavMenu,
-      menuIconAnchor: findDOMNode(this.menuButtonNode),
+      menuIconAnchor: findDOMNode(this.menuButtonNode) as HTMLElement,
     }));
   }
 
@@ -53,7 +61,7 @@ class ShellMobile extends Component {
           <Toolbar style={{margin: 'auto', height: '56px'}}>
             <StrandLogo omitText style={{height: '75%'}}/>
             <IconButton
-              ref={(node) => this.menuButtonNode = node}
+              buttonRef={(node) => this.menuButtonNode = node}
               aria-label='Menu'
               onClick={this.openNavMenu}
               style={{width: 'unset'}}
@@ -91,7 +99,5 @@ class ShellMobile extends Component {
     )
   }
 }
-
-ShellMobile.propTypes = propTypes;
 
 export default ShellMobile;
