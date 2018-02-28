@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
+    // Required option for react-hot-loader
     "target": "es6",
+    // Required option for react-hot-loader
     "module": "commonjs",
+    // Show errors for things that could be typed and are not
     "strict": false,
     "jsx": "react",
+    // Absolute imports start from here
     "baseUrl": ".",
-    "sourceMap": true
+    // Generate source map for debugging purposes
+    "sourceMap": true,
+    // Don't complain on syntax like `import React from 'react'` (vs. `import * as React from 'react')
+    "allowSyntheticDefaultImports": true,
   }
 }
    

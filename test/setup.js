@@ -7,8 +7,3 @@ dotenv.config();
 
 // enzyme
 configure({adapter: new Adapter()});
-
-// sentry.io
-global.Raven = {
-  isSetup: jest.fn(() => false),
-};
