@@ -1,4 +1,5 @@
 const HTMLPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const config = {
   entry: './index.js',
@@ -30,6 +31,7 @@ const config = {
     new HTMLPlugin({
       template: 'index.html',
     }),
+    new Dotenv(),
   ],
 };
 
