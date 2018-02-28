@@ -3,11 +3,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 const config = {
-  // Root JS file for bundling
-  entry: './index.js',
+  // Root TS file for bundling
+  entry: './src/index.tsx',
   module: {
     rules: [
-      // Use babel for transpiling ES6
+      // Use babel for transpiling ES6 (only needed for non-typescript)
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -25,10 +25,29 @@ const config = {
           },
         ],
       },
+      // Transpile & type check with babel/typescript loader
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            // Need babel for React HMR support (otherwise could drop babel and use just typescript)
+            loader: 'babel-loader',
+            options: {
+              babelrc: true,
+              plugins: ['react-hot-loader/babel'],
+            },
+          },
+          'ts-loader',
+        ],
+      },
     ],
   },
   // Enable served source maps
   devtool: 'inline-source-map',
+  resolve: {
+    // Include all these extensions in processing
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   // Webpack Dev Server for running locally
   devServer: {
     // Play nicely with react-router
@@ -42,11 +61,16 @@ const config = {
     new CleanWebpackPlugin(['dist']),
     // Builds the .html file for entering into bundle
     new HTMLPlugin({
-      template: 'index.html',
+      template: 'INDEX_TEMPLATE.html',
     }),
     // HMR plugins
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    // Prevents webpack watch from going into infinite loop (& stopping on retry)
+    new webpack.WatchIgnorePlugin([
+      /\.js$/,
+      /\.d\.ts$/,
+    ]),
   ],
 };
 
