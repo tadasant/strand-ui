@@ -1,26 +1,21 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
 
 import ShellDesktop from './rwd/ShellDesktop.react';
 import ShellMobile from './rwd/ShellMobile.react';
-import withRouter from 'react-router-dom/withRouter';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import Hidden from 'material-ui/Hidden/Hidden';
 
-const propTypes = {
-  // from withRouter
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
+interface PropTypes extends RouteComponentProps<any> {}
 
-class Shell extends Component {
-  constructor(props) {
+class Shell extends Component<PropTypes> {
+  constructor(props: PropTypes) {
     super(props);
 
     this.openPageGenerator = this.openPageGenerator.bind(this);
   }
 
-  openPageGenerator(endpoint) {
+  openPageGenerator(endpoint: string) {
     return () => {
       this.props.history.push(endpoint);
     }
@@ -40,6 +35,4 @@ class Shell extends Component {
   }
 }
 
-Shell.propTypes = propTypes;
-
-export default withRouter(Shell);
+export default withRouter<PropTypes>(Shell);
