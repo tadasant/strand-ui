@@ -153,13 +153,7 @@ const withMutation: ComponentDecorator<any, any> = graphql(attemptSlackInstallat
   props: (props) => {
     const mutate = props.mutate as Function; // Force not-null
     return {
-      attemptInstall: ({code, clientId, redirectUri}: attemptInstallMutationVariables) => mutate({
-        variables: {
-          code,
-          clientId,
-          redirectUri
-        }
-      }),
+      attemptInstall: (variables: attemptInstallMutationVariables) => mutate({variables}),
     }
   },
 });
