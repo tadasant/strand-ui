@@ -53,7 +53,11 @@ class Install extends Component<PropTypes, StateTypes> {
     const params = queryString.parse(this.props.location.search);
     if (params.code) {
       this.setState(() => ({installingSlackApplication: true}), () => {
-        this.props.attemptInstall(params.code, CONFIG.SLACK_CLIENT_ID, this.redirectUri)
+        this.props.attemptInstall({
+          code: params.code,
+          clientId: CONFIG.SLACK_CLIENT_ID,
+          redirectUri: this.redirectUri
+        })
           .then(() => {
             this.setState(() => ({
               installingSlackApplication: false,
@@ -149,7 +153,13 @@ const withMutation: ComponentDecorator<any, any> = graphql(attemptSlackInstallat
   props: (props) => {
     const mutate = props.mutate as Function; // Force not-null
     return {
-      attemptInstall: ({code, clientId, redirectUri}: attemptInstallMutationVariables) => mutate({variables: {code, clientId, redirectUri}}),
+      attemptInstall: ({code, clientId, redirectUri}: attemptInstallMutationVariables) => mutate({
+        variables: {
+          code,
+          clientId,
+          redirectUri
+        }
+      }),
     }
   },
 });
