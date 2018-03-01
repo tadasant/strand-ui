@@ -33,3 +33,22 @@ export interface AttemptInstallMutation {
     } | null,
   } | null,
 };
+
+export interface TopicsParticipantsFragment {
+  alias: string,
+};
+
+export interface TopicsDiscussionsFragment {
+  status: string,
+  participants:  Array< {
+    alias: string,
+  } | null > | null,
+};
+
+export interface TopicsOriginalPosterFragment {
+  alias: string,
+};
+
+export interface TopicsTagsFragment {
+  name: string,
+};
