@@ -4,7 +4,6 @@ import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './App.react';
-import PropTypes from 'prop-types';
 import {hot} from 'react-hot-loader';
 
 // Use http://mcg.mbitson.com/ to generate a palette

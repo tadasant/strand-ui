@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Component} from 'react';
-import PropTypes from 'prop-types';
 import consts from '../common/MenuConstants';
 import StrandLogo from '../common/StrandLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';
