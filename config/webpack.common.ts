@@ -1,8 +1,8 @@
 const HTMLPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
+import * as webpack from 'webpack';
 
-const config = {
+const config: webpack.Configuration = {
   // Root TS file for bundling
   entry: './src/index.tsx',
   module: {

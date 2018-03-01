@@ -1,12 +1,15 @@
-const merge = require('webpack-merge');
-const common = require('./webpack.common.ts');
 const Dotenv = require('dotenv-webpack');
+import common from './webpack.common';
+import * as merge from 'webpack-merge';
+import * as webpack from 'webpack';
 
-export default merge(common, {
+const config: webpack.Configuration = {
   plugins: [
     new Dotenv({
       path: './env/.env.development',
       safe: './env/.env.example',
     }),
   ],
-});
+};
+
+export default merge(common, config);

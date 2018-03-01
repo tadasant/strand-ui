@@ -1,4 +1,7 @@
 const merge = require('webpack-merge');
-const common = require('./webpack.common.ts');
+import common from './webpack.common';
+import * as webpack from 'webpack';
 
-export default merge(common, {});
+const config: webpack.Configuration = {}
+
+export default merge(common, config);
