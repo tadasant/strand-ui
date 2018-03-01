@@ -50,13 +50,9 @@ Using CircleCI, approve the deploy to production.
 
 ## Running tests
 
-It's important to make sure you're running on the up-to-date GraphQL schema. Extract from API by going to its project root and doing:
+It's important to make sure you're running on the up-to-date GraphQL schema. See section below on GraphQL schemas.
 
-`python manage.py graphql_schema --indent 2 --out schema.json`
-
-Commit the schema to `test/schema.json` in UI. UI-26 will automate this process.
-
-We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing. 
+We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing.
 
 While developing, using `yarn test-watch`. This will watch test files that are testing the production files to which you have made edits (based on git).
 
@@ -88,3 +84,19 @@ Babel - not really needed anymore due to introduction of TypeScript. Previously 
 
 package.json - contains a tiny bit of config (stagingcdn, productioncdn) because there's a known html-webpack-plugin
 issue ([UI-46](https://solutionloft.atlassian.net/browse/UI-46)) that prevents us from using a workaround for it. 
+
+## GraphQL schemas, testing, and TypeScript
+
+Extract and updated GraphQL schema from API by going to its project root and doing:
+
+`python manage.py graphql_schema --indent 2 --out schema.json`
+
+Commit the schema to `schema.json` in UI. UI-26 will automate this process.
+
+An alternative to consider; can use `apollo-codegen` over the wire:
+
+`node_modules/.bin/apollo-codegen introspect-schema http://localhost:8000/graphql --output schema.json`
+ 
+Generate up-to-date TypeScript definitions with:
+
+`node_modules/.bin/apollo-codegen generate **/*.graphql --schema schema.json --target typescript --output graphql-types.ts`

@@ -9,7 +9,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 import {buildClientSchema} from 'graphql';
 import {ApolloClient} from 'apollo-client';
 import {get} from 'lodash';
-import * as graphqlIntrospectionResult from '../schema.json';
+import * as graphqlIntrospectionResult from '../../schema.json';
 
 
 /*
