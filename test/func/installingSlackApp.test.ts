@@ -7,7 +7,7 @@ function flushPromises() {
 }
 
 describe('installing slack app', () => {
-  it('sends the user to Slack when the user navigates to the page and clicks the button', async () => {
+  it('sends the user to Slack when the user navigates to the page and clicks the button', () => {
     const wrapper = mountApplication('/');
 
     // Navigate to install page

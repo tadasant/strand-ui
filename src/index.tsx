@@ -12,8 +12,6 @@ import ErrorBoundary from './common/ErrorBoundary.react';
 import * as CONFIG from './config';
 import * as Raven from 'raven-js';
 
-const GRAPHQL_URL = process.env.GRAPHQL_URL;
-
 // sentry.io setup
 if (CONFIG.NODE_ENV === 'production' || CONFIG.NODE_ENV === 'staging') {
   Raven.config(`https://${CONFIG.SENTRY_KEY}@sentry.io/${CONFIG.SENTRY_PROJECT_ID}`, {
