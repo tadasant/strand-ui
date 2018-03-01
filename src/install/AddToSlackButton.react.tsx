@@ -28,8 +28,4 @@ class AddToSlackButton extends Component<PropTypes> {
   }
 }
 
-AddToSlackButton.defaultProps = {
-  size: 'large',
-};
-
 export default AddToSlackButton;
