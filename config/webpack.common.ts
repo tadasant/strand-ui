@@ -37,8 +37,8 @@ const config: webpack.Configuration = {
   // Enable served source maps
   devtool: 'inline-source-map',
   resolve: {
-    // Include all these extensions in processing
-    extensions: ['.ts', '.tsx'],
+    // Include all these extensions in processing (note we need .js because not all node_modules are .ts)
+    extensions: ['.ts', '.tsx', '.js'],
   },
   // Webpack Dev Server for running locally
   devServer: {
