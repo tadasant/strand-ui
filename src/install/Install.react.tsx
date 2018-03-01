@@ -12,13 +12,14 @@ import InstallationStatus from './InstallationStatus.react';
 import AddToSlackButton from './AddToSlackButton.react';
 import * as CONFIG from '../config';
 
-import {Theme} from 'material-ui';
+import {StyleRules, Theme, WithStyles} from 'material-ui/styles';
+import {ComponentDecorator} from 'react-apollo/types';
 
-const styles = (theme: Theme) => ({
+const styles = (theme: Theme): StyleRules => ({
   body1: theme.typography.body1,
 });
 
-interface PropTypes extends RouteComponentProps<any> {
+interface PropTypes extends WithStyles, RouteComponentProps<any> {
   attemptInstall: Function,
   classes: {
     body1: string,
@@ -131,20 +132,21 @@ class Install extends Component<PropTypes, StateTypes> {
 }
 
 const attemptSlackInstallation = gql`
-  mutation($code: String!, $clientId: String!, $redirectUri: String!) {
-    attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
-      slackTeam {
-        name
-      }
+    mutation($code: String!, $clientId: String!, $redirectUri: String!) {
+        attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
+            slackTeam {
+                name
+            }
+        }
     }
-  }
 `;
 
-// TODO [UI-47] apollo-codegen to fix the TS strict issues here
-const InstallWithResult = graphql(attemptSlackInstallation, {
+const InstallStyledRouted = withRouter(withStyles(styles)(Install));
+// TODO figure out the any, any types below
+const withMutation: ComponentDecorator<any, any> = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
     attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
   }),
-})(withRouter(withStyles(styles)(Install)));
+});
 
-export default InstallWithResult;
+export default withMutation(InstallStyledRouted);

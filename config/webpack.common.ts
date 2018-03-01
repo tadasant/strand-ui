@@ -38,7 +38,7 @@ const config: webpack.Configuration = {
   devtool: 'inline-source-map',
   resolve: {
     // Include all these extensions in processing
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx'],
   },
   // Webpack Dev Server for running locally
   devServer: {
@@ -58,7 +58,7 @@ const config: webpack.Configuration = {
     // HMR plugins
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // Prevents webpack watch from going into infinite loop (& stopping on retry)
+    // Prevents webpack watch from going into infinite loop (& stopping on retry) due to TS compilation
     new webpack.WatchIgnorePlugin([
       /\.js$/,
       /\.d\.ts$/,

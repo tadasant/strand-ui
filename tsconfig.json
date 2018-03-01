@@ -12,7 +12,7 @@
     // Generate source map for debugging purposes
     "sourceMap": true,
     // Don't complain on syntax like `import React from 'react'` (vs. `import * as React from 'react')
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   }
 }
    

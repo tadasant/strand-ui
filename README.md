@@ -87,15 +87,19 @@ issue ([UI-46](https://solutionloft.atlassian.net/browse/UI-46)) that prevents u
 
 ## GraphQL schemas, testing, and TypeScript
 
+Recommended that you install the JS GraphQL plugin for IntelliJ so you get features for playing with gql queries with ease.
+IntelliJ uses `graphql.config.json` is ONLY used for local IntelliJ development. Nothing to do with the source code itself.
+ 
+
 Extract and updated GraphQL schema from API by going to its project root and doing:
 
-`python manage.py graphql_schema --indent 2 --out schema.json`
+`python manage.py graphql_schema --indent 2 --out graphql.schema.json`
 
 Commit the schema to `schema.json` in UI. UI-26 will automate this process.
 
 An alternative to consider; can use `apollo-codegen` over the wire:
 
-`node_modules/.bin/apollo-codegen introspect-schema http://localhost:8000/graphql --output schema.json`
+`node_modules/.bin/apollo-codegen introspect-schema http://localhost:8000/graphql --output graphql.schema.json`
  
 Generate up-to-date TypeScript definitions with:
 
