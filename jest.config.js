@@ -1,7 +1,7 @@
 module.exports = {
   'testMatch': [
-    // e.g. some_test.test.js or some_ts_test.tsx
-    '**/?(*.)(spec|test).(j|t)s?(x)',
+    // Note we don't test .js files (typically they're just compiled .ts files)
+    '**/?(*.)(spec|test).ts?(x)',
   ],
   // Allow absolute imports from the following bases
   'moduleDirectories': [
