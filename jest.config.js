@@ -26,7 +26,5 @@ module.exports = {
   'transform': {
     // Transpile & type all .ts(x) files
     '^.+\\.tsx?$': 'ts-jest',
-    // Transpile all .js files
-    '^.+\\.js$': 'babel-jest',
   },
 };

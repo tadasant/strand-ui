@@ -74,6 +74,17 @@ To set up a single file hotkey:
 3) "Fix ESLint Problems"
 4) Recommend ctrl + opt + L (similar to cmd + opt + L code reformat) 
 
-## Webpack, TypeScript, .env files, oh my...
+## Webpack, TypeScript, .env files, babel, oh my...
 
-// TODO
+Webpack - our bundler. Manages the flow of steps that need to be done in going from raw source code to performant
+application in the browser.
+
+TypeScript - compiles and transpiles our code. Takes TypeScript code, which is a superset of ES6-compliant (?) JavaScript.
+
+.env files - used for configuring primitive values (e.g. feature toggles, endpoints) across realms.
+
+Babel - not really needed anymore due to introduction of TypeScript. Previously used to be used for transpiling ES6 -> ES5.
+.babelrc and babel-loader, etc, remain because react-hot-loader depends on it.
+
+package.json - contains a tiny bit of config (stagingcdn, productioncdn) because there's a known html-webpack-plugin
+issue ([UI-46](https://solutionloft.atlassian.net/browse/UI-46)) that prevents us from using a workaround for it. 
