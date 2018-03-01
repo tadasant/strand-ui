@@ -6,12 +6,12 @@ interface PropTypes {
 }
 
 class ErrorBoundary extends Component<PropTypes> {
-  constructor(props) {
+  constructor(props: PropTypes) {
     super(props);
     this.state = {error: null};
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: object) {
     if (Raven.isSetup()) {
       this.setState({error});
       Raven.captureException(error, {extra: errorInfo});

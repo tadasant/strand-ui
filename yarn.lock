@@ -20,6 +20,29 @@
   version "2.0.47"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.47.tgz#f49ba1dd1f189486beb6e1d070a850f6ab4bd521"
 
+"@types/cheerio@*":
+  version "0.22.7"
+  resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.7.tgz#4a92eafedfb2b9f4437d3a4410006d81114c66ce"
+
+"@types/dotenv@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-4.0.2.tgz#f2983f0afe9fd7f6eb8aef515a4d77f4cbaa0597"
+  dependencies:
+    "@types/node" "*"
+
+"@types/enzyme-adapter-react-16@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.2.tgz#15ae37c64d6221a6f4b3a4aacc357cf773859de4"
+  dependencies:
+    "@types/enzyme" "*"
+
+"@types/enzyme@*":
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.1.9.tgz#fbd97f3beb7cad76fc9c6f04c97d77f4834522ef"
+  dependencies:
+    "@types/cheerio" "*"
+    "@types/react" "*"
+
 "@types/history@*":
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.6.2.tgz#12cfaba693ba20f114ed5765467ff25fdf67ddb0"
@@ -35,6 +58,10 @@
 "@types/node@*", "@types/node@^9.4.6":
   version "9.4.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+
+"@types/query-string@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/query-string/-/query-string-5.1.0.tgz#7f40cdea49ddafa0ea4f3db35fb6c24d3bfd4dcc"
 
 "@types/react-dom@^16.0.4":
   version "16.0.4"

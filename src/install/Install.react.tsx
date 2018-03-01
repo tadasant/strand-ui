@@ -12,7 +12,9 @@ import InstallationStatus from './InstallationStatus.react';
 import AddToSlackButton from './AddToSlackButton.react';
 import * as CONFIG from '../config';
 
-const styles = theme => ({
+import {Theme} from 'material-ui';
+
+const styles = (theme: Theme) => ({
   body1: theme.typography.body1,
 });
 
@@ -32,7 +34,7 @@ interface StateTypes {
 class Install extends Component<PropTypes, StateTypes> {
   private redirectUri: string;
 
-  constructor(props) {
+  constructor(props: PropTypes) {
     super(props);
 
     this.redirectUri = `${CONFIG.UI_HOST}${props.location.pathname}`;
@@ -138,7 +140,7 @@ const attemptSlackInstallation = gql`
   }
 `;
 
-// TODO [UI-47] can do more with apollo-codegen here
+// TODO [UI-47] apollo-codegen to fix the TS strict issues here
 const InstallWithResult = graphql(attemptSlackInstallation, {
   props: ({mutate}) => ({
     attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
