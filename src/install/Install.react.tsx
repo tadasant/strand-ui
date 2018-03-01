@@ -14,6 +14,8 @@ import * as CONFIG from '../config';
 
 import {StyleRules, Theme, WithStyles} from 'material-ui/styles';
 import {ComponentDecorator} from 'react-apollo/types';
+import {attemptInstallMutationVariables} from '../../schema/graphql-types';
+import {ApolloError} from 'apollo-client';
 
 const styles = (theme: Theme): StyleRules => ({
   body1: theme.typography.body1,
@@ -58,7 +60,7 @@ class Install extends Component<PropTypes, StateTypes> {
               successInstallationSlackApplication: true,
             }));
           })
-          .catch((response) => {
+          .catch((response: ApolloError) => {
             // TODO refactor this out as we start using it in other places
             if (Raven.isSetup()) {
               Raven.captureException(Error(`Installation error: ${JSON.stringify(response)}`));
@@ -132,7 +134,7 @@ class Install extends Component<PropTypes, StateTypes> {
 }
 
 const attemptSlackInstallation = gql`
-    mutation($code: String!, $clientId: String!, $redirectUri: String!) {
+    mutation attemptInstall ($code: String!, $clientId: String!, $redirectUri: String!) {
         attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
             slackTeam {
                 name
@@ -144,9 +146,12 @@ const attemptSlackInstallation = gql`
 const InstallStyledRouted = withRouter(withStyles(styles)(Install));
 // TODO figure out the any, any types below
 const withMutation: ComponentDecorator<any, any> = graphql(attemptSlackInstallation, {
-  props: ({mutate}) => ({
-    attemptInstall: (code, clientId, redirectUri) => mutate({variables: {code, clientId, redirectUri}}),
-  }),
+  props: (props) => {
+    const mutate = props.mutate as Function; // Force not-null
+    return {
+      attemptInstall: ({code, clientId, redirectUri}: attemptInstallMutationVariables) => mutate({variables: {code, clientId, redirectUri}}),
+    }
+  },
 });
 
 export default withMutation(InstallStyledRouted);
