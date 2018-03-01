@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Component} from 'react';
+import {Component, ReactInstance} from 'react';
 import {findDOMNode} from 'react-dom';
 import consts from '../common/MenuConstants';
 import StrandLogo from '../common/StrandLogo.react';
@@ -21,16 +21,16 @@ interface StateTypes {
 
 class ShellMobile extends Component<PropTypes, StateTypes> {
   // Used to store a ref to the menu button
-  private menuButtonNode: HTMLInputElement;
+  private menuButtonNode?: ReactInstance;
 
-  constructor(props) {
+  constructor(props: PropTypes) {
     super(props);
 
     this.state = {
       showNavMenu: false,
-      menuIconAnchor: null,
+      menuIconAnchor: undefined,
     };
-    this.menuButtonNode = null;
+    this.menuButtonNode = undefined;
     this.openNavMenu = this.openNavMenu.bind(this);
     this.handleCloseNavMenu = this.handleCloseNavMenu.bind(this);
     this.generateHandleClickNavMenuItem = this.generateHandleClickNavMenuItem.bind(this);
@@ -39,7 +39,7 @@ class ShellMobile extends Component<PropTypes, StateTypes> {
   openNavMenu() {
     this.setState(prevState => ({
       showNavMenu: !prevState.showNavMenu,
-      menuIconAnchor: findDOMNode(this.menuButtonNode) as HTMLElement,
+      menuIconAnchor: this.menuButtonNode ? findDOMNode(this.menuButtonNode) as HTMLElement : undefined,
     }));
   }
 
@@ -47,7 +47,7 @@ class ShellMobile extends Component<PropTypes, StateTypes> {
     this.setState({showNavMenu: false});
   }
 
-  generateHandleClickNavMenuItem(openPage) {
+  generateHandleClickNavMenuItem(openPage: Function) {
     return () => {
       this.handleCloseNavMenu();
       openPage();
@@ -61,7 +61,7 @@ class ShellMobile extends Component<PropTypes, StateTypes> {
           <Toolbar style={{margin: 'auto', height: '56px'}}>
             <StrandLogo omitText style={{height: '75%'}}/>
             <IconButton
-              buttonRef={(node) => this.menuButtonNode = node}
+              buttonRef={(node) => this.menuButtonNode = node as ReactInstance}
               aria-label='Menu'
               onClick={this.openNavMenu}
               style={{width: 'unset'}}

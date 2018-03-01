@@ -5,7 +5,7 @@
     // Required option for react-hot-loader
     "module": "commonjs",
     // Show errors for things that could be typed and are not
-    "strict": false,
+    "strict": true,
     "jsx": "react",
     // Absolute imports start from here
     "baseUrl": ".",

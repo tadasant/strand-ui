@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Component} from 'react';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
+import {BrowserRouter} from 'react-router-dom';
 import App from './App.react';
 import {hot} from 'react-hot-loader';
 
