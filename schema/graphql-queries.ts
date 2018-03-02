@@ -52,3 +52,22 @@ export const ATTEMPT_SLACK_INSTALLATION_MUTATION = gql`
         }
     }
 `;
+
+export const GET_REFERENCE_DATA_QUERY = gql`
+    query GetReferenceData {
+        tags {
+            ...ReferenceTags
+        }
+        users {
+            ...ReferenceUsers
+        }
+    }
+  
+    fragment ReferenceTags on TagType {
+        name
+    }
+  
+    fragment ReferenceUsers on UserType {
+        alias
+    }
+`;

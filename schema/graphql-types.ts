@@ -34,6 +34,15 @@ export interface AttemptInstallMutation {
   } | null,
 };
 
+export interface GetReferenceDataQuery {
+  tags:  Array< {
+    name: string,
+  } | null > | null,
+  users:  Array< {
+    alias: string,
+  } | null > | null,
+};
+
 export interface GetTopicsTopicsFragment {
   title: string,
   description: string,
@@ -67,5 +76,13 @@ export interface GetTopicsDiscussionFragment {
 };
 
 export interface GetTopicsParticipantsFragment {
+  alias: string,
+};
+
+export interface ReferenceTagsFragment {
+  name: string,
+};
+
+export interface ReferenceUsersFragment {
   alias: string,
 };
