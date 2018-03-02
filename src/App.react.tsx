@@ -16,12 +16,12 @@ interface PropTypes {
 }
 
 class App extends Component<PropTypes> {
-  generateTopicsViewContainer(tags: ReferenceTagsFragment[]) {
+  generateTopicsViewContainer(): React.ComponentType<any> {
     return (routeProps: RouteProps) => {
       return (
         <TopicsViewContainer
           {...routeProps}
-          tags={tags}
+          tags={this.props.tags}
           users={this.props.users}
         />
       )
@@ -29,12 +29,11 @@ class App extends Component<PropTypes> {
   }
 
   render() {
-    const tags = this.props.tags;
     return (
       <Fragment>
         <Shell/>
         <Switch>
-          <Route path='/topics' component={this.generateTopicsViewContainer(tags)}/>
+          <Route path='/topics' component={this.generateTopicsViewContainer()}/>
           <Route path='/install' component={Install}/>
           <Redirect from='/' to='/topics'/>
         </Switch>

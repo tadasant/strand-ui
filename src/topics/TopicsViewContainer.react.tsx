@@ -7,6 +7,7 @@ import {
   ReferenceUsersFragment
 } from '../../schema/graphql-types';
 import {graphql} from 'react-apollo';
+import {filterFalsey} from '../common/utilities';
 
 interface StaticPropTypes {
   tags: ReferenceTagsFragment[],
@@ -23,11 +24,6 @@ const TopicsViewContainer: StatelessComponent<PropTypes> = props => (
 
 const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY);
 
-// Private topics will be null. For now this is expected, in the future it would probably be an error. TODO
-const filterNullResults = (topics: (GetTopicsTopicsFragment | null)[]): GetTopicsTopicsFragment[] => {
-  return topics.filter(x => x) as GetTopicsTopicsFragment[];
-};
-
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
 // Right now we're just ignoring any graphql errors
 export default withTopics(({data, tags, users}) => {
@@ -35,6 +31,6 @@ export default withTopics(({data, tags, users}) => {
     return <h1>{`ERROR ${data && data.error && data.error.message || ''}`}</h1>
   }
   if (data.loading) return <div>Loading...</div>;
-  const nonNullTopics = filterNullResults(data.topics);
+  const nonNullTopics = filterFalsey(data.topics);
   return <TopicsViewContainer topics={nonNullTopics} tags={tags} users={users}/>
 });
