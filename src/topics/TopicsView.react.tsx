@@ -1,3 +1,13 @@
+import * as React from 'react';
+import {StatelessComponent} from 'react';
+// import TopicsView from './TopicsView.react';
+
+
+const TopicsView: StatelessComponent = () => <div />;
+
+export default TopicsView;
+
+
 // import * as React from 'react';
 // import {Component} from 'react';
 // import {Grid, Hidden, Typography} from 'material-ui';

@@ -1,7 +1,7 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
-export interface TopicsQuery {
+export interface GetTopicsQuery {
   topics:  Array< {
     title: string,
     description: string,
@@ -34,21 +34,38 @@ export interface AttemptInstallMutation {
   } | null,
 };
 
-export interface TopicsParticipantsFragment {
+export interface GetTopicsTopicsFragment {
+  title: string,
+  description: string,
+  tags:  Array< {
+    name: string,
+  } | null > | null,
+  originalPoster:  {
+    alias: string,
+  } | null,
+  discussion:  {
+    status: string,
+    participants:  Array< {
+      alias: string,
+    } | null > | null,
+  } | null,
+};
+
+export interface GetTopicsTagsFragment {
+  name: string,
+};
+
+export interface GetTopicsOriginalPosterFragment {
   alias: string,
 };
 
-export interface TopicsDiscussionsFragment {
+export interface GetTopicsDiscussionFragment {
   status: string,
   participants:  Array< {
     alias: string,
   } | null > | null,
 };
 
-export interface TopicsOriginalPosterFragment {
+export interface GetTopicsParticipantsFragment {
   alias: string,
-};
-
-export interface TopicsTagsFragment {
-  name: string,
 };
