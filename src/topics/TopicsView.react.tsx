@@ -1,14 +1,22 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {GetTopicsTopicsFragment} from '../../schema/graphql-types';
+import {GetTopicsTopicsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
 
 interface PropTypes {
   topics: GetTopicsTopicsFragment[],
+  tags: ReferenceTagsFragment[],
+  users: ReferenceUsersFragment[],
 }
 
 class TopicsView extends Component<PropTypes> {
   render() {
-    return <div>Topics</div>
+    return (
+      <div>
+        Topics: {this.props.topics.map(topic => topic.title)}<br />
+        Tags: {this.props.tags.map(tag => tag.name)}<br />
+        Users: {this.props.users.map(user => user.alias)}
+      </div>
+    );
   }
 }
 

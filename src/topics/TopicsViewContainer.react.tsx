@@ -19,18 +19,22 @@ interface PropTypes extends StaticPropTypes {
 }
 
 const TopicsViewContainer: StatelessComponent<PropTypes> = props => (
-  <TopicsView topics={props.topics}/>
+  <TopicsView {...props}/>
 );
 
-const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY);
+const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY, {
+  options: {
+    'errorPolicy': 'all', // Returns partial data
+  } as any // TODO Apollo types bug. Should be fixed with next npm release of react-apollo (>2.0.4).
+});
 
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
 // Right now we're just ignoring any graphql errors
 export default withTopics(({data, tags, users}) => {
+  if (data && data.loading) return <div>Loading...</div>;
   if (!data || !data.topics) {
     return <h1>{`ERROR ${data && data.error && data.error.message || ''}`}</h1>
   }
-  if (data.loading) return <div>Loading...</div>;
   const nonNullTopics = filterFalsey(data.topics);
   return <TopicsViewContainer topics={nonNullTopics} tags={tags} users={users}/>
 });
