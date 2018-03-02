@@ -9,8 +9,8 @@ interface PropTypes {
   topics: GetTopicsTopicsFragment[],
 }
 
-const TopicsViewContainer: StatelessComponent<PropTypes> = () => (
-  <TopicsView/>
+const TopicsViewContainer: StatelessComponent<PropTypes> = props => (
+  <TopicsView topics={props.topics}/>
 );
 
 const withTopics = graphql<GetTopicsQuery>(GET_TOPICS_QUERY);
@@ -23,7 +23,7 @@ const filterNullResults = (topics: (GetTopicsTopicsFragment | null)[]): GetTopic
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
 export default withTopics(({data}) => {
   if (!data || !data.topics || data.error) {
-    return <h1>{data ? data.error ? data.error : 'ERROR' : 'ERROR'}</h1>
+    return <h1>{`ERROR ${data && data.error && data.error.message}`}</h1>
   }
   if (data.loading) return <div>Loading...</div>;
   const nonNullTopics = filterNullResults(data.topics);

@@ -1,9 +1,16 @@
 import * as React from 'react';
-import {StatelessComponent} from 'react';
-// import TopicsView from './TopicsView.react';
+import {Component} from 'react';
+import {GetTopicsTopicsFragment} from '../../schema/graphql-types';
 
+interface PropTypes {
+  topics: GetTopicsTopicsFragment[],
+}
 
-const TopicsView: StatelessComponent = () => <div />;
+class TopicsView extends Component<PropTypes> {
+  render() {
+    return <div>Topics</div>
+  }
+}
 
 export default TopicsView;
 
