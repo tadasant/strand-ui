@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react';
+import {Component} from 'react'
 import Typography from 'material-ui/Typography/Typography'
 
-const propTypes = {
-  installingSlackApplication: PropTypes.bool.isRequired,
-  successInstallationSlackApplication: PropTypes.bool,
-  errors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-};
+interface PropTypes {
+  installingSlackApplication: boolean,
+  successInstallationSlackApplication?: boolean,
+  errors: string[],
+}
 
-class InstallationStatus extends Component {
+class InstallationStatus extends Component<PropTypes> {
   renderSuccess() {
     return (
       <Typography variant='subheading' style={{color: 'green'}}>
@@ -37,7 +37,5 @@ class InstallationStatus extends Component {
     return this.props.successInstallationSlackApplication ? this.renderSuccess() : this.renderFailure()
   }
 }
-
-InstallationStatus.propTypes = propTypes;
 
 export default InstallationStatus

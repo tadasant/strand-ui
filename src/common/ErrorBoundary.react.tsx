@@ -1,13 +1,17 @@
 import {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as Raven from 'raven-js';
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+interface PropTypes {
+  children: object,
+}
+
+class ErrorBoundary extends Component<PropTypes> {
+  constructor(props: PropTypes) {
     super(props);
     this.state = {error: null};
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: object) {
     if (Raven.isSetup()) {
       this.setState({error});
       Raven.captureException(error, {extra: errorInfo});
@@ -19,9 +23,5 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.object,
-};
 
 export default ErrorBoundary;

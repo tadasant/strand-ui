@@ -1,20 +1,19 @@
-import React from 'react';
-import {mount} from 'enzyme/build/index';
+import * as React from 'react';
+import {mount} from 'enzyme';
 import App from 'src/App.react';
 import {MemoryRouter} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
-import PropTypes from 'prop-types';
 import {addMockFunctionsToSchema} from 'graphql-tools';
 import {SchemaLink} from 'apollo-link-schema';
-import * as graphqlIntrospectionResult from '../schema';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {buildClientSchema} from 'graphql';
 import {ApolloClient} from 'apollo-client';
-import get from 'lodash/get';
+import {get} from 'lodash';
+import * as graphqlIntrospectionResult from '../../schema/graphql.schema.json';
 
 
 /*
-  Mount the entire application (minus stuff in Root.react.js).
+  Mount the entire application (minus stuff in Root.react.tsx).
 
   (optional) options: {
     graphqlMocks: {
@@ -22,7 +21,7 @@ import get from 'lodash/get';
     }
   }
  */
-export const mountApplication = (endpoint, options) => {
+export const mountApplication = (endpoint: string, options?: {}) => {
   const mockApolloClient = generateMockApolloClient(get(options, 'graphqlMocks'));
   return mount(
     <ApolloProvider client={mockApolloClient}>
@@ -31,20 +30,16 @@ export const mountApplication = (endpoint, options) => {
         <App/>
       </MemoryRouter>
     </ApolloProvider>,
-    {
-      context: {uiHost: process.env.UI_HOST, slackClientId: process.env.SLACK_CLIENT_ID},
-      childContextTypes: {uiHost: PropTypes.string, slackClientId: PropTypes.string},
-    }
   );
 };
 
-const generateMockApolloClient = (graphqlMocks) => {
+const generateMockApolloClient = (graphqlMocks: {}) => {
   const schema = buildClientSchema(graphqlIntrospectionResult.data);
   addMockFunctionsToSchema({
     schema,
     mocks: graphqlMocks || {},
   });
-  const apolloCache = new InMemoryCache(window.__APOLLO_STATE__);
+  const apolloCache = new InMemoryCache();
   return new ApolloClient({
     cache: apolloCache,
     link: new SchemaLink({schema}),

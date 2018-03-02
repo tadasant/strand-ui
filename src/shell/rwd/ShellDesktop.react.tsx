@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
 import consts from '../common/MenuConstants';
 import StrandLogo from '../common/StrandLogo.react';
 import AppBar from 'material-ui/AppBar/AppBar';
 import Toolbar from 'material-ui/Toolbar/Toolbar';
 import Button from 'material-ui/Button/Button';
 
-const propTypes = {
-  openPageGenerator: PropTypes.func.isRequired,
-};
+interface PropTypes {
+  openPageGenerator: Function,
+}
 
-class ShellDesktop extends Component {
+class ShellDesktop extends Component<PropTypes> {
   render() {
     return (
       <div>
@@ -33,7 +33,5 @@ class ShellDesktop extends Component {
     )
   }
 }
-
-ShellDesktop.propTypes = propTypes;
 
 export default ShellDesktop;
