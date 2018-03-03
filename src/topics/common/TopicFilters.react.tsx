@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Divider, Grid, Typography} from 'material-ui';
+import Divider from 'material-ui/Divider';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 import Select, {OptionValues} from 'react-select';
 import {get} from 'lodash';
 import {FiltersType, FilterTypes, FilterValuesType} from '../TopicsView.react';

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {Grid, Paper} from 'material-ui';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
 import {GetTopicsTopicsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
 import {FiltersType, FilterTypes, FilterValuesType} from '../TopicsView.react';
 import TopicFilters from '../common/TopicFilters.react';
