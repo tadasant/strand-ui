@@ -27,13 +27,18 @@ const config: webpack.Configuration = {
           'ts-loader',
         ],
       },
+      // Handle .css files
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
     ],
   },
   // Enable served source maps
   devtool: 'inline-source-map',
   resolve: {
     // Include all these extensions in processing (note we need .js because not all node_modules are .ts)
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.css'],
   },
   // Webpack Dev Server for running locally
   devServer: {

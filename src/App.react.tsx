@@ -9,7 +9,7 @@ import {GetReferenceDataQuery, ReferenceTagsFragment, ReferenceUsersFragment} fr
 import {graphql} from 'react-apollo';
 import {get} from 'lodash';
 import {filterFalsey} from './common/utilities';
-// import 'react-select/dist/react-select.css';
+import 'react-select/dist/react-select.css';
 
 interface PropTypes {
   tags: ReferenceTagsFragment[],

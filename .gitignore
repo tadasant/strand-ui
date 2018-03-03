@@ -8,7 +8,4 @@ build/
 .env.local
 yarn-error.log
 .DS_Store
-
-// Compiled TypeScript files
-*.js
-*.js.map
+ts-build/
