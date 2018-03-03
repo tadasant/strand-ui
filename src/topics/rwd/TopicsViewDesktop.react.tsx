@@ -2,14 +2,15 @@ import * as React from 'react';
 import {Component} from 'react';
 import {Grid, Paper} from 'material-ui';
 import {GetTopicsTopicsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
-import {FiltersType, FilterTypes} from '../TopicsView.react';
+import {FiltersType, FilterTypes, FilterValuesType} from '../TopicsView.react';
+import TopicFilters from '../common/TopicFilters.react';
 
 interface PropTypes {
   filteredTopics: GetTopicsTopicsFragment[]
   tags: ReferenceTagsFragment[]
   users: ReferenceUsersFragment[]
   filters: FilterTypes
-  handleChangeFilter: (name: FiltersType, values: string[] | number | undefined) => void
+  handleChangeFilter: (name: FiltersType, values: FilterValuesType) => void
 }
 
 class TopicsViewDesktop extends Component<PropTypes> {
@@ -25,12 +26,12 @@ class TopicsViewDesktop extends Component<PropTypes> {
           <Grid item xs={1}/>
           <Grid item xs={2}>
             <Paper>
-              {/*<TopicFilters*/}
-              {/*filters={this.props.filters}*/}
-              {/*onChangeFilter={this.props.handleChangeFilter}*/}
-              {/*users={this.props.users}*/}
-              {/*tags={this.props.tags}*/}
-              {/*/>*/}
+              <TopicFilters
+                filters={this.props.filters}
+                onChangeFilter={this.props.handleChangeFilter}
+                users={this.props.users}
+                tags={this.props.tags}
+              />
             </Paper>
           </Grid>
           <Grid item xs={8}>

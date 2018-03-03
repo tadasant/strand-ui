@@ -26,7 +26,8 @@
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-select": "^1.2.1"
   },
   "devDependencies": {
     "@types/dotenv": "^4.0.2",
@@ -39,6 +40,7 @@
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
     "@types/react-router-dom": "^4.2.4",
+    "@types/react-select": "^1.2.3",
     "@types/webpack-merge": "^4.1.2",
     "apollo-codegen": "^0.18.8",
     "babel-loader": "^7.1.3",
@@ -49,6 +51,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "clean-webpack-plugin": "^0.1.18",
+    "css-loader": "^0.28.10",
     "dotenv": "^5.0.1",
     "enzyme": "^3.3.0",
     "eslint": "^4.17.0",

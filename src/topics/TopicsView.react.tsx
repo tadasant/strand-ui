@@ -14,6 +14,7 @@ interface PropTypes {
 }
 
 export type FiltersType = 'tagNames' | 'originalPosterId' | 'participantIds';
+export type FilterValuesType = string[] | number | number[] | void;
 
 export interface FilterTypes {
   tagNames: string[],
@@ -42,7 +43,8 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
   }
 
-  handleChangeFilter(name: FiltersType, values: string[] | number | undefined): void {
+  // TODO is there a way to re-use this method type?
+  handleChangeFilter(name: FiltersType, values: FilterValuesType): void {
     const newFilters = {
       ...this.state.filters,
       [name]: values,
