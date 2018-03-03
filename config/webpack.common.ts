@@ -10,12 +10,7 @@ const config: webpack.Configuration = {
       // Bundle files (e.g. images)
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {},
-          },
-        ],
+        use: ['file-loader'],
       },
       // Transpile & type check with babel/typescript loader
       {
