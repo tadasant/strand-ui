@@ -3,14 +3,13 @@ import {Component} from 'react';
 import Chip from 'material-ui/Chip';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import {PropTypes} from 'material-ui';
 
 interface PropTypes {
   topic: {
     description: string,
-    tags:  Array< {
+    tags: Array<{
       name: string,
-    } | null > | null,
+    } | null> | null,
   }
 }
 
@@ -19,7 +18,7 @@ class TopicSummaryTile extends Component<PropTypes> {
     const {description, tags} = this.props.topic;
     return (
       <Grid container alignItems='stretch' direction='column'>
-        <Grid item>
+        <Grid item style={{overflowY: 'scroll'}}>
           <Typography variant='body2'>
             {description}
           </Typography>

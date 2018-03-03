@@ -17,7 +17,7 @@ interface PropTypes {
 
 const style = {
   content: {
-    padding: '1% 1% 1% 1%',
+    padding: '2% 2% 2% 2%',
   },
 };
 
