@@ -5,6 +5,7 @@ import {intersection} from 'lodash';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
+import TopicsViewDesktop from './rwd/TopicsViewDesktop.react';
 
 interface PropTypes {
   topics: GetTopicsTopicsFragment[],
@@ -12,7 +13,9 @@ interface PropTypes {
   users: ReferenceUsersFragment[],
 }
 
-interface FilterTypes {
+export type FiltersType = 'tagNames' | 'originalPosterId' | 'participantIds';
+
+export interface FilterTypes {
   tagNames: string[],
   originalPosterId?: number,
   participantIds: number[],
@@ -39,7 +42,7 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
   }
 
-  handleChangeFilter(name: 'tagNames' | 'originalPosterId' | 'participantIds', values: string[] | number | undefined) {
+  handleChangeFilter(name: FiltersType, values: string[] | number | undefined): void {
     const newFilters = {
       ...this.state.filters,
       [name]: values,
@@ -79,11 +82,10 @@ class TopicsView extends Component<PropTypes, StateTypes> {
           {/*/>*/}
         </Hidden>
         <Hidden smDown>
-          <div>large</div>
-          {/*<HelpSessionDashboardDesktop*/}
-            {/*{...this.props}*/}
-            {/*{...this.state}*/}
-            {/*handleChangeFilter={this.handleChangeFilter}*/}
+          <TopicsViewDesktop
+            {...this.props}
+            {...this.state}
+            handleChangeFilter={this.handleChangeFilter}
           />
         </Hidden>
       </div>
