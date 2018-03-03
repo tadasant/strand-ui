@@ -23,7 +23,7 @@ class ParticipantsTile extends Component<PropTypes> {
         <UserListItem user={this.props.originalPoster} isOriginalPoster/>
         <Divider inset/>
         {otherParticipants.map(participant => (
-          <div key={participant.id}>
+          <div key={`participant_${participant.id}`}>
             <Divider inset/>
             <UserListItem user={participant}/>
           </div>

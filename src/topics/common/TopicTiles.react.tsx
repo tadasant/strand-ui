@@ -15,7 +15,7 @@ class TopicTiles extends Component<PropTypes> {
     return (
       <Grid container alignItems='stretch' direction='column'>
         {this.props.topics.map(topic => (
-          <Grid item key={topic.id}>
+          <Grid item key={`topic_${topic.id}`}>
             {this.props.minimal ? <TopicTileMinimal topic={topic} /> : <TopicTile topic={topic}/>}
           </Grid>
         ))}
