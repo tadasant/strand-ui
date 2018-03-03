@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {ListItem, ListItemIcon, ListItemText} from 'material-ui';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import QuestionAnswer from 'material-ui-icons/QuestionAnswer';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemIcon from 'material-ui/List/ListItemIcon';
+import ListItemText from 'material-ui/List/ListItemText';
 
 interface PropTypes {
   user: {
