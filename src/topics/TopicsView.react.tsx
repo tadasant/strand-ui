@@ -43,6 +43,15 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
   }
 
+  componentWillMount() {
+    this.updateStateWithProps(this.props);
+  }
+
+  updateStateWithProps(props: PropTypes) {
+    const filteredTopics = this.applyFiltersToTopics(this.state.filters, props.topics);
+    this.setState({filteredTopics});
+  }
+
   // TODO is there a way to re-use this method type?
   handleChangeFilter(name: FiltersType, values: FilterValuesType): void {
     const newFilters = {
@@ -59,7 +68,7 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     return topics
       .filter(topic => intersection((topic!.tags || []).map(tag => tag!.name), tagNames).length === tagNames.length)
       .filter(topic => !originalPosterId || parseInt(topic.originalPoster!.id) === originalPosterId)
-      .filter(topic => intersection((topic!.discussion!.participants || []).map(user => parseInt(user!.id)), participantIds).length === participantIds.length)
+      .filter(topic => intersection((topic!.discussion ? topic!.discussion!.participants || [] : []).map(user => parseInt(user!.id)), participantIds).length === participantIds.length)
   }
 
   render() {

@@ -10,6 +10,7 @@ export const GET_TOPICS_QUERY = gql`
     }
 
     fragment GetTopicsTopics on TopicType {
+        id
         title
         description
         tags {

@@ -3,6 +3,7 @@
 
 export interface GetTopicsQuery {
   topics:  Array< {
+    id: string,
     title: string,
     description: string,
     tags:  Array< {
@@ -47,6 +48,7 @@ export interface GetReferenceDataQuery {
 };
 
 export interface GetTopicsTopicsFragment {
+  id: string,
   title: string,
   description: string,
   tags:  Array< {
