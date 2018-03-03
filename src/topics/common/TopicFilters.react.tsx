@@ -79,7 +79,7 @@ class TopicFilters extends Component<PropTypes> {
           <Divider style={{marginTop: '2%'}}/>
         </Grid>
         <Grid item style={{marginTop: '1%'}}>
-          <Typography variant='body2'>Answerer</Typography>
+          <Typography variant='body2'>Original Poster</Typography>
           <Select
             value={this.props.filters.originalPosterId}
             onChange={this.generateHandleChangeFilter('originalPosterId')}
