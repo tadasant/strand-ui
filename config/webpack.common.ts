@@ -1,5 +1,5 @@
-const HTMLPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+import * as HTMLPlugin from 'html-webpack-plugin';
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as webpack from 'webpack';
 
 const config: webpack.Configuration = {
