@@ -6,6 +6,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
 import TopicsViewDesktop from './rwd/TopicsViewDesktop.react';
+import TopicsViewMobile from './rwd/TopicsViewMobile.react';
 
 interface PropTypes {
   topics: GetTopicsTopicsFragment[],
@@ -85,12 +86,11 @@ class TopicsView extends Component<PropTypes, StateTypes> {
           </Grid>
         </Grid>
         <Hidden mdUp>
-          <div>small</div>
-          {/*<HelpSessionDashboardMobile*/}
-            {/*{...this.props}*/}
-            {/*{...this.state}*/}
-            {/*handleChangeFilter={this.handleChangeFilter}*/}
-          {/*/>*/}
+          <TopicsViewMobile
+            {...this.props}
+            {...this.state}
+            handleChangeFilter={this.handleChangeFilter}
+          />
         </Hidden>
         <Hidden smDown>
           <TopicsViewDesktop
