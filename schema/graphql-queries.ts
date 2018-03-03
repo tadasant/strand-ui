@@ -28,6 +28,7 @@ export const GET_TOPICS_QUERY = gql`
     }
 
     fragment GetTopicsOriginalPoster on UserType {
+        id
         alias
     }
 
@@ -39,6 +40,7 @@ export const GET_TOPICS_QUERY = gql`
     }
 
     fragment GetTopicsParticipants on UserType {
+        id
         alias
     }
 `;
@@ -68,6 +70,7 @@ export const GET_REFERENCE_DATA_QUERY = gql`
     }
   
     fragment ReferenceUsers on UserType {
+        id
         alias
     }
 `;

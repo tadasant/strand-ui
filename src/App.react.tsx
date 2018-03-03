@@ -45,7 +45,7 @@ class App extends Component<PropTypes> {
 const withReferenceData = graphql<GetReferenceDataQuery>(GET_REFERENCE_DATA_QUERY);
 
 export default withReferenceData(({data}) => {
-  const tags = filterFalsey(get(data, 'tags', [])!);
-  const users = filterFalsey(get(data, 'users', [])!);
+  const tags = filterFalsey(get(data, 'tags') || []);
+  const users = filterFalsey(get(data, 'users') || []);
   return <App tags={tags} users={users}/>
 })

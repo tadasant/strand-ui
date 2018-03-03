@@ -9,11 +9,13 @@ export interface GetTopicsQuery {
       name: string,
     } | null > | null,
     originalPoster:  {
+      id: string,
       alias: string,
     } | null,
     discussion:  {
       status: string,
       participants:  Array< {
+        id: string,
         alias: string,
       } | null > | null,
     } | null,
@@ -39,6 +41,7 @@ export interface GetReferenceDataQuery {
     name: string,
   } | null > | null,
   users:  Array< {
+    id: string,
     alias: string,
   } | null > | null,
 };
@@ -50,11 +53,13 @@ export interface GetTopicsTopicsFragment {
     name: string,
   } | null > | null,
   originalPoster:  {
+    id: string,
     alias: string,
   } | null,
   discussion:  {
     status: string,
     participants:  Array< {
+      id: string,
       alias: string,
     } | null > | null,
   } | null,
@@ -65,17 +70,20 @@ export interface GetTopicsTagsFragment {
 };
 
 export interface GetTopicsOriginalPosterFragment {
+  id: string,
   alias: string,
 };
 
 export interface GetTopicsDiscussionFragment {
   status: string,
   participants:  Array< {
+    id: string,
     alias: string,
   } | null > | null,
 };
 
 export interface GetTopicsParticipantsFragment {
+  id: string,
   alias: string,
 };
 
@@ -84,5 +92,6 @@ export interface ReferenceTagsFragment {
 };
 
 export interface ReferenceUsersFragment {
+  id: string,
   alias: string,
 };
