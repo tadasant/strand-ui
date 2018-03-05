@@ -1,11 +1,7 @@
 import * as React from 'react';
-import {StatelessComponent} from 'react';
 import TopicsView from './TopicsView.react';
 import {GET_TOPICS_QUERY} from '../../schema/graphql-queries';
-import {
-  GetTopicsQuery, GetTopicsTopicsFragment, ReferenceTagsFragment,
-  ReferenceUsersFragment
-} from '../../schema/graphql-types';
+import {GetTopicsQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
 import {graphql} from 'react-apollo';
 import {filterFalsey} from '../common/utilities';
 
@@ -13,14 +9,6 @@ interface StaticPropTypes {
   tags: ReferenceTagsFragment[],
   users: ReferenceUsersFragment[],
 }
-
-interface PropTypes extends StaticPropTypes {
-  topics: GetTopicsTopicsFragment[],
-}
-
-const TopicsViewContainer: StatelessComponent<PropTypes> = props => (
-  <TopicsView {...props}/>
-);
 
 const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY, {
   options: {
@@ -30,11 +18,13 @@ const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY, {
 
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
 // Right now we're just ignoring any graphql errors
-export default withTopics(({data, tags, users}) => {
+const TopicsViewContainer = withTopics(({data, tags, users}) => {
   if (data && data.loading) return <div>Loading...</div>;
   if (!data || !data.topics) {
     return <h1>{`ERROR ${data && data.error && data.error.message || ''}`}</h1>
   }
   const nonNullTopics = filterFalsey(data.topics);
-  return <TopicsViewContainer topics={nonNullTopics} tags={tags} users={users}/>
+  return <TopicsView topics={nonNullTopics} tags={tags} users={users}/>
 });
+
+export default TopicsViewContainer;
