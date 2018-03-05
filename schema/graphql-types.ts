@@ -53,12 +53,14 @@ export interface GetTopicQueryVariables {
 
 export interface GetTopicQuery {
   topic:  {
+    id: string,
     title: string,
     description: string,
     tags:  Array< {
       name: string,
     } | null > | null,
     originalPoster:  {
+      id: string,
       alias: string,
     } | null,
     discussion:  {
@@ -66,6 +68,7 @@ export interface GetTopicQuery {
       timeEnd: string | null,
       status: string,
       participants:  Array< {
+        id: string,
         alias: string,
       } | null > | null,
     } | null,
@@ -124,12 +127,14 @@ export interface ReferenceUsersFragment {
 };
 
 export interface GetTopicTopicFragment {
+  id: string,
   title: string,
   description: string,
   tags:  Array< {
     name: string,
   } | null > | null,
   originalPoster:  {
+    id: string,
     alias: string,
   } | null,
   discussion:  {
@@ -137,6 +142,7 @@ export interface GetTopicTopicFragment {
     timeEnd: string | null,
     status: string,
     participants:  Array< {
+      id: string,
       alias: string,
     } | null > | null,
   } | null,
@@ -147,6 +153,7 @@ export interface GetTopicTagsFragment {
 };
 
 export interface GetTopicUserFragment {
+  id: string,
   alias: string,
 };
 
@@ -155,6 +162,7 @@ export interface GetTopicDiscussionFragment {
   timeEnd: string | null,
   status: string,
   participants:  Array< {
+    id: string,
     alias: string,
   } | null > | null,
 };

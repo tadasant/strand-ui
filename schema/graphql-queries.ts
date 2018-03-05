@@ -84,6 +84,7 @@ export const GET_TOPIC_QUERY = gql`
     }
     
     fragment GetTopicTopic on TopicType {
+        id
         title
         description
         tags {
@@ -102,6 +103,7 @@ export const GET_TOPIC_QUERY = gql`
     }
   
     fragment GetTopicUser on UserType {
+        id
         alias
     }
   

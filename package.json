@@ -19,6 +19,7 @@
     "lodash": "^4.17.5",
     "material-ui": "^1.0.0-beta.33",
     "material-ui-icons": "^1.0.0-beta.17",
+    "moment": "^2.21.0",
     "query-string": "^5.1.0",
     "raven-js": "^3.22.4",
     "react": "^16.2.0",
@@ -82,7 +83,7 @@
     "productioncdn": "https://app.trystrand.com/"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --config config/webpack.development.ts --output-public-path \"\/\"",
+    "start": "webpack-dev-server --mode development --open --config config/webpack.development.ts --output-public-path \"/\"",
     "build-cmd": "webpack --mode production",
     "build-staging": "yarn build-cmd --env.NODE_ENV=staging --output-public-path \"$npm_package_config_stagingcdn\" --config config/webpack.staging.ts",
     "build": "yarn build-cmd --env.NODE_ENV=production --output-public-path \"$npm_package_config_productioncdn\" --config config/webpack.production.ts",

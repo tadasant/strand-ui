@@ -3,7 +3,7 @@ import {Component} from 'react';
 import Grid from 'material-ui/Grid';
 import Hidden from 'material-ui/Hidden';
 import {GetTopicTopicFragment} from '../../schema/graphql-types';
-// import TopicViewDesktop from './rwd/TopicViewDesktop.react';
+import TopicViewDesktop from './rwd/TopicViewDesktop.react';
 // import TopicViewMobile from './rwd/TopicViewMobile.react';
 
 
@@ -15,17 +15,16 @@ class TopicView extends Component<PropTypes> {
   renderBody() {
     return (
       <div>
-        {this.props.topic.title}
         {/*<Hidden mdUp>*/}
           {/*<TopicViewMobile*/}
             {/*{...this.props}*/}
           {/*/>*/}
         {/*</Hidden>*/}
-        {/*<Hidden smDown>*/}
-          {/*<TopicViewDesktop*/}
-            {/*{...this.props}*/}
-          {/*/>*/}
-        {/*</Hidden>*/}
+        <Hidden smDown>
+          <TopicViewDesktop
+            {...this.props}
+          />
+        </Hidden>
       </div>
     )
   }
