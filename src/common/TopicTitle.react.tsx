@@ -15,7 +15,7 @@ class TopicTitle extends Component<PropTypes> {
       <Typography
         variant='title'
         align={this.props.center ? 'center' : undefined}>
-        <Link to={`/topics/${this.props.topicId}`}>{this.props.title}</Link>
+        <Link to={`/topics/${this.props.topicId}`} style={{textDecoration: 'unset'}}>{this.props.title}</Link>
       </Typography>
     );
   }
