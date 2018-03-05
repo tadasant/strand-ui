@@ -8,7 +8,7 @@ It is recommended that you use WebStorm (not PyCharm) for development.
 
 We use [yarn](https://yarnpkg.com/en/) (rather than `npm`) as our package manager. Install `yarn` with `brew install yarn`.
 
-Run `cd client && yarn install` to set up your `node_modules`.
+Run `yarn install` to set up your `node_modules`.
 
 To run locally (with hot module replacement!), simply run `yarn start`.
 
@@ -48,31 +48,11 @@ Merge to master and [create a release](https://help.github.com/articles/creating
 
 Using CircleCI, approve the deploy to production.
 
-## .env file management
-
-[Parcel.js commit](https://github.com/parcel-bundler/parcel/pull/258/files/bb4f1e62b4948c59983a730262d6938497e4c365) that added dotenv support
-
-[Breakdown](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use) of intended implementation 
-
-Basically the hierarchy is:
-1) .env.${NODE_ENV}.local
-2) .env.${NODE_ENV}
-3) .env.local (excluded if NODE_ENV == 'test')
-4) .env
-
-1 takes priority over 2, etc.
-
-Note that `parcel build` overrides `NODE_ENV` to be `production`, hence our leveraging `REALM` in the script & in `index.js`.
-
 ## Running tests
 
-It's important to make sure you're running on the up-to-date GraphQL schema. Extract from API by going to its project root and doing:
+It's important to make sure you're running on the up-to-date GraphQL schema. See section below on GraphQL schemas.
 
-`python manage.py graphql_schema --indent 2 --out schema.json`
-
-Commit the schema to `test/schema.json` in UI. UI-26 will automate this process.
-
-We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing. 
+We use [jest](https://github.com/facebook/jest) and [enzyme](https://github.com/airbnb/enzyme) for UI testing.
 
 While developing, using `yarn test-watch`. This will watch test files that are testing the production files to which you have made edits (based on git).
 
@@ -90,6 +70,37 @@ To set up a single file hotkey:
 3) "Fix ESLint Problems"
 4) Recommend ctrl + opt + L (similar to cmd + opt + L code reformat) 
 
-## Webpack, TypeScript, .env files, oh my...
+## Webpack, TypeScript, .env files, babel, oh my...
 
-// TODO
+Webpack - our bundler. Manages the flow of steps that need to be done in going from raw source code to performant
+application in the browser.
+
+TypeScript - compiles and transpiles our code. Takes TypeScript code, which is a superset of ES6-compliant (?) JavaScript.
+
+.env files - used for configuring primitive values (e.g. feature toggles, endpoints) across realms.
+
+Babel - not really needed anymore due to introduction of TypeScript. Previously used to be used for transpiling ES6 -> ES5.
+.babelrc and babel-loader, etc, remain because react-hot-loader depends on it.
+
+package.json - contains a tiny bit of config (stagingcdn, productioncdn) because there's a known html-webpack-plugin
+issue ([UI-46](https://solutionloft.atlassian.net/browse/UI-46)) that prevents us from using a workaround for it. 
+
+## GraphQL schemas, testing, and TypeScript
+
+Recommended that you install the JS GraphQL plugin for IntelliJ so you get features for playing with gql queries with ease.
+IntelliJ uses `graphql.config.json` is ONLY used for local IntelliJ development. Nothing to do with the source code itself.
+ 
+
+Extract and updated GraphQL schema from API by going to its project root and doing:
+
+`python manage.py graphql_schema --indent 2 --out graphql.schema.json`
+
+Commit the schema to `schema.json` in UI. UI-26 will automate this process.
+
+An alternative to consider; can use `apollo-codegen` over the wire:
+
+`node_modules/.bin/apollo-codegen introspect-schema http://localhost:8000/graphql --output graphql.schema.json`
+ 
+Generate up-to-date TypeScript definitions with:
+
+`node_modules/.bin/apollo-codegen generate schema/graphql-queries.ts --schema schema/graphql.schema.json --target typescript --output schema/graphql-types.ts`

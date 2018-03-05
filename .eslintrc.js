@@ -17,7 +17,8 @@ module.exports = {
     'no-console': 'warn',
     'react/no-find-dom-node': 'warn',
     'jsx-quotes': ['error', 'prefer-single'],
-    'comma-dangle': ['error', 'always-multiline']
+    'comma-dangle': ['error', 'always-multiline'],
+    'no-undef': 'off' // Doesn't work with TS
   },
   'env': {
     'jest/globals': true,
@@ -30,7 +31,6 @@ module.exports = {
     'console': true,
     'document': true,
     'setImmediate': true,
-    'Raven': true,
     'global': true,
   }
 };

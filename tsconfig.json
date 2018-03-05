@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    // Required option for react-hot-loader
+    "target": "es6",
+    // Required option for react-hot-loader
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "react",
+    // Absolute imports start from here
+    "baseUrl": ".",
+    "sourceMap": true,
+    // Stash these away when doing WebStorm/compile all so they don't get in the way
+    "outDir": "ts-build/"
+  }
+}
+   

@@ -8,3 +8,4 @@ build/
 .env.local
 yarn-error.log
 .DS_Store
+ts-build/
