@@ -3,7 +3,7 @@ import {Component} from 'react';
 import Divider from 'material-ui/Divider';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Select, {OptionValues} from 'react-select';
+import Select, {OnChangeHandler, OptionValues} from 'react-select';
 import {get} from 'lodash';
 import {FiltersType, FilterTypes, FilterValuesType} from '../TopicsView.react';
 import {ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
@@ -34,7 +34,7 @@ class TopicFilters extends Component<PropTypes> {
     this.generateHandleChangeFilter = this.generateHandleChangeFilter.bind(this);
   }
 
-  generateHandleChangeFilter(filterName: FiltersType) {
+  generateHandleChangeFilter(filterName: FiltersType): OnChangeHandler {
     return (selection: Array<ReactSelectSelection> | ReactSelectSelection | null) => {
       const value = Array.isArray(selection) ? selection.map(option => option.value) : get(selection, 'value');
       this.props.onChangeFilter(filterName, value as FilterValuesType);

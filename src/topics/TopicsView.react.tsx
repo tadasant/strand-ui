@@ -63,7 +63,7 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     this.setState({filters: newFilters, filteredTopics})
   }
 
-  applyFiltersToTopics(filters: FilterTypes, topics: GetTopicsTopicsFragment[]) {
+  applyFiltersToTopics(filters: FilterTypes, topics: GetTopicsTopicsFragment[]): GetTopicsTopicsFragment[] {
     const {tagNames, originalPosterId, participantIds} = filters;
     // TODO [UI-50]: Eliminate !'s with non-nullable arrays
     return topics
