@@ -17,10 +17,10 @@ class ShellDesktop extends Component<PropTypes> {
         <AppBar position='fixed'>
           <Toolbar style={{height: '56px'}}>
             <StrandLogo style={{height: '75%'}}/>
-            {Object.keys(consts.navigationLabelToPath).map(label => (
+            {Object.keys(consts.navigationLabelToPath).map((label, i) => (
               <Button
                 id={`${consts.navigationLabelToPath[label]}-button`}
-                style={{marginLeft: 'auto'}}
+                style={i == 0 ? {marginLeft: 'auto'} : undefined}
                 key={label}
                 onClick={this.props.openPageGenerator(consts.navigationLabelToPath[label])}>
                 {label}

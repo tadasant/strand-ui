@@ -1,31 +1,30 @@
 import * as React from 'react';
-import {StatelessComponent} from 'react';
 import TopicsView from './TopicsView.react';
 import {GET_TOPICS_QUERY} from '../../schema/graphql-queries';
-import {GetTopicsQuery, GetTopicsTopicsFragment} from '../../schema/graphql-types';
+import {GetTopicsQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
 import {graphql} from 'react-apollo';
+import {filterFalsey} from '../common/utilities';
 
-interface PropTypes {
-  topics: GetTopicsTopicsFragment[],
+interface StaticPropTypes {
+  tags: ReferenceTagsFragment[],
+  users: ReferenceUsersFragment[],
 }
 
-const TopicsViewContainer: StatelessComponent<PropTypes> = () => (
-  <TopicsView/>
-);
-
-const withTopics = graphql<GetTopicsQuery>(GET_TOPICS_QUERY);
-
-// Private topics will be null. For now this is expected, in the future it would probably be an error. TODO
-const filterNullResults = (topics: (GetTopicsTopicsFragment | null)[]): GetTopicsTopicsFragment[] => {
-  return topics.filter(x => x) as GetTopicsTopicsFragment[];
-};
+const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY, {
+  options: {
+    'errorPolicy': 'all', // Returns partial data
+  } as any // TODO Apollo types bug. Should be fixed with next npm release of react-apollo (>2.0.4).
+});
 
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
-export default withTopics(({data}) => {
-  if (!data || !data.topics || data.error) {
-    return <h1>{data ? data.error ? data.error : 'ERROR' : 'ERROR'}</h1>
+// Right now we're just ignoring any graphql errors
+const TopicsViewContainer = withTopics(({data, tags, users}) => {
+  if (data && data.loading) return <div>Loading...</div>;
+  if (!data || !data.topics) {
+    return <h1>{`ERROR ${data && data.error && data.error.message || ''}`}</h1>
   }
-  if (data.loading) return <div>Loading...</div>;
-  const nonNullTopics = filterNullResults(data.topics);
-  return <TopicsViewContainer topics={nonNullTopics}/>
+  const nonNullTopics = filterFalsey(data.topics);
+  return <TopicsView topics={nonNullTopics} tags={tags} users={users}/>
 });
+
+export default TopicsViewContainer;

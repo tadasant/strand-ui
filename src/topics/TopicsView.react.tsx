@@ -1,125 +1,107 @@
 import * as React from 'react';
-import {StatelessComponent} from 'react';
-// import TopicsView from './TopicsView.react';
+import {Component} from 'react';
+import {GetTopicsTopicsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
+import {intersection} from 'lodash';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+import Hidden from 'material-ui/Hidden';
+import TopicsViewDesktop from './rwd/TopicsViewDesktop.react';
+import TopicsViewMobile from './rwd/TopicsViewMobile.react';
 
+interface PropTypes {
+  topics: GetTopicsTopicsFragment[],
+  tags: ReferenceTagsFragment[],
+  users: ReferenceUsersFragment[],
+}
 
-const TopicsView: StatelessComponent = () => <div />;
+export type FiltersType = 'tagNames' | 'originalPosterId' | 'participantIds';
+export type FilterValuesType = string[] | number | number[] | void;
+
+export interface FilterTypes {
+  tagNames: string[],
+  originalPosterId?: string,
+  participantIds: string[],
+}
+
+interface StateTypes {
+  filteredTopics: GetTopicsTopicsFragment[],
+  filters: FilterTypes,
+}
+
+class TopicsView extends Component<PropTypes, StateTypes> {
+  constructor(props: PropTypes) {
+    super(props);
+    // TODO [UI-49]: At scale, filters can't be in-memory
+    this.state = {
+      filteredTopics: [],
+      filters: {
+        tagNames: [],
+        originalPosterId: undefined,
+        participantIds: [],
+      },
+    };
+
+    this.handleChangeFilter = this.handleChangeFilter.bind(this);
+  }
+
+  componentWillMount() {
+    this.updateStateWithProps(this.props);
+  }
+
+  updateStateWithProps(props: PropTypes) {
+    const filteredTopics = this.applyFiltersToTopics(this.state.filters, props.topics);
+    this.setState({filteredTopics});
+  }
+
+  // TODO is there a way to re-use this method type?
+  handleChangeFilter(name: FiltersType, values: FilterValuesType): void {
+    const newFilters = {
+      ...this.state.filters,
+      [name]: values,
+    };
+    const filteredTopics = this.applyFiltersToTopics(newFilters, this.props.topics);
+    this.setState({filters: newFilters, filteredTopics})
+  }
+
+  applyFiltersToTopics(filters: FilterTypes, topics: GetTopicsTopicsFragment[]): GetTopicsTopicsFragment[] {
+    const {tagNames, originalPosterId, participantIds} = filters;
+    // TODO [UI-50]: Eliminate !'s with non-nullable arrays
+    return topics
+      .filter(topic => intersection((topic!.tags || []).map(tag => tag!.name), tagNames).length === tagNames.length)
+      .filter(topic => !originalPosterId || topic.originalPoster!.id === originalPosterId)
+      .filter(topic => intersection((topic!.discussion ? topic!.discussion!.participants || [] : []).map(user => user!.id), participantIds).length === participantIds.length)
+  }
+
+  render() {
+    return (
+      <div>
+        <Grid
+          container
+          alignItems='center'
+          direction='column'
+          justify='space-around'>
+          <Grid item>
+            <Typography variant='display2' align='center'>Topics</Typography>
+            <Typography variant='caption' align='center'>Review all topics discussed</Typography>
+          </Grid>
+        </Grid>
+        <Hidden mdUp>
+          <TopicsViewMobile
+            {...this.props}
+            {...this.state}
+            handleChangeFilter={this.handleChangeFilter}
+          />
+        </Hidden>
+        <Hidden smDown>
+          <TopicsViewDesktop
+            {...this.props}
+            {...this.state}
+            handleChangeFilter={this.handleChangeFilter}
+          />
+        </Hidden>
+      </div>
+    );
+  }
+}
 
 export default TopicsView;
-
-
-// import * as React from 'react';
-// import {Component} from 'react';
-// import {Grid, Hidden, Typography} from 'material-ui';
-// import isEqual from 'lodash/isEqual';
-// import intersection from 'lodash/intersection';
-// // import TopicsViewDesktop from './rwd/TopicsViewDesktop.react';
-// // import TopicsViewMobile from './rwd/TopicsViewMobile.react';
-//
-// const propTypes = {
-//   helpSessions: PropTypes.arrayOf(helpSessionPropType.isRequired).isRequired,
-//   tags: PropTypes.arrayOf(tagPropType.isRequired).isRequired,
-//   users: PropTypes.arrayOf(userPropType.isRequired).isRequired,
-//   searchHelpSessions: PropTypes.func.isRequired,
-// };
-//
-// interface PropTypes {
-//   topics:
-// }
-//
-// class HelpSessionDashboard extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       filteredHelpSessions: [],
-//       filters: {
-//         tagNames: [],
-//         askerId: null,
-//         answererId: null,
-//         participantIds: [],
-//       },
-//     };
-//
-//     this.handleChangeFilter = this.handleChangeFilter.bind(this);
-//   }
-//
-//   componentWillMount() {
-//     this.updateStateWithProps(this.props);
-//   }
-//
-//   componentDidMount() {
-//     this.context.mixpanel.track('CC - Sessions - viewed');
-//   }
-//
-//   componentWillReceiveProps(newProps) {
-//     if (!isEqual(newProps.helpSessions, this.props.helpSessions)) {
-//       this.updateStateWithProps(newProps);
-//     }
-//   }
-//
-//   updateStateWithProps(props) {
-//     const filteredHelpSessions = this.applyFiltersToHelpSessions(this.state.filters, props.helpSessions);
-//     this.setState({filteredHelpSessions});
-//   }
-//
-//   handleChangeFilter(name, values) {
-//     const newFilters = {
-//       ...this.state.filters,
-//       [name]: values,
-//     };
-//     this.context.mixpanel.track('CC - Sessions - set filter', {
-//       'name': name,
-//       'values': values,
-//     });
-//     const filteredHelpSessions = this.applyFiltersToHelpSessions(newFilters, this.props.helpSessions);
-//     this.setState({filters: newFilters, filteredHelpSessions})
-//   }
-//
-//   applyFiltersToHelpSessions(filters, helpSessions) {
-//     const {tagNames, askerId, answererId, participantIds} = filters;
-//     return helpSessions
-//       .filter(session => intersection(session.tags.map(tag => tag.name), tagNames).length === tagNames.length)
-//       .filter(session => !answererId || session.answerer.id === answererId)
-//       .filter(session => !askerId || session.asker.id === askerId)
-//       .filter(session => intersection(session.participants.map(user => user.id), participantIds).length === participantIds.length)
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         <Grid
-//           container
-//           alignItems='center'
-//           direction='column'
-//           justify='space-around'>
-//           <Grid item>
-//             <Typography type='display2' align='center'>Answers</Typography>
-//             <Typography type='aside' align='center'>Review all help sessions</Typography>
-//           </Grid>
-//         </Grid>
-//         <Hidden mdUp>
-//           <HelpSessionDashboardMobile
-//             {...this.props}
-//             {...this.state}
-//             handleChangeFilter={this.handleChangeFilter}
-//           />
-//         </Hidden>
-//         <Hidden smDown>
-//           <HelpSessionDashboardDesktop
-//             {...this.props}
-//             {...this.state}
-//             handleChangeFilter={this.handleChangeFilter}
-//           />
-//         </Hidden>
-//       </div>
-//     );
-//   }
-// }
-//
-// HelpSessionDashboard.contextTypes = {
-//   mixpanel: PropTypes.object.isRequired,
-// };
-//
-// HelpSessionDashboard.propTypes = propTypes;
-//
-// export default HelpSessionDashboard;

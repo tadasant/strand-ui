@@ -15,11 +15,14 @@ module.exports = {
     'tsx',
     'js',
     'json',
+    'css',
   ],
   'setupTestFrameworkScriptFile': '<rootDir>/test/setup.ts',
   'moduleNameMapper': {
-    // Mock all these filetypes
+    // Static files mocks
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/test/__mocks__/fileMock.ts',
+    // CSS Mocks
+    '\\.(css|less)$': '<rootDir>/test/__mocks__/styleMock.ts',
   },
   // Helpers for ease of serializing snapshots
   'snapshotSerializers': ['enzyme-to-json/serializer'],
