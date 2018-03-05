@@ -18,8 +18,8 @@ class TopicSummaryTile extends Component<PropTypes> {
     const {description, tags} = this.props.topic;
     return (
       <Grid container alignItems='stretch' direction='column'>
-        <Grid item style={{overflowY: 'scroll'}}>
-          <Typography variant='body2'>
+        <Grid item style={{overflow: 'hidden'}}>
+          <Typography variant='caption'>
             {description}
           </Typography>
         </Grid>

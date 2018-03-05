@@ -19,8 +19,8 @@ export type FilterValuesType = string[] | number | number[] | void;
 
 export interface FilterTypes {
   tagNames: string[],
-  originalPosterId?: number,
-  participantIds: number[],
+  originalPosterId?: string,
+  participantIds: string[],
 }
 
 interface StateTypes {
@@ -68,8 +68,8 @@ class TopicsView extends Component<PropTypes, StateTypes> {
     // TODO [UI-50]: Eliminate !'s with non-nullable arrays
     return topics
       .filter(topic => intersection((topic!.tags || []).map(tag => tag!.name), tagNames).length === tagNames.length)
-      .filter(topic => !originalPosterId || parseInt(topic.originalPoster!.id) === originalPosterId)
-      .filter(topic => intersection((topic!.discussion ? topic!.discussion!.participants || [] : []).map(user => parseInt(user!.id)), participantIds).length === participantIds.length)
+      .filter(topic => !originalPosterId || topic.originalPoster!.id === originalPosterId)
+      .filter(topic => intersection((topic!.discussion ? topic!.discussion!.participants || [] : []).map(user => user!.id), participantIds).length === participantIds.length)
   }
 
   render() {
