@@ -103,6 +103,4 @@ An alternative to consider; can use `apollo-codegen` over the wire:
  
 Generate up-to-date TypeScript definitions with:
 
-`node_modules/.bin/apollo-codegen generate **/Install.react.tsx --schema schema/graphql.schema.json --target typescript --output schema/graphql-types.ts`
-
-Note that there appears to be an issue with apollo-codegen that causes the output for `**/*.tsx` to be empty.
+`node_modules/.bin/apollo-codegen generate schema/graphql-queries.ts --schema schema/graphql.schema.json --target typescript --output schema/graphql-types.ts`

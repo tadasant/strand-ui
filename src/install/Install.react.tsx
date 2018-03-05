@@ -6,7 +6,6 @@ import withStyles from 'material-ui/styles/withStyles';
 import * as queryString from 'query-string';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
 import * as Raven from 'raven-js';
 import InstallationStatus from './InstallationStatus.react';
 import AddToSlackButton from './AddToSlackButton.react';
@@ -14,8 +13,9 @@ import * as CONFIG from '../config';
 
 import {StyleRules, Theme, WithStyles} from 'material-ui/styles';
 import {ComponentDecorator} from 'react-apollo/types';
-import {attemptInstallMutationVariables} from '../../schema/graphql-types';
+import {AttemptInstallMutationVariables} from '../../schema/graphql-types';
 import {ApolloError} from 'apollo-client';
+import {ATTEMPT_SLACK_INSTALLATION_MUTATION} from '../../schema/graphql-queries';
 
 const styles = (theme: Theme): StyleRules => ({
   body1: theme.typography.body1,
@@ -137,23 +137,13 @@ class Install extends Component<PropTypes, StateTypes> {
   }
 }
 
-const attemptSlackInstallation = gql`
-    mutation attemptInstall ($code: String!, $clientId: String!, $redirectUri: String!) {
-        attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
-            slackTeam {
-                name
-            }
-        }
-    }
-`;
-
 const InstallStyledRouted = withRouter(withStyles(styles)(Install));
 // TODO figure out the any, any types below
-const withMutation: ComponentDecorator<any, any> = graphql(attemptSlackInstallation, {
+const withMutation: ComponentDecorator<any, any> = graphql(ATTEMPT_SLACK_INSTALLATION_MUTATION, {
   props: (props) => {
     const mutate = props.mutate as Function; // Force not-null
     return {
-      attemptInstall: (variables: attemptInstallMutationVariables) => mutate({variables}),
+      attemptInstall: (variables: AttemptInstallMutationVariables) => mutate({variables}),
     }
   },
 });
