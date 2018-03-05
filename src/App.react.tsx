@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component, Fragment} from 'react';
-import {Redirect, Route, RouteProps, Switch} from 'react-router';
+import {Redirect, Route, RouteComponentProps, RouteProps, Switch} from 'react-router';
 import Shell from './shell/Shell.react';
 import Install from './install/Install.react';
 import TopicsViewContainer from './topics/TopicsViewContainer.react';
@@ -10,6 +10,7 @@ import {graphql} from 'react-apollo';
 import {get} from 'lodash';
 import {filterFalsey} from './common/utilities';
 import 'react-select/dist/react-select.css';
+import TopicViewContainer from './topic/TopicViewContainer.react';
 
 interface PropTypes {
   tags: ReferenceTagsFragment[],
@@ -17,25 +18,14 @@ interface PropTypes {
 }
 
 class App extends Component<PropTypes> {
-  generateTopicsViewContainer(): React.ComponentType<any> {
-    return (routeProps: RouteProps) => {
-      return (
-        <TopicsViewContainer
-          {...routeProps}
-          tags={this.props.tags}
-          users={this.props.users}
-        />
-      )
-    }
-  }
-
   render() {
     return (
       <Fragment>
         <Shell/>
         <Switch>
-          <Route path='/topics' component={this.generateTopicsViewContainer()}/>
-          <Route path='/install' component={Install}/>
+          <Route exact path='/topics' render={() => <TopicsViewContainer tags={this.props.tags} users={this.props.users}/>} />
+          <Route exact path='/topics/:id' render={(props: RouteComponentProps<{id: string}>) => <TopicViewContainer topicId={props.match.params.id}/>}/>
+          <Route exact path='/install' component={Install}/>
           <Redirect from='/' to='/topics'/>
         </Switch>
       </Fragment>

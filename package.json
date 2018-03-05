@@ -82,7 +82,7 @@
     "productioncdn": "https://app.trystrand.com/"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --config config/webpack.development.ts",
+    "start": "webpack-dev-server --mode development --open --config config/webpack.development.ts --output-public-path \"\/\"",
     "build-cmd": "webpack --mode production",
     "build-staging": "yarn build-cmd --env.NODE_ENV=staging --output-public-path \"$npm_package_config_stagingcdn\" --config config/webpack.staging.ts",
     "build": "yarn build-cmd --env.NODE_ENV=production --output-public-path \"$npm_package_config_productioncdn\" --config config/webpack.production.ts",

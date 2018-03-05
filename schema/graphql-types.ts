@@ -47,6 +47,31 @@ export interface GetReferenceDataQuery {
   } | null > | null,
 };
 
+export interface GetTopicQueryVariables {
+  id: number,
+};
+
+export interface GetTopicQuery {
+  topic:  {
+    title: string,
+    description: string,
+    tags:  Array< {
+      name: string,
+    } | null > | null,
+    originalPoster:  {
+      alias: string,
+    } | null,
+    discussion:  {
+      timeStart: string,
+      timeEnd: string | null,
+      status: string,
+      participants:  Array< {
+        alias: string,
+      } | null > | null,
+    } | null,
+  } | null,
+};
+
 export interface GetTopicsTopicsFragment {
   id: string,
   title: string,
@@ -96,4 +121,40 @@ export interface ReferenceTagsFragment {
 export interface ReferenceUsersFragment {
   id: string,
   alias: string,
+};
+
+export interface GetTopicTopicFragment {
+  title: string,
+  description: string,
+  tags:  Array< {
+    name: string,
+  } | null > | null,
+  originalPoster:  {
+    alias: string,
+  } | null,
+  discussion:  {
+    timeStart: string,
+    timeEnd: string | null,
+    status: string,
+    participants:  Array< {
+      alias: string,
+    } | null > | null,
+  } | null,
+};
+
+export interface GetTopicTagsFragment {
+  name: string,
+};
+
+export interface GetTopicUserFragment {
+  alias: string,
+};
+
+export interface GetTopicDiscussionFragment {
+  timeStart: string,
+  timeEnd: string | null,
+  status: string,
+  participants:  Array< {
+    alias: string,
+  } | null > | null,
 };

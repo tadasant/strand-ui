@@ -51,10 +51,6 @@ const config: webpack.Configuration = {
   plugins: [
     // Cleans the build folder per-build/reload
     new CleanWebpackPlugin(['dist']),
-    // Builds the .html file for entering into bundle
-    new HTMLPlugin({
-      template: 'INDEX_TEMPLATE.html',
-    }),
     // HMR plugins
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),

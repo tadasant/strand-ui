@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import Typography from 'material-ui/Typography';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 interface PropTypes {
   title: string
@@ -15,8 +15,7 @@ class TopicTitle extends Component<PropTypes> {
       <Typography
         variant='title'
         align={this.props.center ? 'center' : undefined}>
-        {/*<Link to={`/topics/${this.props.topicId}`}>{this.props.title}</Link>*/}
-        {this.props.title}
+        <Link to={`/topics/${this.props.topicId}`}>{this.props.title}</Link>
       </Typography>
     );
   }
