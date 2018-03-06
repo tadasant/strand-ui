@@ -14,6 +14,8 @@ class MessageTileMinimal extends Component<PropTypes> {
       <Grid
         container
         direction='row'
+        spacing={0}
+        style={{padding: '2% 2% 2% 2%'}}
         alignItems='stretch'>
         <Grid item xs={2}>
           <Grid container>

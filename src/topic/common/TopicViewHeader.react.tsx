@@ -65,6 +65,7 @@ class HelpSessionDetailTopView extends Component<PropTypes> {
                 </Typography>
               </Grid>
               <Grid item>
+                {/*TODO [UI-50] no nulls in graphql to eliminate non-nulls*/}
                 <ParticipantsTile
                   originalPoster={originalPoster!}
                   participants={participants}
@@ -82,6 +83,7 @@ class HelpSessionDetailTopView extends Component<PropTypes> {
               alignItems='stretch'
               style={style.contentGrid}>
               <Grid item>
+                {/*TODO [UI-50] no nulls in graphql to eliminate non-nulls*/}
                 <TimeTile
                   timeStart={this.props.topic.discussion!.timeStart!}
                   timeEnd={this.props.topic.discussion!.timeEnd!}

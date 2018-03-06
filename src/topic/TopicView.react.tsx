@@ -4,7 +4,7 @@ import Grid from 'material-ui/Grid';
 import Hidden from 'material-ui/Hidden';
 import {GetTopicTopicFragment} from '../../schema/graphql-types';
 import TopicViewDesktop from './rwd/TopicViewDesktop.react';
-// import TopicViewMobile from './rwd/TopicViewMobile.react';
+import TopicViewMobile from './rwd/TopicViewMobile.react';
 
 
 interface PropTypes {
@@ -15,11 +15,11 @@ class TopicView extends Component<PropTypes> {
   renderBody() {
     return (
       <div>
-        {/*<Hidden mdUp>*/}
-          {/*<TopicViewMobile*/}
-            {/*{...this.props}*/}
-          {/*/>*/}
-        {/*</Hidden>*/}
+        <Hidden mdUp>
+          <TopicViewMobile
+            {...this.props}
+          />
+        </Hidden>
         <Hidden smDown>
           <TopicViewDesktop
             {...this.props}
@@ -35,8 +35,7 @@ class TopicView extends Component<PropTypes> {
         container
         alignItems='stretch'
         direction='column'
-        justify='space-around'
-        spacing={24}>
+        justify='space-around'>
         {this.renderBody()}
       </Grid>
     );
