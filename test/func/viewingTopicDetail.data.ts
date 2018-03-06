@@ -30,8 +30,8 @@ export const topicFaker = (): GetTopicTopicFragment => {
           alias: faker.internet.userName(),
         }
       ],
-      timeStart: faker.date.recent().toDateString(),
-      timeEnd: faker.date.recent().toDateString(),
+      timeStart: faker.date.past(1, "01-01-2000").toDateString(),
+      timeEnd: faker.date.past(1, "01-01-2000").toDateString(),
       messages: [
         {
           id: faker.finance.account(),
@@ -40,7 +40,7 @@ export const topicFaker = (): GetTopicTopicFragment => {
             id: faker.finance.account(),
             alias: faker.internet.userName(),
           },
-          time: faker.date.recent().toDateString(),
+          time: faker.date.past(1, "01-01-2000").toDateString(),
         }
       ],
     }
