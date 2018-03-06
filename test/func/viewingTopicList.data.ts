@@ -1,37 +1,35 @@
 import {GetTopicsTopicsFragment, GetTopicsUserFragment} from '../../schema/graphql-types';
-import * as casual from 'casual';
+import * as faker from 'faker';
 
-casual.define('originalPoster', (): GetTopicsUserFragment => ({
-  id: casual.word,
-  alias: casual.username,
-}));
+const fakeOriginalPoster = (): GetTopicsUserFragment => ({
+  id: faker.finance.account(),
+  alias: faker.internet.userName(),
+});
 
-// TODO contribute custom generated types to casual
-const fakeOriginalPoster = (casual as any).originalPoster;
-
-casual.define('topic', (): GetTopicsTopicsFragment => ({
-  id: casual.word,
-  title: casual.title,
-  description: casual.description,
-  tags: [
-    {
-      name: casual.word,
-    },
-    {
-      name: casual.word,
-    }
-  ],
-  originalPoster: fakeOriginalPoster,
-  discussion: {
-    status: casual.word,
-    participants: [
-      fakeOriginalPoster,
+export const fakeTopic = (): GetTopicsTopicsFragment => {
+  const originalPoster = fakeOriginalPoster();
+  return {
+    id: faker.finance.account(),
+    title: faker.lorem.sentence(),
+    description: faker.hacker.phrase(),
+    tags: [
       {
-        id: casual.word,
-        alias: casual.word,
+        name: faker.company.bsNoun(),
+      },
+      {
+        name: faker.company.bsNoun(),
       }
-    ]
+    ],
+    originalPoster: originalPoster,
+    discussion: {
+      status: faker.company.bsBuzz(),
+      participants: [
+        originalPoster,
+        {
+          id: faker.finance.account(),
+          alias: faker.internet.userName(),
+        }
+      ]
+    }
   }
-}));
-
-export const topicFaker = (casual as any).topic;
+};

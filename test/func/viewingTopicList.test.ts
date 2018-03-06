@@ -1,7 +1,7 @@
 import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
 import TopicTiles from 'src/topics/common/TopicTiles.react';
-import {topicFaker} from './viewingTopicList.data';
+import {fakeTopic} from './viewingTopicList.data';
 import {MockList} from 'graphql-tools';
 
 function flushPromises() {
@@ -12,7 +12,7 @@ describe('viewing existing topics', () => {
   it('sends the user to Slack when the user navigates to the page and clicks the button', async () => {
     const graphQLMocks = {
       Query: () => ({
-        topics: () => new MockList(2, () => topicFaker),
+        topics: () => new MockList(2, () => fakeTopic()),
       })
     };
     const wrapper = mountApplication('/', {graphQLMocks});
