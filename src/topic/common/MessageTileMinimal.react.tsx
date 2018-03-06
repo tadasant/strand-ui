@@ -30,7 +30,10 @@ class MessageTileMinimal extends Component<PropTypes> {
           </Grid>
         </Grid>
         <Grid item xs={10}>
-          <div dangerouslySetInnerHTML={{__html: this.props.message.text}}/>
+          <Typography
+            variant='caption'>
+            <div dangerouslySetInnerHTML={{__html: this.props.message.text}}/>
+          </Typography>
         </Grid>
       </Grid>
     );
