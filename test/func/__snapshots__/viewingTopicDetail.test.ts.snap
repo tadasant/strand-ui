@@ -8083,6 +8083,11 @@ exports[`viewing existing topic shows the user a filled out detail page when a t
                                                   <WithStyles(GridList)
                                                     cellHeight="auto"
                                                     cols={1}
+                                                    style={
+                                                      Object {
+                                                        "overflow": "hidden",
+                                                      }
+                                                    }
                                                   >
                                                     <GridList
                                                       cellHeight="auto"
@@ -8094,12 +8099,18 @@ exports[`viewing existing topic shows the user a filled out detail page when a t
                                                       cols={1}
                                                       component="ul"
                                                       spacing={4}
+                                                      style={
+                                                        Object {
+                                                          "overflow": "hidden",
+                                                        }
+                                                      }
                                                     >
                                                       <ul
                                                         className="MuiGridList-root-384"
                                                         style={
                                                           Object {
                                                             "margin": -2,
+                                                            "overflow": "hidden",
                                                           }
                                                         }
                                                       >
