@@ -15,6 +15,7 @@ const config: webpack.Configuration = {
     // https://github.com/ReactTraining/react-router/issues/676#issuecomment-174073981
     new HTMLPlugin({
       template: 'INDEX_TEMPLATE.html',
+      favicon: 'assets/favicon.ico',
       publicPath: '/',
     }),
   ],

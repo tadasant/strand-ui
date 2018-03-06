@@ -8,6 +8,7 @@ const config: webpack.Configuration = {
     // Builds the .html file for entering into bundle
     new HTMLPlugin({
       template: 'INDEX_TEMPLATE.html',
+      favicon: 'assets/favicon.ico',
     }),
   ]
 };

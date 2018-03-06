@@ -1,4 +1,3 @@
-import * as HTMLPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as webpack from 'webpack';
 
