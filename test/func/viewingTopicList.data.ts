@@ -1,13 +1,13 @@
 import {GetTopicsTopicsFragment, GetTopicsUserFragment} from '../../schema/graphql-types';
 import * as faker from 'faker';
 
-const fakeOriginalPoster = (): GetTopicsUserFragment => ({
+const originalPosterFaker = (): GetTopicsUserFragment => ({
   id: faker.finance.account(),
   alias: faker.internet.userName(),
 });
 
-export const fakeTopic = (): GetTopicsTopicsFragment => {
-  const originalPoster = fakeOriginalPoster();
+export const topicFaker = (): GetTopicsTopicsFragment => {
+  const originalPoster = originalPosterFaker();
   return {
     id: faker.finance.account(),
     title: faker.lorem.sentence(),
