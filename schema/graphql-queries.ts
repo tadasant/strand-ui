@@ -17,7 +17,7 @@ export const GET_TOPICS_QUERY = gql`
             ...GetTopicsTags
         }
         originalPoster {
-            ...GetTopicsOriginalPoster
+            ...GetTopicsUser
         }
         discussion {
             ...GetTopicsDiscussion
@@ -28,7 +28,7 @@ export const GET_TOPICS_QUERY = gql`
         name
     }
 
-    fragment GetTopicsOriginalPoster on UserType {
+    fragment GetTopicsUser on UserType {
         id
         alias
     }
@@ -36,13 +36,8 @@ export const GET_TOPICS_QUERY = gql`
     fragment GetTopicsDiscussion on DiscussionType {
         status
         participants {
-            ...GetTopicsParticipants
+            ...GetTopicsUser
         }
-    }
-
-    fragment GetTopicsParticipants on UserType {
-        id
-        alias
     }
 `;
 

@@ -22,30 +22,30 @@ exports[`installing slack app shows a failure message when we fail to install th
       align="inherit"
       classes={
         Object {
-          "alignCenter": "MuiTypography-alignCenter-166",
-          "alignJustify": "MuiTypography-alignJustify-168",
-          "alignLeft": "MuiTypography-alignLeft-165",
-          "alignRight": "MuiTypography-alignRight-167",
-          "body1": "MuiTypography-body1-162",
-          "body2": "MuiTypography-body2-161",
-          "button": "MuiTypography-button-164",
-          "caption": "MuiTypography-caption-163",
-          "colorError": "MuiTypography-colorError-176",
-          "colorInherit": "MuiTypography-colorInherit-172",
-          "colorPrimary": "MuiTypography-colorPrimary-173",
-          "colorSecondary": "MuiTypography-colorSecondary-174",
-          "colorTextSecondary": "MuiTypography-colorTextSecondary-175",
-          "display1": "MuiTypography-display1-157",
-          "display2": "MuiTypography-display2-156",
-          "display3": "MuiTypography-display3-155",
-          "display4": "MuiTypography-display4-154",
-          "gutterBottom": "MuiTypography-gutterBottom-170",
-          "headline": "MuiTypography-headline-158",
-          "noWrap": "MuiTypography-noWrap-169",
-          "paragraph": "MuiTypography-paragraph-171",
-          "root": "MuiTypography-root-153",
-          "subheading": "MuiTypography-subheading-160",
-          "title": "MuiTypography-title-159",
+          "alignCenter": "MuiTypography-alignCenter-173",
+          "alignJustify": "MuiTypography-alignJustify-175",
+          "alignLeft": "MuiTypography-alignLeft-172",
+          "alignRight": "MuiTypography-alignRight-174",
+          "body1": "MuiTypography-body1-169",
+          "body2": "MuiTypography-body2-168",
+          "button": "MuiTypography-button-171",
+          "caption": "MuiTypography-caption-170",
+          "colorError": "MuiTypography-colorError-183",
+          "colorInherit": "MuiTypography-colorInherit-179",
+          "colorPrimary": "MuiTypography-colorPrimary-180",
+          "colorSecondary": "MuiTypography-colorSecondary-181",
+          "colorTextSecondary": "MuiTypography-colorTextSecondary-182",
+          "display1": "MuiTypography-display1-164",
+          "display2": "MuiTypography-display2-163",
+          "display3": "MuiTypography-display3-162",
+          "display4": "MuiTypography-display4-161",
+          "gutterBottom": "MuiTypography-gutterBottom-177",
+          "headline": "MuiTypography-headline-165",
+          "noWrap": "MuiTypography-noWrap-176",
+          "paragraph": "MuiTypography-paragraph-178",
+          "root": "MuiTypography-root-160",
+          "subheading": "MuiTypography-subheading-167",
+          "title": "MuiTypography-title-166",
         }
       }
       color="default"
@@ -73,7 +73,7 @@ exports[`installing slack app shows a failure message when we fail to install th
       variant="subheading"
     >
       <h3
-        className="MuiTypography-root-153 MuiTypography-subheading-160"
+        className="MuiTypography-root-160 MuiTypography-subheading-167"
         style={
           Object {
             "color": "red",
@@ -108,30 +108,30 @@ exports[`installing slack app shows a success message when a user successfully i
       align="inherit"
       classes={
         Object {
-          "alignCenter": "MuiTypography-alignCenter-166",
-          "alignJustify": "MuiTypography-alignJustify-168",
-          "alignLeft": "MuiTypography-alignLeft-165",
-          "alignRight": "MuiTypography-alignRight-167",
-          "body1": "MuiTypography-body1-162",
-          "body2": "MuiTypography-body2-161",
-          "button": "MuiTypography-button-164",
-          "caption": "MuiTypography-caption-163",
-          "colorError": "MuiTypography-colorError-176",
-          "colorInherit": "MuiTypography-colorInherit-172",
-          "colorPrimary": "MuiTypography-colorPrimary-173",
-          "colorSecondary": "MuiTypography-colorSecondary-174",
-          "colorTextSecondary": "MuiTypography-colorTextSecondary-175",
-          "display1": "MuiTypography-display1-157",
-          "display2": "MuiTypography-display2-156",
-          "display3": "MuiTypography-display3-155",
-          "display4": "MuiTypography-display4-154",
-          "gutterBottom": "MuiTypography-gutterBottom-170",
-          "headline": "MuiTypography-headline-158",
-          "noWrap": "MuiTypography-noWrap-169",
-          "paragraph": "MuiTypography-paragraph-171",
-          "root": "MuiTypography-root-153",
-          "subheading": "MuiTypography-subheading-160",
-          "title": "MuiTypography-title-159",
+          "alignCenter": "MuiTypography-alignCenter-173",
+          "alignJustify": "MuiTypography-alignJustify-175",
+          "alignLeft": "MuiTypography-alignLeft-172",
+          "alignRight": "MuiTypography-alignRight-174",
+          "body1": "MuiTypography-body1-169",
+          "body2": "MuiTypography-body2-168",
+          "button": "MuiTypography-button-171",
+          "caption": "MuiTypography-caption-170",
+          "colorError": "MuiTypography-colorError-183",
+          "colorInherit": "MuiTypography-colorInherit-179",
+          "colorPrimary": "MuiTypography-colorPrimary-180",
+          "colorSecondary": "MuiTypography-colorSecondary-181",
+          "colorTextSecondary": "MuiTypography-colorTextSecondary-182",
+          "display1": "MuiTypography-display1-164",
+          "display2": "MuiTypography-display2-163",
+          "display3": "MuiTypography-display3-162",
+          "display4": "MuiTypography-display4-161",
+          "gutterBottom": "MuiTypography-gutterBottom-177",
+          "headline": "MuiTypography-headline-165",
+          "noWrap": "MuiTypography-noWrap-176",
+          "paragraph": "MuiTypography-paragraph-178",
+          "root": "MuiTypography-root-160",
+          "subheading": "MuiTypography-subheading-167",
+          "title": "MuiTypography-title-166",
         }
       }
       color="default"
@@ -159,7 +159,7 @@ exports[`installing slack app shows a success message when a user successfully i
       variant="subheading"
     >
       <h3
-        className="MuiTypography-root-153 MuiTypography-subheading-160"
+        className="MuiTypography-root-160 MuiTypography-subheading-167"
         style={
           Object {
             "color": "green",

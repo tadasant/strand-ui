@@ -99,7 +99,7 @@ export interface GetTopicsTagsFragment {
   name: string,
 };
 
-export interface GetTopicsOriginalPosterFragment {
+export interface GetTopicsUserFragment {
   id: string,
   alias: string,
 };
@@ -110,11 +110,6 @@ export interface GetTopicsDiscussionFragment {
     id: string,
     alias: string,
   } | null > | null,
-};
-
-export interface GetTopicsParticipantsFragment {
-  id: string,
-  alias: string,
 };
 
 export interface ReferenceTagsFragment {
