@@ -109,5 +109,17 @@ export const GET_TOPIC_QUERY = gql`
         participants {
             ...GetTopicUser
         }
+        messages {
+            ...GetTopicMessage
+        }
+    }
+  
+    fragment GetTopicMessage on MessageType {
+        id
+        text
+        author {
+            ...GetTopicUser
+        }
+        time
     }
 `;

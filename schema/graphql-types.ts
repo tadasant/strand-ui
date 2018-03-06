@@ -71,6 +71,15 @@ export interface GetTopicQuery {
         id: string,
         alias: string,
       } | null > | null,
+      messages:  Array< {
+        id: string,
+        text: string,
+        author:  {
+          id: string,
+          alias: string,
+        } | null,
+        time: string,
+      } | null > | null,
     } | null,
   } | null,
 };
@@ -140,6 +149,15 @@ export interface GetTopicTopicFragment {
       id: string,
       alias: string,
     } | null > | null,
+    messages:  Array< {
+      id: string,
+      text: string,
+      author:  {
+        id: string,
+        alias: string,
+      } | null,
+      time: string,
+    } | null > | null,
   } | null,
 };
 
@@ -160,4 +178,23 @@ export interface GetTopicDiscussionFragment {
     id: string,
     alias: string,
   } | null > | null,
+  messages:  Array< {
+    id: string,
+    text: string,
+    author:  {
+      id: string,
+      alias: string,
+    } | null,
+    time: string,
+  } | null > | null,
+};
+
+export interface GetTopicMessageFragment {
+  id: string,
+  text: string,
+  author:  {
+    id: string,
+    alias: string,
+  } | null,
+  time: string,
 };
