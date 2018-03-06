@@ -6916,7 +6916,7 @@ exports[`viewing existing topic shows the user a filled out detail page when a t
                                                                                         <WithStyles(ListItemText)
                                                                                           key=".2"
                                                                                           primary="Duration"
-                                                                                          secondary="-2541540m, 0s"
+                                                                                          secondary="-2541600m, 0s"
                                                                                         >
                                                                                           <ListItemText
                                                                                             classes={
@@ -6932,7 +6932,7 @@ exports[`viewing existing topic shows the user a filled out detail page when a t
                                                                                             disableTypography={false}
                                                                                             inset={false}
                                                                                             primary="Duration"
-                                                                                            secondary="-2541540m, 0s"
+                                                                                            secondary="-2541600m, 0s"
                                                                                           >
                                                                                             <div
                                                                                               className="MuiListItemText-root-378"
@@ -7056,7 +7056,7 @@ exports[`viewing existing topic shows the user a filled out detail page when a t
                                                                                                   <p
                                                                                                     className="MuiTypography-root-320 MuiTypography-body1-329 MuiTypography-colorTextSecondary-342 MuiListItemText-secondary-382"
                                                                                                   >
-                                                                                                    -2541540m, 0s
+                                                                                                    -2541600m, 0s
                                                                                                   </p>
                                                                                                 </Typography>
                                                                                               </WithStyles(Typography)>
