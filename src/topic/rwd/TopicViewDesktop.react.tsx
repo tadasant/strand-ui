@@ -3,9 +3,9 @@ import {Component} from 'react';
 import Divider from 'material-ui/Divider';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-// import Dialogue from '../common/Dialogue';
+import Dialogue from '../common/Dialogue.react';
 import TopicViewHeader from '../common/TopicViewHeader.react';
-import {GetTopicTopicFragment} from '../../../schema/graphql-types';
+import {GetTopicMessageFragment, GetTopicTopicFragment} from '../../../schema/graphql-types';
 
 interface PropTypes {
   topic: GetTopicTopicFragment
@@ -27,8 +27,9 @@ class TopicViewDesktop extends Component<PropTypes> {
               Dialogue
             </Typography>
           </Grid>
-          <Grid item>
-            {/*<Dialogue discussion={this.props.topic.discussion}/>*/}
+          <Grid item style={{padding: '2% 2% 2% 2%', overflow: 'hidden'}}>
+            {/*TODO [UI-50] no nulls in graphql to eliminate non-nulls*/}
+            <Dialogue messages={this.props.topic.discussion!.messages as GetTopicMessageFragment[]}/>
           </Grid>
         </Grid>
       </Grid>
