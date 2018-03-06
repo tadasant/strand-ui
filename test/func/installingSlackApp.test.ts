@@ -1,10 +1,7 @@
 import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
 import InstallationStatus from 'src/install/InstallationStatus.react';
-
-function flushPromises() {
-  return new Promise(resolve => setImmediate(resolve));
-}
+import {flushPromises} from '../helper/utilities';
 
 describe('installing slack app', () => {
   it('sends the user to Slack when the user navigates to the page and clicks the button', () => {

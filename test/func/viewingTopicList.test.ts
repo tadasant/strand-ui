@@ -4,10 +4,7 @@ import TopicTiles from 'src/topics/common/TopicTiles.react';
 import {topicFaker} from './viewingTopicList.data';
 import {MockList} from 'graphql-tools';
 import * as faker from "faker";
-
-function flushPromises() {
-  return new Promise(resolve => setImmediate(resolve));
-}
+import {flushPromises} from '../helper/utilities';
 
 describe('viewing existing topics', () => {
   it('shows the user a list of two topics when clicking into the topic page', async () => {

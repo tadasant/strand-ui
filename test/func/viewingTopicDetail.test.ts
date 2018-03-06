@@ -6,10 +6,7 @@ import {MockList} from 'graphql-tools';
 import TopicView from '../../src/topic/TopicView.react';
 import TopicTiles from '../../src/topics/common/TopicTiles.react';
 import * as faker from "faker";
-
-function flushPromises() {
-  return new Promise(resolve => setImmediate(resolve));
-}
+import {flushPromises} from '../helper/utilities';
 
 describe('viewing existing topic', () => {
   it('shows the user a filled out detail page when a topic detail page is opened', async () => {
