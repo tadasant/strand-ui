@@ -18,6 +18,7 @@ class Dialogue extends Component<PropTypes> {
     return (
       <GridList
         cellHeight='auto'
+        style={{overflow: 'hidden'}}
         cols={1}>
         {this.props.messages.map(((message, i) => (
           <GridListTile key={i} style={{overflow: 'hidden'}}>
