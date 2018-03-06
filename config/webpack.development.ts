@@ -1,9 +1,9 @@
 import * as HTMLPlugin from 'html-webpack-plugin';
-
-const Dotenv = require('dotenv-webpack');
 import common from './webpack.common';
 import * as merge from 'webpack-merge';
 import * as webpack from 'webpack';
+
+const Dotenv = require('dotenv-webpack');
 
 const config: webpack.Configuration = {
   plugins: [

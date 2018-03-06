@@ -1,8 +1,7 @@
 import * as HTMLPlugin from 'html-webpack-plugin';
 import common from './webpack.common';
 import * as webpack from 'webpack';
-
-const merge = require('webpack-merge');
+import * as merge from 'webpack-merge';
 
 const config: webpack.Configuration = {
   plugins: [
