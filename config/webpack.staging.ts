@@ -1,4 +1,4 @@
-import common from './webpack.common';
+import deployment from './webpack.deployment';
 import * as merge from 'webpack-merge';
 import * as webpack from 'webpack';
 
@@ -13,4 +13,4 @@ const config: webpack.Configuration = {
   ],
 };
 
-export default merge(common, config);
+export default merge(deployment, config);
