@@ -4,6 +4,7 @@ import {GET_TOPICS_QUERY} from '../../schema/graphql-queries';
 import {GetTopicsQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
 import {graphql} from 'react-apollo';
 import {filterFalsey} from '../common/utilities';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 interface StaticPropTypes {
   tags: ReferenceTagsFragment[],
@@ -19,7 +20,7 @@ const withTopics = graphql<GetTopicsQuery, StaticPropTypes>(GET_TOPICS_QUERY, {
 // TODO consider splitting this larger query into smaller ones in subcomponents (what's best practice?)
 // Right now we're just ignoring any graphql errors
 const TopicsViewContainer = withTopics(({data, tags, users}) => {
-  if (data && data.loading) return <div>Loading...</div>;
+  if (data && data.loading) return <CircularProgress/>;
   if (!data || !data.topics) {
     return <h1>{`ERROR ${data && data.error && data.error.message || ''}`}</h1>
   }

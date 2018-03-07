@@ -7,3 +7,9 @@ dotenv.config({path: 'env/.env.test'});
 
 // enzyme
 configure({adapter: new Adapter()});
+
+// lock in the timing that moment uses
+jest.mock('moment', () => {
+  const moment = require.requireActual('moment');
+  return moment.utc;
+});

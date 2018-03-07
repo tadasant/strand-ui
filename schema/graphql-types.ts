@@ -47,6 +47,43 @@ export interface GetReferenceDataQuery {
   } | null > | null,
 };
 
+export interface GetTopicQueryVariables {
+  id: number,
+};
+
+export interface GetTopicQuery {
+  topic:  {
+    id: string,
+    title: string,
+    description: string,
+    tags:  Array< {
+      name: string,
+    } | null > | null,
+    originalPoster:  {
+      id: string,
+      alias: string,
+    } | null,
+    discussion:  {
+      timeStart: string,
+      timeEnd: string | null,
+      status: string,
+      participants:  Array< {
+        id: string,
+        alias: string,
+      } | null > | null,
+      messages:  Array< {
+        id: string,
+        text: string,
+        author:  {
+          id: string,
+          alias: string,
+        } | null,
+        time: string,
+      } | null > | null,
+    } | null,
+  } | null,
+};
+
 export interface GetTopicsTopicsFragment {
   id: string,
   title: string,
@@ -71,7 +108,7 @@ export interface GetTopicsTagsFragment {
   name: string,
 };
 
-export interface GetTopicsOriginalPosterFragment {
+export interface GetTopicsUserFragment {
   id: string,
   alias: string,
 };
@@ -84,11 +121,6 @@ export interface GetTopicsDiscussionFragment {
   } | null > | null,
 };
 
-export interface GetTopicsParticipantsFragment {
-  id: string,
-  alias: string,
-};
-
 export interface ReferenceTagsFragment {
   name: string,
 };
@@ -96,4 +128,73 @@ export interface ReferenceTagsFragment {
 export interface ReferenceUsersFragment {
   id: string,
   alias: string,
+};
+
+export interface GetTopicTopicFragment {
+  id: string,
+  title: string,
+  description: string,
+  tags:  Array< {
+    name: string,
+  } | null > | null,
+  originalPoster:  {
+    id: string,
+    alias: string,
+  } | null,
+  discussion:  {
+    timeStart: string,
+    timeEnd: string | null,
+    status: string,
+    participants:  Array< {
+      id: string,
+      alias: string,
+    } | null > | null,
+    messages:  Array< {
+      id: string,
+      text: string,
+      author:  {
+        id: string,
+        alias: string,
+      } | null,
+      time: string,
+    } | null > | null,
+  } | null,
+};
+
+export interface GetTopicTagsFragment {
+  name: string,
+};
+
+export interface GetTopicUserFragment {
+  id: string,
+  alias: string,
+};
+
+export interface GetTopicDiscussionFragment {
+  timeStart: string,
+  timeEnd: string | null,
+  status: string,
+  participants:  Array< {
+    id: string,
+    alias: string,
+  } | null > | null,
+  messages:  Array< {
+    id: string,
+    text: string,
+    author:  {
+      id: string,
+      alias: string,
+    } | null,
+    time: string,
+  } | null > | null,
+};
+
+export interface GetTopicMessageFragment {
+  id: string,
+  text: string,
+  author:  {
+    id: string,
+    alias: string,
+  } | null,
+  time: string,
 };

@@ -1,14 +1,13 @@
 import * as React from 'react';
-import {mount} from 'enzyme';
+import {mount, ReactWrapper} from 'enzyme';
 import App from 'src/App.react';
 import {MemoryRouter} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
 import {addMockFunctionsToSchema} from 'graphql-tools';
 import {SchemaLink} from 'apollo-link-schema';
-import {InMemoryCache} from 'apollo-cache-inmemory';
+import {InMemoryCache, NormalizedCacheObject} from 'apollo-cache-inmemory';
 import {buildClientSchema} from 'graphql';
 import {ApolloClient} from 'apollo-client';
-import {get} from 'lodash';
 import * as graphqlIntrospectionResult from '../../schema/graphql.schema.json';
 
 
@@ -21,8 +20,8 @@ import * as graphqlIntrospectionResult from '../../schema/graphql.schema.json';
     }
   }
  */
-export const mountApplication = (endpoint: string, options?: {}) => {
-  const mockApolloClient = generateMockApolloClient(get(options, 'graphqlMocks'));
+export const mountApplication = (endpoint: string, options?: {graphQLMocks: {}}): ReactWrapper<any, any> => {
+  const mockApolloClient = generateMockApolloClient(options ? options.graphQLMocks : {});
   return mount(
     <ApolloProvider client={mockApolloClient}>
       <MemoryRouter initialEntries={[endpoint]} initialIndex={0} keyLength={0}>
@@ -33,7 +32,7 @@ export const mountApplication = (endpoint: string, options?: {}) => {
   );
 };
 
-const generateMockApolloClient = (graphqlMocks: {}) => {
+const generateMockApolloClient = (graphqlMocks: {}): ApolloClient<NormalizedCacheObject> => {
   const schema = buildClientSchema(graphqlIntrospectionResult.data);
   addMockFunctionsToSchema({
     schema,
