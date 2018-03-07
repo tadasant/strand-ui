@@ -93,7 +93,7 @@ IntelliJ uses `graphql.config.json` is ONLY used for local IntelliJ development.
 
 Extract and updated GraphQL schema from API by going to its project root and doing:
 
-`python manage.py graphql_schema --indent 2 --out graphql.schema.json`
+`python3 manage.py graphql_schema --indent 2 --out graphql.schema.json`
 
 Commit the schema to `schema.json` in UI. UI-26 will automate this process.
 

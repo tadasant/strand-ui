@@ -6,10 +6,7 @@ import Paper from 'material-ui/Paper';
 import ParticipantsTile from '../../../common/ParticipantsTile.react';
 import TopicSummaryTile from '../../../common/TopicSummaryTile.react';
 import TopicTitle from '../../../common/TopicTitle.react';
-import {
-  GetTopicsOriginalPosterFragment, GetTopicsParticipantsFragment,
-  GetTopicsTopicsFragment
-} from '../../../../schema/graphql-types';
+import {GetTopicsTopicsFragment, GetTopicsUserFragment} from '../../../../schema/graphql-types';
 
 interface PropTypes {
   topic: GetTopicsTopicsFragment
@@ -44,8 +41,8 @@ class TopicTile extends Component<PropTypes> {
                 <Paper>
                   <ParticipantsTile
                     // TODO [UI-50]: Eliminate as's with non-nullable arrays
-                    originalPoster={originalPoster as GetTopicsOriginalPosterFragment}
-                    participants={participants as GetTopicsParticipantsFragment[]}
+                    originalPoster={originalPoster as GetTopicsUserFragment}
+                    participants={participants as GetTopicsUserFragment[]}
                   />
                 </Paper>
               </Grid>
