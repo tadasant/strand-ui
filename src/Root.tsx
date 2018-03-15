@@ -5,6 +5,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 import {hot} from 'react-hot-loader';
+import {STRAND_API_HOST, STRAND_SLACK_HOST} from './config';
+import StrandSlackClient from './clients/StrandSlackClient';
+import StrandApiClient from './clients/StrandApiClient';
+import TestStrandSlackClient from '../test/clients/TestStrandSlackClient';
 
 // Use http://mcg.mbitson.com/ to generate a palette
 // 2/21/18: http://mcg.mbitson.com/#!?strand1=%23e8ebe4&strand2=%2348466d&strand3=%23190b28&strand4=%237ca982&strand5=%23f1e9da&themename=Strand
@@ -55,7 +59,21 @@ const strandTheme = createMuiTheme({
   'palette': themePalette,
 });
 
-interface PropTypes {}
+interface PropTypes {
+}
+
+// TODO [UI-59] replace with React 16.3 new context API
+// Would put the types in index.d.ts but seems to interfere with module declarations??
+declare global {
+  namespace NodeJS {
+    interface Global {
+      strand_slack_client: StrandSlackClient | TestStrandSlackClient
+      strand_api_client: StrandApiClient
+    }
+  }
+}
+global.strand_slack_client = new StrandSlackClient(STRAND_SLACK_HOST);
+global.strand_api_client = new StrandApiClient(STRAND_API_HOST);
 
 class Root extends Component<PropTypes> {
   render() {

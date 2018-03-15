@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import StrandSummaryTile from '../../../common/StrandSummaryTile';
 import StrandTitle from '../../../common/StrandTitle';
-import {GetStrandListStrandsFragment} from '../../../../schema/graphql-types';
+import {GetStrandListStrandsFragment} from '../../../../../schema/graphql-types';
 
 interface PropTypes {
   strand: GetStrandListStrandsFragment

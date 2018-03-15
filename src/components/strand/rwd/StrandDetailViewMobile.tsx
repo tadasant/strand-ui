@@ -3,7 +3,7 @@ import {Component} from 'react';
 import Divider from 'material-ui/Divider';
 import Grid from 'material-ui/Grid';
 import StrandViewHeaderStacked from '../common/StrandDetailViewHeaderStacked';
-import {GetStrandDetailStrandFragment} from '../../../schema/graphql-types';
+import {GetStrandDetailStrandFragment} from '../../../../schema/graphql-types';
 
 interface PropTypes {
   strand: GetStrandDetailStrandFragment

@@ -8,10 +8,10 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import * as Raven from 'raven-js';
 import InstallationStatus from './InstallationStatus';
 import AddToSlackButton from './AddToSlackButton';
-import * as CONFIG from '../config';
+import * as CONFIG from '../../config';
 
 import {StyleRules, Theme, WithStyles} from 'material-ui/styles';
-import {ApolloError} from 'apollo-client';
+import {InstallationResponseData} from '../../clients/StrandSlackClient';
 
 const styles = (theme: Theme): StyleRules => ({
   body1: theme.typography.body1,
@@ -27,7 +27,7 @@ interface PropTypes extends WithStyles, RouteComponentProps<any> {
 interface StateTypes {
   installingSlackApplication: boolean,
   successInstallationSlackApplication?: boolean,
-  errors: string[],
+  error?: string,
 }
 
 class Install extends Component<PropTypes, StateTypes> {
@@ -41,35 +41,31 @@ class Install extends Component<PropTypes, StateTypes> {
     this.state = {
       installingSlackApplication: false,
       successInstallationSlackApplication: undefined, // true/false after attempt
-      errors: [],
+      error: undefined,
     }
   }
 
   componentDidMount() {
     const params = queryString.parse(this.props.location.search);
-    // TODO replace the graphql mutation with REST POST @ strand-slack
     if (params.code) {
       this.setState(() => ({installingSlackApplication: true}), () => {
-        this.props.attemptInstall({
-          code: params.code,
-          clientId: CONFIG.SLACK_CLIENT_ID,
-          redirectUri: this.redirectUri
-        })
+        global.strand_slack_client.installApplication(params.code)
           .then(() => {
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: true,
             }));
           })
-          .catch((response: ApolloError) => {
+          .catch((response: InstallationResponseData) => {
             // TODO refactor this out as we start using it in other places
+            debugger;
             if (Raven.isSetup()) {
               Raven.captureException(Error(`Installation error: ${JSON.stringify(response)}`));
             }
             this.setState(() => ({
               installingSlackApplication: false,
               successInstallationSlackApplication: false,
-              errors: 'graphQLErrors' in response ? response.graphQLErrors.map(error => error.message) : [],
+              error: response.error,
             }));
           })
       })
@@ -116,7 +112,7 @@ class Install extends Component<PropTypes, StateTypes> {
                 : <InstallationStatus
                   installingSlackApplication={this.state.installingSlackApplication}
                   successInstallationSlackApplication={this.state.successInstallationSlackApplication}
-                  errors={this.state.errors}
+                  error={this.state.error}
                 />}
             </Grid>
             <Grid item>
@@ -135,7 +131,5 @@ class Install extends Component<PropTypes, StateTypes> {
 }
 
 const InstallStyledRouted = withRouter(withStyles(styles)(Install));
-
-// TODO container component that handles the install POST
 
 export default InstallStyledRouted;

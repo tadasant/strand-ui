@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Component} from 'react';
 import Grid from 'material-ui/Grid';
 import Hidden from 'material-ui/Hidden';
-import {GetStrandDetailStrandFragment} from '../../schema/graphql-types';
+import {GetStrandDetailStrandFragment} from '../../../schema/graphql-types';
 import StrandViewDesktop from './rwd/StrandDetailViewDesktop';
 import StrandViewMobile from './rwd/StrandDetailViewMobile';
 

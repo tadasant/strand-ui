@@ -1,7 +1,7 @@
 import * as React from 'react';
 import StrandsView from './StrandListView';
-import {GET_STRAND_LIST_QUERY} from '../../schema/graphql-queries';
-import {GetStrandListQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
+import {GET_STRAND_LIST_QUERY} from '../../../schema/graphql-queries';
+import {GetStrandListQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
 import {graphql} from 'react-apollo';
 import {filterFalsey} from '../common/utilities';
 import CircularProgress from 'material-ui/Progress/CircularProgress';

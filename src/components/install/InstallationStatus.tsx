@@ -5,14 +5,14 @@ import Typography from 'material-ui/Typography/Typography'
 interface PropTypes {
   installingSlackApplication: boolean,
   successInstallationSlackApplication?: boolean,
-  errors: string[],
+  error?: string,
 }
 
 class InstallationStatus extends Component<PropTypes> {
   renderSuccess() {
     return (
       <Typography variant='subheading' style={{color: 'green'}}>
-        {'Successfully installed! The Strand bot should have DM\'d you with setup instructions.'}
+        {'Successfully installed! The Strand bot should have DM\'d you a welcome message.'}
       </Typography>
     )
   }
@@ -20,8 +20,7 @@ class InstallationStatus extends Component<PropTypes> {
   renderFailure() {
     return (
       <Typography variant='subheading' style={{color: 'red'}}>
-        Failed to install.<br/>Errors:&nbsp;
-        {this.props.errors.length > 0 ? this.props.errors.join('; ') : 'Please contact support@solutionloft.com'}
+        Failed to install.<br/>Error: {this.props.error}
       </Typography>
     )
   }

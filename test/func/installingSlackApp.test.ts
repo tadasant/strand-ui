@@ -1,7 +1,8 @@
-import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
+import {navigationLabelToPath} from 'src/components/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
-import InstallationStatus from 'src/install/InstallationStatus';
+import InstallationStatus from 'src/components/install/InstallationStatus';
 import {flushPromises} from '../helper/utilities';
+import TestStrandSlackClient from '../clients/TestStrandSlackClient';
 
 describe('installing slack app', () => {
   it('sends the user to Slack when the user navigates to the page and clicks the button', () => {
@@ -17,16 +18,12 @@ describe('installing slack app', () => {
   });
 
   it('shows a success message when a user successfully installs the app', async () => {
+    const strand_slack_client = global.strand_slack_client as TestStrandSlackClient;
     const mockSlackCode = '12345';
-    const graphQLMocks = {
-      AttemptSlackInstallationMutation: (_: any, info: any) => {
-        // TODO info's "any" type above should be s.t. info.input is the AttemptSlackInstallationMutationInput
-        expect(info.input.code).toEqual(mockSlackCode); // ensuring the code is pulled from the URL
-        return {}
-      },
-    };
-    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`, {graphQLMocks});
-    await flushPromises(); // wait for GraphQL call to complete
+    strand_slack_client.addValidCode(mockSlackCode);
+
+    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`);
+    await flushPromises(); // wait for installation call to resolve
     wrapper.update();
 
     const installationStatusComponent = wrapper.find(InstallationStatus);
@@ -35,12 +32,7 @@ describe('installing slack app', () => {
   });
 
   it('shows a failure message when we fail to install the app', async () => {
-    const graphQLMocks = {
-      AttemptSlackInstallationMutation: () => {
-        throw 'This error message should be displayed on UI'
-      },
-    };
-    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`, {graphQLMocks});
+    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`);
     await flushPromises(); // wait for GraphQL call to complete
     wrapper.update();
 
