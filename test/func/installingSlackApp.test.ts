@@ -1,6 +1,6 @@
 import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
-import InstallationStatus from 'src/install/InstallationStatus.react';
+import InstallationStatus from 'src/install/InstallationStatus';
 import {flushPromises} from '../helper/utilities';
 
 describe('installing slack app', () => {

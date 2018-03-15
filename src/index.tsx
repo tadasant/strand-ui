@@ -7,8 +7,8 @@ import {ApolloClient} from 'apollo-client';
 import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {ApolloProvider} from 'react-apollo';
-import Root from './Root.react';
-import ErrorBoundary from './common/ErrorBoundary.react';
+import Root from './Root';
+import ErrorBoundary from './common/ErrorBoundary';
 import * as CONFIG from './config';
 import * as Raven from 'raven-js';
 
