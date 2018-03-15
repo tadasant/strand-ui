@@ -4,7 +4,7 @@ interface NavigationPaths {
 
 export const navigationLabelToPath: NavigationPaths = {
   Install: '/install',
-  Topics: '/topics',
+  Strands: '/strands',
 };
 
 export default {navigationLabelToPath};

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {mount, ReactWrapper} from 'enzyme';
-import App from 'src/App.react';
+import App from 'src/App';
 import {MemoryRouter} from 'react-router';
 import {ApolloProvider} from 'react-apollo';
 import {addMockFunctionsToSchema} from 'graphql-tools';
@@ -12,7 +12,7 @@ import * as graphqlIntrospectionResult from '../../schema/graphql.schema.json';
 
 
 /*
-  Mount the entire application (minus stuff in Root.react.tsx).
+  Mount the entire application (minus stuff in Root.tsx).
 
   (optional) options: {
     graphqlMocks: {
