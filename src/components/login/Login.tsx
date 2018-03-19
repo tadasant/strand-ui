@@ -39,7 +39,6 @@ const Login: StatelessComponent<PropTypes> = props => (
                 id='password-field'
                 label='Password'
                 type='password'
-                autoFocus
                 fullWidth
                 onChange={props.onPasswordChange}
                 required

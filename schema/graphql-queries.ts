@@ -38,6 +38,9 @@ export const GET_REFERENCE_DATA_QUERY = gql`
         users {
             ...ReferenceUsers
         }
+        me {
+            ...ReferenceMe
+        }
     }
   
     fragment ReferenceTags on TagType {
@@ -45,6 +48,11 @@ export const GET_REFERENCE_DATA_QUERY = gql`
     }
   
     fragment ReferenceUsers on UserType {
+        id
+        email
+    }
+  
+    fragment ReferenceMe on UserType {
         id
         email
     }

@@ -23,6 +23,10 @@ export interface GetReferenceDataQuery {
     id: string,
     email: string,
   } | null > | null,
+  me:  {
+    id: string,
+    email: string,
+  } | null,
 };
 
 export interface GetStrandDetailQueryVariables {
@@ -70,6 +74,11 @@ export interface ReferenceTagsFragment {
 };
 
 export interface ReferenceUsersFragment {
+  id: string,
+  email: string,
+};
+
+export interface ReferenceMeFragment {
   id: string,
   email: string,
 };

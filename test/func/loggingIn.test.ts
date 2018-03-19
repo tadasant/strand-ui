@@ -25,7 +25,7 @@ describe('logging in', () => {
     await flushPromises(); // wait for installation call to resolve
     wrapper.update();
 
-    // TODO assert cookie is saved
+    // TODO [UI-64] assert cookies stuff when cookies libraries settle down
     expect(wrapper.find(StrandListViewContainer)).toHaveLength(1);
   });
 

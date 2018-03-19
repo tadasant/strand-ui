@@ -2465,30 +2465,30 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                       align="inherit"
                                                                                       classes={
                                                                                         Object {
-                                                                                          "alignCenter": "MuiTypography-alignCenter-305",
-                                                                                          "alignJustify": "MuiTypography-alignJustify-307",
-                                                                                          "alignLeft": "MuiTypography-alignLeft-304",
-                                                                                          "alignRight": "MuiTypography-alignRight-306",
-                                                                                          "body1": "MuiTypography-body1-301",
-                                                                                          "body2": "MuiTypography-body2-300",
-                                                                                          "button": "MuiTypography-button-303",
-                                                                                          "caption": "MuiTypography-caption-302",
-                                                                                          "colorError": "MuiTypography-colorError-315",
-                                                                                          "colorInherit": "MuiTypography-colorInherit-311",
-                                                                                          "colorPrimary": "MuiTypography-colorPrimary-312",
-                                                                                          "colorSecondary": "MuiTypography-colorSecondary-313",
-                                                                                          "colorTextSecondary": "MuiTypography-colorTextSecondary-314",
-                                                                                          "display1": "MuiTypography-display1-296",
-                                                                                          "display2": "MuiTypography-display2-295",
-                                                                                          "display3": "MuiTypography-display3-294",
-                                                                                          "display4": "MuiTypography-display4-293",
-                                                                                          "gutterBottom": "MuiTypography-gutterBottom-309",
-                                                                                          "headline": "MuiTypography-headline-297",
-                                                                                          "noWrap": "MuiTypography-noWrap-308",
-                                                                                          "paragraph": "MuiTypography-paragraph-310",
-                                                                                          "root": "MuiTypography-root-292",
-                                                                                          "subheading": "MuiTypography-subheading-299",
-                                                                                          "title": "MuiTypography-title-298",
+                                                                                          "alignCenter": "MuiTypography-alignCenter-82",
+                                                                                          "alignJustify": "MuiTypography-alignJustify-84",
+                                                                                          "alignLeft": "MuiTypography-alignLeft-81",
+                                                                                          "alignRight": "MuiTypography-alignRight-83",
+                                                                                          "body1": "MuiTypography-body1-78",
+                                                                                          "body2": "MuiTypography-body2-77",
+                                                                                          "button": "MuiTypography-button-80",
+                                                                                          "caption": "MuiTypography-caption-79",
+                                                                                          "colorError": "MuiTypography-colorError-92",
+                                                                                          "colorInherit": "MuiTypography-colorInherit-88",
+                                                                                          "colorPrimary": "MuiTypography-colorPrimary-89",
+                                                                                          "colorSecondary": "MuiTypography-colorSecondary-90",
+                                                                                          "colorTextSecondary": "MuiTypography-colorTextSecondary-91",
+                                                                                          "display1": "MuiTypography-display1-73",
+                                                                                          "display2": "MuiTypography-display2-72",
+                                                                                          "display3": "MuiTypography-display3-71",
+                                                                                          "display4": "MuiTypography-display4-70",
+                                                                                          "gutterBottom": "MuiTypography-gutterBottom-86",
+                                                                                          "headline": "MuiTypography-headline-74",
+                                                                                          "noWrap": "MuiTypography-noWrap-85",
+                                                                                          "paragraph": "MuiTypography-paragraph-87",
+                                                                                          "root": "MuiTypography-root-69",
+                                                                                          "subheading": "MuiTypography-subheading-76",
+                                                                                          "title": "MuiTypography-title-75",
                                                                                         }
                                                                                       }
                                                                                       color="default"
@@ -2511,7 +2511,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                       variant="title"
                                                                                     >
                                                                                       <h2
-                                                                                        className="MuiTypography-root-292 MuiTypography-title-298"
+                                                                                        className="MuiTypography-root-69 MuiTypography-title-75"
                                                                                       >
                                                                                         <Link
                                                                                           replace={false}
@@ -2543,11 +2543,11 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                     absolute={false}
                                                                                     classes={
                                                                                       Object {
-                                                                                        "absolute": "MuiDivider-absolute-320",
-                                                                                        "default": "MuiDivider-default-318",
-                                                                                        "inset": "MuiDivider-inset-317",
-                                                                                        "light": "MuiDivider-light-319",
-                                                                                        "root": "MuiDivider-root-316",
+                                                                                        "absolute": "MuiDivider-absolute-296",
+                                                                                        "default": "MuiDivider-default-294",
+                                                                                        "inset": "MuiDivider-inset-293",
+                                                                                        "light": "MuiDivider-light-295",
+                                                                                        "root": "MuiDivider-root-292",
                                                                                       }
                                                                                     }
                                                                                     component="hr"
@@ -2555,7 +2555,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                     light={false}
                                                                                   >
                                                                                     <hr
-                                                                                      className="MuiDivider-root-316 MuiDivider-default-318"
+                                                                                      className="MuiDivider-root-292 MuiDivider-default-294"
                                                                                     />
                                                                                   </Divider>
                                                                                 </WithStyles(Divider)>
@@ -3650,26 +3650,26 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                                                     <Chip
                                                                                                                       classes={
                                                                                                                         Object {
-                                                                                                                          "avatar": "MuiChip-avatar-324",
-                                                                                                                          "avatarChildren": "MuiChip-avatarChildren-325",
-                                                                                                                          "clickable": "MuiChip-clickable-322",
-                                                                                                                          "deletable": "MuiChip-deletable-323",
-                                                                                                                          "deleteIcon": "MuiChip-deleteIcon-327",
-                                                                                                                          "label": "MuiChip-label-326",
-                                                                                                                          "root": "MuiChip-root-321",
+                                                                                                                          "avatar": "MuiChip-avatar-300",
+                                                                                                                          "avatarChildren": "MuiChip-avatarChildren-301",
+                                                                                                                          "clickable": "MuiChip-clickable-298",
+                                                                                                                          "deletable": "MuiChip-deletable-299",
+                                                                                                                          "deleteIcon": "MuiChip-deleteIcon-303",
+                                                                                                                          "label": "MuiChip-label-302",
+                                                                                                                          "root": "MuiChip-root-297",
                                                                                                                         }
                                                                                                                       }
                                                                                                                       component="div"
                                                                                                                       label="schemas"
                                                                                                                     >
                                                                                                                       <div
-                                                                                                                        className="MuiChip-root-321"
+                                                                                                                        className="MuiChip-root-297"
                                                                                                                         onKeyDown={[Function]}
                                                                                                                         role="button"
                                                                                                                         tabIndex={-1}
                                                                                                                       >
                                                                                                                         <span
-                                                                                                                          className="MuiChip-label-326"
+                                                                                                                          className="MuiChip-label-302"
                                                                                                                         >
                                                                                                                           schemas
                                                                                                                         </span>
@@ -3896,26 +3896,26 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                                                     <Chip
                                                                                                                       classes={
                                                                                                                         Object {
-                                                                                                                          "avatar": "MuiChip-avatar-324",
-                                                                                                                          "avatarChildren": "MuiChip-avatarChildren-325",
-                                                                                                                          "clickable": "MuiChip-clickable-322",
-                                                                                                                          "deletable": "MuiChip-deletable-323",
-                                                                                                                          "deleteIcon": "MuiChip-deleteIcon-327",
-                                                                                                                          "label": "MuiChip-label-326",
-                                                                                                                          "root": "MuiChip-root-321",
+                                                                                                                          "avatar": "MuiChip-avatar-300",
+                                                                                                                          "avatarChildren": "MuiChip-avatarChildren-301",
+                                                                                                                          "clickable": "MuiChip-clickable-298",
+                                                                                                                          "deletable": "MuiChip-deletable-299",
+                                                                                                                          "deleteIcon": "MuiChip-deleteIcon-303",
+                                                                                                                          "label": "MuiChip-label-302",
+                                                                                                                          "root": "MuiChip-root-297",
                                                                                                                         }
                                                                                                                       }
                                                                                                                       component="div"
                                                                                                                       label="synergies"
                                                                                                                     >
                                                                                                                       <div
-                                                                                                                        className="MuiChip-root-321"
+                                                                                                                        className="MuiChip-root-297"
                                                                                                                         onKeyDown={[Function]}
                                                                                                                         role="button"
                                                                                                                         tabIndex={-1}
                                                                                                                       >
                                                                                                                         <span
-                                                                                                                          className="MuiChip-label-326"
+                                                                                                                          className="MuiChip-label-302"
                                                                                                                         >
                                                                                                                           synergies
                                                                                                                         </span>
@@ -4658,30 +4658,30 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                     align="center"
                                                                                     classes={
                                                                                       Object {
-                                                                                        "alignCenter": "MuiTypography-alignCenter-305",
-                                                                                        "alignJustify": "MuiTypography-alignJustify-307",
-                                                                                        "alignLeft": "MuiTypography-alignLeft-304",
-                                                                                        "alignRight": "MuiTypography-alignRight-306",
-                                                                                        "body1": "MuiTypography-body1-301",
-                                                                                        "body2": "MuiTypography-body2-300",
-                                                                                        "button": "MuiTypography-button-303",
-                                                                                        "caption": "MuiTypography-caption-302",
-                                                                                        "colorError": "MuiTypography-colorError-315",
-                                                                                        "colorInherit": "MuiTypography-colorInherit-311",
-                                                                                        "colorPrimary": "MuiTypography-colorPrimary-312",
-                                                                                        "colorSecondary": "MuiTypography-colorSecondary-313",
-                                                                                        "colorTextSecondary": "MuiTypography-colorTextSecondary-314",
-                                                                                        "display1": "MuiTypography-display1-296",
-                                                                                        "display2": "MuiTypography-display2-295",
-                                                                                        "display3": "MuiTypography-display3-294",
-                                                                                        "display4": "MuiTypography-display4-293",
-                                                                                        "gutterBottom": "MuiTypography-gutterBottom-309",
-                                                                                        "headline": "MuiTypography-headline-297",
-                                                                                        "noWrap": "MuiTypography-noWrap-308",
-                                                                                        "paragraph": "MuiTypography-paragraph-310",
-                                                                                        "root": "MuiTypography-root-292",
-                                                                                        "subheading": "MuiTypography-subheading-299",
-                                                                                        "title": "MuiTypography-title-298",
+                                                                                        "alignCenter": "MuiTypography-alignCenter-82",
+                                                                                        "alignJustify": "MuiTypography-alignJustify-84",
+                                                                                        "alignLeft": "MuiTypography-alignLeft-81",
+                                                                                        "alignRight": "MuiTypography-alignRight-83",
+                                                                                        "body1": "MuiTypography-body1-78",
+                                                                                        "body2": "MuiTypography-body2-77",
+                                                                                        "button": "MuiTypography-button-80",
+                                                                                        "caption": "MuiTypography-caption-79",
+                                                                                        "colorError": "MuiTypography-colorError-92",
+                                                                                        "colorInherit": "MuiTypography-colorInherit-88",
+                                                                                        "colorPrimary": "MuiTypography-colorPrimary-89",
+                                                                                        "colorSecondary": "MuiTypography-colorSecondary-90",
+                                                                                        "colorTextSecondary": "MuiTypography-colorTextSecondary-91",
+                                                                                        "display1": "MuiTypography-display1-73",
+                                                                                        "display2": "MuiTypography-display2-72",
+                                                                                        "display3": "MuiTypography-display3-71",
+                                                                                        "display4": "MuiTypography-display4-70",
+                                                                                        "gutterBottom": "MuiTypography-gutterBottom-86",
+                                                                                        "headline": "MuiTypography-headline-74",
+                                                                                        "noWrap": "MuiTypography-noWrap-85",
+                                                                                        "paragraph": "MuiTypography-paragraph-87",
+                                                                                        "root": "MuiTypography-root-69",
+                                                                                        "subheading": "MuiTypography-subheading-76",
+                                                                                        "title": "MuiTypography-title-75",
                                                                                       }
                                                                                     }
                                                                                     color="default"
@@ -4704,7 +4704,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                     variant="title"
                                                                                   >
                                                                                     <h2
-                                                                                      className="MuiTypography-root-292 MuiTypography-title-298 MuiTypography-alignCenter-305"
+                                                                                      className="MuiTypography-root-69 MuiTypography-title-75 MuiTypography-alignCenter-82"
                                                                                     >
                                                                                       Participants
                                                                                     </h2>
@@ -4957,11 +4957,11 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                             absolute={false}
                                             classes={
                                               Object {
-                                                "absolute": "MuiDivider-absolute-320",
-                                                "default": "MuiDivider-default-318",
-                                                "inset": "MuiDivider-inset-317",
-                                                "light": "MuiDivider-light-319",
-                                                "root": "MuiDivider-root-316",
+                                                "absolute": "MuiDivider-absolute-296",
+                                                "default": "MuiDivider-default-294",
+                                                "inset": "MuiDivider-inset-293",
+                                                "light": "MuiDivider-light-295",
+                                                "root": "MuiDivider-root-292",
                                               }
                                             }
                                             component="hr"
@@ -4975,7 +4975,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                             }
                                           >
                                             <hr
-                                              className="MuiDivider-root-316 MuiDivider-default-318"
+                                              className="MuiDivider-root-292 MuiDivider-default-294"
                                               style={
                                                 Object {
                                                   "marginBottom": "2.5%",
