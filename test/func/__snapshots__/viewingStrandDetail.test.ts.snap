@@ -5,6 +5,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
   strand={
     Object {
       "__typename": "StrandType",
+      "body": "Hello World",
       "id": "35614841",
       "saver": Object {
         "__typename": "UserType",
@@ -857,6 +858,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                         strand={
                           Object {
                             "__typename": "StrandType",
+                            "body": "Hello World",
                             "id": "35614841",
                             "saver": Object {
                               "__typename": "UserType",
@@ -1303,6 +1305,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                           strand={
                                             Object {
                                               "__typename": "StrandType",
+                                              "body": "Hello World",
                                               "id": "35614841",
                                               "saver": Object {
                                                 "__typename": "UserType",
@@ -2773,6 +2776,7 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                                                                   strand={
                                                                                     Object {
                                                                                       "__typename": "StrandType",
+                                                                                      "body": "Hello World",
                                                                                       "id": "35614841",
                                                                                       "saver": Object {
                                                                                         "__typename": "UserType",
@@ -5218,7 +5222,23 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                           }
                                         }
                                       >
-                                        Markdown goes here
+                                        <ReactMarkdown
+                                          escapeHtml={true}
+                                          renderers={Object {}}
+                                          skipHtml={false}
+                                          source="Hello World"
+                                          transformLinkUri={[Function]}
+                                        >
+                                          <div
+                                            key="root-1-1"
+                                          >
+                                            <p
+                                              key="paragraph-1-1"
+                                            >
+                                              Hello World
+                                            </p>
+                                          </div>
+                                        </ReactMarkdown>
                                       </div>
                                     </Grid>
                                   </GridWrapper>

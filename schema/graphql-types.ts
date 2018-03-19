@@ -33,6 +33,7 @@ export interface GetStrandDetailQuery {
   strand:  {
     id: string,
     title: string | null,
+    body: string,
     tags:  Array< {
       name: string,
     } | null > | null,
@@ -76,6 +77,7 @@ export interface ReferenceUsersFragment {
 export interface GetStrandDetailStrandFragment {
   id: string,
   title: string | null,
+  body: string,
   tags:  Array< {
     name: string,
   } | null > | null,

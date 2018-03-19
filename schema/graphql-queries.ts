@@ -60,6 +60,7 @@ export const GET_STRAND_DETAIL_QUERY = gql`
     fragment GetStrandDetailStrand on StrandType {
         id
         title
+        body
         tags {
             ...GetStrandDetailTags
         }
