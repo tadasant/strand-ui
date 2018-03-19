@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Component} from 'react';
 import Grid from 'material-ui/Grid';
-import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
+import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../../schema/graphql-types';
 import {FiltersType, FilterTypes, FilterValuesType} from '../StrandListView';
 import StrandTiles from '../common/StrandTiles';
 

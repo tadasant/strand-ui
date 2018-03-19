@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Component} from 'react';
-import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../schema/graphql-types';
+import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
 import {intersection} from 'lodash';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';

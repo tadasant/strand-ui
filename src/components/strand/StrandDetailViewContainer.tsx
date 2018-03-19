@@ -1,8 +1,8 @@
 import * as React from 'react';
 import StrandView from './StrandDetailView';
-import {GET_STRAND_DETAIL_QUERY} from '../../schema/graphql-queries';
+import {GET_STRAND_DETAIL_QUERY} from '../../../schema/graphql-queries';
 import {graphql} from 'react-apollo';
-import {GetStrandDetailQuery} from '../../schema/graphql-types';
+import {GetStrandDetailQuery} from '../../../schema/graphql-types';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 interface PropTypes {

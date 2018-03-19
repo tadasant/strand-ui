@@ -3,7 +3,7 @@ import {Component} from 'react';
 import StrandTile from './tile/StrandTile';
 import Grid from 'material-ui/Grid';
 import StrandTileMinimal from './tile/StrandTileMinimal';
-import {GetStrandListStrandsFragment} from '../../../schema/graphql-types';
+import {GetStrandListStrandsFragment} from '../../../../schema/graphql-types';
 
 interface PropTypes {
   strands: GetStrandListStrandsFragment[]

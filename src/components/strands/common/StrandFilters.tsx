@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 import Select, {OnChangeHandler, OptionValues} from 'react-select';
 import {get} from 'lodash';
 import {FiltersType, FilterTypes, FilterValuesType} from '../StrandListView';
-import {ReferenceTagsFragment, ReferenceUsersFragment} from '../../../schema/graphql-types';
+import {ReferenceTagsFragment, ReferenceUsersFragment} from '../../../../schema/graphql-types';
 
 interface PropTypes {
   filters: FilterTypes

@@ -1,6 +1,6 @@
-import {navigationLabelToPath} from 'src/shell/common/MenuConstants';
+import {navigationLabelToPath} from 'src/components/shell/common/MenuConstants';
 import {mountApplication} from 'test/helper/applicationMock';
-import StrandTiles from 'src/strands/common/StrandTiles';
+import StrandTiles from 'src/components/strands/common/StrandTiles';
 import {strandFaker} from './viewingStrandList.data';
 import {MockList} from 'graphql-tools';
 import * as faker from "faker";

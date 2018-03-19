@@ -6,7 +6,7 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 import StrandSummaryTile from '../../common/StrandSummaryTile';
 import StrandTitle from "../../common/StrandTitle";
-import {GetStrandDetailStrandFragment} from '../../../schema/graphql-types';
+import {GetStrandDetailStrandFragment} from '../../../../schema/graphql-types';
 
 
 interface PropTypes {

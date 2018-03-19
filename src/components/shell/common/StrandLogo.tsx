@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
-import * as logoWithText from '../../../assets/strand_darktext.png';
-import * as logo from '../../../assets/strand.png';
+import * as logoWithText from '../../../../assets/strand_darktext.png';
+import * as logo from '../../../../assets/strand.png';
 
 interface PropTypes {
   omitText?: boolean,

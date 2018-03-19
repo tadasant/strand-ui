@@ -8,7 +8,7 @@ import {HttpLink} from 'apollo-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import {ApolloProvider} from 'react-apollo';
 import Root from './Root';
-import ErrorBoundary from './common/ErrorBoundary';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import * as CONFIG from './config';
 import * as Raven from 'raven-js';
 
