@@ -1,18 +1,12 @@
 import {AxiosPromise} from 'axios';
 import {InstallationResponseData} from '../../src/clients/StrandSlackClient';
+import TestClient, {successAxiosResponse} from './TestClient';
 
-const successAxiosResponse = {
-  data: {},
-  status: 200,
-  statusText: 'OK',
-  headers: {},
-  config: {}
-};
-
-class TestStrandSlackClient {
+class TestStrandSlackClient extends TestClient {
   validCodes: string[];
 
   constructor() {
+    super();
     this.validCodes = []
   }
 

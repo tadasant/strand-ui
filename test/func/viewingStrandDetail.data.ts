@@ -19,6 +19,7 @@ export const strandFaker = (): GetStrandDetailStrandFragment => {
         name: faker.company.bsNoun(),
       }
     ],
+    body: faker.lorem.paragraph(),
     saver: saver,
   }
 };

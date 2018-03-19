@@ -18,9 +18,9 @@ describe('installing slack app', () => {
   });
 
   it('shows a success message when a user successfully installs the app', async () => {
-    const strand_slack_client = global.strand_slack_client as TestStrandSlackClient;
+    const strandSlackClient = global.strandSlackClient as TestStrandSlackClient;
     const mockSlackCode = '12345';
-    strand_slack_client.addValidCode(mockSlackCode);
+    strandSlackClient.addValidCode(mockSlackCode);
 
     const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`);
     await flushPromises(); // wait for installation call to resolve

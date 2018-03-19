@@ -10,6 +10,7 @@ import {buildClientSchema} from 'graphql';
 import {ApolloClient} from 'apollo-client';
 import * as graphqlIntrospectionResult from '../../schema/graphql.schema.json';
 import TestStrandSlackClient from '../clients/TestStrandSlackClient';
+import TestStrandApiClient from '../clients/TestStrandApiClient';
 
 
 /*
@@ -50,5 +51,6 @@ const generateMockApolloClient = (graphqlMocks: {}): ApolloClient<NormalizedCach
 
 const setUpTestClients = () => {
   // TODO [UI-59] replace with React 16.3 new context API
-  global.strand_slack_client = new TestStrandSlackClient();
+  global.strandSlackClient = new TestStrandSlackClient();
+  global.strandApiClient = new TestStrandApiClient();
 };

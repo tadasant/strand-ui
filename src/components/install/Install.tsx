@@ -49,7 +49,7 @@ class Install extends Component<PropTypes, StateTypes> {
     const params = queryString.parse(this.props.location.search);
     if (params.code) {
       this.setState(() => ({installingSlackApplication: true}), () => {
-        global.strand_slack_client.installApplication(params.code)
+        global.strandSlackClient.installApplication(params.code)
           .then(() => {
             this.setState(() => ({
               installingSlackApplication: false,

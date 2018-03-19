@@ -2,6 +2,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import {configure} from 'enzyme';
 import * as dotenv from 'dotenv';
 import TestStrandSlackClient from './clients/TestStrandSlackClient';
+import TestStrandApiClient from './clients/TestStrandApiClient';
 
 // environment variables
 dotenv.config({path: 'env/.env.test'});
@@ -16,6 +17,8 @@ jest.mock('moment', () => {
 });
 
 afterEach(() => {
-  const strand_slack_client = global.strand_slack_client as TestStrandSlackClient;
-  strand_slack_client.clearState();
+  const strandSlackClient = global.strandSlackClient as TestStrandSlackClient;
+  const strandApiClient = global.strandApiClient as TestStrandApiClient;
+  strandSlackClient.clearState();
+  strandApiClient.clearState();
 });

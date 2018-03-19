@@ -3,14 +3,15 @@ import {Component, Fragment} from 'react';
 import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
 import Shell from './components/shell/Shell';
 import Install from './components/install/Install';
-import StrandsViewContainer from './components/strands/StrandListViewContainer';
+import StrandListViewContainer from './components/strands/StrandListViewContainer';
 import {GET_REFERENCE_DATA_QUERY} from '../schema/graphql-queries';
 import {GetReferenceDataQuery, ReferenceTagsFragment, ReferenceUsersFragment} from '../schema/graphql-types';
 import {graphql} from 'react-apollo';
 import {get} from 'lodash';
 import {filterFalsey} from './components/common/utilities';
 import 'react-select/dist/react-select.css';
-import StrandViewContainer from './components/strand/StrandDetailViewContainer';
+import StrandDetailViewContainer from './components/strand/StrandDetailViewContainer';
+import Login from './components/login/LoginContainer';
 
 interface PropTypes {
   tags: ReferenceTagsFragment[],
@@ -23,9 +24,10 @@ class App extends Component<PropTypes> {
       <Fragment>
         <Shell/>
         <Switch>
-          <Route exact path='/strands' render={() => <StrandsViewContainer tags={this.props.tags} users={this.props.users}/>} />
-          <Route exact path='/strands/:id' render={(props: RouteComponentProps<{id: string}>) => <StrandViewContainer strandId={props.match.params.id}/>}/>
+          <Route exact path='/strands' render={() => <StrandListViewContainer tags={this.props.tags} users={this.props.users}/>} />
+          <Route exact path='/strands/:id' render={(props: RouteComponentProps<{id: string}>) => <StrandDetailViewContainer strandId={props.match.params.id}/>}/>
           <Route exact path='/install' component={Install}/>
+          <Route exact path='/login' component={Login}/>
           <Redirect from='/' to='/strands'/>
         </Switch>
       </Fragment>
