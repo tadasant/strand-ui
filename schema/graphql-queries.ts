@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 // TODO [UI-47]: split this huge file into .graphql files
 
 export const GET_STRAND_LIST_QUERY = gql`
-    query GetStrandList {
-        strands {
+    query GetStrandList($query: String, $page: Int, $size: Int) {
+        strands(query: $query, page: $page, size: $size) {
             ...GetStrandListStrands
         }
     }

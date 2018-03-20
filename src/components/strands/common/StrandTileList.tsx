@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Component} from 'react';
-import StrandTile from './tile/StrandTile';
+import StrandTileDetail from './tile/StrandTileDetail';
 import Grid from 'material-ui/Grid';
-import StrandTileMinimal from './tile/StrandTileMinimal';
+import StrandTileDetailMinimal from './tile/StrandTileDetailMinimal';
 import {GetStrandListStrandsFragment} from '../../../../schema/graphql-types';
 
 interface PropTypes {
@@ -10,13 +10,13 @@ interface PropTypes {
   minimal?: boolean
 }
 
-class StrandTiles extends Component<PropTypes> {
+class StrandTileList extends Component<PropTypes> {
   render() {
     return (
       <Grid container alignItems='stretch' direction='row'>
         {this.props.strands.map(strand => (
           <Grid item xs={6} key={`strand_${strand.id}`}>
-            {this.props.minimal ? <StrandTileMinimal strand={strand} /> : <StrandTile strand={strand}/>}
+            {this.props.minimal ? <StrandTileDetailMinimal strand={strand} /> : <StrandTileDetail strand={strand}/>}
           </Grid>
         ))}
       </Grid>
@@ -24,4 +24,4 @@ class StrandTiles extends Component<PropTypes> {
   }
 }
 
-export default StrandTiles;
+export default StrandTileList;

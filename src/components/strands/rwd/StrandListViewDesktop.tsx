@@ -5,7 +5,8 @@ import Paper from 'material-ui/Paper';
 import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../../schema/graphql-types';
 import {FiltersType, FilterTypes, FilterValuesType} from '../StrandListView';
 import StrandFilters from '../common/StrandFilters';
-import StrandTiles from '../common/StrandTiles';
+import StrandTiles from '../common/StrandTileList';
+import SearchBox from '../common/SearchBox';
 
 interface PropTypes {
   filteredStrands: GetStrandListStrandsFragment[]
@@ -13,6 +14,7 @@ interface PropTypes {
   users: ReferenceUsersFragment[]
   filters: FilterTypes
   handleChangeFilter: (name: FiltersType, values: FilterValuesType) => void
+  handleSearchStrands: (searchValue: string) => void
 }
 
 class StrandListViewDesktop extends Component<PropTypes> {
@@ -37,6 +39,9 @@ class StrandListViewDesktop extends Component<PropTypes> {
         </Grid>
         <Grid item xs={8}>
           <Grid container direction='column' alignItems='stretch'>
+            <Grid item xs={12}>
+              <SearchBox onSearchStrands={this.props.handleSearchStrands}/>
+            </Grid>
             <Grid item xs={12}>
               <StrandTiles strands={this.props.filteredStrands}/>
             </Grid>

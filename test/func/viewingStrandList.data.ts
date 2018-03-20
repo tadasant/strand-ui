@@ -4,6 +4,8 @@ import * as faker from 'faker';
 const saverFaker = (): GetStrandListUserFragment => ({
   id: faker.finance.account(),
   email: faker.internet.userName(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
 });
 
 export const strandFaker = (): GetStrandListStrandsFragment => {

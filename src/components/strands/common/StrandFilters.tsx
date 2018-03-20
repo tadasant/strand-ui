@@ -71,7 +71,7 @@ class StrandFilters extends Component<PropTypes> {
           <Divider style={{marginTop: '2%'}}/>
         </Grid>
         <Grid item style={{marginTop: '1%'}}>
-          <Typography variant='body2'>Original Poster</Typography>
+          <Typography variant='body2'>Saver</Typography>
           <Select
             value={this.props.filters.saverId}
             onChange={this.generateHandleChangeFilter('saverId')}

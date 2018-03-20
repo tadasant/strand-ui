@@ -1,60 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`viewing existing strands shows the user a list of two strands when clicking into the strand page 1`] = `
-<StrandTiles
+<StrandTileList
   strands={
     Array [
       Object {
         "__typename": "StrandType",
-        "id": "17721201",
+        "id": "72120166",
         "saver": Object {
           "__typename": "UserType",
           "email": "Jessie2",
-          "firstName": "Hello World",
+          "firstName": "Clotilde",
           "id": "72046478",
-          "lastName": "Hello World",
+          "lastName": "Quitzon",
           Symbol(id): "UserType:72046478",
         },
         "tags": Array [
           Object {
             "__typename": "TagType",
-            "name": "channels",
-            Symbol(id): "StrandType:17721201.tags.0",
+            "name": "metrics",
+            Symbol(id): "StrandType:72120166.tags.0",
           },
           Object {
             "__typename": "TagType",
-            "name": "e-markets",
-            Symbol(id): "StrandType:17721201.tags.1",
+            "name": "solutions",
+            Symbol(id): "StrandType:72120166.tags.1",
           },
         ],
-        "title": "Nobis tenetur illum alias suscipit excepturi necessitatibus vel.",
-        Symbol(id): "StrandType:17721201",
+        "title": "Illum alias suscipit excepturi necessitatibus vel velit laborum doloremque quisquam.",
+        Symbol(id): "StrandType:72120166",
       },
       Object {
         "__typename": "StrandType",
-        "id": "73561484",
+        "id": "84162506",
         "saver": Object {
           "__typename": "UserType",
-          "email": "Brenden.Littel",
-          "firstName": "Hello World",
-          "id": "07827957",
-          "lastName": "Hello World",
-          Symbol(id): "UserType:07827957",
+          "email": "Orlo_Hilpert",
+          "firstName": "Christ",
+          "id": "79571541",
+          "lastName": "Kiehn",
+          Symbol(id): "UserType:79571541",
         },
         "tags": Array [
           Object {
             "__typename": "TagType",
-            "name": "paradigms",
-            Symbol(id): "StrandType:73561484.tags.0",
+            "name": "synergies",
+            Symbol(id): "StrandType:84162506.tags.0",
           },
           Object {
             "__typename": "TagType",
-            "name": "systems",
-            Symbol(id): "StrandType:73561484.tags.1",
+            "name": "convergence",
+            Symbol(id): "StrandType:84162506.tags.1",
           },
         ],
-        "title": "Et veniam excepturi.",
-        Symbol(id): "StrandType:73561484",
+        "title": "Animi voluptas aut.",
+        Symbol(id): "StrandType:84162506",
       },
     ]
   }
@@ -274,7 +274,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
         >
           <WithStyles(GridWrapper)
             item={true}
-            key="strand_17721201"
+            key="strand_72120166"
             xs={6}
           >
             <GridWrapper
@@ -485,33 +485,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                 <div
                   className="MuiGrid-typeItem-94 MuiGrid-grid-xs-6-124"
                 >
-                  <StrandTile
+                  <StrandTileDetail
                     strand={
                       Object {
                         "__typename": "StrandType",
-                        "id": "17721201",
+                        "id": "72120166",
                         "saver": Object {
                           "__typename": "UserType",
                           "email": "Jessie2",
-                          "firstName": "Hello World",
+                          "firstName": "Clotilde",
                           "id": "72046478",
-                          "lastName": "Hello World",
+                          "lastName": "Quitzon",
                           Symbol(id): "UserType:72046478",
                         },
                         "tags": Array [
                           Object {
                             "__typename": "TagType",
-                            "name": "channels",
-                            Symbol(id): "StrandType:17721201.tags.0",
+                            "name": "metrics",
+                            Symbol(id): "StrandType:72120166.tags.0",
                           },
                           Object {
                             "__typename": "TagType",
-                            "name": "e-markets",
-                            Symbol(id): "StrandType:17721201.tags.1",
+                            "name": "solutions",
+                            Symbol(id): "StrandType:72120166.tags.1",
                           },
                         ],
-                        "title": "Nobis tenetur illum alias suscipit excepturi necessitatibus vel.",
-                        Symbol(id): "StrandType:17721201",
+                        "title": "Illum alias suscipit excepturi necessitatibus vel velit laborum doloremque quisquam.",
+                        Symbol(id): "StrandType:72120166",
                       }
                     }
                   >
@@ -1003,14 +1003,14 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                               Object {
                                                 "__typename": "UserType",
                                                 "email": "Jessie2",
-                                                "firstName": "Hello World",
+                                                "firstName": "Clotilde",
                                                 "id": "72046478",
-                                                "lastName": "Hello World",
+                                                "lastName": "Quitzon",
                                                 Symbol(id): "UserType:72046478",
                                               }
                                             }
-                                            strandId="17721201"
-                                            title="Nobis tenetur illum alias suscipit excepturi necessitatibus vel."
+                                            strandId="72120166"
+                                            title="Illum alias suscipit excepturi necessitatibus vel velit laborum doloremque quisquam."
                                           >
                                             <WithStyles(GridWrapper)
                                               container={true}
@@ -1510,10 +1510,10 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                         "textDecoration": "unset",
                                                                       }
                                                                     }
-                                                                    to="/strands/17721201"
+                                                                    to="/strands/72120166"
                                                                   >
                                                                     <a
-                                                                      href="/strands/17721201"
+                                                                      href="/strands/72120166"
                                                                       onClick={[Function]}
                                                                       style={
                                                                         Object {
@@ -1521,7 +1521,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                         }
                                                                       }
                                                                     >
-                                                                      Nobis tenetur illum alias suscipit excepturi necessitatibus vel.
+                                                                      Illum alias suscipit excepturi necessitatibus vel velit laborum doloremque quisquam.
                                                                     </a>
                                                                   </Link>
                                                                 </h2>
@@ -1753,9 +1753,9 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                               <Avatar
                                                                 classes={
                                                                   Object {
-                                                                    "colorDefault": "MuiAvatar-colorDefault-189",
-                                                                    "img": "MuiAvatar-img-190",
-                                                                    "root": "MuiAvatar-root-188",
+                                                                    "colorDefault": "MuiAvatar-colorDefault-204",
+                                                                    "img": "MuiAvatar-img-205",
+                                                                    "root": "MuiAvatar-root-203",
                                                                   }
                                                                 }
                                                                 component="div"
@@ -1766,15 +1766,15 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                 }
                                                               >
                                                                 <div
-                                                                  className="MuiAvatar-root-188 MuiAvatar-colorDefault-189"
+                                                                  className="MuiAvatar-root-203 MuiAvatar-colorDefault-204"
                                                                   style={
                                                                     Object {
                                                                       "float": "right",
                                                                     }
                                                                   }
                                                                 >
-                                                                  H
-                                                                  H
+                                                                  C
+                                                                  Q
                                                                 </div>
                                                               </Avatar>
                                                             </WithStyles(Avatar)>
@@ -2007,29 +2007,29 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                             strand={
                                               Object {
                                                 "__typename": "StrandType",
-                                                "id": "17721201",
+                                                "id": "72120166",
                                                 "saver": Object {
                                                   "__typename": "UserType",
                                                   "email": "Jessie2",
-                                                  "firstName": "Hello World",
+                                                  "firstName": "Clotilde",
                                                   "id": "72046478",
-                                                  "lastName": "Hello World",
+                                                  "lastName": "Quitzon",
                                                   Symbol(id): "UserType:72046478",
                                                 },
                                                 "tags": Array [
                                                   Object {
                                                     "__typename": "TagType",
-                                                    "name": "channels",
-                                                    Symbol(id): "StrandType:17721201.tags.0",
+                                                    "name": "metrics",
+                                                    Symbol(id): "StrandType:72120166.tags.0",
                                                   },
                                                   Object {
                                                     "__typename": "TagType",
-                                                    "name": "e-markets",
-                                                    Symbol(id): "StrandType:17721201.tags.1",
+                                                    "name": "solutions",
+                                                    Symbol(id): "StrandType:72120166.tags.1",
                                                   },
                                                 ],
-                                                "title": "Nobis tenetur illum alias suscipit excepturi necessitatibus vel.",
-                                                Symbol(id): "StrandType:17721201",
+                                                "title": "Illum alias suscipit excepturi necessitatibus vel velit laborum doloremque quisquam.",
+                                                Symbol(id): "StrandType:72120166",
                                               }
                                             }
                                           >
@@ -2668,7 +2668,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                   >
                                                                     <WithStyles(GridWrapper)
                                                                       item={true}
-                                                                      key="channels"
+                                                                      key="metrics"
                                                                     >
                                                                       <GridWrapper
                                                                         classes={
@@ -2877,33 +2877,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                             className="MuiGrid-typeItem-94"
                                                                           >
                                                                             <WithStyles(Chip)
-                                                                              label="channels"
+                                                                              label="metrics"
                                                                             >
                                                                               <Chip
                                                                                 classes={
                                                                                   Object {
-                                                                                    "avatar": "MuiChip-avatar-194",
-                                                                                    "avatarChildren": "MuiChip-avatarChildren-195",
-                                                                                    "clickable": "MuiChip-clickable-192",
-                                                                                    "deletable": "MuiChip-deletable-193",
-                                                                                    "deleteIcon": "MuiChip-deleteIcon-197",
-                                                                                    "label": "MuiChip-label-196",
-                                                                                    "root": "MuiChip-root-191",
+                                                                                    "avatar": "MuiChip-avatar-209",
+                                                                                    "avatarChildren": "MuiChip-avatarChildren-210",
+                                                                                    "clickable": "MuiChip-clickable-207",
+                                                                                    "deletable": "MuiChip-deletable-208",
+                                                                                    "deleteIcon": "MuiChip-deleteIcon-212",
+                                                                                    "label": "MuiChip-label-211",
+                                                                                    "root": "MuiChip-root-206",
                                                                                   }
                                                                                 }
                                                                                 component="div"
-                                                                                label="channels"
+                                                                                label="metrics"
                                                                               >
                                                                                 <div
-                                                                                  className="MuiChip-root-191"
+                                                                                  className="MuiChip-root-206"
                                                                                   onKeyDown={[Function]}
                                                                                   role="button"
                                                                                   tabIndex={-1}
                                                                                 >
                                                                                   <span
-                                                                                    className="MuiChip-label-196"
+                                                                                    className="MuiChip-label-211"
                                                                                   >
-                                                                                    channels
+                                                                                    metrics
                                                                                   </span>
                                                                                 </div>
                                                                               </Chip>
@@ -2914,7 +2914,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                     </WithStyles(GridWrapper)>
                                                                     <WithStyles(GridWrapper)
                                                                       item={true}
-                                                                      key="e-markets"
+                                                                      key="solutions"
                                                                     >
                                                                       <GridWrapper
                                                                         classes={
@@ -3123,33 +3123,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                             className="MuiGrid-typeItem-94"
                                                                           >
                                                                             <WithStyles(Chip)
-                                                                              label="e-markets"
+                                                                              label="solutions"
                                                                             >
                                                                               <Chip
                                                                                 classes={
                                                                                   Object {
-                                                                                    "avatar": "MuiChip-avatar-194",
-                                                                                    "avatarChildren": "MuiChip-avatarChildren-195",
-                                                                                    "clickable": "MuiChip-clickable-192",
-                                                                                    "deletable": "MuiChip-deletable-193",
-                                                                                    "deleteIcon": "MuiChip-deleteIcon-197",
-                                                                                    "label": "MuiChip-label-196",
-                                                                                    "root": "MuiChip-root-191",
+                                                                                    "avatar": "MuiChip-avatar-209",
+                                                                                    "avatarChildren": "MuiChip-avatarChildren-210",
+                                                                                    "clickable": "MuiChip-clickable-207",
+                                                                                    "deletable": "MuiChip-deletable-208",
+                                                                                    "deleteIcon": "MuiChip-deleteIcon-212",
+                                                                                    "label": "MuiChip-label-211",
+                                                                                    "root": "MuiChip-root-206",
                                                                                   }
                                                                                 }
                                                                                 component="div"
-                                                                                label="e-markets"
+                                                                                label="solutions"
                                                                               >
                                                                                 <div
-                                                                                  className="MuiChip-root-191"
+                                                                                  className="MuiChip-root-206"
                                                                                   onKeyDown={[Function]}
                                                                                   role="button"
                                                                                   tabIndex={-1}
                                                                                 >
                                                                                   <span
-                                                                                    className="MuiChip-label-196"
+                                                                                    className="MuiChip-label-211"
                                                                                   >
-                                                                                    e-markets
+                                                                                    solutions
                                                                                   </span>
                                                                                 </div>
                                                                               </Chip>
@@ -3182,14 +3182,14 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                         </div>
                       </Paper>
                     </WithStyles(Paper)>
-                  </StrandTile>
+                  </StrandTileDetail>
                 </div>
               </Grid>
             </GridWrapper>
           </WithStyles(GridWrapper)>
           <WithStyles(GridWrapper)
             item={true}
-            key="strand_73561484"
+            key="strand_84162506"
             xs={6}
           >
             <GridWrapper
@@ -3400,33 +3400,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                 <div
                   className="MuiGrid-typeItem-94 MuiGrid-grid-xs-6-124"
                 >
-                  <StrandTile
+                  <StrandTileDetail
                     strand={
                       Object {
                         "__typename": "StrandType",
-                        "id": "73561484",
+                        "id": "84162506",
                         "saver": Object {
                           "__typename": "UserType",
-                          "email": "Brenden.Littel",
-                          "firstName": "Hello World",
-                          "id": "07827957",
-                          "lastName": "Hello World",
-                          Symbol(id): "UserType:07827957",
+                          "email": "Orlo_Hilpert",
+                          "firstName": "Christ",
+                          "id": "79571541",
+                          "lastName": "Kiehn",
+                          Symbol(id): "UserType:79571541",
                         },
                         "tags": Array [
                           Object {
                             "__typename": "TagType",
-                            "name": "paradigms",
-                            Symbol(id): "StrandType:73561484.tags.0",
+                            "name": "synergies",
+                            Symbol(id): "StrandType:84162506.tags.0",
                           },
                           Object {
                             "__typename": "TagType",
-                            "name": "systems",
-                            Symbol(id): "StrandType:73561484.tags.1",
+                            "name": "convergence",
+                            Symbol(id): "StrandType:84162506.tags.1",
                           },
                         ],
-                        "title": "Et veniam excepturi.",
-                        Symbol(id): "StrandType:73561484",
+                        "title": "Animi voluptas aut.",
+                        Symbol(id): "StrandType:84162506",
                       }
                     }
                   >
@@ -3917,15 +3917,15 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                             saver={
                                               Object {
                                                 "__typename": "UserType",
-                                                "email": "Brenden.Littel",
-                                                "firstName": "Hello World",
-                                                "id": "07827957",
-                                                "lastName": "Hello World",
-                                                Symbol(id): "UserType:07827957",
+                                                "email": "Orlo_Hilpert",
+                                                "firstName": "Christ",
+                                                "id": "79571541",
+                                                "lastName": "Kiehn",
+                                                Symbol(id): "UserType:79571541",
                                               }
                                             }
-                                            strandId="73561484"
-                                            title="Et veniam excepturi."
+                                            strandId="84162506"
+                                            title="Animi voluptas aut."
                                           >
                                             <WithStyles(GridWrapper)
                                               container={true}
@@ -4425,10 +4425,10 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                         "textDecoration": "unset",
                                                                       }
                                                                     }
-                                                                    to="/strands/73561484"
+                                                                    to="/strands/84162506"
                                                                   >
                                                                     <a
-                                                                      href="/strands/73561484"
+                                                                      href="/strands/84162506"
                                                                       onClick={[Function]}
                                                                       style={
                                                                         Object {
@@ -4436,7 +4436,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                         }
                                                                       }
                                                                     >
-                                                                      Et veniam excepturi.
+                                                                      Animi voluptas aut.
                                                                     </a>
                                                                   </Link>
                                                                 </h2>
@@ -4668,9 +4668,9 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                               <Avatar
                                                                 classes={
                                                                   Object {
-                                                                    "colorDefault": "MuiAvatar-colorDefault-189",
-                                                                    "img": "MuiAvatar-img-190",
-                                                                    "root": "MuiAvatar-root-188",
+                                                                    "colorDefault": "MuiAvatar-colorDefault-204",
+                                                                    "img": "MuiAvatar-img-205",
+                                                                    "root": "MuiAvatar-root-203",
                                                                   }
                                                                 }
                                                                 component="div"
@@ -4681,15 +4681,15 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                 }
                                                               >
                                                                 <div
-                                                                  className="MuiAvatar-root-188 MuiAvatar-colorDefault-189"
+                                                                  className="MuiAvatar-root-203 MuiAvatar-colorDefault-204"
                                                                   style={
                                                                     Object {
                                                                       "float": "right",
                                                                     }
                                                                   }
                                                                 >
-                                                                  H
-                                                                  H
+                                                                  C
+                                                                  K
                                                                 </div>
                                                               </Avatar>
                                                             </WithStyles(Avatar)>
@@ -4922,29 +4922,29 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                             strand={
                                               Object {
                                                 "__typename": "StrandType",
-                                                "id": "73561484",
+                                                "id": "84162506",
                                                 "saver": Object {
                                                   "__typename": "UserType",
-                                                  "email": "Brenden.Littel",
-                                                  "firstName": "Hello World",
-                                                  "id": "07827957",
-                                                  "lastName": "Hello World",
-                                                  Symbol(id): "UserType:07827957",
+                                                  "email": "Orlo_Hilpert",
+                                                  "firstName": "Christ",
+                                                  "id": "79571541",
+                                                  "lastName": "Kiehn",
+                                                  Symbol(id): "UserType:79571541",
                                                 },
                                                 "tags": Array [
                                                   Object {
                                                     "__typename": "TagType",
-                                                    "name": "paradigms",
-                                                    Symbol(id): "StrandType:73561484.tags.0",
+                                                    "name": "synergies",
+                                                    Symbol(id): "StrandType:84162506.tags.0",
                                                   },
                                                   Object {
                                                     "__typename": "TagType",
-                                                    "name": "systems",
-                                                    Symbol(id): "StrandType:73561484.tags.1",
+                                                    "name": "convergence",
+                                                    Symbol(id): "StrandType:84162506.tags.1",
                                                   },
                                                 ],
-                                                "title": "Et veniam excepturi.",
-                                                Symbol(id): "StrandType:73561484",
+                                                "title": "Animi voluptas aut.",
+                                                Symbol(id): "StrandType:84162506",
                                               }
                                             }
                                           >
@@ -5583,7 +5583,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                   >
                                                                     <WithStyles(GridWrapper)
                                                                       item={true}
-                                                                      key="paradigms"
+                                                                      key="synergies"
                                                                     >
                                                                       <GridWrapper
                                                                         classes={
@@ -5792,33 +5792,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                             className="MuiGrid-typeItem-94"
                                                                           >
                                                                             <WithStyles(Chip)
-                                                                              label="paradigms"
+                                                                              label="synergies"
                                                                             >
                                                                               <Chip
                                                                                 classes={
                                                                                   Object {
-                                                                                    "avatar": "MuiChip-avatar-194",
-                                                                                    "avatarChildren": "MuiChip-avatarChildren-195",
-                                                                                    "clickable": "MuiChip-clickable-192",
-                                                                                    "deletable": "MuiChip-deletable-193",
-                                                                                    "deleteIcon": "MuiChip-deleteIcon-197",
-                                                                                    "label": "MuiChip-label-196",
-                                                                                    "root": "MuiChip-root-191",
+                                                                                    "avatar": "MuiChip-avatar-209",
+                                                                                    "avatarChildren": "MuiChip-avatarChildren-210",
+                                                                                    "clickable": "MuiChip-clickable-207",
+                                                                                    "deletable": "MuiChip-deletable-208",
+                                                                                    "deleteIcon": "MuiChip-deleteIcon-212",
+                                                                                    "label": "MuiChip-label-211",
+                                                                                    "root": "MuiChip-root-206",
                                                                                   }
                                                                                 }
                                                                                 component="div"
-                                                                                label="paradigms"
+                                                                                label="synergies"
                                                                               >
                                                                                 <div
-                                                                                  className="MuiChip-root-191"
+                                                                                  className="MuiChip-root-206"
                                                                                   onKeyDown={[Function]}
                                                                                   role="button"
                                                                                   tabIndex={-1}
                                                                                 >
                                                                                   <span
-                                                                                    className="MuiChip-label-196"
+                                                                                    className="MuiChip-label-211"
                                                                                   >
-                                                                                    paradigms
+                                                                                    synergies
                                                                                   </span>
                                                                                 </div>
                                                                               </Chip>
@@ -5829,7 +5829,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                     </WithStyles(GridWrapper)>
                                                                     <WithStyles(GridWrapper)
                                                                       item={true}
-                                                                      key="systems"
+                                                                      key="convergence"
                                                                     >
                                                                       <GridWrapper
                                                                         classes={
@@ -6038,33 +6038,33 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                                                                             className="MuiGrid-typeItem-94"
                                                                           >
                                                                             <WithStyles(Chip)
-                                                                              label="systems"
+                                                                              label="convergence"
                                                                             >
                                                                               <Chip
                                                                                 classes={
                                                                                   Object {
-                                                                                    "avatar": "MuiChip-avatar-194",
-                                                                                    "avatarChildren": "MuiChip-avatarChildren-195",
-                                                                                    "clickable": "MuiChip-clickable-192",
-                                                                                    "deletable": "MuiChip-deletable-193",
-                                                                                    "deleteIcon": "MuiChip-deleteIcon-197",
-                                                                                    "label": "MuiChip-label-196",
-                                                                                    "root": "MuiChip-root-191",
+                                                                                    "avatar": "MuiChip-avatar-209",
+                                                                                    "avatarChildren": "MuiChip-avatarChildren-210",
+                                                                                    "clickable": "MuiChip-clickable-207",
+                                                                                    "deletable": "MuiChip-deletable-208",
+                                                                                    "deleteIcon": "MuiChip-deleteIcon-212",
+                                                                                    "label": "MuiChip-label-211",
+                                                                                    "root": "MuiChip-root-206",
                                                                                   }
                                                                                 }
                                                                                 component="div"
-                                                                                label="systems"
+                                                                                label="convergence"
                                                                               >
                                                                                 <div
-                                                                                  className="MuiChip-root-191"
+                                                                                  className="MuiChip-root-206"
                                                                                   onKeyDown={[Function]}
                                                                                   role="button"
                                                                                   tabIndex={-1}
                                                                                 >
                                                                                   <span
-                                                                                    className="MuiChip-label-196"
+                                                                                    className="MuiChip-label-211"
                                                                                   >
-                                                                                    systems
+                                                                                    convergence
                                                                                   </span>
                                                                                 </div>
                                                                               </Chip>
@@ -6097,7 +6097,7 @@ exports[`viewing existing strands shows the user a list of two strands when clic
                         </div>
                       </Paper>
                     </WithStyles(Paper)>
-                  </StrandTile>
+                  </StrandTileDetail>
                 </div>
               </Grid>
             </GridWrapper>
@@ -6106,5 +6106,5 @@ exports[`viewing existing strands shows the user a list of two strands when clic
       </Grid>
     </GridWrapper>
   </WithStyles(GridWrapper)>
-</StrandTiles>
+</StrandTileList>
 `;
