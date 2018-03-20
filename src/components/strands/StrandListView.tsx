@@ -30,7 +30,7 @@ interface StateTypes {
 class StrandListView extends Component<PropTypes, StateTypes> {
   constructor(props: PropTypes) {
     super(props);
-    // TODO [UI-49]: At scale, filters can't be in-memory
+    // At scale, filters can't be in-memory
     this.state = {
       filteredStrands: [],
       filters: {
@@ -79,7 +79,6 @@ class StrandListView extends Component<PropTypes, StateTypes> {
           justify='space-around'>
           <Grid item>
             <Typography variant='display2' align='center'>Strands</Typography>
-            <Typography variant='caption' align='center'>Review all strands discussed</Typography>
           </Grid>
         </Grid>
         <Hidden mdUp>

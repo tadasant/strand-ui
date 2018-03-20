@@ -21,7 +21,7 @@ const style = {
 class StrandTileMinimal extends Component<PropTypes> {
 
   render() {
-    const {title, id} = this.props.strand;
+    const {title, id, saver} = this.props.strand;
     return (
       <Paper>
         <Grid
@@ -29,8 +29,7 @@ class StrandTileMinimal extends Component<PropTypes> {
           direction='column'
           style={style.content}>
           <Grid item>
-            <StrandTitle title={title} strandId={id}/>
-            <Divider/>
+            <StrandTitle title={title} strandId={id} saver={saver!}/>
           </Grid>
           <Grid item>
             <StrandSummaryTile strand={this.props.strand}/>

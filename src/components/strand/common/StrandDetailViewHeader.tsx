@@ -21,13 +21,13 @@ const style = {
 
 class StrandDetailTopView extends Component<PropTypes> {
   render() {
-    const {id} = this.props.strand;
+    const {title, saver, id} = this.props.strand;
     return (
       <Grid
         container
         direction='row'
         alignItems='stretch'>
-        <Grid item sm={1}/>
+        <Grid item sm={4}/>
         <Grid item sm={4}>
           <Paper>
             <Grid
@@ -37,29 +37,11 @@ class StrandDetailTopView extends Component<PropTypes> {
               alignItems='stretch'
               style={style.contentGrid}>
               <Grid item>
-                <StrandTitle title={this.props.strand.title} strandId={id}/>
-                <Divider/>
+                {/*// TODO [UI-50]: Eliminate !'s with non-nullables*/}
+                <StrandTitle title={title} strandId={id} saver={saver!}/>
               </Grid>
               <Grid item>
                 <StrandSummaryTile strand={this.props.strand}/>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item sm={3}>
-          <Paper>
-            <Grid
-              container
-              direction='column'
-              justify='center'
-              alignItems='stretch'
-              style={style.contentGrid}>
-              <Grid item>
-                <Typography
-                  align='center'
-                  variant='title'>
-                  Participants
-                </Typography>
               </Grid>
             </Grid>
           </Paper>

@@ -19,13 +19,12 @@ const style = {
 
 class StrandTile extends Component<PropTypes> {
   render() {
-    const {title, id} = this.props.strand;
+    const {title, id, saver} = this.props.strand;
     return (
       <Paper>
         <Grid container spacing={8} style={style.content}>
           <Grid item xs={12}>
-            <StrandTitle title={title} strandId={id}/>
-            <Divider/>
+            <StrandTitle title={title} strandId={id} saver={saver!}/>
           </Grid>
           <Grid item xs={8}>
             <StrandSummaryTile strand={this.props.strand}/>
