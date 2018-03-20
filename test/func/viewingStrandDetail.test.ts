@@ -4,7 +4,7 @@ import {strandFaker} from './viewingStrandDetail.data';
 import {strandFaker as strandListStrandFaker} from './viewingStrandList.data';
 import {MockList} from 'graphql-tools';
 import StrandView from '../../src/components/strand/StrandDetailView';
-import StrandTiles from '../../src/components/strands/common/StrandTiles';
+import StrandTiles from '../../src/components/strands/common/StrandTileList';
 import * as faker from "faker";
 import {flushPromises} from '../helper/utilities';
 

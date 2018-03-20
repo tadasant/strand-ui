@@ -1,6 +1,12 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export interface GetStrandListQueryVariables {
+  query?: string | null,
+  page?: number | null,
+  size?: number | null,
+};
+
 export interface GetStrandListQuery {
   strands:  Array< {
     id: string,

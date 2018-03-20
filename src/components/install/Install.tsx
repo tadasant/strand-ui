@@ -58,7 +58,6 @@ class Install extends Component<PropTypes, StateTypes> {
           })
           .catch((response: InstallationResponseData) => {
             // TODO refactor this out as we start using it in other places
-            debugger;
             if (Raven.isSetup()) {
               Raven.captureException(Error(`Installation error: ${JSON.stringify(response)}`));
             }

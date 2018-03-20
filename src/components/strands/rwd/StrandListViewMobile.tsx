@@ -3,7 +3,8 @@ import {Component} from 'react';
 import Grid from 'material-ui/Grid';
 import {GetStrandListStrandsFragment, ReferenceTagsFragment, ReferenceUsersFragment} from '../../../../schema/graphql-types';
 import {FiltersType, FilterTypes, FilterValuesType} from '../StrandListView';
-import StrandTiles from '../common/StrandTiles';
+import StrandTiles from '../common/StrandTileList';
+import SearchBox from '../common/SearchBox';
 
 interface PropTypes {
   filteredStrands: GetStrandListStrandsFragment[]
@@ -11,6 +12,7 @@ interface PropTypes {
   users: ReferenceUsersFragment[]
   filters: FilterTypes
   handleChangeFilter: (name: FiltersType, values: FilterValuesType) => void
+  handleSearchStrands: (searchValue: string) => void
 }
 
 class StrandListViewMobile extends Component<PropTypes> {
@@ -26,6 +28,9 @@ class StrandListViewMobile extends Component<PropTypes> {
           <Grid item xs={1}/>
           <Grid item xs={10}>
             <Grid container direction='column' alignItems='stretch'>
+              <Grid item xs={12}>
+                <SearchBox onSearchStrands={this.props.handleSearchStrands}/>
+              </Grid>
               <Grid item xs={12}>
                 <StrandTiles strands={this.props.filteredStrands} minimal/>
               </Grid>

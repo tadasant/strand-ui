@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Component} from 'react';
-import Divider from 'material-ui/Divider';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import StrandSummaryTile from '../../../common/StrandSummaryTile';
 import StrandTitle from '../../../common/StrandTitle';
 import {GetStrandListStrandsFragment} from '../../../../../schema/graphql-types';
+import {PropTypes} from 'material-ui';
 
 interface PropTypes {
   strand: GetStrandListStrandsFragment
@@ -13,20 +13,24 @@ interface PropTypes {
 
 const style = {
   content: {
-    padding: '2% 2% 2% 2%',
+    padding: '1% 1% 1% 1%',
   },
 };
 
-class StrandTile extends Component<PropTypes> {
+class StrandTileDetailMinimal extends Component<PropTypes> {
+
   render() {
     const {title, id, saver} = this.props.strand;
     return (
       <Paper>
-        <Grid container spacing={8} style={style.content}>
-          <Grid item xs={12}>
+        <Grid
+          container
+          direction='column'
+          style={style.content}>
+          <Grid item>
             <StrandTitle title={title} strandId={id} saver={saver!}/>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item>
             <StrandSummaryTile strand={this.props.strand}/>
           </Grid>
         </Grid>
@@ -35,4 +39,4 @@ class StrandTile extends Component<PropTypes> {
   }
 }
 
-export default StrandTile;
+export default StrandTileDetailMinimal;

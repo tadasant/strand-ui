@@ -7,11 +7,19 @@ import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
 import StrandsViewDesktop from './rwd/StrandListViewDesktop';
 import StrandsViewMobile from './rwd/StrandListViewMobile';
+import {ApolloQueryResult} from 'apollo-client';
+
+export interface fetchableVariables {
+  query: string,
+  page?: number,
+  size?: number,
+}
 
 interface PropTypes {
   strands: GetStrandListStrandsFragment[],
   tags: ReferenceTagsFragment[],
   users: ReferenceUsersFragment[],
+  refetch: (variables?: fetchableVariables) => Promise<ApolloQueryResult<any>>,
 }
 
 export type FiltersType = 'tagNames' | 'saverId';
@@ -40,6 +48,7 @@ class StrandListView extends Component<PropTypes, StateTypes> {
     };
 
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
+    this.handleSearchStrands = this.handleSearchStrands.bind(this);
   }
 
   componentWillMount() {
@@ -69,6 +78,11 @@ class StrandListView extends Component<PropTypes, StateTypes> {
       .filter(strand => !saverId || strand.saver!.id === saverId)
   }
 
+  handleSearchStrands(query: string) {
+    // TODO smooth over UX by handling this promise
+    this.props.refetch({query});
+  }
+
   render() {
     return (
       <div>
@@ -86,6 +100,7 @@ class StrandListView extends Component<PropTypes, StateTypes> {
             {...this.props}
             {...this.state}
             handleChangeFilter={this.handleChangeFilter}
+            handleSearchStrands={this.handleSearchStrands}
           />
         </Hidden>
         <Hidden smDown>
@@ -93,6 +108,7 @@ class StrandListView extends Component<PropTypes, StateTypes> {
             {...this.props}
             {...this.state}
             handleChangeFilter={this.handleChangeFilter}
+            handleSearchStrands={this.handleSearchStrands}
           />
         </Hidden>
       </div>
