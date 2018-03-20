@@ -39,28 +39,15 @@ class StrandDetailTopViewStacked extends Component<PropTypes> {
                   alignItems='stretch'
                   style={style.contentGrid}>
                   <Grid item>
-                    <Typography
-                      variant='title'>
-                      {this.props.strand.title}
-                    </Typography>
-                    <Divider/>
+                    <StrandTitle
+                      title={this.props.strand.title}
+                      strandId={this.props.strand.id}
+                      center
+                      saver={this.props.strand.saver!}
+                    />
                   </Grid>
                   <Grid item>
                     <StrandSummaryTile strand={this.props.strand}/>
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item style={{paddingBottom: '5vmax'}}>
-              <Paper>
-                <Grid
-                  container
-                  direction='column'
-                  justify='center'
-                  alignItems='stretch'
-                  style={style.contentGrid}>
-                  <Grid item>
-                    <StrandTitle title={this.props.strand.title} strandId={this.props.strand.id} center/>
                   </Grid>
                 </Grid>
               </Paper>

@@ -90,19 +90,14 @@ class Install extends Component<PropTypes, StateTypes> {
             </Grid>
             <Grid item>
               <Typography variant='body1'>
-                Use Strand to have more productive discussions in Slack. Strand makes discussions more focused&nbsp;
-                and easier to share with your team. Please be aware that:
+                Strand lets you save important conversations from Slack to a shared knowledge-base. Create a&nbsp;
+                record of your institutional knowledge so you can ask less, and do more.
               </Typography>
+              <br />
               <div className={this.props.classes.body1}>
-                <ul>
-                  <li>You need to be an <u>admin</u> in your Workspace to add Strand</li>
-                  <li>
-                    Strand will soon be able to store your transcripts online to make them easier to search and&nbsp;
-                    share with your teammates. Therefore, Strand stores the conversations that it participates in.&nbsp;
-                    These are never reviewed by a human and the feature will be opt-in once released, but we&nbsp;
-                    prefer to be transparent about it.
-                  </li>
-                </ul>
+                Depending on your Slack workspace policy, you may need admin approval to install an application.&nbsp;
+                Please be aware of the fact that any information that you save to Strand will be visible to&nbsp;
+                everyone on your Slack and Strand team.
               </div>
             </Grid>
             <Grid item>
@@ -117,7 +112,7 @@ class Install extends Component<PropTypes, StateTypes> {
             </Grid>
             <Grid item>
               <Typography variant='caption'>
-                Not an admin in your workspace?
+                Can't get apps approved in your workspace?
                 Join <a target='_blank' rel='noopener noreferrer' href='https://www.trystrand.com/get-started'>our
                 community</a> instead.
               </Typography>

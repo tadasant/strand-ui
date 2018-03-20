@@ -2,7 +2,6 @@ import * as React from 'react';
 import {Component} from 'react';
 import Chip from 'material-ui/Chip';
 import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
 
 interface PropTypes {
   strand: {

@@ -11,6 +11,8 @@ export interface GetStrandListQuery {
     saver:  {
       id: string,
       email: string,
+      firstName: string,
+      lastName: string,
     } | null,
   } | null > | null,
 };
@@ -44,6 +46,8 @@ export interface GetStrandDetailQuery {
     saver:  {
       id: string,
       email: string,
+      firstName: string,
+      lastName: string,
     } | null,
   } | null,
 };
@@ -57,6 +61,8 @@ export interface GetStrandListStrandsFragment {
   saver:  {
     id: string,
     email: string,
+    firstName: string,
+    lastName: string,
   } | null,
 };
 
@@ -67,6 +73,8 @@ export interface GetStrandListTagsFragment {
 export interface GetStrandListUserFragment {
   id: string,
   email: string,
+  firstName: string,
+  lastName: string,
 };
 
 export interface ReferenceTagsFragment {
@@ -93,6 +101,8 @@ export interface GetStrandDetailStrandFragment {
   saver:  {
     id: string,
     email: string,
+    firstName: string,
+    lastName: string,
   } | null,
 };
 
@@ -103,4 +113,6 @@ export interface GetStrandDetailTagsFragment {
 export interface GetStrandDetailUserFragment {
   id: string,
   email: string,
+  firstName: string,
+  lastName: string,
 };

@@ -27,6 +27,8 @@ export const GET_STRAND_LIST_QUERY = gql`
     fragment GetStrandListUser on UserType {
         id
         email
+        firstName
+        lastName
     }
 `;
 
@@ -84,5 +86,7 @@ export const GET_STRAND_DETAIL_QUERY = gql`
     fragment GetStrandDetailUser on UserType {
         id
         email
+        firstName
+        lastName
     }
 `;
