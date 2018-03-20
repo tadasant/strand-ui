@@ -4,9 +4,9 @@ import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
 import Shell from './components/shell/Shell';
 import Install from './components/install/Install';
 import StrandListViewContainer from './components/strands/StrandListViewContainer';
-import {GET_REFERENCE_DATA_QUERY} from '../schema/graphql-queries';
+import {GET_REFERENCE_DATA_QUERY, GET_STRAND_LIST_QUERY} from '../schema/graphql-queries';
 import {
-  GetReferenceDataQuery, ReferenceMeFragment, ReferenceTagsFragment,
+  GetReferenceDataQuery, GetStrandListQuery, ReferenceMeFragment, ReferenceTagsFragment,
   ReferenceUsersFragment
 } from '../schema/graphql-types';
 import {graphql} from 'react-apollo';
@@ -40,7 +40,11 @@ class App extends Component<PropTypes> {
   }
 }
 
-const withReferenceData = graphql<GetReferenceDataQuery>(GET_REFERENCE_DATA_QUERY);
+const withReferenceData = graphql<GetReferenceDataQuery>(GET_REFERENCE_DATA_QUERY, {
+  options: {
+    errorPolicy: 'all',
+  } as any // TODO Apollo types bug. Should be fixed with next npm release of react-apollo (>2.0.4).
+});
 
 export default withReferenceData(({data}) => {
   const tags = filterFalsey(get(data, 'tags') || []);
