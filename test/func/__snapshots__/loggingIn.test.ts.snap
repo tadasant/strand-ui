@@ -1683,7 +1683,6 @@ exports[`logging in stays on the login page when user fails to login 1`] = `
                                                   </WithStyles(FormControl)>
                                                 </TextField>
                                                 <TextField
-                                                  autoFocus={true}
                                                   fullWidth={true}
                                                   id="password-field"
                                                   label="Password"
@@ -1774,7 +1773,6 @@ exports[`logging in stays on the login page when user fails to login 1`] = `
                                                           </InputLabel>
                                                         </WithStyles(InputLabel)>
                                                         <WithStyles(Input)
-                                                          autoFocus={true}
                                                           fullWidth={true}
                                                           id="password-field"
                                                           onChange={[Function]}
@@ -1782,7 +1780,6 @@ exports[`logging in stays on the login page when user fails to login 1`] = `
                                                           value=""
                                                         >
                                                           <Input
-                                                            autoFocus={true}
                                                             classes={
                                                               Object {
                                                                 "disabled": "MuiInput-disabled-137",
@@ -1818,7 +1815,6 @@ exports[`logging in stays on the login page when user fails to login 1`] = `
                                                               <input
                                                                 aria-invalid={false}
                                                                 aria-required={true}
-                                                                autoFocus={true}
                                                                 className="MuiInput-input-141 MuiInput-inputType-144"
                                                                 disabled={false}
                                                                 id="password-field"

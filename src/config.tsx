@@ -10,3 +10,4 @@ export const SENTRY_KEY = process.env.SENTRY_KEY!;
 export const SENTRY_PROJECT_ID = process.env.SENTRY_PROJECT_ID!;
 export const STRAND_SLACK_HOST = process.env.STRAND_SLACK_HOST!!;
 export const STRAND_API_HOST = process.env.STRAND_API_HOST!;
+export const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME!;
