@@ -11,8 +11,11 @@ import Input from 'material-ui/Input';
 import StrandTileDetail from '../../src/components/strands/common/tile/StrandTileDetail';
 
 describe('viewing existing strands', () => {
-  it('shows the user a list of two strands when clicking into the strand page', async () => {
+  beforeEach(() => {
     faker.seed(10);
+  });
+
+  it('shows the user a list of two strands when clicking into the strand page', async () => {
     const graphQLMocks = {
       Query: () => ({
         strands: () => new MockList(2, () => strandFaker()),
@@ -32,7 +35,6 @@ describe('viewing existing strands', () => {
   });
 
   it('updates the list of strands when user adds a search query', async () => {
-    faker.seed(10);
     const fakeQuery = faker.lorem.word();
     const graphQLMocks = {
       Query: () => ({
