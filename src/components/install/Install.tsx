@@ -109,13 +109,6 @@ class Install extends Component<PropTypes, StateTypes> {
                   error={this.state.error}
                 />}
             </Grid>
-            <Grid item>
-              <Typography variant='caption'>
-                Can't get apps approved in your workspace?
-                Join <a target='_blank' rel='noopener noreferrer' href='https://www.trystrand.com/get-started'>our
-                community</a> instead.
-              </Typography>
-            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={1}/>
