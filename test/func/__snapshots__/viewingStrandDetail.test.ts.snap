@@ -5145,20 +5145,136 @@ exports[`viewing existing strand shows the user a filled out detail page when a 
                                       >
                                         <ReactMarkdown
                                           escapeHtml={true}
-                                          renderers={Object {}}
+                                          renderers={
+                                            Object {
+                                              "code": [Function],
+                                              "inlineCode": [Function],
+                                              "listItem": [Function],
+                                              "paragraph": [Function],
+                                              "root": [Function],
+                                            }
+                                          }
                                           skipHtml={false}
                                           source="Beatae eum at. Odio fuga quia. Minus qui eos velit voluptas vero fugiat. Enim facere mollitia exercitationem officiis."
                                           transformLinkUri={[Function]}
                                         >
-                                          <div
+                                          <root
                                             key="root-1-1"
                                           >
-                                            <p
-                                              key="paragraph-1-1"
-                                            >
-                                              Beatae eum at. Odio fuga quia. Minus qui eos velit voluptas vero fugiat. Enim facere mollitia exercitationem officiis.
-                                            </p>
-                                          </div>
+                                            <WithStyles(Paper)>
+                                              <Paper
+                                                classes={
+                                                  Object {
+                                                    "root": "MuiPaper-root-9",
+                                                    "rounded": "MuiPaper-rounded-10",
+                                                    "shadow0": "MuiPaper-shadow0-11",
+                                                    "shadow1": "MuiPaper-shadow1-12",
+                                                    "shadow10": "MuiPaper-shadow10-21",
+                                                    "shadow11": "MuiPaper-shadow11-22",
+                                                    "shadow12": "MuiPaper-shadow12-23",
+                                                    "shadow13": "MuiPaper-shadow13-24",
+                                                    "shadow14": "MuiPaper-shadow14-25",
+                                                    "shadow15": "MuiPaper-shadow15-26",
+                                                    "shadow16": "MuiPaper-shadow16-27",
+                                                    "shadow17": "MuiPaper-shadow17-28",
+                                                    "shadow18": "MuiPaper-shadow18-29",
+                                                    "shadow19": "MuiPaper-shadow19-30",
+                                                    "shadow2": "MuiPaper-shadow2-13",
+                                                    "shadow20": "MuiPaper-shadow20-31",
+                                                    "shadow21": "MuiPaper-shadow21-32",
+                                                    "shadow22": "MuiPaper-shadow22-33",
+                                                    "shadow23": "MuiPaper-shadow23-34",
+                                                    "shadow24": "MuiPaper-shadow24-35",
+                                                    "shadow3": "MuiPaper-shadow3-14",
+                                                    "shadow4": "MuiPaper-shadow4-15",
+                                                    "shadow5": "MuiPaper-shadow5-16",
+                                                    "shadow6": "MuiPaper-shadow6-17",
+                                                    "shadow7": "MuiPaper-shadow7-18",
+                                                    "shadow8": "MuiPaper-shadow8-19",
+                                                    "shadow9": "MuiPaper-shadow9-20",
+                                                  }
+                                                }
+                                                component="div"
+                                                elevation={2}
+                                                square={false}
+                                              >
+                                                <div
+                                                  className="MuiPaper-root-9 MuiPaper-shadow2-13 MuiPaper-rounded-10"
+                                                >
+                                                  <div
+                                                    style={
+                                                      Object {
+                                                        "padding": "1%",
+                                                      }
+                                                    }
+                                                  >
+                                                    <paragraph
+                                                      key="paragraph-1-1"
+                                                    >
+                                                      <WithStyles(Typography)>
+                                                        <Typography
+                                                          align="inherit"
+                                                          classes={
+                                                            Object {
+                                                              "alignCenter": "MuiTypography-alignCenter-82",
+                                                              "alignJustify": "MuiTypography-alignJustify-84",
+                                                              "alignLeft": "MuiTypography-alignLeft-81",
+                                                              "alignRight": "MuiTypography-alignRight-83",
+                                                              "body1": "MuiTypography-body1-78",
+                                                              "body2": "MuiTypography-body2-77",
+                                                              "button": "MuiTypography-button-80",
+                                                              "caption": "MuiTypography-caption-79",
+                                                              "colorError": "MuiTypography-colorError-92",
+                                                              "colorInherit": "MuiTypography-colorInherit-88",
+                                                              "colorPrimary": "MuiTypography-colorPrimary-89",
+                                                              "colorSecondary": "MuiTypography-colorSecondary-90",
+                                                              "colorTextSecondary": "MuiTypography-colorTextSecondary-91",
+                                                              "display1": "MuiTypography-display1-73",
+                                                              "display2": "MuiTypography-display2-72",
+                                                              "display3": "MuiTypography-display3-71",
+                                                              "display4": "MuiTypography-display4-70",
+                                                              "gutterBottom": "MuiTypography-gutterBottom-86",
+                                                              "headline": "MuiTypography-headline-74",
+                                                              "noWrap": "MuiTypography-noWrap-85",
+                                                              "paragraph": "MuiTypography-paragraph-87",
+                                                              "root": "MuiTypography-root-69",
+                                                              "subheading": "MuiTypography-subheading-76",
+                                                              "title": "MuiTypography-title-75",
+                                                            }
+                                                          }
+                                                          color="default"
+                                                          gutterBottom={false}
+                                                          headlineMapping={
+                                                            Object {
+                                                              "body1": "p",
+                                                              "body2": "aside",
+                                                              "display1": "h1",
+                                                              "display2": "h1",
+                                                              "display3": "h1",
+                                                              "display4": "h1",
+                                                              "headline": "h1",
+                                                              "subheading": "h3",
+                                                              "title": "h2",
+                                                            }
+                                                          }
+                                                          noWrap={false}
+                                                          paragraph={false}
+                                                          variant="body1"
+                                                        >
+                                                          <p
+                                                            className="MuiTypography-root-69 MuiTypography-body1-78"
+                                                          >
+                                                            Beatae eum at. Odio fuga quia. Minus qui eos velit voluptas vero fugiat. Enim facere mollitia exercitationem officiis.
+                                                          </p>
+                                                        </Typography>
+                                                      </WithStyles(Typography)>
+                                                      <br />
+                                                    </paragraph>
+                                                  </div>
+                                                </div>
+                                              </Paper>
+                                            </WithStyles(Paper)>
+                                          </root>
                                         </ReactMarkdown>
                                       </div>
                                     </Grid>
