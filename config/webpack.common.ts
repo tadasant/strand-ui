@@ -33,33 +33,13 @@ const config: webpack.Configuration = {
       },
     ],
   },
-  // Enable served source maps
-  devtool: 'inline-source-map',
   resolve: {
     // Include all these extensions in processing (note we need .js because not all node_modules are .ts)
     extensions: ['.ts', '.tsx', '.js', '.css'],
   },
-  // Webpack Dev Server for running locally
-  devServer: {
-    // Play nicely with react-router
-    historyApiFallback: true,
-    port: 3000,
-    // Enable hot module reloading (HMR)
-    hot: true,
-    // Allow access via ngrok to local
-    disableHostCheck: true,
-  },
   plugins: [
     // Cleans the build folder per-build/reload
     new CleanWebpackPlugin(['dist']),
-    // HMR plugins
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    // Prevents webpack watch from going into infinite loop (& stopping on retry) due to TS compilation
-    new webpack.WatchIgnorePlugin([
-      /\.js$/,
-      /\.d\.ts$/,
-    ]),
   ],
 };
 
