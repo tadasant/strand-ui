@@ -2,11 +2,7 @@
 
 exports[`installing slack app shows a failure message when we fail to install the app 1`] = `
 <InstallationStatus
-  errors={
-    Array [
-      "This error message should be displayed on UI",
-    ]
-  }
+  error="ERROR OCCURRED"
   installingSlackApplication={false}
   successInstallationSlackApplication={false}
 >
@@ -82,8 +78,8 @@ exports[`installing slack app shows a failure message when we fail to install th
       >
         Failed to install.
         <br />
-        Errors: 
-        This error message should be displayed on UI
+        Error: 
+        ERROR OCCURRED
       </h3>
     </Typography>
   </WithStyles(Typography)>
@@ -92,7 +88,6 @@ exports[`installing slack app shows a failure message when we fail to install th
 
 exports[`installing slack app shows a success message when a user successfully installs the app 1`] = `
 <InstallationStatus
-  errors={Array []}
   installingSlackApplication={false}
   successInstallationSlackApplication={true}
 >
@@ -166,7 +161,7 @@ exports[`installing slack app shows a success message when a user successfully i
           }
         }
       >
-        Successfully installed! The Strand bot should have DM'd you with setup instructions.
+        Successfully installed! The Strand bot should have DM'd you a welcome message.
       </h3>
     </Typography>
   </WithStyles(Typography)>

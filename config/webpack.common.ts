@@ -46,6 +46,8 @@ const config: webpack.Configuration = {
     port: 3000,
     // Enable hot module reloading (HMR)
     hot: true,
+    // Allow access via ngrok to local
+    disableHostCheck: true,
   },
   plugins: [
     // Cleans the build folder per-build/reload

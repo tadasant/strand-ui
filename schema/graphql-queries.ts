@@ -2,52 +2,33 @@ import gql from 'graphql-tag';
 
 // TODO [UI-47]: split this huge file into .graphql files
 
-export const GET_TOPICS_QUERY = gql`
-    query GetTopics {
-        topics {
-            ...GetTopicsTopics
+export const GET_STRAND_LIST_QUERY = gql`
+    query GetStrandList($query: String, $page: Int, $size: Int) {
+        strands(query: $query, page: $page, size: $size) {
+            ...GetStrandListStrands
         }
     }
 
-    fragment GetTopicsTopics on TopicType {
+    fragment GetStrandListStrands on StrandType {
         id
         title
-        description
         tags {
-            ...GetTopicsTags
+            ...GetStrandListTags
         }
-        originalPoster {
-            ...GetTopicsUser
-        }
-        discussion {
-            ...GetTopicsDiscussion
+        saver {
+            ...GetStrandListUser
         }
     }
 
-    fragment GetTopicsTags on TagType {
+    fragment GetStrandListTags on TagType {
         name
     }
 
-    fragment GetTopicsUser on UserType {
+    fragment GetStrandListUser on UserType {
         id
-        alias
-    }
-
-    fragment GetTopicsDiscussion on DiscussionType {
-        status
-        participants {
-            ...GetTopicsUser
-        }
-    }
-`;
-
-export const ATTEMPT_SLACK_INSTALLATION_MUTATION = gql`
-    mutation AttemptInstall ($code: String!, $clientId: String!, $redirectUri: String!) {
-        attemptSlackInstallation(input: {code: $code, clientId: $clientId, redirectUri: $redirectUri}) {
-            slackTeam {
-                name
-            }
-        }
+        email
+        firstName
+        lastName
     }
 `;
 
@@ -59,6 +40,9 @@ export const GET_REFERENCE_DATA_QUERY = gql`
         users {
             ...ReferenceUsers
         }
+        me {
+            ...ReferenceMe
+        }
     }
   
     fragment ReferenceTags on TagType {
@@ -67,59 +51,42 @@ export const GET_REFERENCE_DATA_QUERY = gql`
   
     fragment ReferenceUsers on UserType {
         id
-        alias
+        email
+    }
+  
+    fragment ReferenceMe on UserType {
+        id
+        email
     }
 `;
 
-export const GET_TOPIC_QUERY = gql`
-    query GetTopic($id: Int!) {
-        topic(id: $id) {
-            ...GetTopicTopic
+export const GET_STRAND_DETAIL_QUERY = gql`
+    query GetStrandDetail($id: Int!) {
+        strand(id: $id) {
+            ...GetStrandDetailStrand
         }
     }
     
-    fragment GetTopicTopic on TopicType {
+    fragment GetStrandDetailStrand on StrandType {
         id
         title
-        description
+        body
         tags {
-            ...GetTopicTags
+            ...GetStrandDetailTags
         }
-        originalPoster {
-            ...GetTopicUser
-        }
-        discussion {
-            ...GetTopicDiscussion
+        saver {
+            ...GetStrandDetailUser
         }
     }
   
-    fragment GetTopicTags on TagType {
+    fragment GetStrandDetailTags on TagType {
         name
     }
   
-    fragment GetTopicUser on UserType {
+    fragment GetStrandDetailUser on UserType {
         id
-        alias
-    }
-  
-    fragment GetTopicDiscussion on DiscussionType {
-        timeStart
-        timeEnd
-        status
-        participants {
-            ...GetTopicUser
-        }
-        messages {
-            ...GetTopicMessage
-        }
-    }
-  
-    fragment GetTopicMessage on MessageType {
-        id
-        text
-        author {
-            ...GetTopicUser
-        }
-        time
+        email
+        firstName
+        lastName
     }
 `;

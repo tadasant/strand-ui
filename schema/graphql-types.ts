@@ -1,40 +1,26 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
-export interface GetTopicsQuery {
-  topics:  Array< {
+export interface GetStrandListQueryVariables {
+  query?: string | null,
+  page?: number | null,
+  size?: number | null,
+};
+
+export interface GetStrandListQuery {
+  strands:  Array< {
     id: string,
-    title: string,
-    description: string,
+    title: string | null,
     tags:  Array< {
       name: string,
     } | null > | null,
-    originalPoster:  {
+    saver:  {
       id: string,
-      alias: string,
-    } | null,
-    discussion:  {
-      status: string,
-      participants:  Array< {
-        id: string,
-        alias: string,
-      } | null > | null,
+      email: string,
+      firstName: string,
+      lastName: string,
     } | null,
   } | null > | null,
-};
-
-export interface AttemptInstallMutationVariables {
-  code: string,
-  clientId: string,
-  redirectUri: string,
-};
-
-export interface AttemptInstallMutation {
-  attemptSlackInstallation:  {
-    slackTeam:  {
-      name: string,
-    } | null,
-  } | null,
 };
 
 export interface GetReferenceDataQuery {
@@ -43,82 +29,58 @@ export interface GetReferenceDataQuery {
   } | null > | null,
   users:  Array< {
     id: string,
-    alias: string,
+    email: string,
   } | null > | null,
+  me:  {
+    id: string,
+    email: string,
+  } | null,
 };
 
-export interface GetTopicQueryVariables {
+export interface GetStrandDetailQueryVariables {
   id: number,
 };
 
-export interface GetTopicQuery {
-  topic:  {
+export interface GetStrandDetailQuery {
+  strand:  {
     id: string,
-    title: string,
-    description: string,
+    title: string | null,
+    body: string,
     tags:  Array< {
       name: string,
     } | null > | null,
-    originalPoster:  {
+    saver:  {
       id: string,
-      alias: string,
-    } | null,
-    discussion:  {
-      timeStart: string,
-      timeEnd: string | null,
-      status: string,
-      participants:  Array< {
-        id: string,
-        alias: string,
-      } | null > | null,
-      messages:  Array< {
-        id: string,
-        text: string,
-        author:  {
-          id: string,
-          alias: string,
-        } | null,
-        time: string,
-      } | null > | null,
+      email: string,
+      firstName: string,
+      lastName: string,
     } | null,
   } | null,
 };
 
-export interface GetTopicsTopicsFragment {
+export interface GetStrandListStrandsFragment {
   id: string,
-  title: string,
-  description: string,
+  title: string | null,
   tags:  Array< {
     name: string,
   } | null > | null,
-  originalPoster:  {
+  saver:  {
     id: string,
-    alias: string,
-  } | null,
-  discussion:  {
-    status: string,
-    participants:  Array< {
-      id: string,
-      alias: string,
-    } | null > | null,
+    email: string,
+    firstName: string,
+    lastName: string,
   } | null,
 };
 
-export interface GetTopicsTagsFragment {
+export interface GetStrandListTagsFragment {
   name: string,
 };
 
-export interface GetTopicsUserFragment {
+export interface GetStrandListUserFragment {
   id: string,
-  alias: string,
-};
-
-export interface GetTopicsDiscussionFragment {
-  status: string,
-  participants:  Array< {
-    id: string,
-    alias: string,
-  } | null > | null,
+  email: string,
+  firstName: string,
+  lastName: string,
 };
 
 export interface ReferenceTagsFragment {
@@ -127,74 +89,36 @@ export interface ReferenceTagsFragment {
 
 export interface ReferenceUsersFragment {
   id: string,
-  alias: string,
+  email: string,
 };
 
-export interface GetTopicTopicFragment {
+export interface ReferenceMeFragment {
   id: string,
-  title: string,
-  description: string,
+  email: string,
+};
+
+export interface GetStrandDetailStrandFragment {
+  id: string,
+  title: string | null,
+  body: string,
   tags:  Array< {
     name: string,
   } | null > | null,
-  originalPoster:  {
+  saver:  {
     id: string,
-    alias: string,
-  } | null,
-  discussion:  {
-    timeStart: string,
-    timeEnd: string | null,
-    status: string,
-    participants:  Array< {
-      id: string,
-      alias: string,
-    } | null > | null,
-    messages:  Array< {
-      id: string,
-      text: string,
-      author:  {
-        id: string,
-        alias: string,
-      } | null,
-      time: string,
-    } | null > | null,
+    email: string,
+    firstName: string,
+    lastName: string,
   } | null,
 };
 
-export interface GetTopicTagsFragment {
+export interface GetStrandDetailTagsFragment {
   name: string,
 };
 
-export interface GetTopicUserFragment {
+export interface GetStrandDetailUserFragment {
   id: string,
-  alias: string,
-};
-
-export interface GetTopicDiscussionFragment {
-  timeStart: string,
-  timeEnd: string | null,
-  status: string,
-  participants:  Array< {
-    id: string,
-    alias: string,
-  } | null > | null,
-  messages:  Array< {
-    id: string,
-    text: string,
-    author:  {
-      id: string,
-      alias: string,
-    } | null,
-    time: string,
-  } | null > | null,
-};
-
-export interface GetTopicMessageFragment {
-  id: string,
-  text: string,
-  author:  {
-    id: string,
-    alias: string,
-  } | null,
-  time: string,
+  email: string,
+  firstName: string,
+  lastName: string,
 };
