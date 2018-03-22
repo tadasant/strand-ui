@@ -35,7 +35,7 @@ class TestStrandApiClient extends TestClient {
     if (email in this.usersByEmail && password === this.usersByEmail[email].password) {
       const response = {...successAxiosResponse};
       response.data = {token: 'successfullyRetrievedToken'};
-      return Promise.resolve({...successAxiosResponse})
+      return Promise.resolve(response)
     }
     // TODO is this the right ERROR format
     return Promise.reject({'error': 'ERROR OCCURRED'})

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Component} from 'react';
+import {Component, Fragment} from 'react';
 import {Redirect, Route, RouteComponentProps, Switch} from 'react-router';
 import Shell from './components/shell/Shell';
 import Install from './components/install/Install';
@@ -15,7 +15,6 @@ import {filterFalsey} from './components/common/utilities';
 import 'react-select/dist/react-select.css';
 import StrandDetailViewContainer from './components/strand/StrandDetailViewContainer';
 import Login from './components/login/LoginContainer';
-import {CookiesProvider} from 'react-cookie';
 
 interface PropTypes {
   tags: ReferenceTagsFragment[],
@@ -26,7 +25,7 @@ interface PropTypes {
 class App extends Component<PropTypes> {
   render() {
     return (
-      <CookiesProvider>
+      <Fragment>
         <Shell currentUser={this.props.currentUser}/>
         <Switch>
           <Route exact path='/strands' render={() => <StrandListViewContainer tags={this.props.tags} users={this.props.users}/>} />
@@ -35,7 +34,7 @@ class App extends Component<PropTypes> {
           <Route exact path='/login' component={Login}/>
           <Redirect from='/' to='/strands'/>
         </Switch>
-      </CookiesProvider>
+      </Fragment>
     )
   }
 }

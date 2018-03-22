@@ -3,6 +3,7 @@ import {configure} from 'enzyme';
 import * as dotenv from 'dotenv';
 import TestStrandSlackClient from './clients/TestStrandSlackClient';
 import TestStrandApiClient from './clients/TestStrandApiClient';
+import * as faker from "faker";
 
 // environment variables
 dotenv.config({path: 'env/.env.test'});
