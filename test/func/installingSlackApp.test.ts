@@ -6,10 +6,15 @@ import TestStrandSlackClient from '../clients/TestStrandSlackClient';
 
 describe('installing slack app', () => {
   it('sends the user to Slack when the user navigates to the page and clicks the button', () => {
-    const wrapper = mountApplication('/');
+    const graphQLMocks = {
+      Query: () => ({
+        me: () => null, // not logged in
+      })
+    };
+    const wrapper = mountApplication('/', {graphQLMocks});
 
     // Navigate to install page
-    wrapper.find(`Button[id="${navigationLabelToPath.Install}-button"]`).simulate('click');
+    wrapper.find(`Button[id="${navigationLabelToPath.Slack}-button"]`).simulate('click');
 
     // Assert that the install button goes to Slack
     const anchorHref = wrapper.find('a[id="add-to-slack-button"]').prop('href');
@@ -22,7 +27,12 @@ describe('installing slack app', () => {
     const mockSlackCode = '12345';
     strandSlackClient.addValidCode(mockSlackCode);
 
-    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=${mockSlackCode}`);
+    const graphQLMocks = {
+      Query: () => ({
+        me: () => null, // not logged in
+      })
+    };
+    const wrapper = mountApplication(`${navigationLabelToPath.Slack}?code=${mockSlackCode}`, {graphQLMocks});
     await flushPromises(); // wait for installation call to resolve
     wrapper.update();
 
@@ -32,7 +42,12 @@ describe('installing slack app', () => {
   });
 
   it('shows a failure message when we fail to install the app', async () => {
-    const wrapper = mountApplication(`${navigationLabelToPath.Install}?code=12345`);
+    const graphQLMocks = {
+      Query: () => ({
+        me: () => null, // not logged in
+      })
+    };
+    const wrapper = mountApplication(`${navigationLabelToPath.Slack}?code=12345`, {graphQLMocks});
     await flushPromises(); // wait for GraphQL call to complete
     wrapper.update();
 

@@ -2,10 +2,14 @@ interface NavigationPaths {
   [label: string] : string,
 }
 
-export const navigationLabelToPath: NavigationPaths = {
+export const loggedInNavigationLabelToPath: NavigationPaths = {
   Strands: '/strands',
-  Install: '/install',
+  Slack: '/install',
+};
+
+export const navigationLabelToPath: NavigationPaths = {
+  ...loggedInNavigationLabelToPath,
   Login: '/login',
 };
 
-export default {navigationLabelToPath};
+export default {navigationLabelToPath, loggedInNavigationLabelToPath};
