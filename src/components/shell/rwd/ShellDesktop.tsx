@@ -15,17 +15,20 @@ interface PropTypes {
 
 class ShellDesktop extends Component<PropTypes> {
   render() {
+    const navigationLabelToPath = this.props.currentUser
+      ? consts.loggedInNavigationLabelToPath
+      : consts.navigationLabelToPath;
     return (
       <div>
         <AppBar position='fixed'>
           <Toolbar style={{height: '56px'}}>
             <StrandLogo style={{height: '75%'}}/>
-            {Object.keys(consts.navigationLabelToPath).map((label, i) => (
+            {Object.keys(navigationLabelToPath).map((label, i) => (
               <Button
-                id={`${consts.navigationLabelToPath[label]}-button`}
+                id={`${navigationLabelToPath[label]}-button`}
                 style={i == 0 ? {marginLeft: 'auto'} : undefined}
                 key={label}
-                onClick={this.props.openPageGenerator(consts.navigationLabelToPath[label])}>
+                onClick={this.props.openPageGenerator(navigationLabelToPath[label])}>
                 {label}
               </Button>
             ))}
