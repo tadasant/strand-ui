@@ -1,6 +1,4 @@
-# Strand Portal - UI
-
-This project is retired. No further development or maintenance is planned. Feel free to fork and re-use.
+# This project is retired. No further development or maintenance is planned. Feel free to fork and re-use.
 
 ## Getting Started
 
