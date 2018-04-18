@@ -1,5 +1,21 @@
 # This project is retired. No further development or maintenance is planned. Feel free to fork and re-use.
 
+## Overview
+
+This web application was built using:
+* React 16.2
+* TypeScript 2.7
+* Webpack 4.0
+* Apollo (GraphQL)
+* Material UI 1.0 beta
+* Jest 22.3
+
+It was hosted on an Amazon S3 bucket, gated by Amazon CloudFront as the CDN.
+
+Contributors: @tadasant and @audace
+
+Main page: ![screenshot](https://github.com/StrandHQ/strand-ui/blob/master/media/strand-ui.png?raw=true)
+
 ## Getting Started
 
 It is recommended that you use WebStorm (not PyCharm) for development.
