@@ -5,12 +5,15 @@ import {strandFaker as strandListStrandFaker} from './viewingStrandList.data';
 import {MockList} from 'graphql-tools';
 import StrandView from '../../src/components/strand/StrandDetailView';
 import StrandTiles from '../../src/components/strands/common/StrandTileList';
-import * as faker from "faker";
 import {flushPromises} from '../helper/utilities';
+import * as faker from "faker";
 
 describe('viewing existing strand', () => {
-  it('shows the user a filled out detail page when a strand detail page is opened', async () => {
+  beforeEach(() => {
     faker.seed(10);
+  });
+
+  it('shows the user a filled out detail page when a strand detail page is opened', async () => {
     const graphQLMocks = {
       Query: () => ({
         strands: () => new MockList(1, () => strandListStrandFaker()),

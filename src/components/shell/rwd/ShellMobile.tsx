@@ -9,9 +9,12 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import Toolbar from 'material-ui/Toolbar/Toolbar';
 import MenuIcon from 'material-ui-icons/Menu';
+import {ReferenceMeFragment} from '../../../../schema/graphql-types';
+import Typography from 'material-ui/Typography';
 
 interface PropTypes {
   openPageGenerator: Function,
+  currentUser?: ReferenceMeFragment
 }
 
 interface StateTypes {
@@ -55,11 +58,21 @@ class ShellMobile extends Component<PropTypes, StateTypes> {
   }
 
   render() {
+    const navigationLabelToPath = this.props.currentUser
+      ? consts.loggedInNavigationLabelToPath
+      : consts.navigationLabelToPath;
     return (
       <div>
         <AppBar position='fixed'>
           <Toolbar style={{margin: 'auto', height: '56px'}}>
             <StrandLogo omitText style={{height: '75%'}}/>
+            {
+              this.props.currentUser
+                ? <Typography variant='caption' style={{marginLeft: '1%'}}>
+                  {this.props.currentUser.email}
+                </Typography>
+                : null
+            }
             <IconButton
               buttonRef={(node) => this.menuButtonNode = node as ReactInstance}
               aria-label='Menu'
@@ -82,11 +95,11 @@ class ShellMobile extends Component<PropTypes, StateTypes> {
                 vertical: 'top',
                 horizontal: 'center',
               }}>
-              {Object.keys(consts.navigationLabelToPath).map(label => (
+              {Object.keys(navigationLabelToPath).map(label => (
                 <MenuItem
                   key={label}
                   onClick={
-                    this.generateHandleClickNavMenuItem(this.props.openPageGenerator(consts.navigationLabelToPath[label]))
+                    this.generateHandleClickNavMenuItem(this.props.openPageGenerator(navigationLabelToPath[label]))
                   }>
                   {label}
                 </MenuItem>

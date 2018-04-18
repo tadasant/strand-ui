@@ -28,7 +28,7 @@ class Shell extends Component<PropTypes> {
     return (
       <div>
         <Hidden mdUp>
-          <ShellMobile openPageGenerator={this.openPageGenerator}/>
+          <ShellMobile openPageGenerator={this.openPageGenerator} currentUser={this.props.currentUser}/>
         </Hidden>
         <Hidden smDown>
           <ShellDesktop openPageGenerator={this.openPageGenerator} currentUser={this.props.currentUser}/>
