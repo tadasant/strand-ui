@@ -5,11 +5,23 @@ import {flushPromises} from '../helper/utilities';
 import TestStrandApiClient, {StrandUser} from '../clients/TestStrandApiClient';
 import * as faker from 'faker';
 import Login from '../../src/components/login/Login';
+import * as Cookies from 'js-cookie';
+import {MockList} from 'graphql-tools';
+import {strandFaker} from './viewingStrandList.data';
 
 describe('logging in', () => {
-  xit('loads the strand page when user succeeds in logging in', async () => {
-    // TODO enable this test when we have data flow for user
-    const wrapper = mountApplication(`${navigationLabelToPath.Login}`);
+  beforeEach(() => {
+    faker.seed(10);
+  });
+
+  it('loads the strand page when user succeeds in logging in', async () => {
+    const cookiesSpy = jest.spyOn(Cookies, 'set');
+    const graphQLMocks = { // Including this so that StrandListViewContainer renders smoothly at the end
+      Query: () => ({
+        strands: () => new MockList(2, () => strandFaker()),
+      })
+    };
+    const wrapper = mountApplication(`${navigationLabelToPath.Login}`, {graphQLMocks});
     const strandApiClient = global.strandApiClient as TestStrandApiClient;
     const mockUser: StrandUser = {
       email: faker.internet.email(),
@@ -18,14 +30,15 @@ describe('logging in', () => {
     strandApiClient.addUser(mockUser);
 
     const emailInput = wrapper.find('TextField[id="email-field"]');
-    emailInput.simulate('change', {target: {value: mockUser.email}});
+    (emailInput.prop('onChange') as any)({target: {value: mockUser.email}}); // `as any` fixes types bug
     const passwordInput = wrapper.find('TextField[id="password-field"]');
-    passwordInput.simulate('change', {target: {value: mockUser.password}});
+    (passwordInput.prop('onChange') as any)({target: {value: mockUser.password}}); // `as any` fixes types bug
     wrapper.find('Button[id="login-button"]').simulate('click');
     await flushPromises(); // wait for installation call to resolve
     wrapper.update();
 
-    // TODO [UI-64] assert cookies stuff when cookies libraries settle down
+    expect(cookiesSpy).toHaveBeenCalled();
+    // TODO would be good to assert that resetStore happened
     expect(wrapper.find(StrandListViewContainer)).toHaveLength(1);
   });
 
@@ -37,9 +50,9 @@ describe('logging in', () => {
     };
 
     const emailInput = wrapper.find('TextField[id="email-field"]');
-    emailInput.simulate('change', {target: {value: mockUser.email}});
+    (emailInput.prop('onChange') as any)({target: {value: mockUser.email}}); // `as any` fixes types bug
     const passwordInput = wrapper.find('TextField[id="password-field"]');
-    passwordInput.simulate('change', {target: {value: mockUser.password}});
+    (passwordInput.prop('onChange') as any)({target: {value: mockUser.password}}); // `as any` fixes types bug
     wrapper.find('Button[id="login-button"]').simulate('click');
     await flushPromises(); // wait for installation call to resolve
     wrapper.update();

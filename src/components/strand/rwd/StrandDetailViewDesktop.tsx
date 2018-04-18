@@ -5,6 +5,7 @@ import Grid from 'material-ui/Grid';
 import StrandViewHeader from '../common/StrandDetailViewHeader';
 import {GetStrandDetailStrandFragment} from '../../../../schema/graphql-types';
 import * as ReactMarkdown from 'react-markdown';
+import renderers from '../common/markdownRenderers';
 
 
 interface PropTypes {
@@ -20,7 +21,7 @@ class StrandViewDesktop extends Component<PropTypes> {
           <Divider style={{marginTop: '2.5%', marginBottom: '2.5%'}}/>
         </Grid>
         <Grid item style={{padding: '2% 2% 2% 2%', overflow: 'hidden'}}>
-          <ReactMarkdown source={this.props.strand.body}/>
+          <ReactMarkdown source={this.props.strand.body} renderers={renderers}/>
         </Grid>
       </Grid>
     );

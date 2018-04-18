@@ -6,6 +6,18 @@ import * as webpack from 'webpack';
 const Dotenv = require('dotenv-webpack');
 
 const config: webpack.Configuration = {
+  // Enable served source maps
+  devtool: 'inline-source-map',
+  // Webpack Dev Server for running locally
+  devServer: {
+    // Play nicely with react-router
+    historyApiFallback: true,
+    port: 3000,
+    // Enable hot module reloading (HMR)
+    hot: true,
+    // Allow access via ngrok to local
+    disableHostCheck: true,
+  },
   plugins: [
     new Dotenv({
       path: './env/.env.development',
@@ -18,6 +30,14 @@ const config: webpack.Configuration = {
       favicon: 'assets/favicon.ico',
       publicPath: '/',
     }),
+    // HMR plugins
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    // Prevents webpack watch from going into infinite loop (& stopping on retry) due to TS compilation
+    new webpack.WatchIgnorePlugin([
+      /\.js$/,
+      /\.d\.ts$/,
+    ]),
   ],
 };
 
