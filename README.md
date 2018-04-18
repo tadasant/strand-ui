@@ -1,6 +1,6 @@
 # Strand Portal - UI
 
-[![CodeFactor](https://www.codefactor.io/repository/github/solutionloft/strand-ui/badge)](https://www.codefactor.io/repository/github/solutionloft/strand-ui)
+This project is retired. No further development or maintenance is planned. Feel free to fork and re-use.
 
 ## Getting Started
 
