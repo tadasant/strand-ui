@@ -12,9 +12,9 @@ This web application was built using:
 
 It was hosted on an Amazon S3 bucket, gated by Amazon CloudFront as the CDN.
 
-Contributors: @tadasant and @audace
+Contributors: [@tadasant](https://github.com/tadasant) and [@Audace](https://github.com/audace)
 
-![screenshot](https://github.com/StrandHQ/strand-ui/blob/master/media/strand-ui.png?raw=true)
+![screenshot](https://github.com/StrandHQ/tadasant/blob/master/media/strand-ui.png?raw=true)
 
 ## Getting Started
 
