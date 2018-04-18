@@ -12,6 +12,10 @@ This web application was built using:
 
 It was hosted on an Amazon S3 bucket, gated by Amazon CloudFront as the CDN.
 
+[strand-slack](https://github.com/tadasant/strand-slack) was the companion Slack Integration
+
+[strand-api](https://github.com/Audace/strand-api) was the companion backend API
+
 Contributors: [@tadasant](https://github.com/tadasant) and [@Audace](https://github.com/audace)
 
 ![screenshot](https://raw.githubusercontent.com/tadasant/strand-ui/master/media/strand-ui.png)
