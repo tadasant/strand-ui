@@ -14,7 +14,7 @@ It was hosted on an Amazon S3 bucket, gated by Amazon CloudFront as the CDN.
 
 Contributors: [@tadasant](https://github.com/tadasant) and [@Audace](https://github.com/audace)
 
-![screenshot](https://github.com/StrandHQ/tadasant/blob/master/media/strand-ui.png?raw=true)
+![screenshot](https://raw.githubusercontent.com/tadasant/strand-ui/master/media/strand-ui.png)
 
 ## Getting Started
 
